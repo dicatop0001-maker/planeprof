@@ -1,0 +1,144 @@
+name: Setup Project Structure
+
+on:
+  workflow_dispatch:
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Create project structure
+        run: |
+          mkdir -p app/\(auth\)/login
+          mkdir -p app/\(auth\)/cadastro
+          mkdir -p app/dashboard
+          mkdir -p app/planejamento/novo
+          mkdir -p app/planejamento/\[id\]
+          mkdir -p app/pdi
+          mkdir -p app/pagamento
+          mkdir -p app/api/gerar-plano
+          mkdir -p app/api/auth
+          mkdir -p components/Header
+          mkdir -p components/PlanejamentoCard
+          mkdir -p lib
+          mkdir -p public
+          
+          # app/globals.css
+          cat > app/globals.css << 'CSSEOF'
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+}
+CSSEOF
+
+          # app/layout.tsx
+          cat > app/layout.tsx << 'TSXEOF'
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import './globals.css'
+
+const inter = Inter({ subsets: ['latin'] })
+
+export const metadata: Metadata = {
+  title: 'Planeprof - Planejamento de Aulas BNCC',
+  description: 'Planejamento de Aulas baseado na BNCC para Educação Infantil e Fundamental',
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="pt-BR">
+      <body className={inter.className}>{children}</body>
+    </html>
+  )
+}
+TSXEOF
+
+          # app/page.tsx (landing page)
+          cat > app/page.tsx << 'TSXEOF'
+import Link from 'next/link'
+
+export default function Home() {
+  return (
+    <main className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+      <div className="max-w-6xl mx-auto px-4 py-16">
+        <div className="text-center mb-16">
+          <div className="text-6xl mb-4">🎓</div>
+          <h1 className="text-5xl font-bold text-blue-900 mb-4">Planeprof</h1>
+          <p className="text-xl text-gray-600 mb-8">
+            Planejamento de Aulas baseado na BNCC para Educação Infantil e Fundamental
+          </p>
+          <div className="flex gap-4 justify-center">
+            <Link href="/login" className="bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition">
+              Entrar
+            </Link>
+            <Link href="/cadastro" className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-blue-50 transition">
+              Cadastrar
+            </Link>
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+            <div className="text-3xl mb-3">📋</div>
+            <h3 className="text-xl font-semibold mb-2">Alinhado à BNCC</h3>
+            <p className="text-gray-600">Habilidades e competências automaticamente vinculadas à Base Nacional Comum Curricular.</p>
+          </div>
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+            <div className="text-3xl mb-3">🤖</div>
+            <h3 className="text-xl font-semibold mb-2">IA Avançada</h3>
+            <p className="text-gray-600">GPT-4 gera planos de aula completos com objetivos, desenvolvimento e avaliação.</p>
+          </div>
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+            <div className="text-3xl mb-3">📄</div>
+            <h3 className="text-xl font-semibold mb-2">Exportação</h3>
+            <p className="text-gray-600">Exporte seus planos em PDF ou Word com um clique.</p>
+          </div>
+        </div>
+
+        <div className="text-center bg-blue-600 text-white p-8 rounded-2xl">
+          <h2 className="text-3xl font-bold mb-4">Planos e Preços</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+            <div className="bg-white/20 p-6 rounded-xl">
+              <h3 className="text-xl font-bold mb-2">Mensal</h3>
+              <p className="text-4xl font-bold mb-2">R$ 9,90</p>
+              <p className="text-sm opacity-80">40 planejamentos/mês</p>
+            </div>
+            <div className="bg-white/20 p-6 rounded-xl">
+              <h3 className="text-xl font-bold mb-2">Anual</h3>
+              <p className="text-4xl font-bold mb-2">R$ 100,00</p>
+              <p className="text-sm opacity-80">40 planejamentos/mês</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  )
+}
+TSXEOF
+
+          echo "Structure created successfully"
+          
+      - name: Commit and push
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add -A
+          git commit -m "Setup: Create project structure via Actions" || echo "Nothing to commit"
+          git push
