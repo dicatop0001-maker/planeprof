@@ -20,7 +20,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
             <div className="text-4xl mb-3">📋</div>
@@ -48,38 +48,19 @@ export default function Home() {
             <p className="text-gray-600">Plano de Desenvolvimento Individual para alunos com necessidades especiais.</p>
           </div>
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-            <div className="text-4xl mb-3">💰</div>
-            <h3 className="text-xl font-semibold mb-2 text-gray-800">Acessível</h3>
-            <p className="text-gray-600">Apenas R$ 9,90/mês ou R$ 100,00/ano para 40 planejamentos mensais.</p>
+            <div className="text-4xl mb-3">📚</div>
+            <h3 className="text-xl font-semibold mb-2 text-gray-800">Biblioteca de Planos</h3>
+            <p className="text-gray-600">Acesse planos prontos criados por outros professores e compartilhe os seus.</p>
           </div>
         </div>
 
-        <div className="text-center bg-blue-600 text-white p-8 rounded-2xl mb-16">
-          <h2 className="text-3xl font-bold mb-6">Escolha seu Plano</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-            <div className="bg-white/20 p-6 rounded-xl border border-white/30">
-              <h3 className="text-xl font-bold mb-2">Mensal</h3>
-              <p className="text-4xl font-bold mb-1">R$ 9,90</p>
-              <p className="text-sm opacity-80 mb-4">por mês</p>
-              <p className="text-sm">40 planejamentos/mês</p>
-              <p className="text-sm">Exportação PDF e Word</p>
-              <p className="text-sm">Suporte por e-mail</p>
-            </div>
-            <div className="bg-white p-6 rounded-xl text-blue-900 border-2 border-yellow-400">
-              <div className="text-xs font-bold text-yellow-600 mb-2 uppercase">Mais Popular</div>
-              <h3 className="text-xl font-bold mb-2">Anual</h3>
-              <p className="text-4xl font-bold mb-1">R$ 100,00</p>
-              <p className="text-sm text-gray-500 mb-4">por ano (economia de R$ 18,80)</p>
-              <p className="text-sm">40 planejamentos/mês</p>
-              <p className="text-sm">Exportação PDF e Word</p>
-              <p className="text-sm">Suporte prioritário</p>
-            </div>
-          </div>
-          <div className="mt-6">
-            <Link href="/cadastro" className="bg-white text-blue-600 px-8 py-3 rounded-lg text-lg font-bold hover:bg-blue-50 transition inline-block">
-              Começar Agora
-            </Link>
-          </div>
+        <div className="text-center bg-gradient-to-r from-blue-600 to-blue-700 text-white p-8 rounded-2xl mb-16">
+          <div className="text-4xl mb-3">🎁</div>
+          <h2 className="text-2xl font-bold mb-2">Primeiro planejamento gratuito!</h2>
+          <p className="text-blue-100 mb-6">Crie sua conta, gere seu primeiro plano de aula com IA e baixe gratuitamente. Sem precisar de cartão.</p>
+          <Link href="/cadastro" className="bg-white text-blue-600 px-8 py-3 rounded-lg text-lg font-bold hover:bg-blue-50 transition inline-block">
+            Começar Grátis Agora
+          </Link>
         </div>
 
         <footer className="text-center text-gray-500 text-sm">
