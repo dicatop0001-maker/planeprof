@@ -21,39 +21,6 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-            <div className="text-4xl mb-3">📋</div>
-            <h3 className="text-xl font-semibold mb-2 text-gray-800">Alinhado à BNCC</h3>
-            <p className="text-gray-600">Habilidades e competências automaticamente vinculadas à Base Nacional Comum Curricular.</p>
-          </div>
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-            <div className="text-4xl mb-3">🤖</div>
-            <h3 className="text-xl font-semibold mb-2 text-gray-800">IA com GPT-4</h3>
-            <p className="text-gray-600">Inteligência artificial gera planos completos com objetivos, desenvolvimento e avaliação.</p>
-          </div>
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-            <div className="text-4xl mb-3">📄</div>
-            <h3 className="text-xl font-semibold mb-2 text-gray-800">Exportação PDF/Word</h3>
-            <p className="text-gray-600">Exporte seus planos de aula em PDF ou Word com formatação profissional.</p>
-          </div>
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-            <div className="text-4xl mb-3">🎮</div>
-            <h3 className="text-xl font-semibold mb-2 text-gray-800">Dinâmicas Visuais</h3>
-            <p className="text-gray-600">Geração automática de jogos e dinâmicas com imagens ilustrativas.</p>
-          </div>
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-            <div className="text-4xl mb-3">♿</div>
-            <h3 className="text-xl font-semibold mb-2 text-gray-800">PDI Inclusivo</h3>
-            <p className="text-gray-600">Plano de Desenvolvimento Individual para alunos com necessidades especiais.</p>
-          </div>
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-            <div className="text-4xl mb-3">📚</div>
-            <h3 className="text-xl font-semibold mb-2 text-gray-800">Biblioteca de Planos</h3>
-            <p className="text-gray-600">Acesse planos prontos criados por outros professores e compartilhe os seus.</p>
-          </div>
-        </div>
-
         <div className="text-center bg-gradient-to-r from-blue-600 to-blue-700 text-white p-8 rounded-2xl mb-16">
           <div className="text-4xl mb-3">🎁</div>
           <h2 className="text-2xl font-bold mb-2">Primeiro planejamento gratuito!</h2>
