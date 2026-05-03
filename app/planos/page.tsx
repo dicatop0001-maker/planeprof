@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@supabase/supabase-js'
@@ -11,35 +11,26 @@ function getSupabase() {
   )
 }
 
-export default function PlanosPage() {
+function PlanosConteudo() {
   const [planoSelecionado, setPlanoSelecionado] = useState<'mensal' | 'anual'>('anual')
   const [loading, setLoading] = useState(false)
-  const [userPlano, setUserPlano] = useState<string | null>(null)
   const router = useRouter()
   const searchParams = useSearchParams()
   const planoId = searchParams.get('planoId')
-  const acao = searchParams.get('acao') || 'download'
 
   useEffect(() => {
     const checkUser = async () => {
       const supabase = getSupabase()
       const { data: { user } } = await supabase.auth.getUser()
-      if (!user) { router.push('/login'); return }
-      const { data } = await supabase
-        .from('usuarios')
-        .select('plano, planejamentos_usados')
-        .eq('id', user.id)
-        .single()
-      if (data) setUserPlano(data.plano)
+      if (!user) { router.push('/login') }
     }
     checkUser()
   }, [router])
 
-  const handleAssinar = async (tipo: 'mensal' | 'anual') => {
+  const handleAssinar = (tipo: 'mensal' | 'anual') => {
     setLoading(true)
     const params = new URLSearchParams()
     if (planoId) params.set('planoId', planoId)
-    if (acao) params.set('acao', acao)
     params.set('tipo', tipo)
     router.push(`/pagamento?${params.toString()}`)
   }
@@ -56,10 +47,9 @@ export default function PlanosPage() {
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       <div className="max-w-4xl mx-auto px-4 py-12">
 
-        {/* Header */}
         <div className="text-center mb-10">
           <div className="inline-flex items-center gap-2 bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">
-            🎁 Seu planejamento está pronto!
+            🎉 Seu planejamento está pronto!
           </div>
           <h1 className="text-3xl font-bold text-blue-900 mb-3">
             Baixe agora ou assine para acesso completo
@@ -69,7 +59,7 @@ export default function PlanosPage() {
           </p>
         </div>
 
-        {/* Opção Grátis */}
+        {/* Grátis */}
         <div className="bg-white border-2 border-green-400 rounded-2xl p-6 mb-6 flex flex-col md:flex-row items-center justify-between gap-4 shadow-sm">
           <div className="flex items-center gap-4">
             <div className="text-4xl">🎁</div>
@@ -91,16 +81,13 @@ export default function PlanosPage() {
           </button>
         </div>
 
-        {/* Divisor */}
         <div className="flex items-center gap-4 my-6">
           <div className="flex-1 h-px bg-gray-200" />
           <span className="text-gray-400 text-sm font-medium">ou assine e tenha acesso ilimitado</span>
           <div className="flex-1 h-px bg-gray-200" />
         </div>
 
-        {/* Planos pagos */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
-          {/* Mensal */}
           <div
             onClick={() => setPlanoSelecionado('mensal')}
             className={`bg-white rounded-2xl border-2 p-6 cursor-pointer transition shadow-sm hover:shadow-md ${planoSelecionado === 'mensal' ? 'border-blue-500 ring-2 ring-blue-200' : 'border-gray-200'}`}
@@ -112,7 +99,7 @@ export default function PlanosPage() {
               </div>
             </div>
             <div className="mb-4">
-              <span className="text-4xl font-bold text-blue-600">R$ 9,90</span>
+              <span className="text-4xl font-bold text-blue-600">R$&nbsp;9,90</span>
               <span className="text-gray-400 text-sm ml-1">/ mês</span>
             </div>
             <ul className="space-y-2 text-sm text-gray-600">
@@ -123,7 +110,6 @@ export default function PlanosPage() {
             </ul>
           </div>
 
-          {/* Anual */}
           <div
             onClick={() => setPlanoSelecionado('anual')}
             className={`bg-white rounded-2xl border-2 p-6 cursor-pointer transition shadow-sm hover:shadow-md relative ${planoSelecionado === 'anual' ? 'border-blue-500 ring-2 ring-blue-200' : 'border-gray-200'}`}
@@ -138,7 +124,7 @@ export default function PlanosPage() {
               </div>
             </div>
             <div className="mb-1">
-              <span className="text-4xl font-bold text-blue-600">R$ 100,00</span>
+              <span className="text-4xl font-bold text-blue-600">R$&nbsp;100,00</span>
               <span className="text-gray-400 text-sm ml-1">/ ano</span>
             </div>
             <p className="text-green-600 text-sm font-semibold mb-4">Economia de R$ 18,80 vs mensal</p>
@@ -156,7 +142,7 @@ export default function PlanosPage() {
           disabled={loading}
           className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-2xl font-bold text-lg transition disabled:opacity-50 shadow-lg"
         >
-          {loading ? 'Aguarde...' : `Assinar Plano ${planoSelecionado === 'mensal' ? 'Mensal — R$ 9,90/mês' : 'Anual — R$ 100,00/ano'}`}
+          {loading ? 'Aguarde...' : `Assinar ${planoSelecionado === 'mensal' ? 'Mensal — R$ 9,90/mês' : 'Anual — R$ 100,00/ano'}`}
         </button>
 
         <p className="text-center text-xs text-gray-400 mt-4">
@@ -170,5 +156,20 @@ export default function PlanosPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function PlanosPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-4xl mb-4">⏳</div>
+          <p className="text-gray-600">Carregando planos...</p>
+        </div>
+      </div>
+    }>
+      <PlanosConteudo />
+    </Suspense>
   )
 }
