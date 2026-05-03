@@ -248,6 +248,16 @@ export default function NovoPlanejamentoPage() {
   const [mostrarMenuConteudo, setMostrarMenuConteudo] = useState(false)
   const [habilidadesSelecionadas, setHabilidadesSelecionadas] = useState<{codigo: string, descricao: string}[]>([])
   const [numHabilidades, setNumHabilidades] = useState(2)
+  // Estados para Atividade Impressa
+  const [mostrarModalAtividade, setMostrarModalAtividade] = useState(false)
+  const [promptAtividade, setPromptAtividade] = useState('')
+  const [editandoPrompt, setEditandoPrompt] = useState(false)
+  const [gerandoAtividade, setGerandoAtividade] = useState(false)
+  const [atividadeGerada, setAtividadeGerada] = useState('')
+  const [modoModelo, setModoModelo] = useState(false)
+  const [arquivoModelo, setArquivoModelo] = useState<File|null>(null)
+  const [conteudoModelo, setConteudoModelo] = useState('')
+  const modeloRef = useRef<HTMLInputElement>(null)
   const logoRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
 
@@ -325,7 +335,100 @@ export default function NovoPlanejamentoPage() {
     }
   }
 
-  const handleSalvar = async () => {
+  
+  // Gera o prompt padrão para atividade impressa
+  const gerarPromptPadrao = () => {
+    const nAulas = parseInt(form.numAulas) || 1
+    const totalMin = nAulas * 50
+    return `Crie uma atividade impressa completa para alunos de ${form.serie} sobre ${form.conteudo || 'o conteúdo da aula'} (${form.disciplina}).
+
+ESTRUTURA DA ATIVIDADE (para ser impressa e entregue ao aluno):
+- Cabeçalho: Nome: _________ Turma: _____ Data: _____
+- Título da atividade relacionado ao conteúdo
+- Objetivos da atividade (em linguagem para o aluno)
+- Instruções claras e objetivas
+- Entre 3 a 5 questões/exercícios de nível ${form.nivelAtividade === 'facil' ? 'fácil' : form.nivelAtividade === 'dificil' ? 'difícil' : 'médio'}, variando os tipos (múltipla escolha, complete, escreva, desenhe etc.)
+- Espaço suficiente para resposta em ${form.tipoLetra === 'cursiva' ? 'letra cursiva' : 'letra de forma'}
+- Tempo total da aula: ${totalMin} minutos (${nAulas} aula${nAulas>1?'s':''} de 50 min cada)
+- Não incluir duração individual de cada questão — apenas o tempo total ao final
+
+IMPORTANTE: 
+- Linguagem adequada para ${form.serie}
+- Atividade alinhada com as habilidades BNCC da disciplina
+- Incluir pelo menos uma questão criativa ou de reflexão`
+  }
+
+  // Abre modal de atividade impressa e gera prompt
+  const abrirModalAtividade = () => {
+    const prompt = gerarPromptPadrao()
+    setPromptAtividade(prompt)
+    setEditandoPrompt(false)
+    setAtividadeGerada('')
+    setModoModelo(false)
+    setArquivoModelo(null)
+    setConteudoModelo('')
+    setMostrarModalAtividade(true)
+  }
+
+  // Lê o arquivo de modelo enviado pelo usuário
+  const handleArquivoModelo = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setArquivoModelo(file)
+    const reader = new FileReader()
+    reader.onload = (ev) => {
+      const texto = ev.target?.result as string
+      setConteudoModelo(texto)
+      // Gera prompt baseado no modelo
+      const nAulas = parseInt(form.numAulas) || 1
+      const totalMin = nAulas * 50
+      const promptModelo = `Analise este modelo de atividade enviado pelo professor e crie uma NOVA atividade seguindo o mesmo estilo, formato e estrutura visual, mas com conteúdo sobre "${form.conteudo || 'o conteúdo da aula'}" de ${form.disciplina} para ${form.serie}.
+
+MODELO DE REFERÊNCIA:
+---
+${texto.substring(0, 2000)}${texto.length > 2000 ? '\n[...restante do modelo...]' : ''}
+---
+
+INSTRUÇÕES:
+- Siga o mesmo layout e formatação do modelo acima
+- Adapte as questões para o conteúdo: ${form.conteudo}
+- Mantenha o nível ${form.nivelAtividade === 'facil' ? 'fácil' : form.nivelAtividade === 'dificil' ? 'difícil' : 'médio'}
+- Tempo total da aula: ${totalMin} minutos (${nAulas} aula${nAulas>1?'s':''})
+- Não incluir duração de cada questão individualmente — apenas o tempo total ao final
+- Letra: ${form.tipoLetra === 'cursiva' ? 'cursiva' : 'de forma'}`
+      setPromptAtividade(promptModelo)
+    }
+    reader.readAsText(file)
+  }
+
+  // Gera a atividade impressa usando a API
+  const handleGerarAtividade = async () => {
+    setGerandoAtividade(true)
+    setAtividadeGerada('')
+    try {
+      const resp = await fetch('/api/gerar-plano', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...form,
+          gerarAtividade: true,
+          promptAtividade
+        })
+      })
+      const data = await resp.json()
+      if (data.plano?.atividadeImpressaTexto) {
+        setAtividadeGerada(data.plano.atividadeImpressaTexto)
+      } else {
+        setAtividadeGerada('Erro ao gerar atividade. Verifique a API e tente novamente.')
+      }
+    } catch (err: any) {
+      setAtividadeGerada('Erro: ' + err.message)
+    } finally {
+      setGerandoAtividade(false)
+    }
+  }
+
+const handleSalvar = async () => {
     if (!plano) return
     setSaving(true)
     const supabase = getSupabase()
@@ -716,10 +819,16 @@ export default function NovoPlanejamentoPage() {
             <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-semibold text-purple-700">📖 Desenvolvimento da Aula</h2>
-                <button onClick={() => handleRegerar('desenvolvimento')} disabled={loadingSection === 'desenvolvimento'}
-                  className="flex items-center gap-1 text-xs px-3 py-1 bg-purple-50 text-purple-600 rounded-lg hover:bg-purple-100 transition border border-purple-200">
-                  {loadingSection === 'desenvolvimento' ? '⏳...' : '🔄 Regerar'}
-                </button>
+                <div className="flex gap-2">
+                  <button onClick={() => handleRegerar('desenvolvimento')} disabled={loadingSection === 'desenvolvimento'}
+                    className="flex items-center gap-1 text-xs px-3 py-1 bg-purple-50 text-purple-600 rounded-lg hover:bg-purple-100 transition border border-purple-200">
+                    {loadingSection === 'desenvolvimento' ? '⏳...' : '🔄 Regerar'}
+                  </button>
+                  <button type="button" onClick={abrirModalAtividade}
+                    className="flex items-center gap-1 text-xs px-3 py-1 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition font-semibold">
+                    🖨️ Gerar Atividade Impressa
+                  </button>
+                </div>
               </div>
               <div className="bg-gray-50 rounded-xl p-4">
                 <p className="text-gray-700 whitespace-pre-wrap leading-relaxed" style={fontStyle}>{plano.desenvolvimento}</p>
@@ -729,7 +838,139 @@ export default function NovoPlanejamentoPage() {
               </div>
             </div>
 
-            {/* Conclusão */}
+            {/* Modal Atividade Impressa */}
+            {mostrarModalAtividade && (
+              <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 overflow-y-auto">
+                <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+                  <div className="bg-indigo-600 text-white p-5 rounded-t-2xl flex items-center justify-between">
+                    <div>
+                      <h3 className="text-lg font-bold">🖨️ Gerar Atividade Impressa</h3>
+                      <p className="text-indigo-200 text-sm">{form.disciplina} • {form.serie} • {form.conteudo}</p>
+                    </div>
+                    <button type="button" onClick={() => setMostrarModalAtividade(false)}
+                      className="text-white hover:text-indigo-200 text-2xl font-bold">✕</button>
+                  </div>
+                  <div className="p-6 space-y-5">
+                    {/* Modo: Prompt ou Modelo */}
+                    <div className="flex gap-3">
+                      <button type="button" onClick={() => { setModoModelo(false); setPromptAtividade(gerarPromptPadrao()) }}
+                        className={`flex-1 py-3 px-4 rounded-xl border-2 font-semibold text-sm transition ${
+                          !modoModelo ? 'border-indigo-500 bg-indigo-50 text-indigo-700' : 'border-gray-200 text-gray-600 hover:border-gray-300'}`}>
+                        <span className="text-xl block mb-1">✏️</span>
+                        Gerar com Prompt
+                        <span className="block text-xs font-normal mt-1">IA cria a atividade a partir do prompt</span>
+                      </button>
+                      <button type="button" onClick={() => setModoModelo(true)}
+                        className={`flex-1 py-3 px-4 rounded-xl border-2 font-semibold text-sm transition ${
+                          modoModelo ? 'border-indigo-500 bg-indigo-50 text-indigo-700' : 'border-gray-200 text-gray-600 hover:border-gray-300'}`}>
+                        <span className="text-xl block mb-1">📄</span>
+                        Usar como Modelo
+                        <span className="block text-xs font-normal mt-1">Envie um arquivo e a IA seguirá o estilo</span>
+                      </button>
+                    </div>
+
+                    {/* Upload de modelo */}
+                    {modoModelo && (
+                      <div className="border-2 border-dashed border-indigo-300 rounded-xl p-4 bg-indigo-50">
+                        <p className="text-sm font-semibold text-indigo-700 mb-2">📁 Envie o arquivo modelo (.txt, .doc, .pdf):</p>
+                        <p className="text-xs text-indigo-600 mb-3">A IA analisará o estilo, formato e estrutura do seu modelo e criará uma nova atividade igual, mas com o conteúdo desta aula.</p>
+                        <button type="button" onClick={() => modeloRef.current?.click()}
+                          className="w-full py-3 border-2 border-indigo-400 text-indigo-700 rounded-lg font-semibold hover:bg-indigo-100 transition text-sm flex items-center justify-center gap-2">
+                          📎 {arquivoModelo ? arquivoModelo.name : 'Selecionar arquivo modelo'}
+                        </button>
+                        <input ref={modeloRef} type="file" accept=".txt,.doc,.docx,.pdf" onChange={handleArquivoModelo} className="hidden" />
+                        {arquivoModelo && (
+                          <p className="mt-2 text-xs text-green-600">✅ Arquivo carregado: {arquivoModelo.name} ({Math.round(arquivoModelo.size/1024)} KB)</p>
+                        )}
+                        {conteudoModelo && (
+                          <div className="mt-3 bg-white border border-indigo-200 rounded-lg p-3">
+                            <p className="text-xs font-semibold text-gray-600 mb-1">📝 Prévia do modelo lido:</p>
+                            <p className="text-xs text-gray-500 font-mono whitespace-pre-wrap max-h-24 overflow-y-auto">{conteudoModelo.substring(0, 300)}...</p>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Prompt preview + edição */}
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <label className="text-sm font-semibold text-gray-700">
+                          {modoModelo ? '📋 Prompt gerado a partir do modelo:' : '📋 Prompt que será enviado à IA:'}
+                        </label>
+                        <button type="button" onClick={() => setEditandoPrompt(!editandoPrompt)}
+                          className={`text-xs px-3 py-1 rounded-lg border font-semibold transition ${
+                            editandoPrompt ? 'border-yellow-500 bg-yellow-50 text-yellow-700' : 'border-gray-300 text-gray-600 hover:bg-gray-50'}`}>
+                          {editandoPrompt ? '✓ Fechar edição' : '✏️ Editar prompt'}
+                        </button>
+                      </div>
+                      {editandoPrompt ? (
+                        <textarea
+                          value={promptAtividade}
+                          onChange={e => setPromptAtividade(e.target.value)}
+                          rows={10}
+                          className="w-full border-2 border-yellow-400 rounded-xl p-3 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-yellow-400 bg-yellow-50"
+                        />
+                      ) : (
+                        <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 max-h-48 overflow-y-auto">
+                          <p className="text-xs text-gray-600 whitespace-pre-wrap font-mono">{promptAtividade}</p>
+                        </div>
+                      )}
+                      <p className="text-xs text-gray-400 mt-1">💡 Você pode editar o prompt antes de gerar para personalizar a atividade.</p>
+                    </div>
+
+                    {/* Botão Gerar */}
+                    <button type="button" onClick={handleGerarAtividade} disabled={gerandoAtividade || (modoModelo && !arquivoModelo)}
+                      className="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold hover:bg-indigo-700 transition disabled:opacity-50 flex items-center justify-center gap-2 text-sm">
+                      {gerandoAtividade ? <><span className="animate-spin">⚙️</span> Gerando atividade...</> : <>🖨️ Gerar Atividade Impressa</>}
+                    </button>
+                    {modoModelo && !arquivoModelo && (
+                      <p className="text-xs text-orange-600 text-center">⚠️ Envie um arquivo modelo antes de gerar</p>
+                    )}
+
+                    {/* Resultado */}
+                    {atividadeGerada && (
+                      <div className="border-2 border-indigo-200 rounded-xl overflow-hidden">
+                        <div className="bg-indigo-600 text-white px-4 py-2 flex items-center justify-between">
+                          <span className="font-semibold text-sm">📄 Atividade Gerada</span>
+                          <div className="flex gap-2">
+                            <button type="button"
+                              onClick={() => {
+                                const blob = new Blob([atividadeGerada], {type: 'application/vnd.ms-word'})
+                                const url = URL.createObjectURL(blob)
+                                const a = document.createElement('a')
+                                a.href = url
+                                a.download = 'atividade-' + (form.conteudo||'aula').replace(/\s+/g,'_').substring(0,30) + '.doc'
+                                a.click()
+                                URL.revokeObjectURL(url)
+                              }}
+                              className="text-xs bg-white text-indigo-600 px-3 py-1 rounded-lg font-semibold hover:bg-indigo-50 transition">
+                              ⬇️ Baixar .doc
+                            </button>
+                            <button type="button"
+                              onClick={() => {
+                                const w = window.open('', '_blank')
+                                if (w) {
+                                  w.document.write('<html><head><title>Atividade</title><style>body{font-family:Arial,sans-serif;padding:40px;max-width:800px;margin:0 auto}h1{color:#4338ca}pre{white-space:pre-wrap;font-family:inherit}</style></head><body><pre>' + atividadeGerada + '</pre></body></html>')
+                                  w.document.close()
+                                  w.print()
+                                }
+                              }}
+                              className="text-xs bg-white text-indigo-600 px-3 py-1 rounded-lg font-semibold hover:bg-indigo-50 transition">
+                              🖨️ Imprimir
+                            </button>
+                          </div>
+                        </div>
+                        <div className="bg-white p-5 max-h-96 overflow-y-auto">
+                          <pre className="text-sm text-gray-800 whitespace-pre-wrap leading-relaxed font-sans" style={fontStyle}>{atividadeGerada}</pre>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+
+{/* Conclusão */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-semibold text-orange-700">🏁 Conclusão e Reflexão</h2>
