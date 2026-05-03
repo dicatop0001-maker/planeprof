@@ -108,6 +108,16 @@ export default function DashboardPage() {
     router.push('/')
   }
 
+  // Redireciona para /planos passando o ID; 1º plano é grátis
+  const handleBaixar = (plano: Planejamento) => {
+    const isPrimeiro = planejamentos.indexOf(plano) === planejamentos.length - 1
+    if (isPrimeiro) {
+      gerarDocx(plano)
+    } else {
+      router.push(`/planos?planoId=${plano.id}&acao=download`)
+    }
+  }
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -139,7 +149,6 @@ export default function DashboardPage() {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 py-8">
-        {/* Cards de estatísticas */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
             <p className="text-sm text-gray-500">Planejamentos</p>
@@ -159,7 +168,6 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Ações rápidas */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
           <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-6 rounded-2xl flex items-center justify-between">
             <div>
@@ -181,7 +189,6 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Lista de planejamentos */}
         <div>
           <h2 className="text-lg font-semibold text-gray-800 mb-4">Meus Planejamentos</h2>
           {planejamentos.length === 0 ? (
@@ -195,37 +202,46 @@ export default function DashboardPage() {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {planejamentos.map((plano) => (
-                <div key={plano.id} className="bg-white p-5 rounded-xl border border-gray-200 hover:border-blue-300 hover:shadow-md transition flex flex-col">
-                  <div className="flex items-start justify-between mb-3">
-                    <span className="text-2xl">📋</span>
-                    <div className="flex gap-1 flex-wrap justify-end">
-                      {plano.na_biblioteca && (
-                        <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">📚 Biblioteca</span>
-                      )}
-                      <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
-                        {plano.status || 'Concluído'}
-                      </span>
+              {planejamentos.map((plano, idx) => {
+                const isPrimeiro = idx === planejamentos.length - 1
+                return (
+                  <div key={plano.id} className="bg-white p-5 rounded-xl border border-gray-200 hover:border-blue-300 hover:shadow-md transition flex flex-col">
+                    <div className="flex items-start justify-between mb-3">
+                      <span className="text-2xl">📋</span>
+                      <div className="flex gap-1 flex-wrap justify-end">
+                        {isPrimeiro && (
+                          <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">🎁 Grátis</span>
+                        )}
+                        {plano.na_biblioteca && (
+                          <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">📚 Biblioteca</span>
+                        )}
+                        <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
+                          {plano.status || 'Concluído'}
+                        </span>
+                      </div>
+                    </div>
+                    <h3 className="font-semibold text-gray-800 mb-1 line-clamp-2">{plano.titulo}</h3>
+                    <p className="text-sm text-gray-500">{plano.disciplina} • {plano.serie}</p>
+                    {plano.tipo_letra && (
+                      <p className="text-xs text-gray-400 mt-1">{plano.tipo_letra === 'cursiva' ? '✒️ Letra Cursiva' : '🖊️ Letra de Forma'}</p>
+                    )}
+                    <p className="text-xs text-gray-400 mt-1">
+                      {new Date(plano.created_at).toLocaleDateString('pt-BR')}
+                    </p>
+                    <div className="mt-auto pt-4 flex gap-2">
+                      <Link href={"/planejamento/" + plano.id} className="flex-1 text-center text-sm py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50 transition font-medium">
+                        👁 Ver
+                      </Link>
+                      <button
+                        onClick={() => handleBaixar(plano)}
+                        className={`flex-1 text-sm py-2 rounded-lg font-semibold transition ${isPrimeiro ? 'bg-green-500 hover:bg-green-600 text-white' : 'bg-blue-600 hover:bg-blue-700 text-white'}`}
+                      >
+                        {isPrimeiro ? '🎁 Baixar Grátis' : '⬇️ Baixar'}
+                      </button>
                     </div>
                   </div>
-                  <h3 className="font-semibold text-gray-800 mb-1 line-clamp-2">{plano.titulo}</h3>
-                  <p className="text-sm text-gray-500">{plano.disciplina} • {plano.serie}</p>
-                  {plano.tipo_letra && (
-                    <p className="text-xs text-gray-400 mt-1">{plano.tipo_letra === 'cursiva' ? '✒️ Letra Cursiva' : '🖊️ Letra de Forma'}</p>
-                  )}
-                  <p className="text-xs text-gray-400 mt-1">
-                    {new Date(plano.created_at).toLocaleDateString('pt-BR')}
-                  </p>
-                  <div className="mt-auto pt-4 flex gap-2">
-                    <Link href={"/planejamento/" + plano.id} className="flex-1 text-center text-sm py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50 transition font-medium">
-                      👁 Ver
-                    </Link>
-                    <button onClick={() => gerarDocx(plano)} className="flex-1 text-sm py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold">
-                      ⬇️ Baixar
-                    </button>
-                  </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
           )}
         </div>
