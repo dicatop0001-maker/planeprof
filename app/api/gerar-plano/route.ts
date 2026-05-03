@@ -166,7 +166,9 @@ ${atividadesDesc}
 
 **Momento 3 — Roda Final e Sistematização (10 min)**
 Retome as respostas do quadro inicial. Pergunte: *"${ehInfantil ? 'O que aprendemos hoje sobre ' + conteudo + '?' : 'O que mudou no que vocês sabiam sobre ' + conteudo + '?'}"*
-Sistematize no quadro os conceitos-chave sobre ${conteudo}. Deixe visível para referência futura.${oriExtra}`
+Sistematize no quadro os conceitos-chave sobre ${conteudo}. Deixe visível para referência futura.${oriExtra}
+
+**⏱️ TEMPO TOTAL DA AULA:** ${numAulas * 50} minutos (${numAulas} aula${numAulas > 1 ? 's' : ''} de 50 min cada)`
 }
 
 // Gera conclusão específica e reflexiva
@@ -194,13 +196,11 @@ function gerarDinamica(disciplina: string, serie: string, conteudo: string): str
         ? `**Dinâmica: "Caixa Surpresa de ${conteudo}"**
 📦 **Materiais:** Uma caixa decorada, objetos ou imagens sobre ${conteudo}
 🎯 **Como jogar:** Coloque dentro da caixa itens relacionados a ${conteudo}. Cada criança enfia a mão (sem olhar) e descreve o que sentiu. Depois olha e confirma.
-✨ **Aprendizado:** Estimula linguagem descritiva, vocabulário de ${conteudo} e curiosidade científica
-⏱️ **Duração:** 15 minutos`
+✨ **Aprendizado:** Estimula linguagem descritiva, vocabulário de ${conteudo} e curiosidade científica`
         : `**Dinâmica: "Quiz Rápido — ${conteudo}"**
 🎯 **Como jogar:** Divida a turma em 3 grupos. O professor lê perguntas sobre ${conteudo} (fácil, médio, difícil). Cada equipe tem 30 segundos para discutir e responder. Cada acerto vale 1 ponto.
 📋 **Exemplos de perguntas:** O que é ${conteudo}? Onde encontramos ${conteudo}? Como ${conteudo} se relaciona com nossa vida?
-✨ **Aprendizado:** Revisão ativa, trabalho em equipe, oralidade
-⏱️ **Duração:** 15-20 minutos`,
+✨ **Aprendizado:** Revisão ativa, trabalho em equipe, oralidade`,
     },
   ]
   // Escolhe dinâmica baseada na disciplina
@@ -209,26 +209,22 @@ function gerarDinamica(disciplina: string, serie: string, conteudo: string): str
       ? `**Dinâmica: "Boliche Matemático com ${conteudo}"**
 🎳 **Materiais:** 6 garrafas PET numeradas, bola pequena
 🎯 **Como jogar:** Cada garrafa derrubada pede uma tarefa sobre ${conteudo} (ex: mostrar no ábaco, contar, representar). A turma ajuda a confirmar a resposta.
-✨ **Aprendizado:** ${conteudo} de forma cinestésica e divertida
-⏱️ **Duração:** 20 minutos`
+✨ **Aprendizado:** ${conteudo} de forma cinestésica e divertida`
       : `**Dinâmica: "Olimpíada de ${conteudo}"**
 🏆 **Materiais:** Fichas com problemas sobre ${conteudo}, cronômetro
 🎯 **Como jogar:** Equipes de 3 alunos. Cada rodada tem 1 problema de ${conteudo} para resolver em 2 minutos. A equipe que resolver corretamente primeiro marca ponto. 5 rodadas.
-✨ **Aprendizado:** ${conteudo} com raciocínio ágil e colaboração
-⏱️ **Duração:** 20 minutos`
+✨ **Aprendizado:** ${conteudo} com raciocínio ágil e colaboração`
   }
   if (d.match(/portugu|lingua/)) {
     return ehInfantil
       ? `**Dinâmica: "Caça às Letras de ${conteudo}"**
 🔍 **Materiais:** Letras impressas espalhadas pela sala, fichas de palavras
 🎯 **Como jogar:** O professor fala uma palavra de ${conteudo}. As crianças correm para encontrar as letras que formam essa palavra e montam no tapete.
-✨ **Aprendizado:** Alfabetização contextualizada com ${conteudo}
-⏱️ **Duração:** 15 minutos`
+✨ **Aprendizado:** Alfabetização contextualizada com ${conteudo}`
       : `**Dinâmica: "Telegrama de ${conteudo}"**
 📨 **Materiais:** Papéis, canetas
 🎯 **Como jogar:** Cada aluno tem 5 minutos para escrever um "telegrama" (máx 30 palavras) sobre ${conteudo} para um destinatário fictício. Depois leem em dupla e identificam: tem clareza? Informação suficiente?
-✨ **Aprendizado:** Síntese, escrita objetiva, revisão de ${conteudo}
-⏱️ **Duração:** 15 minutos`
+✨ **Aprendizado:** Síntese, escrita objetiva, revisão de ${conteudo}`
   }
   return dinamicas[0].gerar()
 }
@@ -295,7 +291,8 @@ export async function POST(request: NextRequest) {
     const {
       disciplina, serie, bimestre, conteudo, orientacoes,
       numObjetivos, tipoLetra, numAulas, numAtividades, nivelAtividade,
-      regenerar, gerarPdi, pdiAluno, pdiNecessidades
+      regenerar, gerarPdi, pdiAluno, pdiNecessidades,
+      gerarAtividade, promptAtividade
     } = body
 
     if (!disciplina || !serie || !conteudo) {
@@ -314,7 +311,74 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: true, plano: { pdi: pdiTexto }, fonte: 'local' })
     }
 
-    // Gera plano rico localmente
+    // Modo Gerar Atividade Impressa
+  if (gerarAtividade && promptAtividade) {
+    const apiKey = process.env.OPENAI_API_KEY
+    if (!apiKey || apiKey.length < 20) {
+      // Fallback local sem IA
+      const nAulas = parseInt(numAulas) || 1
+      const totalMin = nAulas * 50
+      const atividadeLocal = `ATIVIDADE IMPRESSA — ${disciplina?.toUpperCase() || 'DISCIPLINA'}
+${serie || 'Série'} | Tempo total da aula: ${totalMin} minutos
+
+Nome: ______________________________ Turma: _______ Data: ___/___/______
+
+TEMA: ${conteudo || 'Conteúdo da aula'}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. O que você entendeu sobre ${conteudo}? Explique com suas próprias palavras:
+___________________________________________
+___________________________________________
+___________________________________________
+
+2. Complete as afirmações sobre ${conteudo}:
+a) __________________________ é importante porque __________________________
+b) Podemos encontrar ${conteudo} em: __________________________
+
+3. Desenhe ou escreva um exemplo do que você aprendeu sobre ${conteudo}:
+
+[ Espaço para resposta ]
+
+
+
+
+4. Assinale a alternativa CORRETA sobre ${conteudo}:
+(  ) É um assunto que não existe na nossa vida cotidiana
+(  ) Pode ser observado e estudado no mundo ao nosso redor ✓
+(  ) Só aparece em livros, não tem aplicação prática
+(  ) Apenas professores precisam saber sobre isso
+
+5. Crie uma frase usando o que aprendeu sobre ${conteudo}:
+___________________________________________
+___________________________________________
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Tempo total da aula: ${totalMin} minutos (${nAulas} aula${nAulas>1?'s':''} de 50 min)
+`
+      return NextResponse.json({ success: true, plano: { atividadeImpressaTexto: atividadeLocal }, fonte: 'local' })
+    }
+    try {
+      const OpenAI = (await import('openai')).default
+      const openai = new OpenAI({ apiKey })
+      const completion = await openai.chat.completions.create({
+        model: 'gpt-4o-mini',
+        messages: [
+          { role: 'system', content: 'Você é um especialista em educação brasileira e criação de atividades pedagógicas. Crie atividades impressas claras, formatadas e prontas para imprimir. Responda apenas com o texto da atividade, sem explicações adicionais.' },
+          { role: 'user', content: promptAtividade }
+        ],
+        temperature: 0.7,
+        max_tokens: 2000,
+      })
+      const atividadeTexto = completion.choices[0].message.content || ''
+      return NextResponse.json({ success: true, plano: { atividadeImpressaTexto: atividadeTexto }, fonte: 'ia' })
+    } catch (err: any) {
+      const nAulas = parseInt(numAulas) || 1
+      const totalMin = nAulas * 50
+      return NextResponse.json({ success: true, plano: { atividadeImpressaTexto: 'Atividade sobre ' + conteudo + '\nTempo total da aula: ' + totalMin + ' minutos' }, fonte: 'local' })
+    }
+  }
+
+  // Gera plano rico localmente
     const habilidades = getBNCCparaDisc(disciplina, serie)
     const objetivos = gerarObjetivosEspecificos(disciplina, serie, conteudo, nObj)
     const desenvolvimento = gerarDesenvolvimento(disciplina, serie, conteudo, nAulas, nAtiv, nivel, letra, orientacoes || '')
