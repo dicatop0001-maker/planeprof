@@ -185,6 +185,22 @@ function gerarConclusao(disciplina: string, serie: string, conteudo: string): st
 **Avaliação:** Utilize rubrica simples: Compreendeu o conceito? Aplicou corretamente? Expressou com clareza? Registre para planejamento da próxima sequência didática.`
 }
 
+// Variante 2 da conclusão — abordagem por avaliação diagnóstica
+function gerarConclusaoVariante2(disciplina: string, serie: string, conteudo: string): string {
+  const ehInfantil = serie.toLowerCase().match(/infantil|pré|maternal/)
+    return ehInfantil
+        ? `**Roda de Encerramento:** Sente as crianças em círculo e mostre as produções do dia sobre ${conteudo}. Peça que cada criança escolha um "tesouro" — algo que ela criou ou aprendeu — e explique para o grupo. Fotografe os momentos para o portfólio. **Comunicação com a família:** Envie uma mensagem breve contando o que foi trabalhado sobre ${conteudo} e sugira uma conversa em casa: "Pergunte ao seu filho o que descobriu hoje!" **Registro docente:** Anote no diário quem participou ativamente, quem ficou mais tímido e o que chamou mais atenção nas falas das crianças.`
+            : `**Fechamento estruturado:** Distribua um bilhete de saída (post-it ou ficha pequena) com 3 perguntas sobre ${conteudo}: 1) O que aprendi? 2) O que ainda tenho dúvida? 3) Onde posso usar isso? Os alunos respondem individualmente e entregam ao sair. **Uso diagnóstico:** Leia as respostas antes da próxima aula. Identifique lacunas e retome no início da aula seguinte os pontos que precisam de reforço sobre ${conteudo}. **Conexão com o projeto de vida:** Ajude os alunos a perceber como ${conteudo} se conecta com escolhas, profissões e situações do cotidiano.`
+            }
+
+            // Variante 3 da conclusão — abordagem por síntese criativa
+            function gerarConclusaoVariante3(disciplina: string, serie: string, conteudo: string): string {
+              const ehInfantil = serie.toLowerCase().match(/infantil|pré|maternal/)
+                return ehInfantil
+                    ? `**Celebração da Aprendizagem:** Convide as crianças para uma "exposição relâmpago" — cada uma escolhe como mostrar o que aprendeu sobre ${conteudo}: com um desenho, uma fala, um gesto ou uma música inventada. O professor registra em vídeo curto (com autorização). **Encerramento afetivo:** Forme um círculo, dê as mãos e peça que cada criança diga uma palavra sobre como se sentiu aprendendo ${conteudo}. Termine com uma música ou cantiga do grupo. **Avaliação:** Observe critérios de desenvolvimento integral: linguagem, socialização, criatividade e relação com ${conteudo}.`
+                        : `**Síntese visual:** Peça que cada aluno crie um "mapa mental" ou esquema visual de no máximo 1 página resumindo ${conteudo} com palavras-chave, setas e símbolos próprios — sem texto corrido. Compartilhem em grupos de 4. **Autoavaliação:** Cada aluno preenche: "Sei muito bem: ___ / Ainda preciso revisar: ___ / Quero aprender mais sobre: ___" (referente a ${conteudo}). **Próximos passos:** Com base nas autoavaliações, organize grupos de reforço e aprofundamento para a próxima sequência didática sobre ${conteudo}.`
+                        }
+                        
 // Gera dinâmica EXCLUSIVA para o conteúdo específico
 function gerarDinamica(disciplina: string, serie: string, conteudo: string): string {
   const d = disciplina.toLowerCase()
@@ -388,11 +404,26 @@ Tempo total da aula: ${totalMin} minutos (${nAulas} aula${nAulas>1?'s':''} de 50
     const planoLocal = { habilidades_bncc: habilidades, objetivos, desenvolvimento, conclusao, dinamica: '' }
 
     // Modo regenerar seção específica
-    if (regenerar) {
-      const secoes: Record<string, string> = { habilidades_bncc: habilidades.join(', '), objetivos: objetivos.join('\n'), desenvolvimento, conclusao, dinamica }
-      return NextResponse.json({ success: true, plano: { [regenerar]: secoes[regenerar] || desenvolvimento }, fonte: 'local' })
-    }
-
+      // Modo regenerar seção específica - gera variação real a cada chamada
+        if (regenerar) {
+            const idx = Date.now() % 3 // 0, 1 ou 2 — rotaciona entre variantes
+                const conclusaoVariantes = [
+                      gerarConclusao(disciplina, serie, conteudo),
+                            gerarConclusaoVariante2(disciplina, serie, conteudo),
+                                  gerarConclusaoVariante3(disciplina, serie, conteudo),
+                                      ]
+                                          const desenvolvimentoNovo = gerarDesenvolvimento(disciplina, serie, conteudo, nAulas, nAtiv, nivel, letra, orientacoes || '')
+                                              const dinamicaNova = gerarDinamica(disciplina, serie, conteudo)
+                                                  const objetivosNovos = gerarObjetivosEspecificos(disciplina, serie, conteudo, nObj)
+                                                      const secoes: Record<string, string> = {
+                                                            habilidades_bncc: habilidades.join(', '),
+                                                                  objetivos: objetivosNovos.join('\n'),
+                                                                        desenvolvimento: desenvolvimentoNovo,
+                                                                              conclusao: conclusaoVariantes[idx],
+                                                                                    dinamica: dinamicaNova,
+                                                                                        }
+                                                                                            return NextResponse.json({ success: true, plano: { [regenerar]: secoes[regenerar] || desenvolvimentoNovo }, fonte: 'local' })
+                                                                                              }
     // Tenta enriquecer com OpenAI se disponível
     const apiKey = process.env.OPENAI_API_KEY
     if (!apiKey || apiKey.length < 20) {
