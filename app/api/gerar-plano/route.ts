@@ -385,7 +385,7 @@ Tempo total da aula: ${totalMin} minutos (${nAulas} aula${nAulas>1?'s':''} de 50
     const conclusao = gerarConclusao(disciplina, serie, conteudo)
     const dinamica = gerarDinamica(disciplina, serie, conteudo)
 
-    const planoLocal = { habilidades_bncc: habilidades, objetivos, desenvolvimento, conclusao, dinamica }
+    const planoLocal = { habilidades_bncc: habilidades, objetivos, desenvolvimento, conclusao, dinamica: '' }
 
     // Modo regenerar seção específica
     if (regenerar) {
@@ -442,7 +442,7 @@ Retorne APENAS JSON válido:
         // Garante que tem todos os campos; usa local como fallback
         if (!planoIA.desenvolvimento) planoIA.desenvolvimento = desenvolvimento
         if (!planoIA.conclusao) planoIA.conclusao = conclusao
-        if (!planoIA.dinamica) planoIA.dinamica = dinamica
+        planoIA.dinamica = ''
         if (!planoIA.objetivos?.length) planoIA.objetivos = objetivos
         if (!planoIA.habilidades_bncc?.length) planoIA.habilidades_bncc = habilidades
       } catch {
