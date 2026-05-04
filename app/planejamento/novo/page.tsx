@@ -656,6 +656,7 @@ export default function NovoPlanejamentoPage() {
   const [gerandoPdi, setGerandoPdi] = useState(false)
   const [mostrarMenuHabilidades, setMostrarMenuHabilidades] = useState(false)
   const [mostrarMenuConteudo, setMostrarMenuConteudo] = useState(false)
+  const [conteudosSelecionados, setConteudosSelecionados] = useState<string[]>([])
   const [habilidadesSelecionadas, setHabilidadesSelecionadas] = useState<{codigo: string, descricao: string}[]>([])
   const [numHabilidades, setNumHabilidades] = useState(2)
   // Estados para Atividade Impressa
@@ -961,7 +962,7 @@ const handleSalvar = async () => {
                   <span>Conteúdo Programático *</span>
                 </span>
                 <span className="flex items-center gap-2">
-                  {form.conteudo ? <span className="text-xs text-green-600 max-w-xs truncate">{form.conteudo}</span> : <span className="text-xs text-gray-500">Toque para selecionar</span>}
+                  {form.conteudo ? <span className="text-xs text-green-600 max-w-xs truncate">{conteudosSelecionados.length > 1 ? conteudosSelecionados.length + ' conteúdos' : form.conteudo}</span> : <span className="text-xs text-gray-500">Toque para selecionar</span>}
                   <span>{mostrarMenuConteudo ? '▲' : '▼'}</span>
                 </span>
               </button>
@@ -977,21 +978,21 @@ const handleSalvar = async () => {
                     <div className="space-y-2 mb-4">
                       {CONTEUDOS_PROGRAMATICOS[form.disciplina][form.serie][form.bimestre].map((c, i) => (
                         <button key={i} type="button"
-                          onClick={() => { setForm(prev => ({...prev, conteudo: c})); setMostrarMenuConteudo(false) }}
-                          className={`w-full text-left px-3 py-2 rounded-lg text-sm transition border ${ form.conteudo === c ? 'border-blue-500 bg-blue-50 text-blue-700 font-semibold' : 'border-gray-200 hover:border-blue-300 hover:bg-blue-50 text-gray-700'}`}>
-                          {c}
+                          onClick={() => { const upd = conteudosSelecionados.includes(c) ? conteudosSelecionados.filter(x => x !== c) : [...conteudosSelecionados, c]; setConteudosSelecionados(upd); setForm(prev => ({...prev, conteudo: upd.join(' | ')})); }}
+                          className={`w-full text-left px-3 py-2 rounded-lg text-sm transition border ${ conteudosSelecionados.includes(c) ? 'border-blue-500 bg-blue-50 text-blue-700 font-semibold' : 'border-gray-200 hover:border-blue-300 hover:bg-blue-50 text-gray-700'}`}>
+                          <span className="flex items-center gap-2">{conteudosSelecionados.includes(c) && <span className="text-blue-600 font-bold">✔</span>}<span>{c}</span></span>
                         </button>
                       ))}
                     </div>
                   ) : null}
                   <div>
-                    <label className="block text-xs font-medium text-gray-600 mb-1">Ou escreva o conteúdo personalizado:</label>
-                    <input type="text" name="conteudo" value={form.conteudo} onChange={handleChange}
+                    <div className="flex items-center justify-between mb-1"><label className="block text-xs font-medium text-gray-600">Ou escreva o conteúdo personalizado:</label>{conteudosSelecionados.length > 0 && (<button type="button" onClick={() => { setConteudosSelecionados([]); setForm(prev => ({...prev, conteudo: ''})); }} className="text-xs text-red-500 hover:text-red-700 font-medium">🗑 Limpar seleção ({conteudosSelecionados.length})</button>)}</div>
+                    <input type="text" name="conteudo" value={form.conteudo} onChange={(e) => { handleChange(e); setConteudosSelecionados([]); }}
                       className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                       placeholder="Ex: Frações - conceito e operações básicas" />
                     <button type="button" onClick={() => setMostrarMenuConteudo(false)}
                       className="mt-2 w-full py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">
-                      ✓ Confirmar
+                      ✓ Confirmar {conteudosSelecionados.length > 0 ? ` (${conteudosSelecionados.length})` : ""}
                     </button>
                   </div>
                 </div>
