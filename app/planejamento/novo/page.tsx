@@ -1399,18 +1399,32 @@ const handleSalvar = async () => {
             <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-semibold text-pink-700">🎮 Dinâmica/Jogo</h2>
-                <button onClick={() => handleRegerar('dinamica')} disabled={loadingSection === 'dinamica'}
-                  className="flex items-center gap-1 text-xs px-3 py-1 bg-pink-50 text-pink-600 rounded-lg hover:bg-pink-100 transition border border-pink-200">
-                  {loadingSection === 'dinamica' ? '⏳...' : '🔄 Regerar'}
-                </button>
+                {plano.dinamica && (
+                  <button onClick={() => handleRegerar('dinamica')} disabled={loadingSection === 'dinamica'}
+                    className="flex items-center gap-1 text-xs px-3 py-1 bg-pink-50 text-pink-600 rounded-lg hover:bg-pink-100 transition border border-pink-200">
+                    {loadingSection === 'dinamica' ? '⏳...' : '🔄 Regerar'}
+                  </button>
+                )}
               </div>
-              <div className="bg-pink-50 rounded-xl p-4">
-                <p className="text-gray-700 leading-relaxed" style={fontStyle}>{plano.dinamica}</p>
-              </div>
-              <div className="mt-3 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
-                <p className="text-xs text-yellow-700 font-medium">🎨 Prompt para gerar imagem desta dinâmica:</p>
-                <p className="text-xs text-yellow-600 mt-1 italic">"Ilustração colorida e lúdica para crianças de {form.serie}, mostrando crianças brincando e aprendendo {form.conteudo} em sala de aula, estilo cartoon educativo brasileiro, cores vibrantes"</p>
-              </div>
+              {!plano.dinamica ? (
+                <div className="flex flex-col items-center justify-center py-6 gap-3">
+                  <button onClick={() => handleRegerar('dinamica')} disabled={loadingSection === 'dinamica'}
+                    className="flex items-center gap-2 px-6 py-3 bg-pink-500 text-white rounded-xl font-semibold hover:bg-pink-600 transition disabled:opacity-50 shadow-md">
+                    {loadingSection === 'dinamica' ? <><span>⏳</span> Gerando dinâmica...</> : <><span>🎮</span> Dinâmica/Jogo: Gerar</>}
+                  </button>
+                  <p className="text-xs text-gray-400">Clique para gerar uma dinâmica ou jogo para esta aula</p>
+                </div>
+              ) : (
+                <>
+                  <div className="bg-pink-50 rounded-xl p-4">
+                    <p className="text-gray-700 leading-relaxed" style={fontStyle}>{plano.dinamica}</p>
+                  </div>
+                  <div className="mt-3 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                    <p className="text-xs text-yellow-700 font-medium">🎨 Prompt para gerar imagem desta dinâmica:</p>
+                    <p className="text-xs text-yellow-600 mt-1 italic">"Ilustração colorida e lúdica para crianças de {form.serie}, mostrando crianças brincando e aprendendo {form.conteudo} em sala de aula, estilo cartoon educativo brasileiro, cores vibrantes"</p>
+                  </div>
+                </>
+              )}
             </div>
 
             {/* PDI Section */}
