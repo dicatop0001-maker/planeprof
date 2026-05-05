@@ -649,7 +649,6 @@ export default function NovoPlanejamentoPage() {
   const [plano, setPlano] = useState<PlanoGerado | null>(null)
   const [error, setError] = useState('')
   const [saving, setSaving] = useState(false)
-  const [compartilharBiblioteca, setCompartilharBiblioteca] = useState(false)
   const [pdiMode, setPdiMode] = useState(false)
   const [pdiAluno, setPdiAluno] = useState('')
   const [pdiNecessidades, setPdiNecessidades] = useState('')
@@ -973,7 +972,7 @@ const handleSalvar = async () => {
       habilidades_bncc: [...(habilidadesSelecionadas.length > 0 ? habilidadesSelecionadas.map(h => h.codigo) : []), ...plano.habilidades_bncc].filter((v,i,a)=>a.indexOf(v)===i), objetivos: plano.objetivos,
       desenvolvimento: plano.desenvolvimento, conclusao: plano.conclusao,
       dinamica: plano.dinamica, tipo_letra: form.tipoLetra,
-      na_biblioteca: compartilharBiblioteca, status: 'concluido'
+      na_biblioteca: true, status: 'concluido'
     }).select().single()
     if (error) {
       setError('Erro ao salvar. Tente novamente.')
@@ -1593,18 +1592,6 @@ const handleSalvar = async () => {
                   </ul>
                 </div>
               )}
-            </div>
-
-            {/* Compartilhar */}
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-              <label className="flex items-start gap-3 cursor-pointer">
-                <input type="checkbox" checked={compartilharBiblioteca} onChange={e => setCompartilharBiblioteca(e.target.checked)}
-                  className="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
-                <div>
-                  <span className="font-semibold text-gray-800">📚 Compartilhar na Biblioteca Pública</span>
-                  <p className="text-sm text-gray-500 mt-1">Ao marcar esta opção, seu plano ficará disponível para outros professores baixarem gratuitamente.</p>
-                </div>
-              </label>
             </div>
 
             <div className="flex gap-4">
