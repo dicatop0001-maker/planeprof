@@ -37,22 +37,22 @@ function gerarDocx(plano: Planejamento) {
 <meta charset="utf-8">
 <title>${plano.titulo}</title>
 <style>
-  body { font-family: ${fontFamily}; max-width: 800px; margin: 40px auto; padding: 20px; color: #222; }
-  h1 { color: #1e3a5f; font-size: 22px; border-bottom: 2px solid #1e3a5f; padding-bottom: 8px; }
-  h2 { color: #2563eb; font-size: 16px; margin-top: 24px; }
-  .badge { background: #dbeafe; color: #1d4ed8; padding: 4px 10px; border-radius: 20px; font-size: 13px; display: inline-block; margin: 3px; font-family: monospace; }
-  .info { background: #f0f9ff; border-left: 4px solid #0ea5e9; padding: 12px 16px; margin: 16px 0; border-radius: 4px; }
-  li { margin: 6px 0; }
-  p { line-height: 1.7; }
+body { font-family: ${fontFamily}; max-width: 800px; margin: 40px auto; padding: 20px; color: #222; }
+h1 { color: #1e3a5f; font-size: 22px; border-bottom: 2px solid #1e3a5f; padding-bottom: 8px; }
+h2 { color: #2563eb; font-size: 16px; margin-top: 24px; }
+.badge { background: #dbeafe; color: #1d4ed8; padding: 4px 10px; border-radius: 20px; font-size: 13px; display: inline-block; margin: 3px; font-family: monospace; }
+.info { background: #f0f9ff; border-left: 4px solid #0ea5e9; padding: 12px 16px; margin: 16px 0; border-radius: 4px; }
+li { margin: 6px 0; }
+p { line-height: 1.7; }
 </style>
 </head>
 <body>
 <h1>${plano.titulo}</h1>
 <div class="info">
-  <strong>Disciplina:</strong> ${plano.disciplina} &nbsp;|&nbsp;
-  <strong>Série:</strong> ${plano.serie} &nbsp;|&nbsp;
-  <strong>${plano.bimestre}º Bimestre</strong> &nbsp;|&nbsp;
-  <strong>Tipo de Letra:</strong> ${plano.tipo_letra === 'cursiva' ? 'Cursiva' : 'Letra de Forma'}
+<strong>Disciplina:</strong> ${plano.disciplina} &nbsp;|&nbsp;
+<strong>Série:</strong> ${plano.serie} &nbsp;|&nbsp;
+<strong>${plano.bimestre}º Bimestre</strong> &nbsp;|&nbsp;
+<strong>Tipo de Letra:</strong> ${plano.tipo_letra === 'cursiva' ? 'Cursiva' : 'Letra de Forma'}
 </div>
 <h2>📚 Habilidades BNCC</h2>
 <div>${(plano.habilidades_bncc || []).map(h => `<span class="badge">${h}</span>`).join('')}</div>
@@ -72,7 +72,9 @@ ${plano.dinamica ? `<h2>🎮 Dinâmica/Jogo</h2><p>${plano.dinamica}</p>` : ''}
   const a = document.createElement('a')
   a.href = url
   a.download = plano.titulo.replace(/[^a-zA-Z0-9À-ÿ ]/g, '').replace(/\s+/g, '_').substring(0, 50) + '.doc'
+  document.body.appendChild(a)
   a.click()
+  document.body.removeChild(a)
   URL.revokeObjectURL(url)
 }
 
@@ -86,7 +88,7 @@ export default function DashboardPage() {
     const getUser = async () => {
       const supabase = getSupabase()
       const { data: { user } } = await supabase.auth.getUser()
-      if (!user) { router.push('/login'); return; }
+      if (!user) { router.push('/'); return }
       setUser(user)
       try {
         const { data } = await supabase
@@ -96,11 +98,13 @@ export default function DashboardPage() {
           .order('created_at', { ascending: false })
           .limit(20)
         if (data) setPlanejamentos(data)
-      } catch(e) {}
+      } catch(e) {
+        console.error('Erro ao buscar planejamentos:', e)
+      }
       setLoading(false)
     }
     getUser()
-  }, [])
+  }, [router])
 
   const handleLogout = async () => {
     const supabase = getSupabase()
@@ -108,10 +112,19 @@ export default function DashboardPage() {
     router.push('/')
   }
 
-  // Redireciona para /planos passando o ID; 1º plano é grátis
+  // BUG CORRIGIDO: o primeiro plano criado é o mais antigo (índice mais alto no array ordenado
+  // por created_at DESC), ou seja, idx === planejamentos.length - 1.
+  // Agora identificamos o primeiro plano como o mais antigo via created_at.
+  const isPrimeiroPlano = (plano: Planejamento) => {
+    if (planejamentos.length === 0) return false
+    const sorted = [...planejamentos].sort(
+      (a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+    )
+    return sorted[0].id === plano.id
+  }
+
   const handleBaixar = (plano: Planejamento) => {
-    const isPrimeiro = planejamentos.indexOf(plano) === planejamentos.length - 1
-    if (isPrimeiro) {
+    if (isPrimeiroPlano(plano)) {
       gerarDocx(plano)
     } else {
       router.push(`/planos?planoId=${plano.id}&acao=download`)
@@ -183,8 +196,8 @@ export default function DashboardPage() {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {planejamentos.map((plano, idx) => {
-                const isPrimeiro = idx === planejamentos.length - 1
+              {planejamentos.map((plano) => {
+                const isPrimeiro = isPrimeiroPlano(plano)
                 return (
                   <div key={plano.id} className="bg-white p-5 rounded-xl border border-gray-200 hover:border-blue-300 hover:shadow-md transition flex flex-col">
                     <div className="flex items-start justify-between mb-3">
