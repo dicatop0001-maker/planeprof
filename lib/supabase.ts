@@ -22,7 +22,9 @@ export type Database = {
           desenvolvimento: string
           conclusao: string
           dinamica: string | null
-          pdi: string | null
+          tipo_letra: string
+          na_biblioteca: boolean
+          downloads: number
           status: string
           created_at: string
           updated_at: string
@@ -33,15 +35,42 @@ export type Database = {
       usuarios: {
         Row: {
           id: string
-          user_id: string
-          nome: string
-          email: string
+          nome: string | null
+          email: string | null
           plano: 'free' | 'mensal' | 'anual'
           planejamentos_usados: number
           quota_mensal: number
-          validade_plano: string | null
           created_at: string
         }
+        Insert: Omit<Database['public']['Tables']['usuarios']['Row'], 'created_at'>
+        Update: Partial<Database['public']['Tables']['usuarios']['Insert']>
+      }
+      pagamentos: {
+        Row: {
+          id: string
+          user_id: string
+          valor: number
+          tipo: 'mensal' | 'anual' | null
+          status: string
+          comprovante_url: string | null
+          created_at: string
+        }
+        Insert: Omit<Database['public']['Tables']['pagamentos']['Row'], 'id' | 'created_at'>
+        Update: Partial<Database['public']['Tables']['pagamentos']['Insert']>
+      }
+      pagamentos_pendentes: {
+        Row: {
+          id: string
+          user_id: string
+          plano: 'mensal' | 'anual' | null
+          comprovante_arquivo: string | null
+          plano_id: string | null
+          status: string
+          valor: number | null
+          created_at: string
+        }
+        Insert: Omit<Database['public']['Tables']['pagamentos_pendentes']['Row'], 'id' | 'created_at'>
+        Update: Partial<Database['public']['Tables']['pagamentos_pendentes']['Insert']>
       }
     }
   }
