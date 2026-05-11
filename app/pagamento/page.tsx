@@ -1,15 +1,65 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { createClient } from '@supabase/supabase-js'
+
+function getSupabase() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+  )
+}
 
 export default function PagamentoPage() {
   const [plano, setPlano] = useState<'mensal' | 'anual'>('mensal')
   const [enviado, setEnviado] = useState(false)
+  const [enviando, setEnviando] = useState(false)
+  const [erro, setErro] = useState('')
+  const [comprovanteFile, setComprovanteFile] = useState<File | null>(null)
+  const fileRef = useRef<HTMLInputElement>(null)
+  const router = useRouter()
 
   const handleEnviar = async (e: React.FormEvent) => {
     e.preventDefault()
-    setEnviado(true)
+    if (!comprovanteFile) {
+      setErro('Selecione o comprovante de pagamento.')
+      return
+    }
+    setEnviando(true)
+    setErro('')
+    try {
+      const supabase = getSupabase()
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) {
+        router.push('/cadastro')
+        return
+      }
+      const fileName = `${user.id}_${Date.now()}_${comprovanteFile.name}`
+      const { error: uploadError } = await supabase.storage
+        .from('comprovantes')
+        .upload(fileName, comprovanteFile, { upsert: true })
+      if (uploadError) throw uploadError
+
+      const { error: insertError } = await supabase
+        .from('pagamentos')
+        .insert({
+          user_id: user.id,
+          valor: plano === 'mensal' ? 9.90 : 100.00,
+          tipo: plano,
+          status: 'pendente',
+          comprovante_url: fileName,
+        })
+      if (insertError) throw insertError
+
+      setEnviado(true)
+    } catch (err: any) {
+      setErro('Erro ao enviar comprovante. Tente novamente.')
+      console.error('Erro pagamento:', err)
+    } finally {
+      setEnviando(false)
+    }
   }
 
   return (
@@ -61,15 +111,27 @@ export default function PagamentoPage() {
               <p className="text-sm text-gray-600 mb-1">Chave PIX</p>
               <p className="text-2xl font-bold text-gray-800 font-mono">42988880353</p>
             </div>
+            {erro && (
+              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4 text-sm">{erro}</div>
+            )}
             <form onSubmit={handleEnviar}>
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-1">Comprovante de Pagamento</label>
-                <input type="file" accept="image/*,.pdf"
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm" required />
+                <input
+                  ref={fileRef}
+                  type="file"
+                  accept="image/*,.pdf"
+                  onChange={(e) => setComprovanteFile(e.target.files?.[0] || null)}
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
+                  required
+                />
               </div>
-              <button type="submit"
-                className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
-                Enviar Comprovante
+              <button
+                type="submit"
+                disabled={enviando}
+                className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition disabled:opacity-50"
+              >
+                {enviando ? 'Enviando...' : 'Enviar Comprovante'}
               </button>
             </form>
           </div>
