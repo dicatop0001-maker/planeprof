@@ -667,7 +667,7 @@ export default function NovoPlanejamentoPage() {
   const [modoModelo, setModoModelo] = useState(false)
     // Estados para modal de download/pagamento
       const [mostrarModalDownload, setMostrarModalDownload] = useState(false)
-        const [abaModal, setAbaModal] = useState<'plano' | 'cadastro' | 'login' | 'pix' | 'comprovante'>('plano')
+        const [abaModal, setAbaModal] = useState<'plano' | 'cadastro' | 'login' | 'pix' | 'comprovante' | 'download'>('plano')
           const [planoSelecionado, setPlanoSelecionado] = useState<'mensal' | 'anual'>('mensal')
             const [downloadNome, setDownloadNome] = useState('')
               const [downloadEmail, setDownloadEmail] = useState('')
