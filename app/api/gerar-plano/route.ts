@@ -377,13 +377,13 @@ Tempo total da aula: ${totalMin} minutos (${nAulas} aula${nAulas>1?'s':''} de 50
       const OpenAI = (await import('openai')).default
       const openai = new OpenAI({ apiKey })
       const completion = await openai.chat.completions.create({
-        model: 'gpt-4o-mini',
+        model: 'gpt-4o',
         messages: [
-          { role: 'system', content: 'Você é um especialista em educação brasileira e criação de atividades pedagógicas. Crie atividades impressas claras, formatadas e prontas para imprimir. Responda apenas com o texto da atividade, sem explicações adicionais.' },
+          { role: 'system', content: 'Você é um especialista pedagógico brasileiro com doutorado em Didática. Crie atividades impressas de ALTA QUALIDADE seguindo EXATAMENTE o prompt fornecido. REGRAS CRÍTICAS: (1) Se pede questões de CÁLCULO, crie APENAS questões de cálculo com números e operações matemáticas. (2) Se pede 10 questões, crie EXATAMENTE 10 questões numeradas. (3) Se pede gabarito com passo a passo, inclua gabarito COMPLETO com todos os passos de resolução. (4) JAMAIS substitua questões de cálculo por questões conceituais, de completar frases ou de desenhar. Formate claramente para impressão.' },
           { role: 'user', content: promptAtividade }
         ],
         temperature: 0.7,
-        max_tokens: 2000,
+        max_tokens: 6000,
       })
       const atividadeTexto = completion.choices[0].message.content || ''
       return NextResponse.json({ success: true, plano: { atividadeImpressaTexto: atividadeTexto }, fonte: 'ia' })
@@ -457,7 +457,7 @@ Retorne APENAS JSON válido:
 }`
 
       const completion = await openai.chat.completions.create({
-        model: 'gpt-4o-mini',
+        model: 'gpt-4o',
         messages: [
           { role: 'system', content: 'Pedagogo brasileiro especialista em BNCC. Responda APENAS com JSON válido, sem markdown.' },
           { role: 'user', content: prompt }
@@ -476,7 +476,7 @@ Retorne APENAS JSON válido:
         planoIA.dinamica = ''
         if (!planoIA.objetivos?.length) planoIA.objetivos = objetivos
         if (!planoIA.habilidades_bncc?.length) planoIA.habilidades_bncc = habilidades
-      } catch {
+      } catch {h
         planoIA = planoLocal
       }
       return NextResponse.json({ success: true, plano: planoIA, fonte: 'ia' })
