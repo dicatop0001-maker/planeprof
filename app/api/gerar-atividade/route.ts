@@ -3,328 +3,228 @@ export const dynamic = 'force-dynamic'
 
 // === IMAGENS EDUCATIVAS POR TEMA (Wikimedia Commons - domínio público) ===
 const BANCO_IMAGENS: Record<string, { url: string; descricao: string }[]> = {
-  matematica: [
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Simple_algebra_-_finding_a_missing_number.png/320px-Simple_algebra_-_finding_a_missing_number.png', descricao: 'Equação matemática simples' },
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Numberblock_1-10.png/320px-Numberblock_1-10.png', descricao: 'Blocos de números 1 a 10' },
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Counting_frame_abacus.jpg/320px-Counting_frame_abacus.jpg', descricao: 'Ábaco para contagem' },
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Simple_algebra_-_finding_a_missing_number.png/400px-Simple_algebra_-_finding_a_missing_number.png', descricao: 'Operações matemáticas' },
-  ],
-  geometria: [
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Camponotus_flavomarginatus_ant.jpg/320px-Camponotus_flavomarginatus_ant.jpg', descricao: 'Formas geométricas na natureza' },
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Platonic_Solids.svg/320px-Platonic_Solids.svg.png', descricao: 'Sólidos geométricos' },
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Square_-_black_simple.svg/240px-Square_-_black_simple.svg.png', descricao: 'Formas planas: quadrado, triângulo, círculo' },
-  ],
-  portugues: [
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Camponotus_flavomarginatus_ant.jpg/320px-Camponotus_flavomarginatus_ant.jpg', descricao: 'Letras do alfabeto' },
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Books_HD_%288314929977%29.jpg/320px-Books_HD_%288314929977%29.jpg', descricao: 'Livros e leitura' },
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Declaration_of_Independence_%281819%29%2C_by_John_Trumbull.jpg/320px-Declaration_of_Independence_%281819%29%2C_by_John_Trumbull.jpg', descricao: 'Escrita e texto' },
-  ],
-  natureza: [
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Sunflower_from_Silesia2.jpg/320px-Sunflower_from_Silesia2.jpg', descricao: 'Girassol florescendo' },
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/24701-nature-natural-beauty.jpg/320px-24701-nature-natural-beauty.jpg', descricao: 'Paisagem natural com árvores' },
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Golden_Gate_Bridge_from_Battery_Spencer.jpg/320px-Golden_Gate_Bridge_from_Battery_Spencer.jpg', descricao: 'Rio e natureza' },
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Frog_at_Albany_Bulb.jpg/320px-Frog_at_Albany_Bulb.jpg', descricao: 'Animal na natureza' },
-  ],
-  animais: [
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/320px-Cat03.jpg', descricao: 'Gato doméstico' },
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Bikedog.JPG/320px-Bikedog.JPG', descricao: 'Cão brincando' },
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Frog_at_Albany_Bulb.jpg/320px-Frog_at_Albany_Bulb.jpg', descricao: 'Sapo verde' },
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Camponotus_flavomarginatus_ant.jpg/320px-Camponotus_flavomarginatus_ant.jpg', descricao: 'Formiga carregando folha' },
-  ],
-  corpo_humano: [
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Skeleton_with_organs.jpg/320px-Skeleton_with_organs.jpg', descricao: 'Corpo humano e órgãos' },
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Human_skeleton_front_en.svg/240px-Human_skeleton_front_en.svg.png', descricao: 'Esqueleto humano frontal' },
-  ],
-  historia: [
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Above_Gotham.jpg/320px-Above_Gotham.jpg', descricao: 'Cidade histórica' },
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Books_HD_%288314929977%29.jpg/320px-Books_HD_%288314929977%29.jpg', descricao: 'Livros de história' },
-  ],
-  ciencias: [
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Laughing_girl.jpg/320px-Laughing_girl.jpg', descricao: 'Experimento científico' },
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Sunflower_from_Silesia2.jpg/320px-Sunflower_from_Silesia2.jpg', descricao: 'Ciclo das plantas' },
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Frog_at_Albany_Bulb.jpg/320px-Frog_at_Albany_Bulb.jpg', descricao: 'Animais e ecossistema' },
-  ],
-  arte: [
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/240px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg', descricao: 'Mona Lisa - da Vinci' },
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/320px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg', descricao: 'Noite Estrelada - Van Gogh' },
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Crayons_from_above.jpg/320px-Crayons_from_above.jpg', descricao: 'Lápis de cor para arte' },
-  ],
-  musica: [
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Music_2.jpg/320px-Music_2.jpg', descricao: 'Notas musicais' },
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Musical_notes.svg/320px-Musical_notes.svg.png', descricao: 'Pentagrama com notas' },
-  ],
+    matematica: [
+      { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Simple_algebra_-_finding_a_missing_number.png/320px-Simple_algebra_-_finding_a_missing_number.png', descricao: 'Equação matemática' },
+      { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Counting_frame_abacus.jpg/320px-Counting_frame_abacus.jpg', descricao: 'Ábaco para contagem' },
+      { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Numberblock_1-10.png/320px-Numberblock_1-10.png', descricao: 'Blocos de números' },
+        ],
+    geometria: [
+      { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Platonic_Solids.svg/320px-Platonic_Solids.svg.png', descricao: 'Sólidos geométricos' },
+      { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Square_-_black_simple.svg/240px-Square_-_black_simple.svg.png', descricao: 'Formas planas' },
+        ],
+    portugues: [
+      { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Books_HD_%288314929977%29.jpg/320px-Books_HD_%288314929977%29.jpg', descricao: 'Livros e leitura' },
+        ],
+    natureza: [
+      { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Sunflower_from_Silesia2.jpg/320px-Sunflower_from_Silesia2.jpg', descricao: 'Natureza' },
+        ],
+    ciencias: [
+      { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Sunflower_from_Silesia2.jpg/320px-Sunflower_from_Silesia2.jpg', descricao: 'Ciências naturais' },
+        ],
+    historia: [
+      { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Books_HD_%288314929977%29.jpg/320px-Books_HD_%288314929977%29.jpg', descricao: 'História' },
+        ],
   default: [
     { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Books_HD_%288314929977%29.jpg/320px-Books_HD_%288314929977%29.jpg', descricao: 'Material escolar' },
     { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Crayons_from_above.jpg/320px-Crayons_from_above.jpg', descricao: 'Lápis de cor' },
-    { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Sunflower_from_Silesia2.jpg/320px-Sunflower_from_Silesia2.jpg', descricao: 'Aprendizado na natureza' },
-  ],
+      ],
 }
 
 function detectarTema(disciplina: string, conteudo: string): string {
-  const d = (disciplina + ' ' + conteudo).toLowerCase()
-  if (d.match(/matem|numero|conta|soma|subtra|multiplic|divis|frac|geomet|medid/)) {
-    if (d.match(/form|geomet|circulo|quadrado|triangulo|ret/)) return 'geometria'
-    return 'matematica'
-  }
-  if (d.match(/portugu|letra|leitura|escrita|texto|gram|ortograf|vocabul|silab/)) return 'portugues'
-  if (d.match(/animal|bicho|fauna|mamifero|reptil|inseto|ave|peixe/)) return 'animais'
-  if (d.match(/natur|plant|flor|arvore|meio ambient|ecossist|biosfera|solo|agua/)) return 'natureza'
-  if (d.match(/corpo|orgao|musculo|osso|saude|higiene|nutric|aliment|sentid/)) return 'corpo_humano'
-  if (d.match(/histor|civiliz|guerra|brasil|povo|cultura|tradicao|patrimoni/)) return 'historia'
-  if (d.match(/cienc|experim|quimic|fisic|laborat|fenomen|eletric|magnetis/)) return 'ciencias'
-  if (d.match(/art|pintura|desenho|escult|color|museu|tela|obra/)) return 'arte'
-  if (d.match(/music|nota|ritmo|melodia|instrum|canto|coral|som/)) return 'musica'
-  return 'default'
+    const d = (disciplina + ' ' + conteudo).toLowerCase()
+    if (d.match(/matem|numero|conta|soma|subtra|multiplic|divis|frac|medid/)) {
+          if (d.match(/form|geomet|circulo|quadrado|triangulo|ret|solido/)) return 'geometria'
+          return 'matematica'
+    }
+    if (d.match(/portugu|letra|leitura|escrita|texto|gram|ortograf|vocabul|silab/)) return 'portugues'
+    if (d.match(/natur|plant|flor|arvore|meio ambient|ecossist|biosfera|solo|agua/)) return 'natureza'
+    if (d.match(/histor|civiliz|guerra|brasil|povo|cultura|tradicao|patrimoni/)) return 'historia'
+    if (d.match(/cienc|experim|quimic|fisic|laborat|fenomen|eletric|animal|bicho/)) return 'ciencias'
+    return 'default'
 }
 
 function getImagensParaTema(tema: string, n: number): { url: string; descricao: string }[] {
-  const pool = BANCO_IMAGENS[tema] || BANCO_IMAGENS.default
-  const result: { url: string; descricao: string }[] = []
-  for (let i = 0; i < n; i++) result.push(pool[i % pool.length])
-  return result
-}
-
-// Gera atividades DIVERSAS e ESPECÍFICAS ao conteúdo
-function gerarAtividadesVariadas(
-  disciplina: string,
-  serie: string,
-  conteudo: string,
-  nivel: string,
-  quantidade: number,
-  tipoLetra: string
-): object[] {
-  const tema = detectarTema(disciplina, conteudo)
-  const imgs = getImagensParaTema(tema, quantidade)
-  const nivelLabel = nivel === 'facil' ? 'Fácil' : nivel === 'dificil' ? 'Difícil' : 'Médio'
-  const letra = tipoLetra === 'cursiva' ? 'letra cursiva' : 'letra de forma'
-
-  // Série/faixa etária para adaptar linguagem
-  const ehInfantil = serie.toLowerCase().match(/infantil|pré|maternal|berçario/)
-  const eh1ao3 = serie.match(/1|2|3/) && !serie.toLowerCase().match(/fund.*[456789]|med/)
-  const prefixoIdade = ehInfantil ? 'criança' : eh1ao3 ? 'aluno do ensino fundamental I' : 'aluno'
-
-  // 10 tipos diferentes de atividades para variar
-  const tiposDeFichas = [
-    {
-      tipo: 'Observação Dirigida',
-      gerar: (img: { url: string; descricao: string }, idx: number) => ({
-        titulo: `Atividade ${idx+1}: Observe e Descubra — ${conteudo}`,
-        instrucao: `Olhe bem para a figura abaixo (${img.descricao}). Ela mostra algo sobre "${conteudo}" que estudamos em ${disciplina}.`,
-        perguntas: [
-          `1. O que você enxerga na imagem? Escreva em ${letra}: ___________________________`,
-          `2. Como isso se relaciona com "${conteudo}"? ___________________________`,
-          `3. Você já viu isso no seu dia a dia? Onde? ___________________________`,
-        ],
-        instrucaoDesenho: `No espaço abaixo, faça seu próprio desenho sobre "${conteudo}":`,
-        temDesenho: true,
-      }),
-    },
-    {
-      tipo: 'Complete as Frases',
-      gerar: (img: { url: string; descricao: string }, idx: number) => ({
-        titulo: `Atividade ${idx+1}: Complete com suas Palavras — ${conteudo}`,
-        instrucao: `Veja a figura (${img.descricao}) e complete as frases usando o que você aprendeu sobre "${conteudo}" em ${disciplina}. Escreva em ${letra}.`,
-        perguntas: [
-          `1. Na figura eu vejo ___________ que é um exemplo de ${conteudo}.`,
-          `2. Quando estudo ${conteudo} em ${disciplina}, aprendo que ___________.`,
-          `3. Uma coisa que eu não sabia sobre ${conteudo} e agora sei é ___________.`,
-          `4. Quero aprender mais sobre ${conteudo} porque ___________.`,
-        ],
-        instrucaoDesenho: '',
-        temDesenho: false,
-      }),
-    },
-    {
-      tipo: 'Caça-Palavras / Palavras Escondidas',
-      gerar: (img: { url: string; descricao: string }, idx: number) => {
-        const palavras = conteudo.split(' ').filter((p: string) => p.length > 3).slice(0, 4)
-        return {
-          titulo: `Atividade ${idx+1}: Palavras do Tema — ${conteudo}`,
-          instrucao: `Observe a figura (${img.descricao}). As palavras abaixo estão relacionadas ao que você aprendeu sobre "${conteudo}". Escreva cada uma em ${letra} e depois faça uma frase com ela.`,
-          perguntas: palavras.length > 0
-            ? palavras.map((p: string, i: number) => `${i+1}. ${p.toUpperCase()} → Minha frase: ___________________________`)
-            : [
-                `1. ${conteudo.split(' ')[0].toUpperCase()} → Minha frase: ___________________________`,
-                `2. Escreva 3 palavras que aprendeu sobre o tema: ___ | ___ | ___`,
-              ],
-          instrucaoDesenho: `Desenhe uma palavra que aprendeu sobre ${conteudo}:`,
-          temDesenho: true,
-        }
-      },
-    },
-    {
-      tipo: 'Sequência de Passos',
-      gerar: (img: { url: string; descricao: string }, idx: number) => ({
-        titulo: `Atividade ${idx+1}: Coloque na Ordem Certa — ${conteudo}`,
-        instrucao: `Veja a imagem (${img.descricao}) e pense sobre o que você aprendeu em ${disciplina} sobre "${conteudo}". Numere os passos abaixo de 1 a 4 na ordem correta.`,
-        perguntas: [
-          `( ) Observar o que acontece com ${conteudo}`,
-          `( ) Registrar o que aprendemos`,
-          `( ) Estudar e entender ${conteudo}`,
-          `( ) Compartilhar o conhecimento com os colegas`,
-          `Agora escreva com suas palavras em ${letra} para que serve ${conteudo}: ___________`,
-        ],
-        instrucaoDesenho: '',
-        temDesenho: false,
-      }),
-    },
-    {
-      tipo: 'Verdadeiro ou Falso Argumentado',
-      gerar: (img: { url: string; descricao: string }, idx: number) => ({
-        titulo: `Atividade ${idx+1}: Verdadeiro, Falso ou Depende? — ${conteudo}`,
-        instrucao: `Olhe a figura (${img.descricao}). Leia cada afirmação sobre "${conteudo}" e escreva V (verdadeiro), F (falso) ou D (depende). Depois explique em ${letra}.`,
-        perguntas: [
-          `1. ( ) ${conteudo} é importante para nosso aprendizado. Por quê? ___________`,
-          `2. ( ) Só aprendemos ${conteudo} na escola. Por quê? ___________`,
-          `3. ( ) ${disciplina} e ${conteudo} estão relacionados com a vida real. Por quê? ___________`,
-          `4. ( ) Qualquer pessoa pode aprender sobre ${conteudo}. Por quê? ___________`,
-        ],
-        instrucaoDesenho: '',
-        temDesenho: false,
-      }),
-    },
-    {
-      tipo: 'Criação e Expressão',
-      gerar: (img: { url: string; descricao: string }, idx: number) => ({
-        titulo: `Atividade ${idx+1}: Crie sua História — ${conteudo}`,
-        instrucao: `Inspire-se na imagem (${img.descricao}) e no que aprendeu sobre "${conteudo}" para criar!`,
-        perguntas: [
-          `1. Escreva em ${letra} um título para uma história sobre ${conteudo}: ___________`,
-          `2. Quem são os personagens? ___________`,
-          `3. O que acontece? (pelo menos 2 frases): ___________`,
-          `4. Como termina? ___________`,
-        ],
-        instrucaoDesenho: `Ilustre sua história no espaço abaixo:`,
-        temDesenho: true,
-      }),
-    },
-    {
-      tipo: 'Pesquisa e Descoberta',
-      gerar: (img: { url: string; descricao: string }, idx: number) => ({
-        titulo: `Atividade ${idx+1}: Seja um Pesquisador — ${conteudo}`,
-        instrucao: `Como um cientista, você vai investigar "${conteudo}"! Olhe a imagem (${img.descricao}) e responda em ${letra}.`,
-        perguntas: [
-          `1. O QUE É isso? (Defina ${conteudo} com suas palavras) ___________`,
-          `2. ONDE encontramos ${conteudo}? ___________`,
-          `3. PARA QUE serve ou para que é importante? ___________`,
-          `4. O QUE você ainda quer saber sobre ${conteudo}? ___________`,
-        ],
-        instrucaoDesenho: `Desenhe sua descoberta mais importante sobre ${conteudo}:`,
-        temDesenho: true,
-      }),
-    },
-    {
-      tipo: 'Comparação e Análise',
-      gerar: (img: { url: string; descricao: string }, idx: number) => ({
-        titulo: `Atividade ${idx+1}: Compare e Analise — ${conteudo}`,
-        instrucao: `Use a imagem (${img.descricao}) como referência. Pense em tudo que aprendeu sobre "${conteudo}" e complete a tabela escrevendo em ${letra}.`,
-        perguntas: [
-          `| O que eu SABIA antes | O que eu APRENDI | O que ainda quero saber |`,
-          `|______________________|_________________|_________________________|`,
-          `|                      |                 |                         |`,
-          `|                      |                 |                         |`,
-          `Escreva 1 coisa que vai lembrar para sempre sobre ${conteudo}: ___________`,
-        ],
-        instrucaoDesenho: '',
-        temDesenho: false,
-      }),
-    },
-    {
-      tipo: 'Jogo Didático',
-      gerar: (img: { url: string; descricao: string }, idx: number) => ({
-        titulo: `Atividade ${idx+1}: Jogo dos Saberes — ${conteudo}`,
-        instrucao: `Olhe a figura (${img.descricao}). Agora é hora de jogar! Cada ponto vale 1 estrela ⭐`,
-        perguntas: [
-          `⭐ FÁCIL: Dê 2 exemplos de ${conteudo}: ___ e ___`,
-          `⭐⭐ MÉDIO: Explique em ${letra} o que é ${conteudo} (em 1 frase): ___________`,
-          `⭐⭐⭐ DIFÍCIL: Crie uma pergunta sobre ${conteudo} para fazer para um colega: ___________`,
-          `🏆 DESAFIO: Como você ensinaria ${conteudo} para alguém que nunca ouviu falar? ___________`,
-        ],
-        instrucaoDesenho: `Desenhe o símbolo ou ícone que representa ${conteudo} para você:`,
-        temDesenho: true,
-      }),
-    },
-    {
-      tipo: 'Mapa Mental Visual',
-      gerar: (img: { url: string; descricao: string }, idx: number) => ({
-        titulo: `Atividade ${idx+1}: Mapa do Conhecimento — ${conteudo}`,
-        instrucao: `Use a imagem (${img.descricao}) como inspiração. Complete o mapa mental sobre "${conteudo}" escrevendo em ${letra}.`,
-        perguntas: [
-          `            [${conteudo}]`,
-          `           /     |     \\`,
-          `    [O que é]  [Onde] [Para quê]`,
-          `    ________  ______  __________`,
-          `    ________  ______  __________`,
-          `Agora escreva 1 frase completa unindo tudo: ___________`,
-        ],
-        instrucaoDesenho: `Adicione ícones ou pequenos desenhos ao redor das palavras:`,
-        temDesenho: true,
-      }),
-    },
-  ]
-
-  // Seleciona tipos diferentes para cada atividade (sem repetir)
-  const tiposSelecionados = []
-  const indices = Array.from({ length: tiposDeFichas.length }, (_, i) => i)
-  // Embaralha com seed baseado no conteudo
-  const seed = conteudo.length + disciplina.length
-  for (let i = indices.length - 1; i > 0; i--) {
-    const j = (seed + i) % (i + 1);
-    [indices[i], indices[j]] = [indices[j], indices[i]]
-  }
-
-  const atividades = []
-  for (let i = 0; i < quantidade; i++) {
-    const tipoIdx = indices[i % tiposDeFichas.length]
-    const tipoFicha = tiposDeFichas[tipoIdx]
-    const img = imgs[i]
-    const atv = (tipoFicha.gerar as Function)(img, i)
-    atividades.push({
-      numero: i + 1,
-      tipo: tipoFicha.tipo,
-      nivel: nivelLabel,
-      imagemUrl: img.url,
-      imagemDescricao: img.descricao,
-      promptImagem: `Ilustracao educativa colorida para ${prefixoIdade} de ${serie}, tema especifico: "${conteudo}" em ${disciplina}, estilo cartoon didatico brasileiro, fundo branco, cores vivas, sem texto, para imprimir em folha A4`,
-      ...atv,
-    })
-  }
-  return atividades
+    const pool = BANCO_IMAGENS[tema] || BANCO_IMAGENS.default
+    const result: { url: string; descricao: string }[] = []
+        for (let i = 0; i < n; i++) result.push(pool[i % pool.length])
+    return result
 }
 
 export async function POST(request: NextRequest) {
-  try {
-    const body = await request.json()
-    const { disciplina, serie, conteudo, nivel, quantidade, tipoLetra, objetivos } = body
+    try {
+          const body = await request.json()
+          const { disciplina, serie, conteudo, nivel, quantidade, tipoLetra, objetivos } = body
 
-    if (!conteudo) {
-      return NextResponse.json({ error: 'Conteúdo é obrigatório' }, { status: 400 })
+      if (!conteudo) {
+              return NextResponse.json({ error: 'Conteúdo é obrigatório' }, { status: 400 })
+      }
+
+      const n = Math.min(Math.max(parseInt(quantidade) || 3, 1), 10)
+          const nivelLabel = nivel === 'facil' ? 'Fácil' : nivel === 'dificil' ? 'Difícil' : 'Médio'
+          const letra = tipoLetra === 'cursiva' ? 'letra cursiva' : 'letra de forma'
+          const tema = detectarTema(disciplina || '', conteudo)
+          const imgs = getImagensParaTema(tema, n)
+
+      const apiKey = process.env.OPENAI_API_KEY
+          if (!apiKey) {
+                  return NextResponse.json({ error: 'Chave da API OpenAI não configurada' }, { status: 500 })
+          }
+
+      const tiposDeAtividade = [
+              'Interpretação de Texto com Questões Dissertativas',
+              'Múltipla Escolha (4 alternativas A, B, C, D)',
+              'Complete as Lacunas com Vocabulário Específico',
+              'Produção Escrita / Redação Dirigida',
+              'Resolução de Problemas / Situação-Problema',
+              'Verdadeiro ou Falso com Justificativa',
+              'Relacione as Colunas (conceitos x definições)',
+              'Mapa Conceitual / Organização de Ideias',
+              'Pesquisa e Investigação Guiada',
+              'Exercício Prático / Aplicação do Conteúdo',
+            ]
+
+      const ehInfantil = (serie || '').toLowerCase().match(/infantil|pré|maternal|berçario/)
+          const faixaEtaria = ehInfantil
+            ? 'Educação Infantil (4-6 anos), use linguagem simples, frases curtas, muitas imagens e atividades lúdicas'
+                  : `${serie} — adapte o vocabulário, complexidade e raciocínio exigido para essa faixa etária`
+
+      const prompt = `Você é um especialista em educação brasileira e na BNCC. Crie EXATAMENTE ${n} atividade(s) impressa(s) de alta qualidade pedagógica para a seguinte situação:
+
+      DISCIPLINA: ${disciplina || 'Educação Geral'}
+      SÉRIE/ANO: ${serie || 'Ensino Fundamental'}
+      FAIXA ETÁRIA: ${faixaEtaria}
+      CONTEÚDO ESPECÍFICO: ${conteudo}
+      NÍVEL DE DIFICULDADE: ${nivelLabel}
+      TIPO DE LETRA PARA LINHAS: ${letra}
+      ${objetivos ? `OBJETIVOS DA AULA: ${Array.isArray(objetivos) ? objetivos.join('; ') : objetivos}` : ''}
+
+      REGRAS OBRIGATÓRIAS:
+      1. Gere EXATAMENTE ${n} atividade(s) — nem mais, nem menos.
+      2. Cada atividade deve ser PROFUNDA e ESPECÍFICA ao conteúdo "${conteudo}", não genérica.
+      3. As questões devem abordar conceitos reais, exemplos concretos, vocabulário técnico da matéria.
+      4. Use tipos variados de atividades entre: ${tiposDeAtividade.join(', ')}.
+      5. Cada atividade deve ter entre 4 a 6 questões/itens bem elaborados.
+      6. Questões de múltipla escolha DEVEM ter 4 alternativas (A, B, C, D) com apenas 1 resposta correta indicada.
+      7. Questões dissertativas devem ter espaço para resposta (linhas representadas por ___________).
+      8. O conteúdo deve ser contextualizado na realidade brasileira.
+      9. Progressão pedagógica: vá do mais simples ao mais complexo dentro de cada atividade.
+      10. Inclua um gabarito resumido ao final de cada atividade (apenas para questões objetivas).
+
+      Retorne um JSON válido com exatamente este formato (sem texto fora do JSON):
+      {
+        "atividades": [
+            {
+                  "numero": 1,
+                        "tipo": "nome do tipo de atividade",
+                              "nivel": "${nivelLabel}",
+                                    "titulo": "título criativo e específico ao conteúdo",
+                                          "introducao": "texto introdutório que contextualiza a atividade (2-4 frases explicando o tema)",
+                                                "instrucao": "instrução clara para o aluno sobre como realizar a atividade",
+                                                      "questoes": [
+                                                              {
+                                                                        "numero": 1,
+                                                                                  "enunciado": "enunciado completo e específico ao conteúdo ${conteudo}",
+                                                                                            "tipo": "dissertativa|multipla_escolha|lacuna|vf",
+                                                                                                      "alternativas": ["A) ...", "B) ...", "C) ...", "D) ..."],
+                                                                                                                "resposta_correta": "A (apenas para multipla_escolha e vf)",
+                                                                                                                          "linhas_resposta": 3
+                                                                                                                                  }
+                                                                                                                                        ],
+                                                                                                                                              "gabarito": "Gabarito: 1-A, 2-C, ... (apenas questões objetivas)"
+                                                                                                                                                  }
+                                                                                                                                                    ]
+                                                                                                                                                    }`
+
+      const openaiResp = await fetch('https://api.openai.com/v1/chat/completions', {
+              method: 'POST',
+              headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${apiKey}`,
+              },
+              body: JSON.stringify({
+                        model: 'gpt-4o',
+                        messages: [
+                          {
+                                        role: 'system',
+                                        content: 'Você é um especialista pedagógico brasileiro com 20 anos de experiência no ensino fundamental e infantil, especializado na BNCC. Cria atividades educacionais impressas de alta qualidade, profundas e específicas ao conteúdo, adequadas para impressão em folha A4. Sempre retorna JSON válido e bem estruturado.',
+                          },
+                          { role: 'user', content: prompt },
+                                  ],
+                        temperature: 0.7,
+                        max_tokens: 4000,
+                        response_format: { type: 'json_object' },
+              }),
+      })
+
+      if (!openaiResp.ok) {
+              const errText = await openaiResp.text()
+              console.error('[gerar-atividade] OpenAI error:', errText)
+              return NextResponse.json({ error: 'Erro na API OpenAI: ' + openaiResp.status }, { status: 500 })
+      }
+
+      const openaiData = await openaiResp.json()
+          const rawContent = openaiData.choices?.[0]?.message?.content || '{}'
+
+      let parsed: any
+          try {
+                  parsed = JSON.parse(rawContent)
+          } catch (e) {
+                  console.error('[gerar-atividade] Erro ao parsear JSON da OpenAI:', rawContent)
+                  return NextResponse.json({ error: 'Erro ao processar resposta da IA' }, { status: 500 })
+          }
+
+      const atividadesIA = parsed.atividades || []
+
+            // Enriquecer com imagens e prompt de imagem
+            const atividadesFinais = atividadesIA.map((a: any, i: number) => {
+                    const img = imgs[i % imgs.length]
+                    return {
+                              numero: a.numero || i + 1,
+                              tipo: a.tipo || 'Atividade',
+                              nivel: a.nivel || nivelLabel,
+                              titulo: a.titulo || `Atividade ${i + 1}: ${conteudo}`,
+                              introducao: a.introducao || '',
+                              instrucao: a.instrucao || 'Responda as questões abaixo:',
+                              questoes: a.questoes || [],
+                              gabarito: a.gabarito || '',
+                              imagemUrl: img.url,
+                              imagemDescricao: img.descricao,
+                              promptImagem: `Ilustração educativa colorida para ${serie}, tema: "${conteudo}" em ${disciplina}, estilo cartoon didático brasileiro, fundo branco, cores vivas, sem texto, para impressão em A4`,
+                              // Compatibilidade com formato antigo (perguntas)
+                              perguntas: (a.questoes || []).map((q: any) => {
+                                          let linha = `${q.numero}. ${q.enunciado}`
+                                          if (q.tipo === 'multipla_escolha' && q.alternativas?.length) {
+                                                        linha += '\n' + q.alternativas.join('\n')
+                                          } else if (q.tipo === 'vf') {
+                                                        linha += '\n( ) Verdadeiro  ( ) Falso'
+                                                        if (q.alternativas?.length) linha += '\n' + q.alternativas.join('\n')
+                                          } else if (q.tipo === 'lacuna') {
+                                                        linha += '\nResposta: ___________________________'
+                                          } else {
+                                                        const linhasResp = q.linhas_resposta || 2
+                                                        linha += '\n' + Array(linhasResp).fill('___________________________').join('\n')
+                                          }
+                                          return linha
+                              }),
+                              instrucaoDesenho: '',
+                              temDesenho: false,
+                    }
+            })
+
+      return NextResponse.json({
+              success: true,
+              disciplina,
+              serie,
+              conteudo,
+              nivel,
+              totalAtividades: atividadesFinais.length,
+              atividades: atividadesFinais,
+      })
+    } catch (error: any) {
+          console.error('[gerar-atividade] Erro:', error)
+          return NextResponse.json(
+            { error: 'Erro ao gerar atividades: ' + error.message },
+            { status: 500 }
+                )
     }
-
-    const n = Math.min(parseInt(quantidade) || 3, 5)
-    const atividades = gerarAtividadesVariadas(
-      disciplina || 'Educação Geral',
-      serie || 'Ensino Fundamental',
-      conteudo,
-      nivel || 'medio',
-      n,
-      tipoLetra || 'forma'
-    )
-
-    return NextResponse.json({
-      success: true,
-      disciplina,
-      serie,
-      conteudo,
-      nivel,
-      totalAtividades: atividades.length,
-      atividades,
-    })
-  } catch (error: any) {
-    console.error('[gerar-atividade] Erro:', error)
-    return NextResponse.json(
-      { error: 'Erro ao gerar atividades: ' + error.message },
-      { status: 500 }
-    )
-  }
 }
