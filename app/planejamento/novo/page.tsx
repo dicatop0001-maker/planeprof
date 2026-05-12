@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { createClient } from '@supabase/supabase-js'
 
 function getSupabase() {
-  return createClient(h
+  return createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL || '',
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
   )
