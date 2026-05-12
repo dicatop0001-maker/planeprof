@@ -27,15 +27,25 @@ interface Plano {
   created_at: string
 }
 
-// Interface compatível com a nova API gerar-atividade
+interface Questao {
+  numero: number
+  enunciado: string
+  tipo: 'dissertativa' | 'multipla_escolha' | 'lacuna' | 'vf'
+  alternativas?: string[]
+  resposta_correta?: string
+  linhas_resposta?: number
+}
+
 interface Atividade {
   numero: number
   titulo: string
   tipo: string
   nivel: string
+  introducao?: string
   instrucao: string
+  questoes?: Questao[]
   perguntas?: string[]
-  linhas?: string[]
+  gabarito?: string
   instrucaoDesenho?: string
   temDesenho?: boolean
   imagemUrl: string
@@ -54,8 +64,9 @@ export default function PlanejamentoPage() {
   const [atividades, setAtividades] = useState<Atividade[] | null>(null)
   const [gerandoAtiv, setGerandoAtiv] = useState(false)
   const [mostrarAtivForm, setMostrarAtivForm] = useState(false)
-  const [numAtiv, setNumAtiv] = useState('3')
+  const [numAtiv, setNumAtiv] = useState('5')
   const [nivelAtiv, setNivelAtiv] = useState('medio')
+  const [erroAtiv, setErroAtiv] = useState<string | null>(null)
   const params = useParams()
   const router = useRouter()
 
@@ -96,6 +107,7 @@ export default function PlanejamentoPage() {
   const gerarAtividades = async () => {
     if (!plano) return
     setGerandoAtiv(true)
+    setErroAtiv(null)
     try {
       const resp = await fetch('/api/gerar-atividade', {
         method: 'POST',
@@ -103,21 +115,62 @@ export default function PlanejamentoPage() {
         body: JSON.stringify({
           disciplina: plano.disciplina, serie: plano.serie,
           conteudo: plano.conteudo, nivel: nivelAtiv,
-          quantidade: numAtiv, tipoLetra: plano.tipo_letra || 'forma'
+          quantidade: numAtiv, tipoLetra: plano.tipo_letra || 'forma',
+          objetivos: plano.objetivos
         })
       })
       const data = await resp.json()
       if (data.atividades && Array.isArray(data.atividades)) {
         setAtividades(data.atividades)
         setMostrarAtivForm(false)
+      } else if (data.error) {
+        setErroAtiv(data.error)
       }
-    } catch (e) { console.error(e) }
+    } catch (e: any) {
+      setErroAtiv('Erro ao conectar: ' + e.message)
+    }
     finally { setGerandoAtiv(false) }
   }
 
-  // Renderiza linhas de uma atividade (compatível com ambos os formatos)
-  const renderLinhas = (a: Atividade) => {
-    const linhas = a.perguntas || a.linhas || []
+  // Renderiza questoes de uma atividade (novo formato com alternativas)
+  const renderQuestoes = (a: Atividade) => {
+    // Novo formato com questoes estruturadas
+    if (a.questoes && a.questoes.length > 0) {
+      return a.questoes.map((q, i) => (
+        <div key={i} className="mb-4 p-3 bg-gray-50 rounded-lg border-l-4 border-blue-300">
+          <p className="text-sm font-semibold text-gray-800 mb-2">{q.numero}. {q.enunciado}</p>
+          {q.tipo === 'multipla_escolha' && q.alternativas && (
+            <div className="ml-4 space-y-1">
+              {q.alternativas.map((alt, j) => (
+                <p key={j} className="text-sm text-gray-700 py-1 border-b border-gray-100 last:border-0">{alt}</p>
+              ))}
+            </div>
+          )}
+          {q.tipo === 'vf' && (
+            <div className="ml-4 flex gap-6 mt-1">
+              <label className="flex items-center gap-2 text-sm">
+                <span className="w-5 h-5 border-2 border-gray-400 rounded inline-block"></span> Verdadeiro
+              </label>
+              <label className="flex items-center gap-2 text-sm">
+                <span className="w-5 h-5 border-2 border-gray-400 rounded inline-block"></span> Falso
+              </label>
+            </div>
+          )}
+          {q.tipo === 'dissertativa' && (
+            <div className="ml-4 mt-2 space-y-1">
+              {Array.from({ length: q.linhas_resposta || 3 }).map((_, j) => (
+                <div key={j} className="border-b border-gray-400 h-6 w-full"></div>
+              ))}
+            </div>
+          )}
+          {q.tipo === 'lacuna' && (
+            <p className="ml-4 mt-1 text-sm text-gray-600">Resposta: <span className="inline-block w-48 border-b-2 border-gray-500"></span></p>
+          )}
+        </div>
+      ))
+    }
+    // Formato antigo (perguntas como array de strings)
+    const linhas = a.perguntas || []
     return linhas.map((l, i) => (
       <p key={i} className="text-sm text-gray-600 font-mono py-0.5">{l}</p>
     ))
@@ -135,10 +188,27 @@ export default function PlanejamentoPage() {
     let atividadesHtml = ''
     if (comAtiv && atividades && atividades.length > 0) {
       atividadesHtml = `<div style="page-break-before:always">
-<h2 style="color:#be185d;font-size:18px;border-bottom:2px solid #be185d;padding-bottom:6px;margin-bottom:16px">Atividades com Imagens</h2>
+<h2 style="color:#be185d;font-size:18px;border-bottom:2px solid #be185d;padding-bottom:6px;margin-bottom:16px">Atividades Impressas</h2>
 ${atividades.map(a => {
-  const linhas = a.perguntas || a.linhas || []
-  const deseArt = temDesenho(a) ? a.instrucaoDesenho || 'Espaço para desenho' : null
+  const questoesHtml = (a.questoes && a.questoes.length > 0)
+    ? a.questoes.map(q => {
+        let qHtml = `<div style="margin-bottom:12px;padding:10px;background:#f9f9f9;border-left:3px solid #3b82f6;border-radius:4px">
+<p style="font-weight:600;font-size:11px;color:#1f2937;margin:0 0 6px 0">${q.numero}. ${q.enunciado}</p>`
+        if (q.tipo === 'multipla_escolha' && q.alternativas) {
+          qHtml += q.alternativas.map(alt => `<p style="font-size:10px;color:#374151;margin:3px 0 3px 12px">&#9633; ${alt}</p>`).join('')
+        } else if (q.tipo === 'vf') {
+          qHtml += `<p style="font-size:10px;color:#374151;margin:3px 0 3px 12px">&#9633; Verdadeiro &nbsp;&nbsp; &#9633; Falso</p>`
+        } else if (q.tipo === 'dissertativa') {
+          const n2 = q.linhas_resposta || 3
+          qHtml += Array(n2).fill('<div style="border-bottom:1px solid #9ca3af;height:20px;margin:4px 0"></div>').join('')
+        } else {
+          qHtml += `<p style="font-size:10px;color:#374151;margin:4px 0 4px 12px">Resposta: <span style="display:inline-block;width:200px;border-bottom:1px solid #374151">&nbsp;</span></p>`
+        }
+        qHtml += '</div>'
+        return qHtml
+      }).join('')
+    : (a.perguntas || []).map((l: string) => `<p style="color:#4b5563;font-size:11px;margin:3px 0">${l}</p>`).join('')
+  const gabaritoHtml = a.gabarito ? `<div style="background:#fef3c7;border:1px solid #f59e0b;border-radius:4px;padding:6px 10px;margin-top:8px"><p style="font-size:10px;color:#92400e;margin:0"><strong>&#128203; ${a.gabarito}</strong></p></div>` : ''
   return `<div style="border:1px solid #e5e7eb;border-radius:8px;padding:16px;margin-bottom:20px;page-break-inside:avoid">
 <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
 <span style="background:#fdf2f8;color:#be185d;border:1px solid #fbcfe8;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600">Atividade ${a.numero}</span>
@@ -147,11 +217,12 @@ ${atividades.map(a => {
 </div>
 <h3 style="color:#1f2937;font-size:14px;margin:0 0 8px 0">${a.titulo}</h3>
 <div style="display:flex;gap:16px;align-items:flex-start">
-<img src="${a.imagemUrl}" alt="Imagem da atividade" style="width:180px;height:130px;object-fit:cover;border-radius:6px;border:1px solid #e5e7eb;flex-shrink:0" />
+<img src="${a.imagemUrl}" alt="Ilustracao" style="width:140px;height:100px;object-fit:cover;border-radius:6px;border:1px solid #e5e7eb;flex-shrink:0" />
 <div style="flex:1">
-<p style="color:#374151;font-size:12px;margin:0 0 10px 0;line-height:1.5">${a.instrucao}</p>
-${linhas.map(l => `<p style="color:#4b5563;font-size:11px;margin:3px 0">${l}</p>`).join('')}
-${deseArt ? `<p style="font-size:11px;color:#6b7280;font-style:italic;margin-top:6px">${deseArt}</p><div style="border:1px dashed #d1d5db;border-radius:4px;height:80px;margin-top:4px;background:#fafafa"></div>` : ''}
+${a.introducao ? `<p style="color:#374151;font-size:11px;margin:0 0 8px 0;padding:6px;background:#eff6ff;border-radius:4px;line-height:1.5">${a.introducao}</p>` : ''}
+<p style="color:#374151;font-size:11px;font-weight:600;margin:0 0 8px 0">${a.instrucao}</p>
+${questoesHtml}
+${gabaritoHtml}
 </div>
 </div>
 </div>`
@@ -203,7 +274,7 @@ ${atividadesHtml}${pdiHtml}
 
   const downloadPDF = (comAtiv = false) => {
     if (!plano) return
-    const html = buildHtmlDoc(!!pdiTexto, comAtiv) + '<script>window.onload=function(){window.print();setTimeout(function(){window.close()},1500)}</script>'
+    const html = buildHtmlDoc(!!pdiTexto, comAtiv) + '<script>window.onload=function(){window.print();setTimeout(function(){window.close()},1500)}<' + '/script>'
     const w = window.open('', '_blank', 'width=900,height=700')
     if (w) { w.document.write(html); w.document.close() }
   }
@@ -229,8 +300,8 @@ ${atividadesHtml}${pdiHtml}
           </div>
           <div className="flex items-center gap-2 flex-wrap">
             <button onClick={() => downloadWord(!!atividades)} className="flex items-center gap-1 bg-blue-600 text-white px-3 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition">📄 Word</button>
-            <button onClick={() => downloadPDF(!!atividades)} className="flex items-center gap-1 bg-red-600 text-white px-3 py-2 rounded-lg text-sm font-semibold hover:bg-red-700 transition">🖨️ PDF</button>
-            <button onClick={() => setMostrarAtivForm(!mostrarAtivForm)} className="flex items-center gap-1 bg-pink-600 text-white px-3 py-2 rounded-lg text-sm font-semibold hover:bg-pink-700 transition">🎨 Atividades c/ Imagens</button>
+            <button onClick={() => downloadPDF(!!atividades)} className="flex items-center gap-1 bg-red-600 text-white px-3 py-2 rounded-lg text-sm font-semibold hover:bg-red-700 transition">🖸️ PDF</button>
+            <button onClick={() => setMostrarAtivForm(!mostrarAtivForm)} className="flex items-center gap-1 bg-pink-600 text-white px-3 py-2 rounded-lg text-sm font-semibold hover:bg-pink-700 transition">🎨 Atividade Impressa</button>
             <button onClick={() => setMostrarPdiForm(!mostrarPdiForm)} className="flex items-center gap-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-3 py-2 rounded-lg text-sm font-semibold hover:from-purple-700 hover:to-pink-700 transition">♿ PDI</button>
           </div>
         </div>
@@ -239,12 +310,12 @@ ${atividadesHtml}${pdiHtml}
         {mostrarAtivForm && (
           <div className="border-t border-pink-100 bg-gradient-to-r from-pink-50 to-rose-50 px-4 py-3">
             <div className="max-w-4xl mx-auto">
-              <p className="text-sm font-semibold text-pink-800 mb-2">🎨 Gerar atividades com imagens para inserir no planejamento:</p>
+              <p className="text-sm font-semibold text-pink-800 mb-2">🎨 Gerar atividade impressa de alta qualidade com questões diversificadas:</p>
               <div className="flex flex-wrap gap-2 items-end">
                 <div>
-                  <label className="text-xs text-pink-700 font-medium">Quantidade</label>
+                  <label className="text-xs text-pink-700 font-medium">Quantidade de Atividades</label>
                   <select value={numAtiv} onChange={e => setNumAtiv(e.target.value)} className="block mt-1 border border-pink-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400 bg-white">
-                    {[1, 2, 3, 4, 5].map(n => <option key={n} value={n}>{n} atividade{n > 1 ? 's' : ''}</option>)}
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => <option key={n} value={n}>{n} atividade{n > 1 ? 's' : ''}</option>)}
                   </select>
                 </div>
                 <div>
@@ -256,10 +327,12 @@ ${atividadesHtml}${pdiHtml}
                   </select>
                 </div>
                 <button onClick={gerarAtividades} disabled={gerandoAtiv} className="bg-pink-600 text-white px-5 py-2 rounded-lg text-sm font-bold hover:bg-pink-700 transition disabled:opacity-50 mt-3">
-                  {gerandoAtiv ? '⏳ Gerando...' : '✨ Gerar Atividades'}
+                  {gerandoAtiv ? '⏳ Gerando atividades com IA...' : '✨ Gerar Atividades com IA'}
                 </button>
                 <button onClick={() => setMostrarAtivForm(false)} className="text-gray-400 hover:text-gray-600 text-sm px-2 py-2 mt-3">✕</button>
               </div>
+              {erroAtiv && <p className="mt-2 text-sm text-red-600 font-medium">⚠️ {erroAtiv}</p>}
+              <p className="text-xs text-pink-600 mt-2">💡 As atividades são geradas pelo GPT-4o com questões específicas e aprofundadas sobre <strong>{plano.conteudo}</strong></p>
             </div>
           </div>
         )}
@@ -300,7 +373,7 @@ ${atividadesHtml}${pdiHtml}
             <span className="bg-white/10 px-3 py-1 rounded-full">🏫 {plano.serie}</span>
             <span className="bg-white/10 px-3 py-1 rounded-full">📅 {plano.bimestre}° Bimestre</span>
             <span className="bg-white/10 px-3 py-1 rounded-full">📝 {new Date(plano.created_at).toLocaleDateString('pt-BR')}</span>
-            {plano.tipo_letra && <span className="bg-white/10 px-3 py-1 rounded-full">{plano.tipo_letra === 'cursiva' ? '✒️ Letra Cursiva' : '🖊️ Letra de Forma'}</span>}
+            {plano.tipo_letra && <span className="bg-white/10 px-3 py-1 rounded-full">{plano.tipo_letra === 'cursiva' ? '✂️ Letra Cursiva' : '🖊️ Letra de Forma'}</span>}
           </div>
         </div>
 
@@ -314,7 +387,7 @@ ${atividadesHtml}${pdiHtml}
           </div>
         </div>
 
-        {/* Conteúdo */}
+        {/* Conteudo */}
         <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
           <h2 className="text-base font-bold text-gray-700 mb-2">📖 Conteúdo Programático</h2>
           <p className="text-gray-700" style={fontStyle}>{plano.conteudo}</p>
@@ -340,7 +413,7 @@ ${atividadesHtml}${pdiHtml}
           </div>
         </div>
 
-        {/* Conclusão */}
+        {/* Conclusao */}
         <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
           <h2 className="text-base font-bold text-orange-700 mb-3">🏁 Conclusão e Reflexão</h2>
           <div className="bg-orange-50 rounded-lg p-4">
@@ -348,7 +421,7 @@ ${atividadesHtml}${pdiHtml}
           </div>
         </div>
 
-        {/* Dinâmica */}
+        {/* Dinamica */}
         {plano.dinamica && (
           <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
             <h2 className="text-base font-bold text-pink-700 mb-3">🎮 Dinâmica / Jogo</h2>
@@ -358,65 +431,87 @@ ${atividadesHtml}${pdiHtml}
           </div>
         )}
 
-        {/* ===== ATIVIDADES COM IMAGENS ===== */}
+        {/* ===== ATIVIDADES IMPRESSAS ===== */}
         {atividades && atividades.length > 0 && (
           <div className="space-y-4">
             <div className="flex items-center justify-between bg-gradient-to-r from-pink-600 to-rose-600 text-white p-4 rounded-2xl flex-wrap gap-2">
               <div className="flex items-center gap-3">
                 <span className="text-2xl">🎨</span>
                 <div>
-                  <h2 className="text-lg font-bold">Atividades com Imagens</h2>
-                  <p className="text-pink-100 text-sm">{atividades.length} atividade{atividades.length > 1 ? 's' : ''} para {plano.conteudo}</p>
+                  <h2 className="text-lg font-bold">Atividades Impressas com IA</h2>
+                  <p className="text-pink-100 text-sm">{atividades.length} atividade{atividades.length > 1 ? 's' : ''} — {plano.conteudo}</p>
                 </div>
               </div>
               <div className="flex gap-2 flex-wrap">
                 <button onClick={() => downloadWord(true)} className="bg-white text-pink-700 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-pink-50 transition">📄 Word c/ Atividades</button>
-                <button onClick={() => downloadPDF(true)} className="bg-white text-pink-700 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-pink-50 transition">🖨️ PDF c/ Atividades</button>
-                <button onClick={() => setMostrarAtivForm(true)} className="bg-white/20 text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-white/30 transition">🔄 Regerar</button>
+                <button onClick={() => downloadPDF(true)} className="bg-white text-pink-700 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-pink-50 transition">🖸️ PDF c/ Atividades</button>
+                <button onClick={() => { setMostrarAtivForm(true); setAtividades(null) }} className="bg-white/20 text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-white/30 transition">🔄 Regerar</button>
               </div>
             </div>
 
             {atividades.map(a => (
-              <div key={a.numero} className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-                <div className="flex items-center gap-2 mb-3 flex-wrap">
-                  <span className="bg-pink-100 text-pink-700 border border-pink-200 px-3 py-1 rounded-full text-xs font-bold">Atividade {a.numero}</span>
-                  <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded-full text-xs">{a.tipo}</span>
-                  <span className="bg-yellow-50 text-yellow-700 border border-yellow-200 px-2 py-1 rounded-full text-xs">📊 {a.nivel}</span>
+              <div key={a.numero} className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                {/* Cabecalho da Atividade */}
+                <div className="bg-gradient-to-r from-pink-50 to-rose-50 px-5 py-4 border-b border-pink-100">
+                  <div className="flex items-center gap-2 mb-2 flex-wrap">
+                    <span className="bg-pink-600 text-white px-3 py-1 rounded-full text-xs font-bold">Atividade {a.numero}</span>
+                    <span className="bg-white text-gray-600 border border-gray-200 px-2 py-1 rounded-full text-xs">{a.tipo}</span>
+                    <span className="bg-yellow-50 text-yellow-700 border border-yellow-200 px-2 py-1 rounded-full text-xs">📊 {a.nivel}</span>
+                  </div>
+                  <h3 className="font-bold text-gray-800 text-base">{a.titulo}</h3>
                 </div>
-                <h3 className="font-bold text-gray-800 mb-3">{a.titulo}</h3>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <div className="sm:w-48 shrink-0">
-                    <img
-                      src={a.imagemUrl}
-                      alt={a.imagemDescricao || 'Atividade ' + a.numero}
-                      className="w-full h-36 object-cover rounded-xl border border-gray-200"
-                      loading="lazy"
-                      onError={(e) => {
-                        const img = e.target as HTMLImageElement
-                        img.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Books_HD_%288314929977%29.jpg/320px-Books_HD_%288314929977%29.jpg'
-                      }}
-                    />
-                    {a.imagemDescricao && <p className="text-xs text-gray-400 mt-1 leading-tight">{a.imagemDescricao}</p>}
-                    <p className="text-xs text-gray-400 mt-2 leading-tight">💡 Prompt para imagem:</p>
-                    <p className="text-xs text-gray-400 italic mt-1 leading-tight">"{a.promptImagem?.substring(0, 80)}..."</p>
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-gray-700 text-sm leading-relaxed mb-3" style={fontStyle}
-                      dangerouslySetInnerHTML={{ __html: a.instrucao }} />
-                    <div className="space-y-1.5">
-                      {renderLinhas(a)}
+
+                <div className="p-5">
+                  <div className="flex flex-col sm:flex-row gap-4 mb-4">
+                    {/* Imagem */}
+                    <div className="sm:w-40 shrink-0">
+                      <img
+                        src={a.imagemUrl}
+                        alt={a.imagemDescricao || 'Atividade ' + a.numero}
+                        className="w-full h-32 object-cover rounded-xl border border-gray-200"
+                        loading="lazy"
+                        onError={(e) => {
+                          const img = e.target as HTMLImageElement
+                          img.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Books_HD_%288314929977%29.jpg/320px-Books_HD_%288314929977%29.jpg'
+                        }}
+                      />
+                      {a.imagemDescricao && <p className="text-xs text-gray-400 mt-1 leading-tight">{a.imagemDescricao}</p>}
                     </div>
-                    {temDesenho(a) && (
-                      <>
-                        {a.instrucaoDesenho && (
-                          <p className="text-sm text-gray-600 mt-3 font-medium" style={fontStyle}>{a.instrucaoDesenho}</p>
-                        )}
-                        <div className="mt-2 border-2 border-dashed border-gray-300 rounded-lg h-20 flex items-center justify-center bg-gray-50">
-                          <span className="text-gray-400 text-sm">✏️ Espaço para desenho</span>
+
+                    {/* Introducao e instrucao */}
+                    <div className="flex-1">
+                      {a.introducao && (
+                        <div className="bg-blue-50 border border-blue-100 rounded-lg p-3 mb-3">
+                          <p className="text-sm text-blue-800 leading-relaxed" style={fontStyle}>{a.introducao}</p>
                         </div>
-                      </>
-                    )}
+                      )}
+                      <p className="text-sm font-semibold text-gray-700 mb-3" style={fontStyle}>{a.instrucao}</p>
+                    </div>
                   </div>
+
+                  {/* Questoes */}
+                  <div className="space-y-1">
+                    {renderQuestoes(a)}
+                  </div>
+
+                  {/* Gabarito */}
+                  {a.gabarito && (
+                    <div className="mt-4 bg-amber-50 border border-amber-200 rounded-lg p-3">
+                      <p className="text-xs text-amber-800 font-medium">📋 {a.gabarito}</p>
+                    </div>
+                  )}
+
+                  {/* Desenho (formato antigo) */}
+                  {temDesenho(a) && (
+                    <>
+                      {a.instrucaoDesenho && (
+                        <p className="text-sm text-gray-600 mt-3 font-medium" style={fontStyle}>{a.instrucaoDesenho}</p>
+                      )}
+                      <div className="mt-2 border-2 border-dashed border-gray-300 rounded-lg h-20 flex items-center justify-center bg-gray-50">
+                        <span className="text-gray-400 text-sm">✏️ Espaço para desenho</span>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             ))}
@@ -439,7 +534,7 @@ ${atividadesHtml}${pdiHtml}
             </div>
             <div className="flex gap-2 mt-4 flex-wrap">
               <button onClick={() => downloadWord(!!atividades)} className="flex items-center gap-1 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition">📄 Word (com PDI)</button>
-              <button onClick={() => downloadPDF(!!atividades)} className="flex items-center gap-1 bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-red-700 transition">🖨️ PDF (com PDI)</button>
+              <button onClick={() => downloadPDF(!!atividades)} className="flex items-center gap-1 bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-red-700 transition">🖸️ PDF (com PDI)</button>
               <button onClick={() => setMostrarPdiForm(true)} className="flex items-center gap-1 border-2 border-purple-400 text-purple-700 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-purple-50 transition">🔄 Regerar PDI</button>
             </div>
           </div>
@@ -450,8 +545,8 @@ ${atividadesHtml}${pdiHtml}
           <h3 className="font-semibold text-gray-700 mb-3">📥 Exportar este planejamento</h3>
           <div className="flex flex-wrap gap-3">
             <button onClick={() => downloadWord(!!atividades)} className="flex items-center gap-2 bg-blue-600 text-white px-5 py-3 rounded-xl font-semibold hover:bg-blue-700 transition shadow-sm">📄 Baixar em Word (.doc)</button>
-            <button onClick={() => downloadPDF(!!atividades)} className="flex items-center gap-2 bg-red-600 text-white px-5 py-3 rounded-xl font-semibold hover:bg-red-700 transition shadow-sm">🖨️ Baixar em PDF</button>
-            {!atividades && <button onClick={() => setMostrarAtivForm(true)} className="flex items-center gap-2 bg-pink-600 text-white px-5 py-3 rounded-xl font-semibold hover:bg-pink-700 transition shadow-sm">🎨 Gerar Atividades c/ Imagens</button>}
+            <button onClick={() => downloadPDF(!!atividades)} className="flex items-center gap-2 bg-red-600 text-white px-5 py-3 rounded-xl font-semibold hover:bg-red-700 transition shadow-sm">🖸️ Baixar em PDF</button>
+            {!atividades && <button onClick={() => setMostrarAtivForm(true)} className="flex items-center gap-2 bg-pink-600 text-white px-5 py-3 rounded-xl font-semibold hover:bg-pink-700 transition shadow-sm">🎨 Gerar Atividade Impressa</button>}
             {!pdiTexto && <button onClick={() => setMostrarPdiForm(true)} className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-5 py-3 rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 transition shadow-sm">♿ Converter para PDI</button>}
           </div>
           <p className="text-xs text-gray-400 mt-3">💡 Os downloads incluem PDI e atividades geradas, se houver.</p>
