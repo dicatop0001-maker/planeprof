@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { createClient } from '@supabase/supabase-js'
 
 function getSupabase() {
-  return createClient(
+  return createClient(h
     process.env.NEXT_PUBLIC_SUPABASE_URL || '',
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
   )
@@ -1363,7 +1363,7 @@ const handleSalvar = async () => {
                 </div>
               </div>
               <div className="bg-gray-50 rounded-xl p-4">
-                <p className="text-gray-700 whitespace-pre-wrap leading-relaxed" style={fontStyle}>{plano.desenvolvimento}</p>
+                <div className="text-gray-700 leading-relaxed prose-dev" style={fontStyle} dangerouslySetInnerHTML={{__html: (plano.desenvolvimento || '').replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br />')}} />
               </div>
               <div className="mt-3 text-xs text-gray-400 flex items-center gap-1">
                 <span>⚙️</span> Para personalizar o desenvolvimento, use o campo de orientações especiais acima e regenere.
@@ -1373,10 +1373,10 @@ const handleSalvar = async () => {
             {/* Modal Atividade Impressa */}
             {mostrarModalAtividade && (
               <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 overflow-y-auto">
-                <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+                <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto mx-4 sm:mx-0">
                   <div className="bg-indigo-600 text-white p-5 rounded-t-2xl flex items-center justify-between">
                     <div>
-                      <h3 className="text-lg font-bold">🖨️ Gerar Atividade Impressa</h3>
+                      <h3 className="text-lg font-bold">🖨️ hhGerar Atividade Impressa</h3>
                       <p className="text-indigo-200 text-sm">{form.disciplina} • {form.serie} • {form.conteudo}</p>
                     </div>
                     <button type="button" onClick={() => setMostrarModalAtividade(false)}
@@ -1512,7 +1512,7 @@ const handleSalvar = async () => {
                 </button>
               </div>
               <div className="bg-orange-50 rounded-xl p-4">
-                <p className="text-gray-700 leading-relaxed" style={fontStyle}>{plano.conclusao}</p>
+                <div className="text-gray-700 leading-relaxed" style={fontStyle} dangerouslySetInnerHTML={{__html: (plano.conclusao || '').replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br />')}} />
               </div>
             </div>
 
@@ -1574,7 +1574,7 @@ const handleSalvar = async () => {
               {plano.pdi && (
                 <div className="bg-white/10 rounded-xl p-4">
                   <p className="text-sm font-semibold mb-2">📋 PDI Gerado:</p>
-                  <p className="text-white/90 text-sm whitespace-pre-wrap leading-relaxed">{plano.pdi}</p>
+                  <div className="text-white/90 text-sm leading-relaxed" dangerouslySetInnerHTML={{__html: (plano.pdi || '').replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br />')}} />
                   <button onClick={() => handleRegerar('pdi')} disabled={loadingSection === 'pdi'}
                     className="mt-3 flex items-center gap-1 text-xs px-3 py-1 bg-white/20 text-white rounded-lg hover:bg-white/30 transition">
                     {loadingSection === 'pdi' ? '⏳...' : '🔄 Regerar PDI'}
