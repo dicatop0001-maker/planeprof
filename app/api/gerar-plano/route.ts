@@ -476,7 +476,7 @@ Retorne APENAS JSON válido:
         planoIA.dinamica = ''
         if (!planoIA.objetivos?.length) planoIA.objetivos = objetivos
         if (!planoIA.habilidades_bncc?.length) planoIA.habilidades_bncc = habilidades
-      } catch {h
+      } catch {
         planoIA = planoLocal
       }
       return NextResponse.json({ success: true, plano: planoIA, fonte: 'ia' })
