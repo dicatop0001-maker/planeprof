@@ -638,6 +638,14 @@ interface PlanoGerado {
   pdi?: string
 }
 
+// Função para renderizar markdown simples
+function renderMD(text: string): string {
+  if (!text) return '';
+  return text
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n/g, '<br />');
+}
+
 export default function NovoPlanejamentoPage() {
   const [form, setForm] = useState({
     disciplina:'', serie:'', bimestre:'1', conteudo:'', orientacoes:'',
@@ -1363,7 +1371,7 @@ const handleSalvar = async () => {
                 </div>
               </div>
               <div className="bg-gray-50 rounded-xl p-4">
-                <div className="text-gray-700 leading-relaxed prose-dev" style={fontStyle} dangerouslySetInnerHTML={{__html: (plano.desenvolvimento || '').replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br />')}} />
+                <div className="text-gray-700 leading-relaxed prose-dev" style={fontStyle} dangerouslySetInnerHTML={{__html: renderMD(plano.desenvolvimento)}} />
               </div>
               <div className="mt-3 text-xs text-gray-400 flex items-center gap-1">
                 <span>⚙️</span> Para personalizar o desenvolvimento, use o campo de orientações especiais acima e regenere.
@@ -1512,7 +1520,7 @@ const handleSalvar = async () => {
                 </button>
               </div>
               <div className="bg-orange-50 rounded-xl p-4">
-                <div className="text-gray-700 leading-relaxed" style={fontStyle} dangerouslySetInnerHTML={{__html: (plano.conclusao || '').replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br />')}} />
+                <div className="text-gray-700 leading-relaxed" style={fontStyle} dangerouslySetInnerHTML={{__html: renderMD(plano.conclusao)}} />
               </div>
             </div>
 
@@ -1574,7 +1582,7 @@ const handleSalvar = async () => {
               {plano.pdi && (
                 <div className="bg-white/10 rounded-xl p-4">
                   <p className="text-sm font-semibold mb-2">📋 PDI Gerado:</p>
-                  <div className="text-white/90 text-sm leading-relaxed" dangerouslySetInnerHTML={{__html: (plano.pdi || '').replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br />')}} />
+                  <div className="text-white/90 text-sm leading-relaxed" dangerouslySetInnerHTML={{__html: renderMD(plano.pdi)}} />
                   <button onClick={() => handleRegerar('pdi')} disabled={loadingSection === 'pdi'}
                     className="mt-3 flex items-center gap-1 text-xs px-3 py-1 bg-white/20 text-white rounded-lg hover:bg-white/30 transition">
                     {loadingSection === 'pdi' ? '⏳...' : '🔄 Regerar PDI'}
