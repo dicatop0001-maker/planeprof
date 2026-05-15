@@ -1849,4 +1849,3 @@ const handleSalvar = async () => {
   )
 }
 
-Stop Claude
