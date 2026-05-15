@@ -4,7 +4,7 @@
 -- ============================================================
 
 -- 1. Criar tabela de planos de aula
-CREATE TABLE IF NOT EXISTS planos_de_aula (
+CREATE TABLE IF NOT EXISTS planos_de_aula (h
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
   titulo TEXT NOT NULL,
