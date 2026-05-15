@@ -109,7 +109,7 @@ function gerarObjetivosEspecificos(disciplina: string, serie: string, conteudo: 
   ]
 
   let contextos: string[]
-  se (d.match(/matem/)) contextos = contextosMat
+  if (d.match(/matem/)) contextos = contextosMat
   else if (d.match(/portugu|lingua/)) contextos = contextosPort
   else if (ehInfantil) contextos = contextosGeralInfantil
   else contextos = contextosGeral
@@ -150,7 +150,7 @@ function gerarDesenvolvimento(disciplina: string, série: string, conteúdo: str
       `**Atividade ${i+1} — Síntese e Consolidação:** ${ehInfantil ? 'Roda de conversa onde cada criança mostra o que fez e diz uma coisa que aprendeu sobre ' + conteudo + '.' : 'Cada aluno escreve em ' + letra + ' um parágrafo resumindo o que aprendeu sobre ' + conteudo + '. Compartilham com a turma.'}`,
       `**Atividade ${i+1} — Avaliação Formativa:** O professor propõe questão oral/escrita de nível ${nivel} sobre ${conteudo}. Registre as respostas para avaliação individual.`,
     ]
-    retornar tiposAtv[i % tiposAtv.length]
+    return tiposAtv[i % tiposAtv.length]
   }).join('\n\n')
 
   return `${distribuicaoAulas}**RECURSOS NECESSÁRIOS:** ${recursos}
@@ -166,7 +166,7 @@ ${atividadesDesc}
 
 **Momento 3 — Roda Final e Sistematização (10 min)**
 Retome as respostas do quadro inicial. Consulte: *"${ehInfantil ? 'O que aprender hoje sobre ' + conteúdo + '?' : 'O que mudou no que vocês sabiam sobre ' + conteudo + '?'}"*
-Sistematize no quadro os conceitos-chave sobre ${conteudo}. Deixe visível para referência futura.${oriExtra}
+Sistematize no quadro os conceitos-chave sobre ${conteudo}. let visível para referência futura.${oriExtra}
 
 **⏱️ TEMPO TOTAL DA AULA:** ${numAulas * 50} minutos (${numAulas} aula${numAulas > 1 ? 's' : ''} de 50 min cada)`
 }
@@ -174,7 +174,7 @@ Sistematize no quadro os conceitos-chave sobre ${conteudo}. Deixe visível para 
 // Gera conclusão específica e reflexiva
 função gerarConclusão(disciplina: string, série: string, conteúdo: string): string {
   const ehInfantil = serie.toLowerCase().match(/infantil|pré|maternal/)
-  retornar ehInfantil
+  return ehInfantil
     ? `**Encerramento:** Reuna as crianças em roda de conversa. Cada uma completa a frase: *"Hoje eu aprendi que ${conteudo}..."* O professor registra no diário de bordo com fotos das produções. Para as famílias: envie um bilhete de verificação que perguntem à criança o que ela aprendeu sobre ${conteudo} — o diálogo em casa fortalece a aprendizagem.
     
 **Avaliação formativa:** Observe a participação, engajamento e vocabulário usados. Cadastre-se: quem demonstrou compreensão? Quem precisa de mais apoio? Que estratégia usar na próxima aula?`
@@ -188,7 +188,7 @@ função gerarConclusão(disciplina: string, série: string, conteúdo: string):
 // Variante 2 da conclusão — abordagem por avaliação diagnóstica
 function gerarConclusaoVariante2(disciplina: string, serie: string, conteudo: string): string {
   const ehInfantil = serie.toLowerCase().match(/infantil|pré|maternal/)
-    retornar ehInfantil
+    return ehInfantil
         ? `**Roda de Encerramento:** Sente as crianças em círculo e mostre as produções do dia sobre ${conteudo}. Peça que cada criança escolha um "tesouro" — algo que ela criou ou aprendeu — e explique para o grupo. Fotografe os momentos para o portfólio. **Comunicação com a família:** Envie uma mensagem breve contando o que foi trabalhado sobre ${conteudo} e sugira uma conversa em casa: "Pergunte ao seu filho o que descobriu hoje!" **Registro docente:** Anote no diário quem participou, quem ficou mais tímido e o que chamou mais atenção nas falas das crianças.`
             : `**Fechamento estruturado:** Distribua um bilhete de saída (post-it ou ficha pequena) com 3 perguntas sobre ${conteudo}: 1) O que aprendeu? 2) O que ainda tenho dúvidas? 3) Onde posso usar isso? As aulas serão solicitadas individualmente e entregues ao sair. **Uso diagnóstico:** Leia as respostas antes da próxima aula. Identifique lacunas e retome no início da aula após os pontos que precisam de reforço sobre ${conteudo}. **Conexão com o projeto de vida:** Ajude os alunos a perceber como ${conteudo} se conecta com escolhas, profissões e situações do cotidiano.`
             }
@@ -196,7 +196,7 @@ function gerarConclusaoVariante2(disciplina: string, serie: string, conteudo: st
             // Variante 3 da conclusão — abordagem por síntese criativa
             function gerarConclusaoVariante3(disciplina: string, serie: string, conteudo: string): string {
               const ehInfantil = serie.toLowerCase().match(/infantil|pré|maternal/)
-                retornar ehInfantil
+                return ehInfantil
                     ? `**Celebração da Aprendizagem:** Convide as crianças para uma "exposição relâmpago" — cada uma escolhe como mostrar o que aprendeu sobre ${conteudo}: com um desenho, uma fala, um gesto ou uma música inventada. O professor registre em vídeo curto (com autorização). **Encerramento afetivo:** Forme um círculo, dê as mãos e peça que cada criança diga uma palavra sobre como se sentiu aprendendo ${conteudo}. Termine com uma música ou cantiga do grupo. **Avaliação:** Observar critérios de desenvolvimento integral: linguagem, socialização, criatividade e relação com ${conteudo}.`
                         : `**Síntese visual:** Peça que cada aluno cria um "mapa mental" ou esquema visual de no máximo 1 página resumindo ${conteudo} com palavras-chave, setas e símbolos próprios — sem texto corrido. Compartilhem em grupos de 4. **Autoavaliação:** Cada aluno preenche: "Sei muito bem: ___ / Ainda preciso revisar: ___ / Quero aprender mais sobre: ​​___" (referente a ${conteudo}). **Próximos passos:** Com base nas autoavaliações, organize grupos de reforço e aprofundamento para a próxima sequência didática sobre ${conteudo}.`
                         }
@@ -220,8 +220,8 @@ função gerarDinamica(disciplina: string, série: string, conteúdo: string): s
     },
   ]
   // Escolhe dinâmica baseada na disciplina
-  se (d.match(/matem/)) {
-    retornar ehInfantil
+  if (d.match(/matem/)) {
+    return ehInfantil
       ? `**Dinâmica: "Boliche Matemático com ${conteudo}"**
 🎳 **Materiais:** 6 garrafas PET numeradas, bola pequena
 🎯 **Como jogar:** Cada garrafa derrubada pede uma tarefa sobre ${conteudo} (ex: mostrar no ábaco, contar, representar). A turma ajuda a confirmar a resposta.
@@ -232,7 +232,7 @@ função gerarDinamica(disciplina: string, série: string, conteúdo: string): s
 ✨ **Aprendizado:** ${conteudo} com análise ágil e colaboração`
   }
   if (d.match(/portugu|língua/)) {
-    retornar ehInfantil
+    return ehInfantil
       ? `**Dinâmica: "Caça às Letras de ${conteudo}"**
 🔍 **Materiais:** Letras impressas espalhadas pela sala, fichas de palavras
 🎯 **Como jogar:** O professor fala uma palavra de ${conteudo}. As crianças correm para encontrar as letras que formam essa palavra e montam no tapete.
@@ -242,7 +242,7 @@ função gerarDinamica(disciplina: string, série: string, conteúdo: string): s
 🎯 **Como jogar:** Cada aluno tem 5 minutos para escrever um "telegrama" (máx 30 palavras) sobre ${conteudo} para um planejador fictício. Depois leem em dupla e identificam: tem claro? Informação suficiente?
 ✨ **Aprendizado:** Síntese, escrita objetiva, revisão de ${conteudo}`
   }
-  retornar dinamicas[0].gerar()
+  return dinamicas[0].gerar()
 }
 
 // Gera PDI detalhada e específica
@@ -257,7 +257,7 @@ function gerarPdiLocal(disciplina: string, serie: string, conteudo: string, pdiA
     ? ['Atividades curtas sobre ' + conteúdo + ' com pausas frequentes','Posicionar próximo ao professor durante explicação','Dar tarefas de movimento/manipulação sobre ' + conteúdo,'Checklist visual das etapas da atividade','Sinal combinado entre professor e aluno para refoco']
     : ['Cartões visuais com imagens relacionadas a ' + conteúdo,'Material manipulável concreto para cada etapa','Apoio de colega tutor durante as atividades','Avaliação por observação e portfólio','Redução de exigência quantitativa mantendo aprofundamento']
 
-  retornar `**PDI - PLANO DE DESENVOLVIMENTO INDIVIDUAL**
+  return `**PDI - PLANO DE DESENVOLVIMENTO INDIVIDUAL**
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 👤 **Aluno(a):** ${nomeAluno}
 📋 **Necessidades:** ${nec}
@@ -302,17 +302,17 @@ ${adaptacoesEspecificas.map(a => '• ' + a).join('\n')}
 }
 
 export async function POST(request: NextRequest) {
-  tentar {
+  try {
     const body = await request.json()
     const {
       disciplina, série, bimestre, conteúdo, orientações,
       numObjetivos, tipoLetra, numAulas, numAtividades, nivelAtividade,
       regenerar, gerarPdi, pdiAluno, pdiNecessidades,
       gerarAtividade, promptAtividade
-    } = corpo
+    } = body
 
     if (!disciplina || !série || !conteudo) {
-      return NextResponse.json({erro: 'Campos obrigatórios: disciplina, série, conteúdo' }, { status: 400 })
+      return NextResponse.json({ error: 'Campos obrigatórios: disciplina, série, conteúdo' }, { status: 400 })
     }
 
     const nObj = parseInt(numObjetivos) || 3
@@ -322,9 +322,9 @@ export async function POST(request: NextRequest) {
     const letra = tipoLetra || 'forma'
 
     // Modo PDI
-    se (gerarPdi) {
+    if (gerarPdi) {
       const pdiTexto = gerarPdiLocal(disciplina, série, conteudo, pdiAluno || '', pdiNecessidades || '')
-      retornar NextResponse.json({ sucesso: true, plano: { pdi: pdiTexto }, fonte: 'local' })
+      return NextResponse.json({ sucesso: true, plano: { pdi: pdiTexto }, fonte: 'local' })
     }
 
     // Modo Gerar Atividade Impressa
@@ -375,7 +375,7 @@ if (gerarAtividade && promptAtividade) {
 
     // Modo regenerar seção específica
       // Modo regenerar seção específica - gera variação real a cada chamada
-        se (regenerar) {
+        if (regenerar) {
             const idx = Date.now() % 3 // 0, 1 ou 2 — rotação entre variantes
                 const conclusaoVariantes = [
                       gerarConclusão(disciplina, série, conteúdo),
@@ -396,13 +396,13 @@ if (gerarAtividade && promptAtividade) {
                                                                                               }
     // Tenta enriquecer com OpenAI se estiver disponível
     const apiKey = process.env.OPENAI_API_KEY
-    se (!apiKey || apiKey.length < 20) {
-      retornar NextResponse.json({ sucesso: true, plano: planoLocal, fonte: 'local' })
+    if (!apiKey || apiKey.length < 20) {
+      return NextResponse.json({ sucesso: true, plano: planoLocal, fonte: 'local' })
     }
 
-    tentar {
+    try {
       const OpenAI = (await import('openai')).default
-      const openai = novo OpenAI({apiKey})
+      const openai = new OpenAI({apiKey})
       const tipoLetraInstrucao = letra === 'cursiva' ? 'Atividades em letra cursiva.' : 'Atividades em letra de forma.'
       const nivelInstrucao = nivel === 'facil' ? 'atividades simples e acessíveis' : nivel === 'dificil' ? 'atividades desafiadoras e complexas' : 'atividades de nível médio progressivo'
       const prompt = `Você é um especialista em pedagogia brasileira e BNCC.
@@ -432,27 +432,27 @@ Retorne APENAS JSON válido:
           { função: 'sistema', conteúdo: 'Pedagogo brasileiro especialista em BNCC. Responda APENAS com JSON válido, sem markdown.' },
           { role: 'user', content: prompt }
         ],
-        temperatura: 0,8,
+        temperature: 0,8,
         max_tokens: 3000,
       })
       const responseText = completion.choices[0].message.content || '{}'
-      deixe planoIA
-      tentar {
+      let planoIA
+      try {
         const cleaned = responseText.replace(/^```json\n?/, '').replace(/```$/, '').trim()
-        planoIA = JSON.parse(limpo)
+        planoIA = JSON.parse(cleaned)
         // Garantir que todos os campos tenham; EUA local como substituto
         if (!planoIA.desenvolvimento) planoIA.desenvolvimento = desenvolvimento
         if (!planoIA.conclusao) planoIA.conclusao = conclusão
         planoIA.dinamica = ''
         if (!planoIA.objetivos?.length) planoIA.objetivos = objetivos
         if (!planoIA.habilidades_bncc?.length) planoIA.habilidades_bncc = habilidades
-      } pegar {
+      } catch {
         planoIA = planoLocal
       }
-      return NextResponse.json({ sucesso: verdadeiro, plano: planoIA, fonte: 'ia' })
+      return NextResponse.json({ success: true, plano: planoIA, fonte: 'ia' })
     } catch (openaiError: any) {
       console.error('[gerar plano] erro OpenAI:', openaiError.message)
-      retornar NextResponse.json({ sucesso: true, plano: planoLocal, fonte: 'local' })
+      return NextResponse.json({ sucesso: true, plano: planoLocal, fonte: 'local' })
     }
   } catch (error: any) {
     console.error('[gerar-plano] Erro geral:', erro)
