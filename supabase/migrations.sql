@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS planos_de_aula (
   desenvolvimento TEXT,
   conclusao TEXT,
   dinamica TEXT,
-  tipo_letra TEXT DEFAULT 'forma' CHECK (tipo_letra IN ('forma', 'cursiva')),
+  tipo_letra TEXT DEFAULT 'forma' CHECK (tipo_letra IN ('forma')), -- Apenas letra de forma (cursiva removida)
   na_biblioteca BOOLEAN DEFAULT false,
   downloads INTEGER DEFAULT 0,
   status TEXT DEFAULT 'concluido',
