@@ -23,7 +23,7 @@ interface Plano {
 }
 
 function gerarDocx(plano: Plano) {
-  const fontFamily = plano.tipo_letra === 'cursiva' ? 'Georgia, serif' : 'Arial, sans-serif'
+  const fontFamily = 'Arial, sans-serif' // Sempre letra de forma
   const html = `
 <!DOCTYPE html>
 <html>
@@ -47,7 +47,7 @@ function gerarDocx(plano: Plano) {
   <strong>Disciplina:</strong> ${plano.disciplina} &nbsp;|&nbsp;
   <strong>Série:</strong> ${plano.serie} &nbsp;|&nbsp;
   <strong>${plano.bimestre}º Bimestre</strong> &nbsp;|&nbsp;
-  <strong>Tipo de Letra:</strong> ${plano.tipo_letra === 'cursiva' ? 'Cursiva' : 'Letra de Forma'}
+  <strong>Tipo de Letra:</strong> Letra de Forma
 </div>
 
 <h2>📚 Habilidades BNCC</h2>
@@ -218,7 +218,7 @@ export default function BibliotecaPage() {
                   {(plano.habilidades_bncc || []).length > 3 && <span className="text-xs text-gray-400">+{plano.habilidades_bncc.length - 3}</span>}
                 </div>
                 <div className="flex items-center gap-2 mb-4 text-xs text-gray-400">
-                  <span>{plano.tipo_letra === 'cursiva' ? '✒️ Cursiva' : '🖊️ Letra de Forma'}</span>
+                  <span>🖊️ Letra de Forma</span>
                   <span>•</span>
                   <span>⬇️ {plano.downloads || 0} downloads</span>
                 </div>
@@ -260,7 +260,7 @@ export default function BibliotecaPage() {
               </div>
               <button onClick={() => setPlanoAberto(null)} className="text-gray-400 hover:text-gray-600 text-2xl leading-none ml-4">✕</button>
             </div>
-            <div className="p-6 space-y-5" style={planoAberto.tipo_letra === 'cursiva' ? {fontFamily: 'cursive'} : {}}>
+            <div className="p-6 space-y-5" style={{}}>
               <div>
                 <h3 className="text-sm font-semibold text-blue-700 mb-2">📚 Habilidades BNCC</h3>
                 <div className="flex flex-wrap gap-2">
