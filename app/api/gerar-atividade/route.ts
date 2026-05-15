@@ -168,7 +168,7 @@ export async function POST(request: NextRequest) {
 
     const n = Math.min(Math.max(parseInt(quantidade) || 10, 1), 20)
     const nivelLabel = nivel === 'facil' ? 'Facil' : nivel === 'dificil' ? 'Dificil' : 'Medio'
-    const letra = tipoLetra === 'cursiva' ? 'letra cursiva' : 'letra de forma'
+    const letra = 'letra de forma' // Cursiva removida - sempre letra de forma
     const chaveDisciplina = detectarDisciplina(disciplina || '')
     const imagens = getImagens(disciplina || '', 1)
 
@@ -212,7 +212,7 @@ DISCIPLINA: ${disciplina || 'Educacao Geral'}
 SERIE/ANO: ${serie || 'Ensino Fundamental'}
 CONTEUDO ESPECIFICO: ${conteudo}
 NIVEL DE DIFICULDADE: ${nivelLabel}
-TIPO DE LETRA: ${letra}
+TIPO DE LETRA: letra de forma (padrão escolar BNCC)
 OBJETIVOS: ${objetivosTexto || 'Compreender, aplicar e analisar o conteudo proposto'}
 
 ${instrucaoEspecifica}
@@ -256,7 +256,7 @@ Responda APENAS com JSON valido (sem markdown, sem texto fora do JSON):
       messages: [
         {
           role: 'system',
-          content: 'Voce e um especialista pedagogico brasileiro com doutorado em Didatica. Suas questoes sao profundas, especificas ao conteudo e nunca genericas. Responda APENAS com JSON valido, sem markdown, sem explicacoes fora do JSON.',
+          content: 'Você é um especialista pedagógico brasileiro com doutorado em Didática e profundo conhecimento da BNCC. Suas questões são rigorosamente alinhadas às habilidades BNCC, específicas ao conteúdo e nunca genéricas. Responda APENAS com JSON válido, sem markdown.',
         },
         { role: 'user', content: prompt },
       ],
