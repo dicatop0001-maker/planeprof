@@ -779,7 +779,7 @@ ESTRUTURA DA ATIVIDADE (para ser impressa e entregue ao aluno):
 - EXATAMENTE 10 questões numeradas de 1 a 10 (5 se for Educação Infantil), variando: múltipla escolha (4 alternativas plausíveis), dissertativa, V/F com justificativa, situação-problema
 - ESPECIFICIDADE: cada questão menciona "${form.conteudo}" pelo nome — PROIBIDO enunciados genéricos
 - TAXONOMIA DE BLOOM: lembrar (1-2), compreender (2), aplicar (2-3), analisar (2), avaliar/criar (1-2)
-- Espaço para resposta em ${form.tipoLetra === 'cursiva' ? 'letra cursiva' : 'letra de forma'}: linhas para dissertativas, parênteses para objetivas
+- Espaço para resposta em letra de forma: linhas para dissertativas, parênteses para objetivas
 - GABARITO COMENTADO completo com as 10 respostas ao final
 - Nível de dificuldade: ${form.nivelAtividade === 'facil' ? 'fácil' : form.nivelAtividade === 'dificil' ? 'difícil' : 'médio'}
 - Tempo total da aula: ${totalMin} minutos (${nAulas} aula${nAulas>1?'s':''} de 50 min cada)
@@ -828,7 +828,7 @@ INSTRUÇÕES:
 - Mantenha o nível ${form.nivelAtividade === 'facil' ? 'fácil' : form.nivelAtividade === 'dificil' ? 'difícil' : 'médio'}
 - Tempo total da aula: ${totalMin} minutos (${nAulas} aula${nAulas>1?'s':''})
 - Não incluir duração de cada questão individualmente — apenas o tempo total ao final
-- Letra: ${form.tipoLetra === 'cursiva' ? 'cursiva' : 'de forma'}`
+- Letra: de forma`
       setPromptAtividade(promptModelo)
     }
     reader.readAsText(file)
@@ -995,7 +995,7 @@ const handleSalvar = async () => {
     setSaving(false)
   }
 
-  const fontStyle = form.tipoLetra === 'cursiva' ? { fontFamily: 'cursive' } : {}
+  const fontStyle = {}
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -1234,25 +1234,7 @@ const handleSalvar = async () => {
               </div>
             </div>
 
-            {/* Tipo de letra */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">✏️ Tipo de Letra das Atividades</label>
-              <div className="flex gap-3">
-                <button type="button"
-                  onClick={() => setForm(prev => ({ ...prev, tipoLetra: 'forma' }))}
-                  className={`flex-1 py-3 px-4 rounded-xl border-2 font-semibold transition text-center ${form.tipoLetra === 'forma' ? 'border-blue-500 bg-blue-50 text-blue-700' : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'}`}>
-                  <span className="block text-lg mb-1" style={{fontFamily: 'sans-serif'}}>Aa</span>
-                  <span className="text-sm">Letra de Forma</span>
-                </button>
-                <button type="button"
-                  onClick={() => setForm(prev => ({ ...prev, tipoLetra: 'cursiva' }))}
-                  className={`flex-1 py-3 px-4 rounded-xl border-2 font-semibold transition text-center ${form.tipoLetra === 'cursiva' ? 'border-purple-500 bg-purple-50 text-purple-700' : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'}`}>
-                  <span className="block text-lg mb-1" style={{fontFamily: 'cursive'}}>Aa</span>
-                  <span className="text-sm">Letra Cursiva</span>
-                </button>
-              </div>
-            </div>
-
+            
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">⚙️ Orientações especiais (opcional)</label>
               <textarea name="orientacoes" value={form.orientacoes} onChange={handleChange}
@@ -1320,8 +1302,8 @@ const handleSalvar = async () => {
                   <p className="text-blue-100 text-sm">{form.disciplina} • {form.serie} • {form.bimestre}° Trimestre • {form.numAulas} aula{parseInt(form.numAulas)>1?'s':''}</p>
                 </div>
               </div>
-              <span className={`px-3 py-1 rounded-full text-sm font-bold bg-white/20 ${form.tipoLetra === 'cursiva' ? 'text-purple-200' : 'text-blue-200'}`}>
-                {form.tipoLetra === 'cursiva' ? '✒️ Letra Cursiva' : '🖊️ Letra de Forma'}
+              <span className={`px-3 py-1 rounded-full text-sm font-bold bg-white/20 text-blue-200`}>
+                🖊️ Letra de Forma
               </span>
             </div>
 
