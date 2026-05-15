@@ -182,9 +182,7 @@ export default function PlanejamentoPage() {
 
   const buildHtmlDoc = (comPdi: boolean, comAtiv: boolean) => {
     if (!plano) return ''
-    const fontStyle = plano.tipo_letra === 'cursiva'
-      ? 'font-family:cursive;'
-      : 'font-family:Arial,sans-serif;'
+    const fontStyle = 'font-family:Arial,sans-serif;'
     let atividadesHtml = ''
     if (comAtiv && atividades && atividades.length > 0) {
       atividadesHtml = `<div style="page-break-before:always">
@@ -286,7 +284,7 @@ ${atividadesHtml}${pdiHtml}
   )
   if (!plano) return null
 
-  const fontStyle = plano.tipo_letra === 'cursiva' ? { fontFamily: 'cursive' } : {}
+  const fontStyle = {}
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -373,7 +371,7 @@ ${atividadesHtml}${pdiHtml}
             <span className="bg-white/10 px-3 py-1 rounded-full">🏫 {plano.serie}</span>
             <span className="bg-white/10 px-3 py-1 rounded-full">📅 {plano.bimestre}° Bimestre</span>
             <span className="bg-white/10 px-3 py-1 rounded-full">📝 {new Date(plano.created_at).toLocaleDateString('pt-BR')}</span>
-            {plano.tipo_letra && <span className="bg-white/10 px-3 py-1 rounded-full">{plano.tipo_letra === 'cursiva' ? '✂️ Letra Cursiva' : '🖊️ Letra de Forma'}</span>}
+            {plano.tipo_letra && <span className="bg-white/10 px-3 py-1 rounded-full">🖊️ Letra de Forma</span>}
           </div>
         </div>
 
