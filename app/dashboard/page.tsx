@@ -30,7 +30,7 @@ interface Planejamento {
 }
 
 function gerarDocx(plano: Planejamento) {
-  const fontFamily = plano.tipo_letra === 'cursiva' ? 'Georgia, serif' : 'Arial, sans-serif'
+  const fontFamily = 'Arial, sans-serif' // Sempre letra de forma (cursiva removida)
   const html = `<!DOCTYPE html>
 <html>
 <head>
@@ -52,7 +52,7 @@ p { line-height: 1.7; }
 <strong>Disciplina:</strong> ${plano.disciplina} &nbsp;|&nbsp;
 <strong>Série:</strong> ${plano.serie} &nbsp;|&nbsp;
 <strong>${plano.bimestre}º Bimestre</strong> &nbsp;|&nbsp;
-<strong>Tipo de Letra:</strong> ${plano.tipo_letra === 'cursiva' ? 'Cursiva' : 'Letra de Forma'}
+<strong>Tipo de Letra:</strong> Letra de Forma
 </div>
 <h2>📚 Habilidades BNCC</h2>
 <div>${(plano.habilidades_bncc || []).map(h => `<span class="badge">${h}</span>`).join('')}</div>
@@ -217,7 +217,7 @@ export default function DashboardPage() {
                     <h3 className="font-semibold text-gray-800 mb-1 line-clamp-2">{plano.titulo}</h3>
                     <p className="text-sm text-gray-500">{plano.disciplina} • {plano.serie}</p>
                     {plano.tipo_letra && (
-                      <p className="text-xs text-gray-400 mt-1">{plano.tipo_letra === 'cursiva' ? '✒️ Letra Cursiva' : '🖊️ Letra de Forma'}</p>
+                      <p className="text-xs text-gray-400 mt-1">{'Letra de Forma'}</p>
                     )}
                     <p className="text-xs text-gray-400 mt-1">
                       {new Date(plano.created_at).toLocaleDateString('pt-BR')}
