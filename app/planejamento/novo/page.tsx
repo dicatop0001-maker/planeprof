@@ -765,37 +765,30 @@ export default function NovoPlanejamentoPage() {
   }
 
   
-  // Gera o prompt padrao para atividade impressa
+  // Gera o prompt padrão para atividade impressa
   const gerarPromptPadrao = () => {
     const nAulas = parseInt(form.numAulas) || 1
     const totalMin = nAulas * 50
-    const nivelLabel = form.nivelAtividade === 'facil' ? 'facil' : form.nivelAtividade === 'dificil' ? 'dificil' : 'medio'
-    const letra = form.tipoLetra === 'cursiva' ? 'letra cursiva' : 'letra de forma'
-    const ehInfantil = (form.serie || '').toLowerCase().match(/infantil|pre|berç|maternal/)
-    const qtdQuestoes = ehInfantil ? 5 : 10
-    return `Crie uma ATIVIDADE IMPRESSA de ALTA QUALIDADE PEDAGOGICA com EXATAMENTE ${qtdQuestoes} questoes para:
+    return `Crie uma atividade impressa completa para alunos de ${form.serie} sobre ${form.conteudo || 'o conteúdo da aula'} (${form.disciplina}).
 
-DISCIPLINA: ${form.disciplina}
-SERIE/ANO: ${form.serie}
-CONTEUDO ESPECIFICO: ${form.conteudo || 'conteudo da aula'}
-NIVEL: ${nivelLabel}
-LETRA: ${letra}
-TEMPO TOTAL: ${totalMin} minutos (${nAulas} aula${nAulas > 1 ? 's' : ''} de 50 min)
+ESTRUTURA DA ATIVIDADE (para ser impressa e entregue ao aluno):
+- Cabeçalho: Nome: _________ Turma: _____ Data: _____
+- Título da atividade relacionado ao conteúdo
+- Objetivos da atividade (em linguagem para o aluno)
+- Instruções claras e objetivas
+- EXATAMENTE 10 questões numeradas de 1 a 10 (5 se for Educação Infantil), variando: múltipla escolha (4 alternativas plausíveis), dissertativa, V/F com justificativa, situação-problema
+- ESPECIFICIDADE: cada questão menciona "${form.conteudo}" pelo nome — PROIBIDO enunciados genéricos
+- TAXONOMIA DE BLOOM: lembrar (1-2), compreender (2), aplicar (2-3), analisar (2), avaliar/criar (1-2)
+- Espaço para resposta em ${form.tipoLetra === 'cursiva' ? 'letra cursiva' : 'letra de forma'}: linhas para dissertativas, parênteses para objetivas
+- GABARITO COMENTADO completo com as 10 respostas ao final
+- Nível de dificuldade: ${form.nivelAtividade === 'facil' ? 'fácil' : form.nivelAtividade === 'dificil' ? 'difícil' : 'médio'}
+- Tempo total da aula: ${totalMin} minutos (${nAulas} aula${nAulas>1?'s':''} de 50 min cada)
+- Não incluir duração individual de cada questão — apenas o tempo total ao final
 
-ESTRUTURA OBRIGATORIA:
-- Cabecalho: Nome: _________ Turma: _____ Data: ___/___/______
-- Titulo criativo e especifico sobre ${form.conteudo}
-- Instrucoes claras para o aluno
-
-REGRAS CRITICAS — LEIA COM ATENCAO:
-1. QUANTIDADE EXATA: crie EXATAMENTE ${qtdQuestoes} questoes numeradas. Nunca menos.
-2. ESPECIFICIDADE MAXIMA: cada questao deve mencionar "${form.conteudo}" diretamente. PROIBIDO questoes genericas.
-3. TAXONOMIA DE BLOOM: distribua as questoes — memorizar (1-2), compreender (2), aplicar (2-3), analisar (2), avaliar/criar (1-2).
-4. TIPOS VARIADOS: use multipla escolha (4 alternativas plausíveis), dissertativa, verdadeiro/falso com justificativa, lacuna, situacao-problema, producao textual.
-5. CONTEXTO BRASILEIRO: use exemplos, dados e situacoes do cotidiano brasileiro.
-6. ESPACO PARA RESPOSTA: dissertativas com linhas de resposta (___), multipla escolha com parenteses ( ).
-7. GABARITO: inclua gabarito comentado completo ao final com ${qtdQuestoes} respostas.
-8. NAO inclua duracao individual de cada questao — apenas o tempo total ao final.`
+REGRAS CRÍTICAS:
+- Linguagem adequada para ${form.serie}
+- Atividade alinhada com as habilidades BNCC de ${form.disciplina}
+- Contexto brasileiro: use exemplos, dados e situações do cotidiano do Brasil`
   }
 
   // Abre modal de atividade impressa e gera prompt
@@ -1855,3 +1848,5 @@ const handleSalvar = async () => {
     </div>
   )
 }
+
+Stop Claude
