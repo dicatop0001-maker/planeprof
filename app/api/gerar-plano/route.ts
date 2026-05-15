@@ -122,10 +122,10 @@ function gerarObjetivosEspecificos(disciplina: string, serie: string, conteudo: 
 }
 
 // Gera desenvolvimento pedagógico DETALHADO e ÚNICO
-function gerarDesenvolvimento(disciplina: string, serie: string, conteudo: string, numAulas: number, numAtividades: number, nivelAtividade: string, tipoLetra: string, orientacoes: string): string {
+function gerarDesenvolvimento(disciplina: string, serie: string, conteudo: string, numAulas: number, numAtividades: number, nivelAtividade: string, orientacoes: string): string {
   const ehInfantil = serie.toLowerCase().match(/infantil|pré|maternal|berç/)
   const nivel = nivelAtividade === 'facil' ? 'simples, com suporte visual e concreto' : nivelAtividade === 'dificil' ? 'desafiador, com raciocínio elaborado' : 'adequado, progressivo em complexidade'
-  const letra = tipoLetra === 'cursiva' ? 'letra cursiva' : 'letra de forma'
+  const letra = 'letra de forma'
   const oriExtra = orientacoes ? `
 
 **Orientações específicas do professor:** ${orientacoes}` : ''
@@ -319,7 +319,7 @@ export async function POST(request: NextRequest) {
     const nAulas = parseInt(numAulas) || 1
     const nAtiv = parseInt(numAtividades) || 2
     const nivel = nivelAtividade || 'medio'
-    const letra = tipoLetra || 'forma'
+    const letra = 'forma' // Sempre letra de forma (cursiva removida)
 
     // Modo PDI
     if (gerarPdi) {
@@ -346,7 +346,7 @@ export async function POST(request: NextRequest) {
         messages: [
           {
             role: 'system',
-            content: 'Voce e um especialista pedagogico brasileiro com doutorado em Didatica. REGRAS: (1) Crie EXATAMENTE o numero de questoes pedido. (2) Cada questao menciona o conteudo especifico. (3) Taxonomia de Bloom. (4) Tipos variados. (5) Contexto brasileiro. (6) Gabarito comentado ao final. JAMAIS crie questoes genericas.'
+            content: 'Você é um especialista pedagógico brasileiro com doutorado em Didática e domínio da BNCC. REGRAS: (1) Crie EXATAMENTE o número de questões pedido. (2) Cada questão menciona o conteúdo específico. (3) Taxonomia de Bloom aplicada à série. (4) Tipos variados. (5) Contexto brasileiro real. (6) Alinhamento explícito às habilidades BNCC. (7) Gabarito comentado ao final. JAMAIS crie questões genéricas.'
           },
           { role: 'user', content: promptAtividade }
         ],
@@ -364,7 +364,7 @@ export async function POST(request: NextRequest) {
     // Gera plano rico localmente
     const habilidades = getBNCCparaDisc(disciplina, serie)
     const objetivos = gerarObjetivosEspecificos(disciplina, serie, conteudo, nObj)
-    const desenvolvimento = gerarDesenvolvimento(disciplina, serie, conteudo, nAulas, nAtiv, nivel, letra, orientacoes || '')
+    const desenvolvimento = gerarDesenvolvimento(disciplina, serie, conteudo, nAulas, nAtiv, nivel, orientacoes || '')
     const conclusao = gerarConclusao(disciplina, serie, conteudo)
     const dinamica = gerarDinamica(disciplina, serie, conteudo)
 
@@ -379,7 +379,7 @@ export async function POST(request: NextRequest) {
                             gerarConclusaoVariante2(disciplina, serie, conteudo),
                                   gerarConclusaoVariante3(disciplina, serie, conteudo),
                                       ]
-                                          const desenvolvimentoNovo = gerarDesenvolvimento(disciplina, serie, conteudo, nAulas, nAtiv, nivel, letra, orientacoes || '')
+                                          const desenvolvimentoNovo = gerarDesenvolvimento(disciplina, serie, conteudo, nAulas, nAtiv, nivel, orientacoes || '')
                                               const dinamicaNova = gerarDinamica(disciplina, serie, conteudo)
                                                   const objetivosNovos = gerarObjetivosEspecificos(disciplina, serie, conteudo, nObj)
                                                       const secoes: Record<string, string> = {
@@ -400,7 +400,7 @@ export async function POST(request: NextRequest) {
     try {
       const OpenAI = (await import('openai')).default
       const openai = new OpenAI({ apiKey })
-      const tipoLetraInstrucao = letra === 'cursiva' ? 'Atividades em letra cursiva.' : 'Atividades em letra de forma.'
+      const tipoLetraInstrucao = 'Atividades em letra de forma (padrão BNCC).'
       const nivelInstrucao = nivel === 'facil' ? 'atividades simples e acessíveis' : nivel === 'dificil' ? 'atividades desafiadoras e complexas' : 'atividades de nível médio progressivo'
       const prompt = `Você é um especialista em pedagogia brasileira e BNCC.
 Crie um plano de aula RICO, ESPECÍFICO e DETALHADO com:
@@ -426,7 +426,7 @@ Retorne APENAS JSON válido:
       const completion = await openai.chat.completions.create({
         model: 'gpt-4o',
         messages: [
-          { role: 'system', content: 'Pedagogo brasileiro especialista em BNCC. Responda APENAS com JSON válido, sem markdown.' },
+          { role: 'system', content: 'Você é um pedagogo brasileiro especialista na BNCC (Base Nacional Comum Curricular). Seus planos de aula seguem RIGOROSAMENTE as diretrizes da BNCC, contemplando habilidades específicas, competências gerais, avaliação formativa e metodologias ativas. Responda APENAS com JSON válido, sem markdown, sem texto fora do JSON.' },
           { role: 'user', content: prompt }
         ],
         temperature: 0.8,
