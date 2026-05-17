@@ -126,52 +126,121 @@ function gerarDesenvolvimento(disciplina: string, serie: string, conteudo: strin
   const ehInfantil = serie.toLowerCase().match(/infantil|pré|maternal|berç/)
   const nivel = nivelAtividade === 'facil' ? 'simples, com suporte visual e concreto' : nivelAtividade === 'dificil' ? 'desafiador, com raciocínio elaborado' : 'adequado, progressivo em complexidade'
   const letra = 'letra de forma'
-  const oriExtra = orientacoes ? `
 
-**Orientações específicas do professor:** ${orientacoes}` : ''
+  // Variantes de abertura (Momento 1) por disciplina — rotação para evitar repetição
+  const aberturasDisc: Record<string, string[]> = {
+    'Matemática': [
+      `Inicie com um desafio concreto: traga objetos ou situações do cotidiano ligados a **"${conteudo}"**. Pergunte: *"Como vocês resolveriam isso no dia a dia?"* Anote as estratégias no quadro. Valide o raciocínio intuitivo antes de formalizar.`,
+      `Apresente um problema real e aberto sobre **"${conteudo}"**: sem dar a resposta, deixe os alunos tentarem resolver por diferentes caminhos. Registre as hipóteses no quadro e explore os erros como pontos de aprendizagem.`,
+      `Comece com um jogo rápido ou atividade manipulativa relacionada a **"${conteudo}"**. Após a dinâmica, conduza uma roda de perguntas: *"O que perceberam? Que padrão apareceu?"* Construa o conceito a partir das observações dos próprios alunos.`,
+    ],
+    'Língua Portuguesa': [
+      `Inicie com leitura compartilhada de um texto curto que exemplifique **"${conteudo}"**. Explore o contexto antes de definir: *"Onde aparece isso no texto? Para que serve?"* Crie um mapa conceitual colaborativo no quadro.`,
+      `Apresente dois exemplos contrastantes de **"${conteudo}"** — um com e outro sem o recurso linguístico em foco. Conduza a descoberta: *"O que muda? O que fica melhor? Por quê?"* Construa a regra com as palavras dos alunos.`,
+      `Inicie com produção oral espontânea: peça aos alunos que contem algo de seu cotidiano e, ao ouvir, identifique com eles onde aparece **"${conteudo}"** na fala. Transfira para a escrita de forma gradual e contextualizada.`,
+    ],
+    'Ciências': [
+      `Apresente uma situação-problema ou fenômeno observável relacionado a **"${conteudo}"**. Levante hipóteses com a turma: *"Por que isso acontece? O que sabemos sobre isso?"* Registre as respostas para retomar ao final.`,
+      `Inicie com um experimento simples de observação sobre **"${conteudo}"**. Guie os alunos no registro das observações antes de apresentar o conceito científico. Valorize a curiosidade e o método investigativo.`,
+      `Comece com imagens, vídeo curto ou objeto real ligado a **"${conteudo}"**. Conduza uma chuva de ideias sobre o que já sabem e o que querem descobrir. Use as dúvidas dos alunos como fio condutor da aula.`,
+    ],
+    'História': [
+      `Inicie com uma fonte histórica (imagem, documento ou relato) sobre o período/tema de **"${conteudo}"**. Conduza análise coletiva: *"Quem fez isso? Para quem? Em que contexto?"* Desenvolva o senso crítico antes de apresentar a narrativa.`,
+      `Apresente o contexto histórico de **"${conteudo}"** por meio de comparação com o presente: *"Como era diferente de hoje? O que mudou? Por quê?"* Estimule a empatia histórica e a compreensão de temporalidade.`,
+      `Comece com a perspectiva dos sujeitos históricos de **"${conteudo}"**: quem eram, o que queriam, o que enfrentavam. Use relatos, imagens ou dramatização curta. Humanize o conteúdo antes de situar na linha do tempo.`,
+    ],
+    'Geografia': [
+      `Inicie mostrando o espaço geográfico relacionado a **"${conteudo}"** em diferentes escalas (local, regional, global). Pergunte: *"Isso existe perto da escola? No Brasil? No mundo?"* Construa a noção espacial antes da conceituação.`,
+      `Apresente imagens de paisagens ou mapas ligados a **"${conteudo}"**. Conduza leitura cartográfica ou análise visual coletiva. Estimule a comparação entre realidades geográficas distintas.`,
+      `Inicie conectando **"${conteudo}"** à realidade local dos alunos: rua, bairro, cidade. Expanda progressivamente para outras escalas. Valorize o conhecimento prévio e a experiência geográfica cotidiana.`,
+    ],
+  }
+
+  // Variantes de Momento 2 — diferentes tipos de atividades práticas
+  const variantesMomento2Infantil = [
+    `**Atividade Lúdica Dirigida:** Proponha brincadeira, músicas ou movimento corporal explorando **"${conteudo}"**. Observe a participação, faça perguntas abertas durante a atividade e registre as descobertas das crianças.`,
+    `**Exploração de Materiais:** Ofereça materiais concretos (massinha, blocos, materiais naturais) para que as crianças explorem aspectos de **"${conteudo}"** de forma autônoma. Circule fazendo mediações e valorizando cada descoberta.`,
+    `**Arte e Expressão:** Proponha atividade de desenho, colagem ou construção livre conectada a **"${conteudo}"**. Conduza a criação com perguntas que aprofundem o pensamento: *"Como você vai mostrar isso? O que mais quer acrescentar?"*`,
+  ]
+
+  const variantesMomento2Fund = [
+    `**Atividade Investigativa em Pares:** Em duplas, os alunos recebem situação-problema desafiadora sobre **"${conteudo}"** e registram em ${letra} a estratégia de resolução. Circulem pela sala mediando e fazendo perguntas que levem ao aprofundamento.`,
+    `**Atividade por Estações:** Organize 3 estações temáticas sobre aspectos diferentes de **"${conteudo}"** (conceitual, aplicação, criativo). Grupos rodam pelas estações, garantindo diversidade de abordagem e ritmo individual de aprendizagem.`,
+    `**Pesquisa Orientada e Síntese:** Alunos recebem material de pesquisa sobre **"${conteudo}"** (texto, infográfico ou vídeo), identificam informações-chave e produzem síntese própria em ${letra}. Compartilham e debatem as descobertas.`,
+    `**Criação Colaborativa:** Em grupos, os alunos produzem material (cartaz, mapa mental, esquema ou texto informativo) sobre **"${conteudo}"**, articulando diferentes aspectos do conteúdo. Valorize a coautoria e a negociação de ideias.`,
+  ]
+
+  // Selecionar variantes por disciplina e rotação baseada no conteúdo
+  const rotIdx = conteudo.length % 3
+  const discKey = Object.keys(aberturasDisc).find(d => disciplina.toLowerCase().includes(d.toLowerCase())) || ''
+  const aberturas = aberturasDisc[discKey] || [
+    `Inicie com uma pergunta provocadora sobre **"${conteudo}"**: *"O que já sabem sobre isso? Onde encontram no cotidiano?"* Mapeie os conhecimentos prévios no quadro antes de aprofundar.`,
+    `Apresente um caso real ou situação concreta relacionada a **"${conteudo}"**. Estimule a análise coletiva antes de apresentar conceitos. Valorize o raciocínio espontâneo da turma.`,
+    `Inicie com recurso visual, musical ou manipulativo ligado a **"${conteudo}"**. Conduza uma exploração guiada por perguntas antes de sistematizar. Registre as percepções dos alunos no quadro.`,
+  ]
+  const abertura = aberturas[rotIdx % aberturas.length]
+
+  const ativIdx = (conteudo.length + numAtividades) % (ehInfantil ? variantesMomento2Infantil.length : variantesMomento2Fund.length)
+  const ativPrincipal = ehInfantil ? variantesMomento2Infantil[ativIdx] : variantesMomento2Fund[ativIdx]
+
+  // Atividades adicionais baseadas no numAtividades
+  const atividadesExtras = Array.from({length: Math.max(0, numAtividades - 1)}, (_, i) => {
+    const tiposAtv = ehInfantil ? [
+      `**Atividade Extra ${i+2} — Registro e Expressão:** As crianças registram por desenho ou escrita espontânea algo que aprenderam sobre **"${conteudo}"**. O professor anota falas significativas para o portfólio.`,
+      `**Atividade Extra ${i+2} — Movimento e Corpo:** Brincadeira motora que incorpore elementos de **"${conteudo}"**, estimulando aprendizagem cinestésica e integração.`,
+    ] : [
+      `**Atividade Extra ${i+2} — Consolidação Individual:** Cada aluno resolve exercício de nível ${nivel} sobre **"${conteudo}"** de forma autônoma. O professor realiza avaliação formativa circulando pela sala.`,
+      `**Atividade Extra ${i+2} — Conexão Interdisciplinar:** Proponha situação que articule **"${conteudo}"** com outra área do conhecimento. Estimule a transferência de aprendizagem e o pensamento integrado.`,
+      `**Atividade Extra ${i+2} — Produção Autoral:** Os alunos criam registro original sobre **"${conteudo}"** em ${letra} (resumo, esquema, minilivro ou outro formato). Compartilham com a turma.`,
+    ]
+    return tiposAtv[i % tiposAtv.length]
+  }).join('\n\n')
 
   const distribuicaoAulas = numAulas > 1
     ? `Este planejamento está organizado em **${numAulas} aulas** com continuidade progressiva:\n`
       + Array.from({length: numAulas}, (_, i) =>
-          `\n**Aula ${i+1}:** ${i === 0 ? `Introdução e sensibilização para ${conteudo}` : i === numAulas-1 ? `Sistematização, avaliação e encerramento sobre ${conteudo}` : `Aprofundamento e prática de ${conteudo} — atividade ${i+1}`}`
-        ).join('')
-      + '\n\n'
+          `\n**Aula ${i+1}:** ${i === 0 ? `Introdução e sensibilização para ${conteudo}` : i === numAulas-1 ? `Sistematização, avaliação e encerramento sobre ${conteudo}` : `Aprofundamento e prática de ${conteudo} — ativid`}`
+      ).join('')
     : ''
 
-  const recursos = ehInfantil
-    ? `materiais concretos (blocos, cartões, objetos do cotidiano), imagens coloridas, fantoche ou boneco, espaço no chão para exploração livre`
-    : `quadro, materiais de escrita em ${letra}, fichas de atividade, imagens ilustrativas, material de apoio visual`
+  const recursos = disciplina === 'Matemática' ? `Materiais concretos (blocos, régua, calculadora), quadro branco, folhas para registro em ${letra}`
+    : disciplina === 'Língua Portuguesa' ? `Textos de apoio, dicionário, quadro branco, caderno de produção em ${letra}`
+    : disciplina === 'Ciências' ? `Materiais para experimento/observação, lupa (se disponível), quadro branco, caderno científico`
+    : disciplina === 'História' ? `Fontes históricas (imagens, mapas, relatos), linha do tempo, quadro branco, caderno de registro`
+    : disciplina === 'Geografia' ? `Mapas, imagens de paisagens, atlas, quadro branco, caderno de registro`
+    : `Quadro branco, materiais específicos para ${disciplina}, caderno de registro em ${letra}`
 
-  const atividadesDesc = Array.from({length: numAtividades}, (_, i) => {
-    const tiposAtv = [
-      `**Atividade ${i+1} — Exploração Inicial:** ${ehInfantil ? 'As crianças manuseiam materiais concretos relacionados a ' + conteudo + '. O professor observa e faz perguntas mediadoras: "O que você vê? O que isso te lembra?"' : 'Leitura e análise de texto/imagem de referência sobre ' + conteudo + '. Os alunos registram suas percepções iniciais em ' + letra + '.'}`,
-      `**Atividade ${i+1} — Construção do Conhecimento:** ${ehInfantil ? 'Em pequenos grupos, as crianças criam representações sobre ' + conteudo + ' usando recortes, massinha ou desenho.' : 'Em duplas, os alunos realizam tarefa estruturada de nível ' + nivel + ' sobre ' + conteudo + ', registrando respostas em ' + letra + '.'}`,
-      `**Atividade ${i+1} — Aplicação Prática:** Os alunos resolvem situação-problema real envolvendo ${conteudo}. Nível: ${nivel}. Cada aluno ${ehInfantil ? 'apresenta sua solução oralmente' : 'registra sua solução em ' + letra + ' e apresenta ao grupo'}.`,
-      `**Atividade ${i+1} — Síntese e Consolidação:** ${ehInfantil ? 'Roda de conversa onde cada criança mostra o que fez e diz uma coisa que aprendeu sobre ' + conteudo + '.' : 'Cada aluno escreve em ' + letra + ' um parágrafo resumindo o que aprendeu sobre ' + conteudo + '. Compartilham com a turma.'}`,
-      `**Atividade ${i+1} — Avaliação Formativa:** O professor propõe questão oral/escrita de nível ${nivel} sobre ${conteudo}. Registra as respostas para avaliar compreensão individual.`,
-    ]
-    return tiposAtv[i % tiposAtv.length]
-  }).join('\n\n')
+  // Seção de orientações especiais com destaque visual
+  const oriBlock = orientacoes
+    ? `
+
+---
+**🎯 ORIENTAÇÕES ESPECIAIS DO PROFESSOR (aplicadas nesta aula):**
+> ${orientacoes}
+
+Com base nas orientações acima, adapte as atividades conforme necessário: ajuste o agrupamento dos alunos, diversifique os materiais de apoio, inclua recursos visuais ou adapte o nível de abstração para atender às necessidades específicas da turma.
+---`
+    : ''
 
   return `${distribuicaoAulas}**RECURSOS NECESSÁRIOS:** ${recursos}
 
 **DESENVOLVIMENTO DA AULA:**
 
-**Momento 1 — Sensibilização e Mobilização (10-15 min)**
-Inicie com os alunos em roda. Apresente o tema **"${conteudo}"** com uma pergunta provocadora: *"${ehInfantil ? 'Quem já viu ou ouviu falar em ' + conteudo + '? Me conta!'  : 'O que vocês já sabem sobre ' + conteudo + '? Como isso aparece na nossa vida?'}"*
-Use imagens, vídeo curto ou objeto concreto para criar interesse genuíno. Anote as respostas das crianças no quadro criando um mapa de conhecimentos prévios.
+**Momento 1 — Sensibilização e Mobilização**
+${abertura}
+${ehInfantil ? '' : 'Anote as respostas e hipóteses no quadro — este registro será retomado na sistematização final para evidenciar o aprendizado.'}
+${oriBlock ? oriBlock + '\n\n' : ''}
+**Momento 2 — Desenvolvimento das Atividades**
+${ativPrincipal}
+${atividadesExtras ? '\n\n' + atividadesExtras : ''}
 
-**Momento 2 — Desenvolvimento das Atividades (25-30 min)**
-${atividadesDesc}
-
-**Momento 3 — Roda Final e Sistematização (10 min)**
-Retome as respostas do quadro inicial. Pergunte: *"${ehInfantil ? 'O que aprendemos hoje sobre ' + conteudo + '?' : 'O que mudou no que vocês sabiam sobre ' + conteudo + '?'}"*
-Sistematize no quadro os conceitos-chave sobre ${conteudo}. Deixe visível para referência futura.${oriExtra}
+**Momento 3 — Roda Final e Sistematização**
+${ehInfantil
+  ? `Reúna as crianças em roda. Mostre as produções e pergunte: *"O que fizemos hoje? O que você descobriu sobre ${conteudo}?"* Faça a mediação das falas e fotografe os trabalhos para o portfólio. Comunique às famílias o que foi aprendido.`
+  : `Retome o registro inicial do quadro. Pergunte: *"O que mudou no que vocês sabiam sobre ${conteudo}? O que ficou mais claro? O que ainda gera dúvida?"* Sistematize os conceitos-chave de forma clara e deixe visível para consulta futura. Proponha reflexão: *"Onde usaremos isso fora da escola?"*`}
 
 **⏱️ TEMPO TOTAL DA AULA:** ${numAulas * 50} minutos (${numAulas} aula${numAulas > 1 ? 's' : ''} de 50 min cada)`
 }
-
-// Gera conclusão específica e reflexiva
 function gerarConclusao(disciplina: string, serie: string, conteudo: string): string {
   const ehInfantil = serie.toLowerCase().match(/infantil|pré|maternal/)
   return ehInfantil
@@ -308,7 +377,7 @@ export async function POST(request: NextRequest) {
       disciplina, serie, bimestre, conteudo, orientacoes,
       numObjetivos, tipoLetra, numAulas, numAtividades, nivelAtividade,
       regenerar, gerarPdi, pdiAluno, pdiNecessidades,
-      gerarAtividade, promptAtividade
+      gerarAtividade, promptAtividade, habilidadesManuais, codigoManual
     } = body
 
     if (!disciplina || !serie || !conteudo) {
@@ -362,7 +431,12 @@ export async function POST(request: NextRequest) {
   }
 
     // Gera plano rico localmente
-    const habilidades = getBNCCparaDisc(disciplina, serie)
+    const habilidadesBase = getBNCCparaDisc(disciplina, serie)
+    const habilidadesExtras: string[] = [
+      ...(Array.isArray(habilidadesManuais) ? habilidadesManuais : []),
+      ...(codigoManual && typeof codigoManual === 'string' ? codigoManual.split(/[,\s]+/).map((c: string) => c.trim()).filter((c: string) => c.length > 0) : [])
+    ]
+    const habilidades = habilidadesExtras.length > 0 ? [...habilidadesExtras, ...habilidadesBase.filter((h: string) => !habilidadesExtras.includes(h))] : habilidadesBase
     const objetivos = gerarObjetivosEspecificos(disciplina, serie, conteudo, nObj)
     const desenvolvimento = gerarDesenvolvimento(disciplina, serie, conteudo, nAulas, nAtiv, nivel, orientacoes || '')
     const conclusao = gerarConclusao(disciplina, serie, conteudo)
