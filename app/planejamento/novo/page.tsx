@@ -666,6 +666,7 @@ export default function NovoPlanejamentoPage() {
   const [conteudosSelecionados, setConteudosSelecionados] = useState<string[]>([])
   const [habilidadesSelecionadas, setHabilidadesSelecionadas] = useState<{codigo: string, descricao: string}[]>([])
   const [numHabilidades, setNumHabilidades] = useState(2)
+  const [codigoManual, setCodigoManual] = useState('')
   // Estados para Atividade Impressa
   const [mostrarModalAtividade, setMostrarModalAtividade] = useState(false)
   const [promptAtividade, setPromptAtividade] = useState('')
@@ -712,7 +713,7 @@ export default function NovoPlanejamentoPage() {
       const resp = await fetch('/api/gerar-plano', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({...form, habilidadesManuais: habilidadesSelecionadas.map(h=>h.codigo)})
+        body: JSON.stringify({...form, habilidadesManuais: habilidadesSelecionadas.map(h=>h.codigo), codigoManual})
       })
       const data = await resp.json()
       if (!resp.ok) throw new Error(data.error || 'Erro ao gerar plano')
@@ -1191,6 +1192,25 @@ const handleSalvar = async () => {
                   </button>
                 </div>
               )}
+
+              {/* Campo manual de código BNCC */}
+              <div className="mt-3">
+                <label className="block text-xs font-medium text-gray-600 mb-1">
+                  ✏️ Inserir código BNCC manualmente (ex: EF01MA01, EF02LP03)
+                </label>
+                <input
+                  type="text"
+                  value={codigoManual}
+                  onChange={e => setCodigoManual(e.target.value)}
+                  placeholder="Ex: EF01MA01, EF02LP03, EI03ET01"
+                  className="w-full border border-blue-300 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 bg-blue-50 placeholder-gray-400"
+                />
+                {codigoManual && (
+                  <p className="text-xs text-blue-600 mt-1">
+                    {codigoManual.split(/[,\s]+/).filter((c) => c.trim()).length} código(s) BNCC manual(is) adicionado(s)
+                  </p>
+                )}
+              </div>
             </div>
 
             {/* 7 e 8. Nº de Objetivos e Nº de Atividades Lúdicas */}
