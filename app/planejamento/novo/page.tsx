@@ -687,8 +687,8 @@ export default function NovoPlanejamentoPage() {
                       const [pixGerado, setPixGerado] = useState(false)
   const [arquivoModelo, setArquivoModelo] = useState<File|null>(null)
   const [conteudoModelo, setConteudoModelo] = useState('')
-  const [modeloUrl, setModeloUrl] = useState('')
   const modeloRef = useRef<HTMLInputElement>(null)
+  const [modeloUrl, setModeloUrl] = useState('')
   const logoRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
 
@@ -1433,34 +1433,30 @@ const handleSalvar = async () => {
                           className="w-full py-3 border-2 border-indigo-400 text-indigo-700 rounded-lg font-semibold hover:bg-indigo-100 transition text-sm flex items-center justify-center gap-2">
                           📎 {arquivoModelo ? arquivoModelo.name : 'Selecionar arquivo modelo'}
                         </button>
-                        <input ref={modeloRef} type="file" accept=".txt,.doc,.docx,.pdf" onChange={handleArquivoModelo} className="hidden" />
-                        {arquivoModelo && (
-                          <p className="mt-2 text-xs text-green-600">✅ Arquivo carregado: {arquivoModelo.name} ({Math.round(arquivoModelo.size/1024)} KB)</p>
-                        )}
-                        {conteudoModelo && (
-
                         {/* OU - separador */}
-                        <div className="flex items-center gap-2 my-3">
-                          <div className="flex-1 border-t border-indigo-200" />
-                          <span className="text-xs text-indigo-400 font-semibold">OU</span>
-                          <div className="flex-1 border-t border-indigo-200" />
+                        <div className="flex items-center gap-2 my-2">
+                          <div className="flex-1 border-t border-indigo-200"></div>
+                          <span className="text-xs text-indigo-400 font-medium">OU</span>
+                          <div className="flex-1 border-t border-indigo-200"></div>
                         </div>
-                        {/* URL do modelo */}
-                        <div>
-                          <label className="block text-xs font-medium text-indigo-700 mb-1">
-                            🔗 Cole a URL de uma atividade modelo (site, Google Docs, etc.)
-                          </label>
+                        <div className="space-y-1">
+                          <p className="text-xs text-indigo-600">Cole a URL de uma atividade modelo:</p>
                           <input
                             type="url"
                             value={modeloUrl}
                             onChange={e => { setModeloUrl(e.target.value); setArquivoModelo(null); setConteudoModelo(''); }}
                             placeholder="https://www.tudosaladeaula.com/..."
-                            className="w-full border border-indigo-300 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white placeholder-gray-400"
+                            className="w-full border border-indigo-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-indigo-400"
                           />
                           {modeloUrl && (
-                            <p className="text-xs text-green-600 mt-1">✅ URL informada — a IA irá analisar o conteúdo e criar atividade no mesmo estilo</p>
+                            <p className="text-xs text-green-600">URL inserida - sera usada como modelo</p>
                           )}
                         </div>
+                        <input ref={modeloRef} type="file" accept=".txt,.doc,.docx,.pdf" onChange={handleArquivoModelo} className="hidden" />
+                        {arquivoModelo && (
+                          <p className="mt-2 text-xs text-green-600">✅ Arquivo carregado: {arquivoModelo.name} ({Math.round(arquivoModelo.size/1024)} KB)</p>
+                        )}
+                        {conteudoModelo && (
                           <div className="mt-3 bg-white border border-indigo-200 rounded-lg p-3">
                             <p className="text-xs font-semibold text-gray-600 mb-1">📝 Prévia do modelo lido:</p>
                             <p className="text-xs text-gray-500 font-mono whitespace-pre-wrap max-h-24 overflow-y-auto">{conteudoModelo.substring(0, 300)}...</p>
