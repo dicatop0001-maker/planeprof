@@ -687,6 +687,7 @@ export default function NovoPlanejamentoPage() {
                       const [pixGerado, setPixGerado] = useState(false)
   const [arquivoModelo, setArquivoModelo] = useState<File|null>(null)
   const [conteudoModelo, setConteudoModelo] = useState('')
+  const [modeloUrl, setModeloUrl] = useState('')
   const modeloRef = useRef<HTMLInputElement>(null)
   const logoRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
@@ -809,6 +810,7 @@ REGRAS CRÍTICAS:
     const file = e.target.files?.[0]
     if (!file) return
     setArquivoModelo(file)
+    setModeloUrl('') // Clear URL when file is selected
     const reader = new FileReader()
     reader.onload = (ev) => {
       const texto = ev.target?.result as string
@@ -840,13 +842,21 @@ INSTRUÇÕES:
     setGerandoAtividade(true)
     setAtividadeGerada('')
     try {
-      const resp = await fetch('/api/gerar-plano', {
+      const resp = await fetch('/api/gerar-atividade', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+        body: JSON.stringify({
           ...form,
-          gerarAtividade: true,
-          promptAtividade
+          nivel: form.nivelAtividade,
+          quantidade: form.numAtividades,
+          objetivos: plano?.objetivos || [],
+          habilidadesBNCC: plano?.habilidades_bncc || [],
+          numAulas: form.numAulas,
+          bimestre: form.bimestre,
+          modeloUrl: modoModelo ? modeloUrl : '',
+          modeloTexto: modoModelo ? conteudoModelo : '',
+          promptAtividade: !modoModelo ? promptAtividade : ''
         })
       })
       const data = await resp.json()
@@ -1429,6 +1439,29 @@ const handleSalvar = async () => {
                           <p className="mt-2 text-xs text-green-600">✅ Arquivo carregado: {arquivoModelo.name} ({Math.round(arquivoModelo.size/1024)} KB)</p>
                         )}
                         {conteudoModelo && (
+
+                        {/* OU - separador */}
+                        <div className="flex items-center gap-2 my-3">
+                          <div className="flex-1 border-t border-indigo-200" />
+                          <span className="text-xs text-indigo-400 font-semibold">OU</span>
+                          <div className="flex-1 border-t border-indigo-200" />
+                        </div>
+                        {/* URL do modelo */}
+                        <div>
+                          <label className="block text-xs font-medium text-indigo-700 mb-1">
+                            🔗 Cole a URL de uma atividade modelo (site, Google Docs, etc.)
+                          </label>
+                          <input
+                            type="url"
+                            value={modeloUrl}
+                            onChange={e => { setModeloUrl(e.target.value); setArquivoModelo(null); setConteudoModelo(''); }}
+                            placeholder="https://www.tudosaladeaula.com/..."
+                            className="w-full border border-indigo-300 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white placeholder-gray-400"
+                          />
+                          {modeloUrl && (
+                            <p className="text-xs text-green-600 mt-1">✅ URL informada — a IA irá analisar o conteúdo e criar atividade no mesmo estilo</p>
+                          )}
+                        </div>
                           <div className="mt-3 bg-white border border-indigo-200 rounded-lg p-3">
                             <p className="text-xs font-semibold text-gray-600 mb-1">📝 Prévia do modelo lido:</p>
                             <p className="text-xs text-gray-500 font-mono whitespace-pre-wrap max-h-24 overflow-y-auto">{conteudoModelo.substring(0, 300)}...</p>
