@@ -11,617 +11,617 @@ function getSupabase() {
   )
 }
 
-const DISCIPLINAS = ['Matemática','Língua Portuguesa','Ciências','História','Geografia','Arte','Educação Física','Ensino Religioso','Inglês']
-const SERIES = ['Berçário I','Berçário II','Infantil I','Infantil II','Infantil III','Infantil IV','Infantil V','1º Ano','2º Ano','3º Ano','4º Ano','5º Ano','6º Ano','7º Ano','8º Ano','9º Ano']
+const DISCIPLINAS = ['MatemÃ¡tica','LÃ­ngua Portuguesa','CiÃªncias','HistÃ³ria','Geografia','Arte','EducaÃ§Ã£o FÃ­sica','Ensino Religioso','InglÃªs']
+const SERIES = ['BerÃ§Ã¡rio I','BerÃ§Ã¡rio II','Infantil I','Infantil II','Infantil III','Infantil IV','Infantil V','1Âº Ano','2Âº Ano','3Âº Ano','4Âº Ano','5Âº Ano','6Âº Ano','7Âº Ano','8Âº Ano','9Âº Ano']
 
 const HABILIDADES_BNCC_DATA: Record<string, {codigo: string, descricao: string}[]> = {
-  'Matemática': [
-    {codigo: 'EF01MA01', descricao: 'Utilizar números naturais como indicador de quantidade ou de ordem em diferentes situações cotidianas'},
-    {codigo: 'EF01MA06', descricao: 'Realizar adição de dois números, com e sem agrupamento, com e sem suporte de material manipulável'},
-    {codigo: 'EF02MA01', descricao: 'Comparar e ordenar números naturais, inteiros e racionais em diferentes contextos'},
-    {codigo: 'EF03MA01', descricao: 'Ler, escrever e comparar números naturais de até a ordem dos milhar com compreensão'},
-    {codigo: 'EF04MA01', descricao: 'Ler, escrever e ordenar números naturais até a ordem dos milhões'},
-    {codigo: 'EF04MA09', descricao: 'Reconhecer as frações unitárias mais usuais como metade, terça parte, quarta parte, décima parte'},
-    {codigo: 'EF05MA01', descricao: 'Ler, escrever, comparar e ordenar números naturais, racionais e inteiros'},
-    {codigo: 'EF05MA07', descricao: 'Calcular e representar frações equivalentes e simplificação de frações'},
-    {codigo: 'EF06MA01', descricao: 'Comparar e ordenar números inteiros em diferentes contextos incluindo o histórico'},
-    {codigo: 'EF06MA07', descricao: 'Resolver e elaborar problemas que envolvam porcentagem, de preferência relacionados ao contexto social'},
-    {codigo: 'EF07MA01', descricao: 'Compreender a ideia de número real, representar na reta numérica e compará-los'},
-    {codigo: 'EF07MA13', descricao: 'Verificar relações entre os ângulos formados por retas paralelas cortadas por uma transversal'},
-    {codigo: 'EF08MA01', descricao: 'Resolver e elaborar problemas envolvendo porcentagem, incluindo os que requerem cálculo de taxas percentuais'},
-    {codigo: 'EF08MA14', descricao: 'Demonstrar que a soma dos ângulos internos de um triângulo é 180°'},
-    {codigo: 'EF09MA01', descricao: 'Compreender os números reais, com e sem o uso de tecnologias digitais'},
-    {codigo: 'EF09MA14', descricao: 'Reconhecer as condições necessárias e suficientes para que dois triângulos sejam semelhantes'},
+  'MatemÃ¡tica': [
+    {codigo: 'EF01MA01', descricao: 'Utilizar nÃºmeros naturais como indicador de quantidade ou de ordem em diferentes situaÃ§Ãµes cotidianas'},
+    {codigo: 'EF01MA06', descricao: 'Realizar adiÃ§Ã£o de dois nÃºmeros, com e sem agrupamento, com e sem suporte de material manipulÃ¡vel'},
+    {codigo: 'EF02MA01', descricao: 'Comparar e ordenar nÃºmeros naturais, inteiros e racionais em diferentes contextos'},
+    {codigo: 'EF03MA01', descricao: 'Ler, escrever e comparar nÃºmeros naturais de atÃ© a ordem dos milhar com compreensÃ£o'},
+    {codigo: 'EF04MA01', descricao: 'Ler, escrever e ordenar nÃºmeros naturais atÃ© a ordem dos milhÃµes'},
+    {codigo: 'EF04MA09', descricao: 'Reconhecer as fraÃ§Ãµes unitÃ¡rias mais usuais como metade, terÃ§a parte, quarta parte, dÃ©cima parte'},
+    {codigo: 'EF05MA01', descricao: 'Ler, escrever, comparar e ordenar nÃºmeros naturais, racionais e inteiros'},
+    {codigo: 'EF05MA07', descricao: 'Calcular e representar fraÃ§Ãµes equivalentes e simplificaÃ§Ã£o de fraÃ§Ãµes'},
+    {codigo: 'EF06MA01', descricao: 'Comparar e ordenar nÃºmeros inteiros em diferentes contextos incluindo o histÃ³rico'},
+    {codigo: 'EF06MA07', descricao: 'Resolver e elaborar problemas que envolvam porcentagem, de preferÃªncia relacionados ao contexto social'},
+    {codigo: 'EF07MA01', descricao: 'Compreender a ideia de nÃºmero real, representar na reta numÃ©rica e comparÃ¡-los'},
+    {codigo: 'EF07MA13', descricao: 'Verificar relaÃ§Ãµes entre os Ã¢ngulos formados por retas paralelas cortadas por uma transversal'},
+    {codigo: 'EF08MA01', descricao: 'Resolver e elaborar problemas envolvendo porcentagem, incluindo os que requerem cÃ¡lculo de taxas percentuais'},
+    {codigo: 'EF08MA14', descricao: 'Demonstrar que a soma dos Ã¢ngulos internos de um triÃ¢ngulo Ã© 180Â°'},
+    {codigo: 'EF09MA01', descricao: 'Compreender os nÃºmeros reais, com e sem o uso de tecnologias digitais'},
+    {codigo: 'EF09MA14', descricao: 'Reconhecer as condiÃ§Ãµes necessÃ¡rias e suficientes para que dois triÃ¢ngulos sejam semelhantes'},
   ],
-  'Língua Portuguesa': [
-    {codigo: 'EF01LP01', descricao: 'Reconhecer que palavras e frases são formadas por letras e que há diferença entre letras e outros sinais gráficos'},
-    {codigo: 'EF02LP01', descricao: 'Ler e compreender, em colaboração com os colegas, enunciados de tarefas escolares'},
-    {codigo: 'EF03LP01', descricao: 'Ler e compreender textos literários de diferentes gêneros e extensões'},
-    {codigo: 'EF04LP01', descricao: 'Demonstrar compreensão de textos lidos em voz alta por adultos e de textos multissemióticos'},
-    {codigo: 'EF05LP01', descricao: 'Compreender e interpretar textos de diferentes gêneros textuais, identificando tema e propósito'},
-    {codigo: 'EF35LP04', descricao: 'Inferir informações implícitas nos textos lidos'},
-    {codigo: 'EF06LP01', descricao: 'Engajar-se e contribuir com a escuta atenta às apresentações de trabalhos e às instruções'},
+  'LÃ­ngua Portuguesa': [
+    {codigo: 'EF01LP01', descricao: 'Reconhecer que palavras e frases sÃ£o formadas por letras e que hÃ¡ diferenÃ§a entre letras e outros sinais grÃ¡ficos'},
+    {codigo: 'EF02LP01', descricao: 'Ler e compreender, em colaboraÃ§Ã£o com os colegas, enunciados de tarefas escolares'},
+    {codigo: 'EF03LP01', descricao: 'Ler e compreender textos literÃ¡rios de diferentes gÃªneros e extensÃµes'},
+    {codigo: 'EF04LP01', descricao: 'Demonstrar compreensÃ£o de textos lidos em voz alta por adultos e de textos multissemiÃ³ticos'},
+    {codigo: 'EF05LP01', descricao: 'Compreender e interpretar textos de diferentes gÃªneros textuais, identificando tema e propÃ³sito'},
+    {codigo: 'EF35LP04', descricao: 'Inferir informaÃ§Ãµes implÃ­citas nos textos lidos'},
+    {codigo: 'EF06LP01', descricao: 'Engajar-se e contribuir com a escuta atenta Ã s apresentaÃ§Ãµes de trabalhos e Ã s instruÃ§Ãµes'},
     {codigo: 'EF07LP01', descricao: 'Identificar os efeitos de sentido do uso de recursos expressivos sonoros em textos'},
-    {codigo: 'EF08LP01', descricao: 'Reconhecer e utilizar formas de progressão temática que conferem coerência textual'},
-    {codigo: 'EF09LP01', descricao: 'Identificar e compreender, em textos argumentativos, os posicionamentos e as estratégias argumentativas'},
-    {codigo: 'EF69LP44', descricao: 'Inferir a presença de valores nos textos considerando a relação entre contexto de produção e circulação'},
+    {codigo: 'EF08LP01', descricao: 'Reconhecer e utilizar formas de progressÃ£o temÃ¡tica que conferem coerÃªncia textual'},
+    {codigo: 'EF09LP01', descricao: 'Identificar e compreender, em textos argumentativos, os posicionamentos e as estratÃ©gias argumentativas'},
+    {codigo: 'EF69LP44', descricao: 'Inferir a presenÃ§a de valores nos textos considerando a relaÃ§Ã£o entre contexto de produÃ§Ã£o e circulaÃ§Ã£o'},
   ],
-  'Ciências': [
-    {codigo: 'EF01CI01', descricao: 'Comparar características de diferentes materiais presentes em objetos de uso cotidiano'},
-    {codigo: 'EF02CI01', descricao: 'Identificar de onde vêm os alimentos consumidos em casa, na escola e no município'},
-    {codigo: 'EF03CI01', descricao: 'Produzir diferentes misturas e comparar as características dos materiais antes e depois de serem misturados'},
-    {codigo: 'EF04CI01', descricao: 'Identificar misturas na vida diária e propor como separá-las com base nas propriedades físicas'},
-    {codigo: 'EF04CI09', descricao: 'Identificar os pontos cardeais por meio de indicadores naturais e bússola'},
-    {codigo: 'EF05CI01', descricao: 'Explorar fenômenos da vida cotidiana que evidenciem propriedades físicas dos materiais'},
-    {codigo: 'EF05CI08', descricao: 'Organizar um cardápio equilibrado baseando-se nas características dos grupos alimentares'},
-    {codigo: 'EF06CI01', descricao: 'Classificar como homogêneas ou heterogêneas misturas envolvendo diferentes materiais do cotidiano'},
-    {codigo: 'EF07CI01', descricao: 'Discutir a aplicação, no dia a dia, de métodos de separação de misturas'},
-    {codigo: 'EF07CI09', descricao: 'Interpretar as condições do tempo atmosférico e distinguir tempo de clima'},
-    {codigo: 'EF08CI01', descricao: 'Identificar e analisar fontes de energia renováveis e não renováveis e seus impactos ambientais'},
-    {codigo: 'EF09CI01', descricao: 'Investigar as transformações que ocorrem no corpo durante a puberdade'},
-    {codigo: 'EF09CI14', descricao: 'Descrever a composição e a estrutura do sistema Solar'},
+  'CiÃªncias': [
+    {codigo: 'EF01CI01', descricao: 'Comparar caracterÃ­sticas de diferentes materiais presentes em objetos de uso cotidiano'},
+    {codigo: 'EF02CI01', descricao: 'Identificar de onde vÃªm os alimentos consumidos em casa, na escola e no municÃ­pio'},
+    {codigo: 'EF03CI01', descricao: 'Produzir diferentes misturas e comparar as caracterÃ­sticas dos materiais antes e depois de serem misturados'},
+    {codigo: 'EF04CI01', descricao: 'Identificar misturas na vida diÃ¡ria e propor como separÃ¡-las com base nas propriedades fÃ­sicas'},
+    {codigo: 'EF04CI09', descricao: 'Identificar os pontos cardeais por meio de indicadores naturais e bÃºssola'},
+    {codigo: 'EF05CI01', descricao: 'Explorar fenÃ´menos da vida cotidiana que evidenciem propriedades fÃ­sicas dos materiais'},
+    {codigo: 'EF05CI08', descricao: 'Organizar um cardÃ¡pio equilibrado baseando-se nas caracterÃ­sticas dos grupos alimentares'},
+    {codigo: 'EF06CI01', descricao: 'Classificar como homogÃªneas ou heterogÃªneas misturas envolvendo diferentes materiais do cotidiano'},
+    {codigo: 'EF07CI01', descricao: 'Discutir a aplicaÃ§Ã£o, no dia a dia, de mÃ©todos de separaÃ§Ã£o de misturas'},
+    {codigo: 'EF07CI09', descricao: 'Interpretar as condiÃ§Ãµes do tempo atmosfÃ©rico e distinguir tempo de clima'},
+    {codigo: 'EF08CI01', descricao: 'Identificar e analisar fontes de energia renovÃ¡veis e nÃ£o renovÃ¡veis e seus impactos ambientais'},
+    {codigo: 'EF09CI01', descricao: 'Investigar as transformaÃ§Ãµes que ocorrem no corpo durante a puberdade'},
+    {codigo: 'EF09CI14', descricao: 'Descrever a composiÃ§Ã£o e a estrutura do sistema Solar'},
   ],
-  'História': [
-    {codigo: 'EF01HI01', descricao: 'Identificar aspectos do seu crescimento por meio do registro das lembranças particulares ou de um grupo social'},
-    {codigo: 'EF02HI01', descricao: 'Reconhecer espaços de sociabilidade e identificar os motivos que aproximam e separam as pessoas'},
-    {codigo: 'EF03HI01', descricao: 'Identificar aspectos do próprio desenvolvimento e os processos de formação da comunidade'},
-    {codigo: 'EF04HI01', descricao: 'Reconhecer a história como resultado da ação dos seres humanos no tempo e no espaço'},
-    {codigo: 'EF05HI01', descricao: 'Identificar os processos de produção, hierarquização e difusão dos marcos de memória'},
-    {codigo: 'EF06HI01', descricao: 'Identificar diferentes formas de compreensão da noção de tempo e de periodização dos processos históricos'},
-    {codigo: 'EF07HI01', descricao: 'Explicar o significado de "modernidade" e suas lógicas de inclusão e exclusão'},
-    {codigo: 'EF08HI01', descricao: 'Conhecer e apreciar a história do Brasil no contexto da América e do mundo'},
-    {codigo: 'EF08HI24', descricao: 'Identificar e analisar processos que contribuíram para a emergência dos direitos civis no Brasil'},
-    {codigo: 'EF09HI01', descricao: 'Descrever e contextualizar os principais aspectos da história do Brasil contemporâneo'},
+  'HistÃ³ria': [
+    {codigo: 'EF01HI01', descricao: 'Identificar aspectos do seu crescimento por meio do registro das lembranÃ§as particulares ou de um grupo social'},
+    {codigo: 'EF02HI01', descricao: 'Reconhecer espaÃ§os de sociabilidade e identificar os motivos que aproximam e separam as pessoas'},
+    {codigo: 'EF03HI01', descricao: 'Identificar aspectos do prÃ³prio desenvolvimento e os processos de formaÃ§Ã£o da comunidade'},
+    {codigo: 'EF04HI01', descricao: 'Reconhecer a histÃ³ria como resultado da aÃ§Ã£o dos seres humanos no tempo e no espaÃ§o'},
+    {codigo: 'EF05HI01', descricao: 'Identificar os processos de produÃ§Ã£o, hierarquizaÃ§Ã£o e difusÃ£o dos marcos de memÃ³ria'},
+    {codigo: 'EF06HI01', descricao: 'Identificar diferentes formas de compreensÃ£o da noÃ§Ã£o de tempo e de periodizaÃ§Ã£o dos processos histÃ³ricos'},
+    {codigo: 'EF07HI01', descricao: 'Explicar o significado de "modernidade" e suas lÃ³gicas de inclusÃ£o e exclusÃ£o'},
+    {codigo: 'EF08HI01', descricao: 'Conhecer e apreciar a histÃ³ria do Brasil no contexto da AmÃ©rica e do mundo'},
+    {codigo: 'EF08HI24', descricao: 'Identificar e analisar processos que contribuÃ­ram para a emergÃªncia dos direitos civis no Brasil'},
+    {codigo: 'EF09HI01', descricao: 'Descrever e contextualizar os principais aspectos da histÃ³ria do Brasil contemporÃ¢neo'},
   ],
   'Geografia': [
-    {codigo: 'EF01GE01', descricao: 'Descrever características observadas de seus lugares de vivência (moradia, escola etc.)'},
-    {codigo: 'EF02GE01', descricao: 'Comparar diferentes paisagens, identificando ações humanas e naturais que as constituem'},
-    {codigo: 'EF03GE01', descricao: 'Identificar instâncias do poder público responsáveis por buscar soluções para as comunidades'},
-    {codigo: 'EF04GE01', descricao: 'Selecionar e construir argumentos sobre a contribuição dos grupos sociais no processo de produção'},
-    {codigo: 'EF05GE01', descricao: 'Descrever e analisar dinâmicas populacionais na UF em que vive'},
-    {codigo: 'EF06GE01', descricao: 'Comparar modificações das paisagens nos lugares de vivência em diferentes tempos'},
-    {codigo: 'EF06GE11', descricao: 'Analisar distintas interações das sociedades com a natureza a partir do desenvolvimento técnico'},
-    {codigo: 'EF07GE01', descricao: 'Avaliar, por meio de exemplos, a importância do trabalho na formação de paisagens'},
-    {codigo: 'EF08GE01', descricao: 'Descrever as rotas de dispersão da espécie humana pelo planeta'},
-    {codigo: 'EF09GE01', descricao: 'Analisar criticamente de que forma a hegemonia europeia foi exercida nos diferentes territórios colonizados'},
-    {codigo: 'EF09GE14', descricao: 'Elaborar e interpretar gráficos de barras e de setores, mapas temáticos e esquemáticos'},
+    {codigo: 'EF01GE01', descricao: 'Descrever caracterÃ­sticas observadas de seus lugares de vivÃªncia (moradia, escola etc.)'},
+    {codigo: 'EF02GE01', descricao: 'Comparar diferentes paisagens, identificando aÃ§Ãµes humanas e naturais que as constituem'},
+    {codigo: 'EF03GE01', descricao: 'Identificar instÃ¢ncias do poder pÃºblico responsÃ¡veis por buscar soluÃ§Ãµes para as comunidades'},
+    {codigo: 'EF04GE01', descricao: 'Selecionar e construir argumentos sobre a contribuiÃ§Ã£o dos grupos sociais no processo de produÃ§Ã£o'},
+    {codigo: 'EF05GE01', descricao: 'Descrever e analisar dinÃ¢micas populacionais na UF em que vive'},
+    {codigo: 'EF06GE01', descricao: 'Comparar modificaÃ§Ãµes das paisagens nos lugares de vivÃªncia em diferentes tempos'},
+    {codigo: 'EF06GE11', descricao: 'Analisar distintas interaÃ§Ãµes das sociedades com a natureza a partir do desenvolvimento tÃ©cnico'},
+    {codigo: 'EF07GE01', descricao: 'Avaliar, por meio de exemplos, a importÃ¢ncia do trabalho na formaÃ§Ã£o de paisagens'},
+    {codigo: 'EF08GE01', descricao: 'Descrever as rotas de dispersÃ£o da espÃ©cie humana pelo planeta'},
+    {codigo: 'EF09GE01', descricao: 'Analisar criticamente de que forma a hegemonia europeia foi exercida nos diferentes territÃ³rios colonizados'},
+    {codigo: 'EF09GE14', descricao: 'Elaborar e interpretar grÃ¡ficos de barras e de setores, mapas temÃ¡ticos e esquemÃ¡ticos'},
   ],
   'Arte': [
     {codigo: 'EF15AR01', descricao: 'Identificar e apreciar formas distintas das artes visuais presentes no cotidiano'},
-    {codigo: 'EF15AR02', descricao: 'Explorar e praticar a produção artística em artes visuais considerando diferentes materiais'},
-    {codigo: 'EF15AR14', descricao: 'Perceber e explorar os elementos constitutivos da música como ritmo, duração, altura e timbre'},
+    {codigo: 'EF15AR02', descricao: 'Explorar e praticar a produÃ§Ã£o artÃ­stica em artes visuais considerando diferentes materiais'},
+    {codigo: 'EF15AR14', descricao: 'Perceber e explorar os elementos constitutivos da mÃºsica como ritmo, duraÃ§Ã£o, altura e timbre'},
     {codigo: 'EF15AR20', descricao: 'Explorar e fruir teatralidades na vida cotidiana e nas diversas culturas'},
-    {codigo: 'EF15AR22', descricao: 'Explorar possibilidades expressivas dos movimentos cotidianos e dos elementos constitutivos da dança'},
-    {codigo: 'EF69AR01', descricao: 'Pesquisar, desenvolver e experienciar investigações sobre diferentes linguagens artísticas'},
-    {codigo: 'EF69AR25', descricao: 'Criar e improvisar movimentos de dança como prática de integração e expressão'},
-    {codigo: 'EF69AR32', descricao: 'Analisar e explorar, em projetos temáticos, as relações entre as artes visuais e as demais áreas do conhecimento'},
+    {codigo: 'EF15AR22', descricao: 'Explorar possibilidades expressivas dos movimentos cotidianos e dos elementos constitutivos da danÃ§a'},
+    {codigo: 'EF69AR01', descricao: 'Pesquisar, desenvolver e experienciar investigaÃ§Ãµes sobre diferentes linguagens artÃ­sticas'},
+    {codigo: 'EF69AR25', descricao: 'Criar e improvisar movimentos de danÃ§a como prÃ¡tica de integraÃ§Ã£o e expressÃ£o'},
+    {codigo: 'EF69AR32', descricao: 'Analisar e explorar, em projetos temÃ¡ticos, as relaÃ§Ãµes entre as artes visuais e as demais Ã¡reas do conhecimento'},
   ],
-  'Educação Física': [
-    {codigo: 'EF12EF01', descricao: 'Experimentar e fruir variações de habilidades motoras básicas como correr, saltar e arremessar'},
+  'EducaÃ§Ã£o FÃ­sica': [
+    {codigo: 'EF12EF01', descricao: 'Experimentar e fruir variaÃ§Ãµes de habilidades motoras bÃ¡sicas como correr, saltar e arremessar'},
     {codigo: 'EF35EF01', descricao: 'Experimentar e fruir brincadeiras e jogos da cultura popular, identificando a diversidade cultural'},
-    {codigo: 'EF35EF07', descricao: 'Experimentar e fruir elementos básicos das ginásticas de condicionamento físico'},
-    {codigo: 'EF35EF12', descricao: 'Experimentar e fruir, com controle e adequação às condições da ação motora, habilidades técnicas'},
-    {codigo: 'EF69EF01', descricao: 'Experimentar e fruir esportes de marca, precisão, campo e taco, rede/divisória e invasão'},
+    {codigo: 'EF35EF07', descricao: 'Experimentar e fruir elementos bÃ¡sicos das ginÃ¡sticas de condicionamento fÃ­sico'},
+    {codigo: 'EF35EF12', descricao: 'Experimentar e fruir, com controle e adequaÃ§Ã£o Ã s condiÃ§Ãµes da aÃ§Ã£o motora, habilidades tÃ©cnicas'},
+    {codigo: 'EF69EF01', descricao: 'Experimentar e fruir esportes de marca, precisÃ£o, campo e taco, rede/divisÃ³ria e invasÃ£o'},
     {codigo: 'EF69EF10', descricao: 'Experimentar e fruir lutas do Brasil e do mundo, identificando marcas e contextos de origem'},
-    {codigo: 'EF69EF14', descricao: 'Experimentar e fruir diferentes danças do contexto comunitário e regional'},
+    {codigo: 'EF69EF14', descricao: 'Experimentar e fruir diferentes danÃ§as do contexto comunitÃ¡rio e regional'},
   ],
   'Ensino Religioso': [
-    {codigo: 'EF01ER01', descricao: 'Identificar e acolher as semelhanças e diferenças nas formas que as pessoas se identificam culturalmente'},
-    {codigo: 'EF02ER01', descricao: 'Identificar as histórias sagradas e seus personagens em diferentes tradições religiosas'},
-    {codigo: 'EF35ER01', descricao: 'Reconhecer e valorizar a diversidade de práticas religiosas no contexto escolar e comunitário'},
-    {codigo: 'EF69ER01', descricao: 'Reconhecer e respeitar a diversidade de crenças, valores e expressões religiosas como parte da identidade cultural humana'},
-    {codigo: 'EF69ER09', descricao: 'Discutir como as tradições religiosas se relacionam com práticas de cuidado com a natureza'},
+    {codigo: 'EF01ER01', descricao: 'Identificar e acolher as semelhanÃ§as e diferenÃ§as nas formas que as pessoas se identificam culturalmente'},
+    {codigo: 'EF02ER01', descricao: 'Identificar as histÃ³rias sagradas e seus personagens em diferentes tradiÃ§Ãµes religiosas'},
+    {codigo: 'EF35ER01', descricao: 'Reconhecer e valorizar a diversidade de prÃ¡ticas religiosas no contexto escolar e comunitÃ¡rio'},
+    {codigo: 'EF69ER01', descricao: 'Reconhecer e respeitar a diversidade de crenÃ§as, valores e expressÃµes religiosas como parte da identidade cultural humana'},
+    {codigo: 'EF69ER09', descricao: 'Discutir como as tradiÃ§Ãµes religiosas se relacionam com prÃ¡ticas de cuidado com a natureza'},
   ],
-  'Inglês': [
-    {codigo: 'EF06LI01', descricao: 'Identificar o contexto de uso de palavras e expressões de língua inglesa presentes no cotidiano'},
-    {codigo: 'EF06LI14', descricao: 'Localizar informações específicas em textos curtos escritos em língua inglesa'},
-    {codigo: 'EF07LI01', descricao: 'Usar língua inglesa para interagir e compartilhar informações, experiências e sentimentos'},
-    {codigo: 'EF07LI15', descricao: 'Identificar e reproduzir, em meio digital ou impresso, palavras e expressões-chave de um texto'},
-    {codigo: 'EF08LI01', descricao: 'Usar recursos de língua inglesa para formular e responder perguntas em situações do cotidiano'},
-    {codigo: 'EF08LI14', descricao: 'Produzir textos em língua inglesa sobre situações cotidianas'},
-    {codigo: 'EF09LI01', descricao: 'Expressar-se em língua inglesa sobre temas do mundo contemporâneo usando vocabulário adequado'},
-    {codigo: 'EF09LI16', descricao: 'Produzir textos de diferentes gêneros sobre temas familiares em língua inglesa'},
+  'InglÃªs': [
+    {codigo: 'EF06LI01', descricao: 'Identificar o contexto de uso de palavras e expressÃµes de lÃ­ngua inglesa presentes no cotidiano'},
+    {codigo: 'EF06LI14', descricao: 'Localizar informaÃ§Ãµes especÃ­ficas em textos curtos escritos em lÃ­ngua inglesa'},
+    {codigo: 'EF07LI01', descricao: 'Usar lÃ­ngua inglesa para interagir e compartilhar informaÃ§Ãµes, experiÃªncias e sentimentos'},
+    {codigo: 'EF07LI15', descricao: 'Identificar e reproduzir, em meio digital ou impresso, palavras e expressÃµes-chave de um texto'},
+    {codigo: 'EF08LI01', descricao: 'Usar recursos de lÃ­ngua inglesa para formular e responder perguntas em situaÃ§Ãµes do cotidiano'},
+    {codigo: 'EF08LI14', descricao: 'Produzir textos em lÃ­ngua inglesa sobre situaÃ§Ãµes cotidianas'},
+    {codigo: 'EF09LI01', descricao: 'Expressar-se em lÃ­ngua inglesa sobre temas do mundo contemporÃ¢neo usando vocabulÃ¡rio adequado'},
+    {codigo: 'EF09LI16', descricao: 'Produzir textos de diferentes gÃªneros sobre temas familiares em lÃ­ngua inglesa'},
   ],
 }
 const CONTEUDOS_PROGRAMATICOS: Record<string, Record<string, Record<string, string[]>>> = {
-  'Matemática': {
-    '1º Ano': {
-      '1': ['Números naturais de 0 a 9: leitura, escrita e quantidade','Sequência numérica crescente e decrescente','Figuras geométricas planas: círculo, triângulo, quadrado e retângulo','Noções de espaço: dentro/fora, em cima/embaixo, frente/atrás','Contagem e comparação de quantidades concretas'],
-      '2': ['Números de 0 a 19: dezena e unidade','Adição sem reagrupamento com apoio concreto','Subtração como retirada com apoio concreto','Medidas não padronizadas: comprimento e massa','Sequências com padrões simples'],
-      '3': ['Números de 0 a 99: dezenas e unidades','Adição com agrupamento (básico)','Introdução à multiplicação como adição repetida','Figuras geométricas espaciais: cubo, esfera, cilindro','Gráficos de barras e pictogramas simples'],
-      '4': ['Sistema monetário brasileiro: cédulas e moedas','Noções de tempo: calendário, dias da semana, meses','Revisão: números até 99, adição e subtração','Resolução de problemas do cotidiano','Organização e leitura de tabelas simples'],
+  'MatemÃ¡tica': {
+    '1Âº Ano': {
+      '1': ['NÃºmeros naturais de 0 a 9: leitura, escrita e quantidade','SequÃªncia numÃ©rica crescente e decrescente','Figuras geomÃ©tricas planas: cÃ­rculo, triÃ¢ngulo, quadrado e retÃ¢ngulo','NoÃ§Ãµes de espaÃ§o: dentro/fora, em cima/embaixo, frente/atrÃ¡s','Contagem e comparaÃ§Ã£o de quantidades concretas'],
+      '2': ['NÃºmeros de 0 a 19: dezena e unidade','AdiÃ§Ã£o sem reagrupamento com apoio concreto','SubtraÃ§Ã£o como retirada com apoio concreto','Medidas nÃ£o padronizadas: comprimento e massa','SequÃªncias com padrÃµes simples'],
+      '3': ['NÃºmeros de 0 a 99: dezenas e unidades','AdiÃ§Ã£o com agrupamento (bÃ¡sico)','IntroduÃ§Ã£o Ã  multiplicaÃ§Ã£o como adiÃ§Ã£o repetida','Figuras geomÃ©tricas espaciais: cubo, esfera, cilindro','GrÃ¡ficos de barras e pictogramas simples'],
+      '4': ['Sistema monetÃ¡rio brasileiro: cÃ©dulas e moedas','NoÃ§Ãµes de tempo: calendÃ¡rio, dias da semana, meses','RevisÃ£o: nÃºmeros atÃ© 99, adiÃ§Ã£o e subtraÃ§Ã£o','ResoluÃ§Ã£o de problemas do cotidiano','OrganizaÃ§Ã£o e leitura de tabelas simples'],
     },
-    '2º Ano': {
-      '1': ['Números de 0 a 100: leitura, escrita e comparação','Adição com reagrupamento (duas parcelas)','Subtração com reagrupamento','Agrupamentos e trocas na base 10','Sequências numéricas com critérios variados'],
-      '2': ['Números até 1000: centenas, dezenas, unidades','Multiplicação: fatos básicos de 2, 3, 4 e 5','Divisão exata como repartição igualitária','Frações: metade, um terço e um quarto','Medidas de comprimento: metro e centímetro'],
-      '3': ['Tabuadas de 2 a 5: construção e memorização','Problemas com as quatro operações','Medidas de massa: quilograma e grama','Medidas de capacidade: litro e meio litro','Figuras geométricas: lados, vértices e ângulos'],
-      '4': ['Resolução de problemas de múltiplas etapas','Sistema monetário: cálculo de troco e preços','Leitura e construção de gráficos de barras','Revisão geral das quatro operações','Noção de tempo: horas inteiras e meias horas'],
+    '2Âº Ano': {
+      '1': ['NÃºmeros de 0 a 100: leitura, escrita e comparaÃ§Ã£o','AdiÃ§Ã£o com reagrupamento (duas parcelas)','SubtraÃ§Ã£o com reagrupamento','Agrupamentos e trocas na base 10','SequÃªncias numÃ©ricas com critÃ©rios variados'],
+      '2': ['NÃºmeros atÃ© 1000: centenas, dezenas, unidades','MultiplicaÃ§Ã£o: fatos bÃ¡sicos de 2, 3, 4 e 5','DivisÃ£o exata como repartiÃ§Ã£o igualitÃ¡ria','FraÃ§Ãµes: metade, um terÃ§o e um quarto','Medidas de comprimento: metro e centÃ­metro'],
+      '3': ['Tabuadas de 2 a 5: construÃ§Ã£o e memorizaÃ§Ã£o','Problemas com as quatro operaÃ§Ãµes','Medidas de massa: quilograma e grama','Medidas de capacidade: litro e meio litro','Figuras geomÃ©tricas: lados, vÃ©rtices e Ã¢ngulos'],
+      '4': ['ResoluÃ§Ã£o de problemas de mÃºltiplas etapas','Sistema monetÃ¡rio: cÃ¡lculo de troco e preÃ§os','Leitura e construÃ§Ã£o de grÃ¡ficos de barras','RevisÃ£o geral das quatro operaÃ§Ãµes','NoÃ§Ã£o de tempo: horas inteiras e meias horas'],
     },
-    '3º Ano': {
-      '1': ['Números até 10.000: leitura, escrita e ordenação','Adição e subtração com números de até 4 dígitos','Multiplicação por um dígito com reagrupamento','Tabuadas de 6 a 9: construção e uso','Propriedades da adição: comutativa e associativa'],
-      '2': ['Divisão exata com divisor de um dígito','Frações: numerador e denominador, representação gráfica','Ângulos: reto, obtuso e agudo','Perímetro de figuras poligonais','Resolução de problemas com multiplicação e divisão'],
-      '3': ['Números decimais: décimos e centésimos','Área de figuras planas: noção e cálculo informal','Probabilidade: certeza, possibilidade e impossibilidade','Medidas de tempo: horas, minutos e segundos','Problemas com dinheiro e medidas'],
-      '4': ['Revisão das quatro operações com números maiores','Problemas de múltiplas etapas','Simetria: eixos de simetria em figuras planas','Leitura e construção de gráficos e tabelas','Preparação para o 4º ano'],
+    '3Âº Ano': {
+      '1': ['NÃºmeros atÃ© 10.000: leitura, escrita e ordenaÃ§Ã£o','AdiÃ§Ã£o e subtraÃ§Ã£o com nÃºmeros de atÃ© 4 dÃ­gitos','MultiplicaÃ§Ã£o por um dÃ­gito com reagrupamento','Tabuadas de 6 a 9: construÃ§Ã£o e uso','Propriedades da adiÃ§Ã£o: comutativa e associativa'],
+      '2': ['DivisÃ£o exata com divisor de um dÃ­gito','FraÃ§Ãµes: numerador e denominador, representaÃ§Ã£o grÃ¡fica','Ãngulos: reto, obtuso e agudo','PerÃ­metro de figuras poligonais','ResoluÃ§Ã£o de problemas com multiplicaÃ§Ã£o e divisÃ£o'],
+      '3': ['NÃºmeros decimais: dÃ©cimos e centÃ©simos','Ãrea de figuras planas: noÃ§Ã£o e cÃ¡lculo informal','Probabilidade: certeza, possibilidade e impossibilidade','Medidas de tempo: horas, minutos e segundos','Problemas com dinheiro e medidas'],
+      '4': ['RevisÃ£o das quatro operaÃ§Ãµes com nÃºmeros maiores','Problemas de mÃºltiplas etapas','Simetria: eixos de simetria em figuras planas','Leitura e construÃ§Ã£o de grÃ¡ficos e tabelas','PreparaÃ§Ã£o para o 4Âº ano'],
     },
-    '4º Ano': {
-      '1': ['Números até 1.000.000: leitura, escrita e valor posicional','Números romanos: leitura e escrita','Multiplicação por dois dígitos: algoritmo convencional','MMC: noção básica e aplicações','Expressões numéricas com as quatro operações'],
-      '2': ['Divisão por dois dígitos: algoritmo convencional','Frações equivalentes e simplificação de frações','Números decimais: adição e subtração','MDC: noção básica e aplicações','Resolução de problemas com frações e decimais'],
-      '3': ['Porcentagem: noção básica (25%, 50%, 75%, 100%)','Ângulos: medição com transferidor','Transformações geométricas: reflexão e translação','Números decimais: multiplicação por 10, 100 e 1000','Estimativas e arredondamentos'],
-      '4': ['Área e perímetro de retângulos e quadrados','Estatística: média aritmética básica','Gráficos de setores: interpretação','Revisão geral do 4º ano','Resolução de problemas desafiadores'],
+    '4Âº Ano': {
+      '1': ['NÃºmeros atÃ© 1.000.000: leitura, escrita e valor posicional','NÃºmeros romanos: leitura e escrita','MultiplicaÃ§Ã£o por dois dÃ­gitos: algoritmo convencional','MMC: noÃ§Ã£o bÃ¡sica e aplicaÃ§Ãµes','ExpressÃµes numÃ©ricas com as quatro operaÃ§Ãµes'],
+      '2': ['DivisÃ£o por dois dÃ­gitos: algoritmo convencional','FraÃ§Ãµes equivalentes e simplificaÃ§Ã£o de fraÃ§Ãµes','NÃºmeros decimais: adiÃ§Ã£o e subtraÃ§Ã£o','MDC: noÃ§Ã£o bÃ¡sica e aplicaÃ§Ãµes','ResoluÃ§Ã£o de problemas com fraÃ§Ãµes e decimais'],
+      '3': ['Porcentagem: noÃ§Ã£o bÃ¡sica (25%, 50%, 75%, 100%)','Ãngulos: mediÃ§Ã£o com transferidor','TransformaÃ§Ãµes geomÃ©tricas: reflexÃ£o e translaÃ§Ã£o','NÃºmeros decimais: multiplicaÃ§Ã£o por 10, 100 e 1000','Estimativas e arredondamentos'],
+      '4': ['Ãrea e perÃ­metro de retÃ¢ngulos e quadrados','EstatÃ­stica: mÃ©dia aritmÃ©tica bÃ¡sica','GrÃ¡ficos de setores: interpretaÃ§Ã£o','RevisÃ£o geral do 4Âº ano','ResoluÃ§Ã£o de problemas desafiadores'],
     },
-    '5º Ano': {
-      '1': ['Números naturais: operações com grandes números','MMC e MDC: cálculo e aplicações','Potenciação: base e expoente','Números racionais: representação fracionária e decimal','Comparação e ordenação de frações'],
-      '2': ['Operações com números decimais: as quatro operações','Porcentagem: cálculo e problemas contextualizados','Razão e proporção: conceito e aplicações','Regra de três simples','Juros simples: noção básica'],
-      '3': ['Álgebra: noção de equação e incógnita','Geometria: polígonos regulares e irregulares','Volume de cubos e paralelepípedos','Ampliação e redução de figuras planas','Coordenadas cartesianas: localização de pontos'],
-      '4': ['Estatística: média, moda e mediana','Probabilidade: cálculo de probabilidades simples','Revisão geral dos Anos Iniciais','Problemas desafiadores com múltiplos conceitos','Preparação para o 6º ano'],
+    '5Âº Ano': {
+      '1': ['NÃºmeros naturais: operaÃ§Ãµes com grandes nÃºmeros','MMC e MDC: cÃ¡lculo e aplicaÃ§Ãµes','PotenciaÃ§Ã£o: base e expoente','NÃºmeros racionais: representaÃ§Ã£o fracionÃ¡ria e decimal','ComparaÃ§Ã£o e ordenaÃ§Ã£o de fraÃ§Ãµes'],
+      '2': ['OperaÃ§Ãµes com nÃºmeros decimais: as quatro operaÃ§Ãµes','Porcentagem: cÃ¡lculo e problemas contextualizados','RazÃ£o e proporÃ§Ã£o: conceito e aplicaÃ§Ãµes','Regra de trÃªs simples','Juros simples: noÃ§Ã£o bÃ¡sica'],
+      '3': ['Ãlgebra: noÃ§Ã£o de equaÃ§Ã£o e incÃ³gnita','Geometria: polÃ­gonos regulares e irregulares','Volume de cubos e paralelepÃ­pedos','AmpliaÃ§Ã£o e reduÃ§Ã£o de figuras planas','Coordenadas cartesianas: localizaÃ§Ã£o de pontos'],
+      '4': ['EstatÃ­stica: mÃ©dia, moda e mediana','Probabilidade: cÃ¡lculo de probabilidades simples','RevisÃ£o geral dos Anos Iniciais','Problemas desafiadores com mÃºltiplos conceitos','PreparaÃ§Ã£o para o 6Âº ano'],
     },
-    '6º Ano': {
-      '1': ['Números inteiros: representação, comparação e ordenação','Operações com números inteiros: adição e subtração','Divisibilidade: critérios e números primos','Decomposição em fatores primos','MMC e MDC: cálculo e aplicações'],
-      '2': ['Frações: operações de adição, subtração, multiplicação e divisão','Números decimais e porcentagem: aprofundamento','Razão e proporção: proporcionalidade direta e inversa','Regra de três simples e composta','Juros simples: cálculo e problemas'],
-      '3': ['Álgebra: expressões algébricas e equações do 1º grau','Geometria plana: áreas de triângulos e paralelogramos','Estatística: coleta, organização e representação de dados','Probabilidade: espaço amostral e eventos','Construção de diferentes tipos de gráficos'],
-      '4': ['Geometria espacial: prismas e pirâmides','Números racionais: aprofundamento','Revisão e consolidação do 6º ano','Projetos matemáticos com dados do cotidiano','Preparação para o 7º ano'],
+    '6Âº Ano': {
+      '1': ['NÃºmeros inteiros: representaÃ§Ã£o, comparaÃ§Ã£o e ordenaÃ§Ã£o','OperaÃ§Ãµes com nÃºmeros inteiros: adiÃ§Ã£o e subtraÃ§Ã£o','Divisibilidade: critÃ©rios e nÃºmeros primos','DecomposiÃ§Ã£o em fatores primos','MMC e MDC: cÃ¡lculo e aplicaÃ§Ãµes'],
+      '2': ['FraÃ§Ãµes: operaÃ§Ãµes de adiÃ§Ã£o, subtraÃ§Ã£o, multiplicaÃ§Ã£o e divisÃ£o','NÃºmeros decimais e porcentagem: aprofundamento','RazÃ£o e proporÃ§Ã£o: proporcionalidade direta e inversa','Regra de trÃªs simples e composta','Juros simples: cÃ¡lculo e problemas'],
+      '3': ['Ãlgebra: expressÃµes algÃ©bricas e equaÃ§Ãµes do 1Âº grau','Geometria plana: Ã¡reas de triÃ¢ngulos e paralelogramos','EstatÃ­stica: coleta, organizaÃ§Ã£o e representaÃ§Ã£o de dados','Probabilidade: espaÃ§o amostral e eventos','ConstruÃ§Ã£o de diferentes tipos de grÃ¡ficos'],
+      '4': ['Geometria espacial: prismas e pirÃ¢mides','NÃºmeros racionais: aprofundamento','RevisÃ£o e consolidaÃ§Ã£o do 6Âº ano','Projetos matemÃ¡ticos com dados do cotidiano','PreparaÃ§Ã£o para o 7Âº ano'],
     },
-    '7º Ano': {
-      '1': ['Números racionais: operações e propriedades','Equações do 1º grau: resolução e verificação','Proporcionalidade: direta e inversa','Porcentagem: descontos, acréscimos e juros simples','Expressões algébricas: simplificação'],
-      '2': ['Inequações do 1º grau: resolução e representação','Semelhança de triângulos: critérios e aplicações','Geometria analítica: plano cartesiano e coordenadas','Figuras semelhantes: razão de semelhança','Escala: representação e cálculo'],
-      '3': ['Produtos notáveis: quadrado da soma e da diferença','Teorema de Pitágoras: demonstração e aplicações','Trigonometria básica: seno, cosseno e tangente no triângulo retângulo','Polígonos: soma dos ângulos internos','Circunferência e círculo: área e comprimento'],
-      '4': ['Estatística: gráficos e análise de dados','Probabilidade: experimentos aleatórios e frequência relativa','Matemática financeira: revisão e aprofundamento','Revisão geral e consolidação','Preparação para o 8º ano'],
+    '7Âº Ano': {
+      '1': ['NÃºmeros racionais: operaÃ§Ãµes e propriedades','EquaÃ§Ãµes do 1Âº grau: resoluÃ§Ã£o e verificaÃ§Ã£o','Proporcionalidade: direta e inversa','Porcentagem: descontos, acrÃ©scimos e juros simples','ExpressÃµes algÃ©bricas: simplificaÃ§Ã£o'],
+      '2': ['InequaÃ§Ãµes do 1Âº grau: resoluÃ§Ã£o e representaÃ§Ã£o','SemelhanÃ§a de triÃ¢ngulos: critÃ©rios e aplicaÃ§Ãµes','Geometria analÃ­tica: plano cartesiano e coordenadas','Figuras semelhantes: razÃ£o de semelhanÃ§a','Escala: representaÃ§Ã£o e cÃ¡lculo'],
+      '3': ['Produtos notÃ¡veis: quadrado da soma e da diferenÃ§a','Teorema de PitÃ¡goras: demonstraÃ§Ã£o e aplicaÃ§Ãµes','Trigonometria bÃ¡sica: seno, cosseno e tangente no triÃ¢ngulo retÃ¢ngulo','PolÃ­gonos: soma dos Ã¢ngulos internos','CircunferÃªncia e cÃ­rculo: Ã¡rea e comprimento'],
+      '4': ['EstatÃ­stica: grÃ¡ficos e anÃ¡lise de dados','Probabilidade: experimentos aleatÃ³rios e frequÃªncia relativa','MatemÃ¡tica financeira: revisÃ£o e aprofundamento','RevisÃ£o geral e consolidaÃ§Ã£o','PreparaÃ§Ã£o para o 8Âº ano'],
     },
-    '8º Ano': {
-      '1': ['Potências e raízes: propriedades operatórias','Notação científica: representação e operações','Equações do 2º grau: fatoração e fórmula de Bhaskara','Sistemas de equações: métodos de resolução','Polinômios: operações básicas'],
-      '2': ['Geometria plana: polígonos regulares e relações métricas','Teorema de Pitágoras: aprofundamento','Trigonometria: aplicações em situações reais','Círculo e setores circulares: cálculos de área','Problemas com porcentagem e financeiros'],
-      '3': ['Função do 1º grau: representação gráfica e taxa de variação','Função do 2º grau: parábola e vértice','Progressões aritméticas: soma e termo geral','Estatística: medidas de tendência central e dispersão','Probabilidade condicional: noção básica'],
-      '4': ['Geometria espacial: cilindro, cone e esfera','Matemática financeira: juros compostos introdutórios','Revisão geral dos conteúdos do 8º ano','Projetos interdisciplinares com estatística','Preparação para o 9º ano'],
+    '8Âº Ano': {
+      '1': ['PotÃªncias e raÃ­zes: propriedades operatÃ³rias','NotaÃ§Ã£o cientÃ­fica: representaÃ§Ã£o e operaÃ§Ãµes','EquaÃ§Ãµes do 2Âº grau: fatoraÃ§Ã£o e fÃ³rmula de Bhaskara','Sistemas de equaÃ§Ãµes: mÃ©todos de resoluÃ§Ã£o','PolinÃ´mios: operaÃ§Ãµes bÃ¡sicas'],
+      '2': ['Geometria plana: polÃ­gonos regulares e relaÃ§Ãµes mÃ©tricas','Teorema de PitÃ¡goras: aprofundamento','Trigonometria: aplicaÃ§Ãµes em situaÃ§Ãµes reais','CÃ­rculo e setores circulares: cÃ¡lculos de Ã¡rea','Problemas com porcentagem e financeiros'],
+      '3': ['FunÃ§Ã£o do 1Âº grau: representaÃ§Ã£o grÃ¡fica e taxa de variaÃ§Ã£o','FunÃ§Ã£o do 2Âº grau: parÃ¡bola e vÃ©rtice','ProgressÃµes aritmÃ©ticas: soma e termo geral','EstatÃ­stica: medidas de tendÃªncia central e dispersÃ£o','Probabilidade condicional: noÃ§Ã£o bÃ¡sica'],
+      '4': ['Geometria espacial: cilindro, cone e esfera','MatemÃ¡tica financeira: juros compostos introdutÃ³rios','RevisÃ£o geral dos conteÃºdos do 8Âº ano','Projetos interdisciplinares com estatÃ­stica','PreparaÃ§Ã£o para o 9Âº ano'],
     },
-    '9º Ano': {
-      '1': ['Conjuntos numéricos: naturais, inteiros, racionais, irracionais e reais','Radiciação e racionalização de denominadores','Progressões geométricas: soma e produto','Análise combinatória: princípio fundamental da contagem','Combinações e permutações'],
-      '2': ['Probabilidade com análise combinatória','Estatística: distribuição de frequências e histogramas','Funções: conceito, domínio, contradomínio e imagem','Função logarítmica e exponencial: introdução','Matrizes: operações básicas'],
-      '3': ['Geometria analítica: equação da reta e da circunferência','Trigonometria no ciclo trigonométrico','Geometria espacial: poliedros de Platão','Transformações geométricas: rotação e homotetia','Problemas de otimização com funções'],
-      '4': ['Revisão geral do Ensino Fundamental','Matemática financeira: empréstimos e financiamentos','Projetos de modelagem matemática','Preparação para o Ensino Médio','Avaliação diagnóstica e recuperação'],
-    },
-  },
-  'Língua Portuguesa': {
-    '1º Ano': {
-      '1': ['Sistema de escrita alfabética: letra, sílaba e palavra','Vogais e consoantes: identificação e sons','Leitura de palavras com sílabas simples','Escrita do nome próprio e dos colegas','Consciência fonológica: rimas e aliterações'],
-      '2': ['Sílabas complexas: CVC, CCV e VCV','Leitura de frases e pequenos textos','Produção escrita de palavras e frases','Letra maiúscula: início de frase e nomes próprios','Calendário e datas: escrita e leitura'],
-      '3': ['Texto narrativo: personagens, lugar e tempo','Leitura e interpretação de pequenos textos','Produção de frases com sentido completo','Pontuação: ponto final e ponto de interrogação','Ortografia: sons parecidos (M/N, B/P)'],
-      '4': ['Produção de texto: história com começo, meio e fim','Revisão do alfabeto: ordem alfabética','Leitura de diferentes gêneros: poema, lista, receita','Separação de sílabas: divisão silábica','Escuta e fala em diferentes contextos'],
-    },
-    '2º Ano': {
-      '1': ['Consolidação da alfabetização: leitura e escrita autônomas','Gêneros textuais: conto, fábula e poema','Substantivo: conceito e classificação (próprio e comum)','Adjetivo: caracterização de seres e objetos','Ortografia: uso do H, LH, NH'],
-      '2': ['Verbo: noção de ação no presente, passado e futuro','Produção de texto narrativo com estrutura completa','Parágrafo: organização de ideias','Pontuação: vírgula em enumerações','Ortografia: S/SS, C/Ç, G/GU'],
-      '3': ['Gêneros textuais: notícia e texto informativo','Interpretação de texto: ideias principais e secundárias','Pronome pessoal: conceito e uso','Artigo: definido e indefinido','Ortografia: X/CH, Z/S'],
-      '4': ['Produção de texto: reescrita e revisão','Gêneros textuais: carta e bilhete','Revisão ortográfica e gramatical','Leitura expressiva: entonação e fluência','Projeto de leitura: clube do livro da turma'],
-    },
-    '3º Ano': {
-      '1': ['Gêneros textuais: conto maravilhoso, lenda e mito','Substantivo: gênero, número e grau','Verbo: conjugação no presente, pretérito e futuro','Adjetivo: concordância com o substantivo','Ortografia: uso do RR, SS, SC, XC'],
-      '2': ['Interpretação de texto: inferências e reflexões','Produção de texto descritivo e narrativo','Pronomes: pessoais e demonstrativos','Advérbio: noção básica de tempo, lugar e modo','Pontuação: exclamação, dois pontos e travessão'],
-      '3': ['Poesia: rima, ritmo e recursos sonoros','Produção poética: poema de livre criação','Preposição: ligação entre palavras','Conjunção: e, mas, porém, porque','Ortografia: palavras com prefixo e sufixo'],
-      '4': ['Revisão gramatical e ortográfica','Produção de texto: história em quadrinhos','Gêneros textuais: anúncio publicitário e receita culinária','Leitura de gêneros digitais','Projeto de escrita criativa coletiva'],
-    },
-    '4º Ano': {
-      '1': ['Gêneros textuais: reportagem, entrevista e artigo de opinião','Substantivos compostos e derivados','Verbo: modos indicativo, subjuntivo e imperativo','Tempos verbais: passado composto e futuro do pretérito','Ortografia: uso de mal/mau, mas/mais, há/a'],
-      '2': ['Artigos, pronomes e numerais: uso e concordância','Produção de texto argumentativo: tese e argumentos','Interpretação de texto: ironias e figuras de linguagem','Período simples e composto: noção básica','Ortografia: emprego do hífen'],
-      '3': ['Preposições e conjunções: coordenativas e subordinativas','Orações coordenadas: sindéticas e assindéticas','Crase: uso básico (a + a)','Produção de texto expositivo','Revisão ortográfica: acento gráfico'],
-      '4': ['Revisão gramatical completa dos Anos Iniciais','Produção de diferentes gêneros textuais','Leitura crítica: identificação de intencionalidade','Projeto de leitura: divulgação literária','Preparação para o 5º ano'],
-    },
-    '5º Ano': {
-      '1': ['Morfologia: classes de palavras — revisão e aprofundamento','Verbos: modo indicativo, subjuntivo e conjugações irregulares','Análise sintática: sujeito e predicado','Complemento verbal: objeto direto e indireto','Ortografia: uso de porque, por que, porquê, por quê'],
-      '2': ['Concordância verbal: sujeito composto e inversão','Concordância nominal: adjetivo e substantivo','Regência verbal e nominal: básico','Produção de texto dissertativo-argumentativo','Crase: ampliação dos casos de uso'],
-      '3': ['Figuras de linguagem: metáfora, comparação, personificação','Literatura brasileira: introdução a autores e gêneros','Produção de crônica e texto literário','Análise sintática: adjunto adnominal e adverbial','Pontuação: ponto e vírgula, parênteses, aspas'],
-      '4': ['Revisão gramatical completa para o Ensino Fundamental II','Redação: gêneros cobrados em avaliações externas','Projeto de leitura e produção de texto','Análise de textos multimodais','Preparação para o 6º ano'],
-    },
-    '6º Ano': {
-      '1': ['Variações linguísticas: regional, social e histórica','Gêneros textuais: conto contemporâneo e romance juvenil','Morfologia: revisão e aprofundamento de todas as classes','Sintaxe: análise de períodos simples','Fonologia: dígrafo, encontro consonantal e vocálico'],
-      '2': ['Análise sintática do período composto','Texto argumentativo: tipos de argumento','Figuras de linguagem: antítese, eufemismo, hipérbole','Discurso direto e indireto','Leitura de textos jornalísticos'],
-      '3': ['Literatura brasileira: regionalismo e modernismo','Produção de textos: relatório, ata e resumo','Ortografia avançada e revisão textual','Gêneros digitais: blog, e-mail formal e infográfico','Análise de propaganda e publicidade'],
-      '4': ['Projeto de leitura e análise literária','Revisão de todos os conteúdos do 6º ano','Avaliação diagnóstica e recuperação','Produção final de portfólio literário','Preparação para o 7º ano'],
-    },
-    '7º Ano': {
-      '1': ['Literatura: trovadorismo e humanismo','Morfossintaxe: coordenação e subordinação','Orações subordinadas substantivas','Semântica: sinonímia, antonímia e homonímia','Produção de texto: editorial e carta do leitor'],
-      '2': ['Orações subordinadas adjetivas e adverbiais','Figuras de linguagem: ironia, metonímia, sinestesia','Período composto por coordenação: revisão','Interpretação de texto literário e não literário','Redação: texto expositivo e argumentativo'],
-      '3': ['Literatura: classicismo — Camões e Quinhentismo','Morfossintaxe: aposto e vocativo','Análise sintática completa do período composto','Leitura crítica de textos multimodais','Produção de texto: resenha e comentário'],
-      '4': ['Revisão completa dos conteúdos do 7º ano','Projetos interdisciplinares de leitura e escrita','Avaliação diagnóstica e recuperação','Preparação para o SAEP-PR e avaliações externas','Portfólio de produções textuais'],
-    },
-    '8º Ano': {
-      '1': ['Literatura: Barroco e Arcadismo','Morfossintaxe avançada: período composto complexo','Concordância verbal e nominal: casos especiais','Regência verbal e nominal com crase','Produção: artigo de opinião e ensaio'],
-      '2': ['Literatura: Romantismo brasileiro (prosa e poesia)','Colocação pronominal: próclise, ênclise e mesóclise','Figuras de construção: pleonasmo, anacoluto, elipse','Produção de texto: relatório de pesquisa','Interpretação de texto: intertextualidade'],
-      '3': ['Literatura: Realismo e Naturalismo','Pontuação avançada: usos de vírgula e ponto e vírgula','Análise linguística: adequação textual e coesão','Gêneros do discurso: debate, seminário e apresentação oral','Produção de texto persuasivo e publicitário'],
-      '4': ['Revisão completa dos conteúdos do 8º ano','Projetos de leitura e pesquisa literária','Avaliação diagnóstica e recuperação','Preparação para provas externas (SAEP, ENEM)','Produção de redação dissertativo-argumentativa'],
-    },
-    '9º Ano': {
-      '1': ['Literatura: Parnasianismo, Simbolismo e Pré-Modernismo','Sintaxe: período composto e análise completa','Semântica: polissemia, ambiguidade e denotação/conotação','Produção: redação estilo ENEM','Leitura crítica: argumentação e falácias'],
-      '2': ['Literatura: Modernismo brasileiro — 1ª e 2ª fases','Variações linguísticas: norma culta e linguagem informal','Análise de gêneros jornalísticos complexos','Produção de texto: manifesto e carta aberta','Intertextualidade e paródia na literatura'],
-      '3': ['Literatura: Modernismo — 3ª fase e Pós-Modernismo','Revisão de gramática: morfossintaxe completa','Produção de texto dissertativo com proposta de intervenção','Análise de discursos midiáticos e digitais','Projeto de leitura: romance brasileiro contemporâneo'],
-      '4': ['Revisão geral do Ensino Fundamental','Redação ENEM: estrutura, repertório e proposta de intervenção','Preparação para o Ensino Médio','Avaliação diagnóstica e consolidação','Portfólio final de produções textuais'],
+    '9Âº Ano': {
+      '1': ['Conjuntos numÃ©ricos: naturais, inteiros, racionais, irracionais e reais','RadiciaÃ§Ã£o e racionalizaÃ§Ã£o de denominadores','ProgressÃµes geomÃ©tricas: soma e produto','AnÃ¡lise combinatÃ³ria: princÃ­pio fundamental da contagem','CombinaÃ§Ãµes e permutaÃ§Ãµes'],
+      '2': ['Probabilidade com anÃ¡lise combinatÃ³ria','EstatÃ­stica: distribuiÃ§Ã£o de frequÃªncias e histogramas','FunÃ§Ãµes: conceito, domÃ­nio, contradomÃ­nio e imagem','FunÃ§Ã£o logarÃ­tmica e exponencial: introduÃ§Ã£o','Matrizes: operaÃ§Ãµes bÃ¡sicas'],
+      '3': ['Geometria analÃ­tica: equaÃ§Ã£o da reta e da circunferÃªncia','Trigonometria no ciclo trigonomÃ©trico','Geometria espacial: poliedros de PlatÃ£o','TransformaÃ§Ãµes geomÃ©tricas: rotaÃ§Ã£o e homotetia','Problemas de otimizaÃ§Ã£o com funÃ§Ãµes'],
+      '4': ['RevisÃ£o geral do Ensino Fundamental','MatemÃ¡tica financeira: emprÃ©stimos e financiamentos','Projetos de modelagem matemÃ¡tica','PreparaÃ§Ã£o para o Ensino MÃ©dio','AvaliaÃ§Ã£o diagnÃ³stica e recuperaÃ§Ã£o'],
     },
   },
-  'Ciências': {
-    '1º Ano': {
-      '1': ['Seres vivos e não vivos: características e diferenças','Corpo humano: partes externas e cuidados com a higiene','Animais: características e habitats','Plantas: partes e importância para a vida','Sentidos humanos: visão, audição, tato, olfato e paladar'],
-      '2': ['Alimentação saudável: grupos alimentares','Água na natureza: importância e estados físicos','Solo: tipos e importância','Fenômenos naturais: chuva, vento e arco-íris','Dia e noite: movimentos da Terra'],
-      '3': ['Materiais e suas propriedades: dureza, flexibilidade e textura','Uso responsável dos materiais: reutilização e reciclagem','Estações do ano: características no Paraná','Luz e sombra: comportamento da luz','Som: fontes sonoras no cotidiano'],
-      '4': ['Preservação do meio ambiente: lixo e reciclagem','Animais e plantas do Paraná','Revisão: seres vivos e cuidados com o ambiente','O céu: Sol, Lua, estrelas e planetas','Projeto ambiental: horta escolar'],
+  'LÃ­ngua Portuguesa': {
+    '1Âº Ano': {
+      '1': ['Sistema de escrita alfabÃ©tica: letra, sÃ­laba e palavra','Vogais e consoantes: identificaÃ§Ã£o e sons','Leitura de palavras com sÃ­labas simples','Escrita do nome prÃ³prio e dos colegas','ConsciÃªncia fonolÃ³gica: rimas e aliteraÃ§Ãµes'],
+      '2': ['SÃ­labas complexas: CVC, CCV e VCV','Leitura de frases e pequenos textos','ProduÃ§Ã£o escrita de palavras e frases','Letra maiÃºscula: inÃ­cio de frase e nomes prÃ³prios','CalendÃ¡rio e datas: escrita e leitura'],
+      '3': ['Texto narrativo: personagens, lugar e tempo','Leitura e interpretaÃ§Ã£o de pequenos textos','ProduÃ§Ã£o de frases com sentido completo','PontuaÃ§Ã£o: ponto final e ponto de interrogaÃ§Ã£o','Ortografia: sons parecidos (M/N, B/P)'],
+      '4': ['ProduÃ§Ã£o de texto: histÃ³ria com comeÃ§o, meio e fim','RevisÃ£o do alfabeto: ordem alfabÃ©tica','Leitura de diferentes gÃªneros: poema, lista, receita','SeparaÃ§Ã£o de sÃ­labas: divisÃ£o silÃ¡bica','Escuta e fala em diferentes contextos'],
     },
-    '2º Ano': {
-      '1': ['Alimentos: origem animal e vegetal','Cadeia alimentar simples: produtores e consumidores','Corpo humano: órgãos dos sentidos e função','Saúde bucal: prevenção de cáries','Plantas medicinais do Paraná'],
-      '2': ['Água: ciclo hidrológico simples','Poluição da água e do ar: causas e consequências','Solos do Paraná: tipos e usos agrícolas','Rochas e minerais: tipos e usos','Fósseis: registro da vida passada'],
-      '3': ['Luz: fontes luminosas e reflexão','Calor: fontes de calor e condução','Som: propagação e fontes sonoras','Magnetismo: ímã e suas propriedades','Eletricidade estática: experimentos simples'],
-      '4': ['Biodiversidade do Paraná: biomas e ecossistemas','Animais vertebrados e invertebrados','Plantas: ciclo de vida e reprodução','Revisão e projeto de ciências ambiental','Feira de Ciências da escola'],
+    '2Âº Ano': {
+      '1': ['ConsolidaÃ§Ã£o da alfabetizaÃ§Ã£o: leitura e escrita autÃ´nomas','GÃªneros textuais: conto, fÃ¡bula e poema','Substantivo: conceito e classificaÃ§Ã£o (prÃ³prio e comum)','Adjetivo: caracterizaÃ§Ã£o de seres e objetos','Ortografia: uso do H, LH, NH'],
+      '2': ['Verbo: noÃ§Ã£o de aÃ§Ã£o no presente, passado e futuro','ProduÃ§Ã£o de texto narrativo com estrutura completa','ParÃ¡grafo: organizaÃ§Ã£o de ideias','PontuaÃ§Ã£o: vÃ­rgula em enumeraÃ§Ãµes','Ortografia: S/SS, C/Ã, G/GU'],
+      '3': ['GÃªneros textuais: notÃ­cia e texto informativo','InterpretaÃ§Ã£o de texto: ideias principais e secundÃ¡rias','Pronome pessoal: conceito e uso','Artigo: definido e indefinido','Ortografia: X/CH, Z/S'],
+      '4': ['ProduÃ§Ã£o de texto: reescrita e revisÃ£o','GÃªneros textuais: carta e bilhete','RevisÃ£o ortogrÃ¡fica e gramatical','Leitura expressiva: entonaÃ§Ã£o e fluÃªncia','Projeto de leitura: clube do livro da turma'],
     },
-    '3º Ano': {
-      '1': ['Matéria e energia: noções básicas','Propriedades dos materiais: condutibilidade e solubilidade','Misturas: homogêneas e heterogêneas','Separação de misturas: filtragem, decantação e evaporação','Água: importância e tratamento básico'],
-      '2': ['Seres vivos: células (introdução)','Reinos dos seres vivos: animal, vegetal, fungi, monera e protista','Cadeia e teia alimentar: decompositores','Fotossíntese: processo e importância','Respiração e nutrição dos seres vivos'],
-      '3': ['Sistema solar: planetas e astros','Movimentos da Terra: rotação e translação','Fases da Lua e marés','Temperatura e clima: diferenças no Paraná','Camadas da Terra: crosta, manto e núcleo'],
-      '4': ['Ecossistemas do Paraná: Floresta Atlântica, Cerrado e Pantanal','Impactos humanos no ambiente','Preservação e sustentabilidade','Revisão geral e projeto de ciências','Preparação para o 4º ano'],
+    '3Âº Ano': {
+      '1': ['GÃªneros textuais: conto maravilhoso, lenda e mito','Substantivo: gÃªnero, nÃºmero e grau','Verbo: conjugaÃ§Ã£o no presente, pretÃ©rito e futuro','Adjetivo: concordÃ¢ncia com o substantivo','Ortografia: uso do RR, SS, SC, XC'],
+      '2': ['InterpretaÃ§Ã£o de texto: inferÃªncias e reflexÃµes','ProduÃ§Ã£o de texto descritivo e narrativo','Pronomes: pessoais e demonstrativos','AdvÃ©rbio: noÃ§Ã£o bÃ¡sica de tempo, lugar e modo','PontuaÃ§Ã£o: exclamaÃ§Ã£o, dois pontos e travessÃ£o'],
+      '3': ['Poesia: rima, ritmo e recursos sonoros','ProduÃ§Ã£o poÃ©tica: poema de livre criaÃ§Ã£o','PreposiÃ§Ã£o: ligaÃ§Ã£o entre palavras','ConjunÃ§Ã£o: e, mas, porÃ©m, porque','Ortografia: palavras com prefixo e sufixo'],
+      '4': ['RevisÃ£o gramatical e ortogrÃ¡fica','ProduÃ§Ã£o de texto: histÃ³ria em quadrinhos','GÃªneros textuais: anÃºncio publicitÃ¡rio e receita culinÃ¡ria','Leitura de gÃªneros digitais','Projeto de escrita criativa coletiva'],
     },
-    '4º Ano': {
-      '1': ['Sistema solar: características dos planetas','Movimentos da Terra e do Sistema Solar','Fases da Lua e estações do ano no Paraná','Energia: formas e transformações','Luz: reflexão, refração e espectro luminoso'],
-      '2': ['Cadeia alimentar: pirâmide ecológica','Ecossistemas brasileiros: Amazônia, Cerrado, Caatinga, Pampa','Fotossíntese e respiração celular','Adaptações dos seres vivos','Preservação da biodiversidade paranaense'],
-      '3': ['Misturas e substâncias: propriedades e separação','Propriedades da água: estados físicos e transições','Ciclo da água: evaporação, condensação e precipitação','Poluição das águas do Paraná: rios e Aquífero Guarani','Solo: formação, composição e conservação'],
-      '4': ['Energia elétrica: geração, transmissão e consumo','Fontes renováveis no Paraná: hidrelétricas e eólica','Preservação ambiental: Agenda 2030 ONU','Revisão e projeto de Ciências','Feira de Ciências: apresentação de projetos'],
+    '4Âº Ano': {
+      '1': ['GÃªneros textuais: reportagem, entrevista e artigo de opiniÃ£o','Substantivos compostos e derivados','Verbo: modos indicativo, subjuntivo e imperativo','Tempos verbais: passado composto e futuro do pretÃ©rito','Ortografia: uso de mal/mau, mas/mais, hÃ¡/a'],
+      '2': ['Artigos, pronomes e numerais: uso e concordÃ¢ncia','ProduÃ§Ã£o de texto argumentativo: tese e argumentos','InterpretaÃ§Ã£o de texto: ironias e figuras de linguagem','PerÃ­odo simples e composto: noÃ§Ã£o bÃ¡sica','Ortografia: emprego do hÃ­fen'],
+      '3': ['PreposiÃ§Ãµes e conjunÃ§Ãµes: coordenativas e subordinativas','OraÃ§Ãµes coordenadas: sindÃ©ticas e assindÃ©ticas','Crase: uso bÃ¡sico (a + a)','ProduÃ§Ã£o de texto expositivo','RevisÃ£o ortogrÃ¡fica: acento grÃ¡fico'],
+      '4': ['RevisÃ£o gramatical completa dos Anos Iniciais','ProduÃ§Ã£o de diferentes gÃªneros textuais','Leitura crÃ­tica: identificaÃ§Ã£o de intencionalidade','Projeto de leitura: divulgaÃ§Ã£o literÃ¡ria','PreparaÃ§Ã£o para o 5Âº ano'],
     },
-    '5º Ano': {
-      '1': ['Sistemas do corpo humano: digestório e respiratório','Saúde e prevenção de doenças: vacinas e saneamento','Microrganismos: bactérias, vírus e fungos','Parasitoses comuns no Paraná: verminoses e malária','Higiene pessoal e coletiva'],
-      '2': ['Sistema nervoso: neurônios e sinapses','Sistema endócrino: hormônios e puberdade','Reprodução humana: noções básicas e saúde','Sistema reprodutor masculino e feminino','Gravidez na adolescência: prevenção e informação'],
-      '3': ['Ecologia: cadeias e teias alimentares complexas','Biomas brasileiros: características e fauna','Impactos ambientais: desmatamento e queimadas','Mudanças climáticas: causas e consequências','Sustentabilidade: consumo consciente'],
-      '4': ['Tecnologia e ciência: inovações recentes','Ciência e sociedade: ética na pesquisa científica','Revisão geral dos conteúdos do 5º ano','Projetos de pesquisa científica','Preparação para o Ensino Fundamental Anos Finais'],
+    '5Âº Ano': {
+      '1': ['Morfologia: classes de palavras â revisÃ£o e aprofundamento','Verbos: modo indicativo, subjuntivo e conjugaÃ§Ãµes irregulares','AnÃ¡lise sintÃ¡tica: sujeito e predicado','Complemento verbal: objeto direto e indireto','Ortografia: uso de porque, por que, porquÃª, por quÃª'],
+      '2': ['ConcordÃ¢ncia verbal: sujeito composto e inversÃ£o','ConcordÃ¢ncia nominal: adjetivo e substantivo','RegÃªncia verbal e nominal: bÃ¡sico','ProduÃ§Ã£o de texto dissertativo-argumentativo','Crase: ampliaÃ§Ã£o dos casos de uso'],
+      '3': ['Figuras de linguagem: metÃ¡fora, comparaÃ§Ã£o, personificaÃ§Ã£o','Literatura brasileira: introduÃ§Ã£o a autores e gÃªneros','ProduÃ§Ã£o de crÃ´nica e texto literÃ¡rio','AnÃ¡lise sintÃ¡tica: adjunto adnominal e adverbial','PontuaÃ§Ã£o: ponto e vÃ­rgula, parÃªnteses, aspas'],
+      '4': ['RevisÃ£o gramatical completa para o Ensino Fundamental II','RedaÃ§Ã£o: gÃªneros cobrados em avaliaÃ§Ãµes externas','Projeto de leitura e produÃ§Ã£o de texto','AnÃ¡lise de textos multimodais','PreparaÃ§Ã£o para o 6Âº ano'],
     },
-    '6º Ano': {
-      '1': ['Universo: formação e estrutura (Big Bang)','Sistema Solar: características e movimentos','Terra: camadas, minerais e rochas','Fenômenos geológicos: vulcanismo e terremotos','Atmosfera: composição e camadas'],
-      '2': ['Matéria: propriedades e estados físicos','Substâncias puras e misturas: classificação','Métodos de separação de misturas','Transformações físicas e químicas','Água: importância, distribuição e ciclo'],
-      '3': ['Células: descoberta, tipos e organelas','Seres vivos: classificação e características dos reinos','Vírus: estrutura e doenças causadas','Bactérias: estrutura, funções e importância','Protistas e fungos: características'],
-      '4': ['Ecologia: relações ecológicas','Desequilíbrios ambientais: extinção e conservação','Sustentabilidade e desenvolvimento','Revisão do 6º ano e projetos','Preparação para o 7º ano'],
+    '6Âº Ano': {
+      '1': ['VariaÃ§Ãµes linguÃ­sticas: regional, social e histÃ³rica','GÃªneros textuais: conto contemporÃ¢neo e romance juvenil','Morfologia: revisÃ£o e aprofundamento de todas as classes','Sintaxe: anÃ¡lise de perÃ­odos simples','Fonologia: dÃ­grafo, encontro consonantal e vocÃ¡lico'],
+      '2': ['AnÃ¡lise sintÃ¡tica do perÃ­odo composto','Texto argumentativo: tipos de argumento','Figuras de linguagem: antÃ­tese, eufemismo, hipÃ©rbole','Discurso direto e indireto','Leitura de textos jornalÃ­sticos'],
+      '3': ['Literatura brasileira: regionalismo e modernismo','ProduÃ§Ã£o de textos: relatÃ³rio, ata e resumo','Ortografia avanÃ§ada e revisÃ£o textual','GÃªneros digitais: blog, e-mail formal e infogrÃ¡fico','AnÃ¡lise de propaganda e publicidade'],
+      '4': ['Projeto de leitura e anÃ¡lise literÃ¡ria','RevisÃ£o de todos os conteÃºdos do 6Âº ano','AvaliaÃ§Ã£o diagnÃ³stica e recuperaÃ§Ã£o','ProduÃ§Ã£o final de portfÃ³lio literÃ¡rio','PreparaÃ§Ã£o para o 7Âº ano'],
     },
-    '7º Ano': {
-      '1': ['Botânica: morfologia e fisiologia das plantas','Classificação das plantas: briófitas, pteridófitas, gimnospermas e angiospermas','Reprodução dos vegetais','Fotossíntese e respiração celular','Plantas do Paraná: biomas e espécies endêmicas'],
-      '2': ['Zoologia: invertebrados — poríferos, cnidários e platelmintos','Moluscos, anelídeos e artrópodes','Equinodermos e outros invertebrados','Parasitoses: esquistossomose, ascaridíase e pediculose','Biodiversidade de invertebrados no Paraná'],
-      '3': ['Zoologia: vertebrados — peixes, anfíbios e répteis','Aves e mamíferos: características e adaptações','Fauna ameaçada do Paraná','Ecossistemas aquáticos do Paraná','Conservação e legislação ambiental'],
-      '4': ['Revisão: seres vivos e classificação','Projetos de educação ambiental','Ciências e tecnologia: biotecnologia','Avaliação diagnóstica e recuperação','Preparação para o 8º ano'],
+    '7Âº Ano': {
+      '1': ['Literatura: trovadorismo e humanismo','Morfossintaxe: coordenaÃ§Ã£o e subordinaÃ§Ã£o','OraÃ§Ãµes subordinadas substantivas','SemÃ¢ntica: sinonÃ­mia, antonÃ­mia e homonÃ­mia','ProduÃ§Ã£o de texto: editorial e carta do leitor'],
+      '2': ['OraÃ§Ãµes subordinadas adjetivas e adverbiais','Figuras de linguagem: ironia, metonÃ­mia, sinestesia','PerÃ­odo composto por coordenaÃ§Ã£o: revisÃ£o','InterpretaÃ§Ã£o de texto literÃ¡rio e nÃ£o literÃ¡rio','RedaÃ§Ã£o: texto expositivo e argumentativo'],
+      '3': ['Literatura: classicismo â CamÃµes e Quinhentismo','Morfossintaxe: aposto e vocativo','AnÃ¡lise sintÃ¡tica completa do perÃ­odo composto','Leitura crÃ­tica de textos multimodais','ProduÃ§Ã£o de texto: resenha e comentÃ¡rio'],
+      '4': ['RevisÃ£o completa dos conteÃºdos do 7Âº ano','Projetos interdisciplinares de leitura e escrita','AvaliaÃ§Ã£o diagnÃ³stica e recuperaÃ§Ã£o','PreparaÃ§Ã£o para o SAEP-PR e avaliaÃ§Ãµes externas','PortfÃ³lio de produÃ§Ãµes textuais'],
     },
-    '8º Ano': {
-      '1': ['Corpo humano: sistemas de sustentação e movimento','Sistema digestório: órgãos, processos e doenças','Sistema respiratório: mecanismos e doenças','Sistema cardiovascular: coração, vasos e sangue','Doenças cardiovasculares: prevenção'],
-      '2': ['Sistema excretor: rins e funções','Sistema nervoso: central e periférico','Sistema endócrino: glândulas e hormônios','Imunidade: sistema imunológico e vacinas','Drogas e saúde: dependência química'],
-      '3': ['Reprodução humana: fecundação e desenvolvimento embrionário','Sexualidade e saúde reprodutiva','Genética: conceitos básicos de Mendel','DNA, genes e hereditariedade','Biotecnologia: transgênicos e clonagem'],
-      '4': ['Química e vida: reações químicas no organismo','Nutrição: macro e micronutrientes','Educação alimentar: análise de rótulos','Revisão completa do 8º ano','Preparação para o 9º ano'],
+    '8Âº Ano': {
+      '1': ['Literatura: Barroco e Arcadismo','Morfossintaxe avanÃ§ada: perÃ­odo composto complexo','ConcordÃ¢ncia verbal e nominal: casos especiais','RegÃªncia verbal e nominal com crase','ProduÃ§Ã£o: artigo de opiniÃ£o e ensaio'],
+      '2': ['Literatura: Romantismo brasileiro (prosa e poesia)','ColocaÃ§Ã£o pronominal: prÃ³clise, Ãªnclise e mesÃ³clise','Figuras de construÃ§Ã£o: pleonasmo, anacoluto, elipse','ProduÃ§Ã£o de texto: relatÃ³rio de pesquisa','InterpretaÃ§Ã£o de texto: intertextualidade'],
+      '3': ['Literatura: Realismo e Naturalismo','PontuaÃ§Ã£o avanÃ§ada: usos de vÃ­rgula e ponto e vÃ­rgula','AnÃ¡lise linguÃ­stica: adequaÃ§Ã£o textual e coesÃ£o','GÃªneros do discurso: debate, seminÃ¡rio e apresentaÃ§Ã£o oral','ProduÃ§Ã£o de texto persuasivo e publicitÃ¡rio'],
+      '4': ['RevisÃ£o completa dos conteÃºdos do 8Âº ano','Projetos de leitura e pesquisa literÃ¡ria','AvaliaÃ§Ã£o diagnÃ³stica e recuperaÃ§Ã£o','PreparaÃ§Ã£o para provas externas (SAEP, ENEM)','ProduÃ§Ã£o de redaÃ§Ã£o dissertativo-argumentativa'],
     },
-    '9º Ano': {
-      '1': ['Química: estrutura atômica e tabela periódica','Ligações químicas: iônica, covalente e metálica','Reações químicas: classificação e balanceamento','Ácidos, bases, sais e óxidos','Reações de oxidação-redução'],
-      '2': ['Física: mecânica — movimento, velocidade e aceleração','Força e Leis de Newton','Energia mecânica: cinética e potencial','Trabalho e potência','Calor: transmissão e dilatação'],
-      '3': ['Eletricidade: cargas elétricas e campo elétrico','Corrente elétrica, resistência e potência','Circuitos elétricos: série e paralelo','Ondas: sonoras, luminosas e eletromagnéticas','Radioatividade: tipos e aplicações'],
-      '4': ['Revisão geral de Ciências do Ensino Fundamental','Ciência, tecnologia e sociedade','Projetos de pesquisa científica','Avaliação diagnóstica e recuperação','Preparação para o Ensino Médio'],
+    '9Âº Ano': {
+      '1': ['Literatura: Parnasianismo, Simbolismo e PrÃ©-Modernismo','Sintaxe: perÃ­odo composto e anÃ¡lise completa','SemÃ¢ntica: polissemia, ambiguidade e denotaÃ§Ã£o/conotaÃ§Ã£o','ProduÃ§Ã£o: redaÃ§Ã£o estilo ENEM','Leitura crÃ­tica: argumentaÃ§Ã£o e falÃ¡cias'],
+      '2': ['Literatura: Modernismo brasileiro â 1Âª e 2Âª fases','VariaÃ§Ãµes linguÃ­sticas: norma culta e linguagem informal','AnÃ¡lise de gÃªneros jornalÃ­sticos complexos','ProduÃ§Ã£o de texto: manifesto e carta aberta','Intertextualidade e parÃ³dia na literatura'],
+      '3': ['Literatura: Modernismo â 3Âª fase e PÃ³s-Modernismo','RevisÃ£o de gramÃ¡tica: morfossintaxe completa','ProduÃ§Ã£o de texto dissertativo com proposta de intervenÃ§Ã£o','AnÃ¡lise de discursos midiÃ¡ticos e digitais','Projeto de leitura: romance brasileiro contemporÃ¢neo'],
+      '4': ['RevisÃ£o geral do Ensino Fundamental','RedaÃ§Ã£o ENEM: estrutura, repertÃ³rio e proposta de intervenÃ§Ã£o','PreparaÃ§Ã£o para o Ensino MÃ©dio','AvaliaÃ§Ã£o diagnÃ³stica e consolidaÃ§Ã£o','PortfÃ³lio final de produÃ§Ãµes textuais'],
     },
   },
-  'História': {
-    '1º Ano': {
-      '1': ['Minha história: família, nome e data de nascimento','Linha do tempo pessoal: bebê, criança, adulto','Moradia e comunidade: onde eu vivo','Rotina diária: manhã, tarde e noite','Datas comemorativas da escola e da família'],
-      '2': ['A escola: história, funcionários e regras','Convivência: respeito e cooperação','Tradições familiares: festas e costumes','Meios de comunicação usados pela família','Diferentes tipos de família na sociedade atual'],
-      '3': ['O bairro e a comunidade: história e mudanças','Profissões presentes na comunidade','Patrimônio local: lugares de memória','Festas e cultura popular do Paraná','Povos que formaram o Paraná'],
-      '4': ['Crianças no tempo: brincadeiras do passado e do presente','História dos brinquedos','Revisão do ano: linha do tempo da turma','Diversidade cultural na escola','Preparação para o 2º ano'],
+  'CiÃªncias': {
+    '1Âº Ano': {
+      '1': ['Seres vivos e nÃ£o vivos: caracterÃ­sticas e diferenÃ§as','Corpo humano: partes externas e cuidados com a higiene','Animais: caracterÃ­sticas e habitats','Plantas: partes e importÃ¢ncia para a vida','Sentidos humanos: visÃ£o, audiÃ§Ã£o, tato, olfato e paladar'],
+      '2': ['AlimentaÃ§Ã£o saudÃ¡vel: grupos alimentares','Ãgua na natureza: importÃ¢ncia e estados fÃ­sicos','Solo: tipos e importÃ¢ncia','FenÃ´menos naturais: chuva, vento e arco-Ã­ris','Dia e noite: movimentos da Terra'],
+      '3': ['Materiais e suas propriedades: dureza, flexibilidade e textura','Uso responsÃ¡vel dos materiais: reutilizaÃ§Ã£o e reciclagem','EstaÃ§Ãµes do ano: caracterÃ­sticas no ParanÃ¡','Luz e sombra: comportamento da luz','Som: fontes sonoras no cotidiano'],
+      '4': ['PreservaÃ§Ã£o do meio ambiente: lixo e reciclagem','Animais e plantas do ParanÃ¡','RevisÃ£o: seres vivos e cuidados com o ambiente','O cÃ©u: Sol, Lua, estrelas e planetas','Projeto ambiental: horta escolar'],
     },
-    '2º Ano': {
-      '1': ['História da família ao longo do tempo','Árvore genealógica: geração, bisavós, avós, pais','Moradia através do tempo: passado e presente','Objetos de uso doméstico: antes e hoje','Meios de transporte: história e evolução'],
-      '2': ['História da escola: fundação e mudanças','Trabalho e profissões ao longo do tempo','Tipos de trabalho: campo e cidade','Ferramentas de trabalho: antes e hoje','Direitos e deveres das crianças'],
-      '3': ['O município: história e formação','Imigração no Paraná: povos que vieram e seus costumes','Contribuições culturais dos imigrantes','Patrimônio cultural e histórico do município','Festas típicas e tradições paranaenses'],
-      '4': ['Cultura indígena: povos originários do Paraná','Contribuição africana na formação do Brasil e do Paraná','Diversidade étnica e cultural','Revisão do ano','Preparação para o 3º ano'],
+    '2Âº Ano': {
+      '1': ['Alimentos: origem animal e vegetal','Cadeia alimentar simples: produtores e consumidores','Corpo humano: Ã³rgÃ£os dos sentidos e funÃ§Ã£o','SaÃºde bucal: prevenÃ§Ã£o de cÃ¡ries','Plantas medicinais do ParanÃ¡'],
+      '2': ['Ãgua: ciclo hidrolÃ³gico simples','PoluiÃ§Ã£o da Ã¡gua e do ar: causas e consequÃªncias','Solos do ParanÃ¡: tipos e usos agrÃ­colas','Rochas e minerais: tipos e usos','FÃ³sseis: registro da vida passada'],
+      '3': ['Luz: fontes luminosas e reflexÃ£o','Calor: fontes de calor e conduÃ§Ã£o','Som: propagaÃ§Ã£o e fontes sonoras','Magnetismo: Ã­mÃ£ e suas propriedades','Eletricidade estÃ¡tica: experimentos simples'],
+      '4': ['Biodiversidade do ParanÃ¡: biomas e ecossistemas','Animais vertebrados e invertebrados','Plantas: ciclo de vida e reproduÃ§Ã£o','RevisÃ£o e projeto de ciÃªncias ambiental','Feira de CiÃªncias da escola'],
     },
-    '3º Ano': {
-      '1': ['A história da minha família: documentos e fontes históricas','Linha do tempo pessoal e da turma','Diferentes formas de registrar a história: foto, carta, diário','Memória coletiva: o que lembramos juntos','Patrimônios históricos locais'],
-      '2': ['A comunidade onde vivemos: história e transformações','Trabalho e moradia ao longo do tempo no Paraná','Tradições culturais e festas locais','Campo e cidade: diferenças históricas','Meios de transporte e comunicação no passado e hoje'],
-      '3': ['O município: formação histórica do Paraná','Patrimônio histórico local: monumentos e memórias','Transformações urbanas: antes e depois','A importância dos rios para o Paraná','História de Curitiba e do Paraná'],
-      '4': ['Cultura indígena local: Guarani, Kaingang e Xokleng','Afrodescendência na história do Paraná','Festas e tradições dos imigrantes no Paraná','Revisão do ano','Preparação para o 4º ano'],
+    '3Âº Ano': {
+      '1': ['MatÃ©ria e energia: noÃ§Ãµes bÃ¡sicas','Propriedades dos materiais: condutibilidade e solubilidade','Misturas: homogÃªneas e heterogÃªneas','SeparaÃ§Ã£o de misturas: filtragem, decantaÃ§Ã£o e evaporaÃ§Ã£o','Ãgua: importÃ¢ncia e tratamento bÃ¡sico'],
+      '2': ['Seres vivos: cÃ©lulas (introduÃ§Ã£o)','Reinos dos seres vivos: animal, vegetal, fungi, monera e protista','Cadeia e teia alimentar: decompositores','FotossÃ­ntese: processo e importÃ¢ncia','RespiraÃ§Ã£o e nutriÃ§Ã£o dos seres vivos'],
+      '3': ['Sistema solar: planetas e astros','Movimentos da Terra: rotaÃ§Ã£o e translaÃ§Ã£o','Fases da Lua e marÃ©s','Temperatura e clima: diferenÃ§as no ParanÃ¡','Camadas da Terra: crosta, manto e nÃºcleo'],
+      '4': ['Ecossistemas do ParanÃ¡: Floresta AtlÃ¢ntica, Cerrado e Pantanal','Impactos humanos no ambiente','PreservaÃ§Ã£o e sustentabilidade','RevisÃ£o geral e projeto de ciÃªncias','PreparaÃ§Ã£o para o 4Âº ano'],
     },
-    '4º Ano': {
-      '1': ['Povos indígenas no Brasil: diversidade e cultura','Chegada dos europeus: Portugal e Espanha','Processo de colonização do Brasil','Exploração e comércio no período colonial','Economia colonial: ciclo do pau-brasil e cana-de-açúcar'],
-      '2': ['Escravidão no Brasil: origens e sistema','Resistência negra e indígena: quilombos e levantes','Cultura afro-brasileira: religião, música e comida','Economia colonial: ciclo do ouro','Cidades coloniais: Ouro Preto e Salvador'],
-      '3': ['Revoluções e movimentos: Inconfidência Mineira','Independência do Brasil: processo e personagens','D. Pedro I e o Império do Brasil','Período regencial: revoltas e instabilidade','Consolidação do Império: D. Pedro II'],
-      '4': ['Proclamação da República: causas e consequências','República Velha: oligarquias e coronelismo','Revolta da Vacina e outros movimentos','História do Paraná na época imperial','Revisão do 4º ano e preparação para o 5º'],
+    '4Âº Ano': {
+      '1': ['Sistema solar: caracterÃ­sticas dos planetas','Movimentos da Terra e do Sistema Solar','Fases da Lua e estaÃ§Ãµes do ano no ParanÃ¡','Energia: formas e transformaÃ§Ãµes','Luz: reflexÃ£o, refraÃ§Ã£o e espectro luminoso'],
+      '2': ['Cadeia alimentar: pirÃ¢mide ecolÃ³gica','Ecossistemas brasileiros: AmazÃ´nia, Cerrado, Caatinga, Pampa','FotossÃ­ntese e respiraÃ§Ã£o celular','AdaptaÃ§Ãµes dos seres vivos','PreservaÃ§Ã£o da biodiversidade paranaense'],
+      '3': ['Misturas e substÃ¢ncias: propriedades e separaÃ§Ã£o','Propriedades da Ã¡gua: estados fÃ­sicos e transiÃ§Ãµes','Ciclo da Ã¡gua: evaporaÃ§Ã£o, condensaÃ§Ã£o e precipitaÃ§Ã£o','PoluiÃ§Ã£o das Ã¡guas do ParanÃ¡: rios e AquÃ­fero Guarani','Solo: formaÃ§Ã£o, composiÃ§Ã£o e conservaÃ§Ã£o'],
+      '4': ['Energia elÃ©trica: geraÃ§Ã£o, transmissÃ£o e consumo','Fontes renovÃ¡veis no ParanÃ¡: hidrelÃ©tricas e eÃ³lica','PreservaÃ§Ã£o ambiental: Agenda 2030 ONU','RevisÃ£o e projeto de CiÃªncias','Feira de CiÃªncias: apresentaÃ§Ã£o de projetos'],
     },
-    '5º Ano': {
-      '1': ['República Velha: política do café com leite','Crise de 1929 e seus impactos no Brasil','Revolução de 1930: Getúlio Vargas','Era Vargas: Estado Novo e populismo','Industrialização no Brasil e no Paraná'],
-      '2': ['Democracia e ditadura militar (1964-1985)','Resistência e luta pelos direitos civis','Redemocratização: eleições diretas','Constituição de 1988: direitos e garantias','Cidadania e participação política'],
-      '3': ['Brasil e o mundo atual: globalização','Desigualdades sociais no Brasil','Movimentos sociais e direitos humanos','Diversidade cultural e identidade nacional','Paraná no século XX e XXI'],
-      '4': ['Revisão histórica do Brasil: do colonial ao contemporâneo','Marcos históricos do Paraná','História local: pesquisa e projeto','Avaliação diagnóstica e recuperação','Preparação para o 6º ano'],
+    '5Âº Ano': {
+      '1': ['Sistemas do corpo humano: digestÃ³rio e respiratÃ³rio','SaÃºde e prevenÃ§Ã£o de doenÃ§as: vacinas e saneamento','Microrganismos: bactÃ©rias, vÃ­rus e fungos','Parasitoses comuns no ParanÃ¡: verminoses e malÃ¡ria','Higiene pessoal e coletiva'],
+      '2': ['Sistema nervoso: neurÃ´nios e sinapses','Sistema endÃ³crino: hormÃ´nios e puberdade','ReproduÃ§Ã£o humana: noÃ§Ãµes bÃ¡sicas e saÃºde','Sistema reprodutor masculino e feminino','Gravidez na adolescÃªncia: prevenÃ§Ã£o e informaÃ§Ã£o'],
+      '3': ['Ecologia: cadeias e teias alimentares complexas','Biomas brasileiros: caracterÃ­sticas e fauna','Impactos ambientais: desmatamento e queimadas','MudanÃ§as climÃ¡ticas: causas e consequÃªncias','Sustentabilidade: consumo consciente'],
+      '4': ['Tecnologia e ciÃªncia: inovaÃ§Ãµes recentes','CiÃªncia e sociedade: Ã©tica na pesquisa cientÃ­fica','RevisÃ£o geral dos conteÃºdos do 5Âº ano','Projetos de pesquisa cientÃ­fica','PreparaÃ§Ã£o para o Ensino Fundamental Anos Finais'],
     },
-    '6º Ano': {
-      '1': ['Pré-História: evolução humana e formação das sociedades','Mesopotâmia: primeiras civilizações e escrita','Egito antigo: cultura, religião e faraós','Grécia antiga: democracia e cultura','Roma antiga: república e império'],
-      '2': ['Idade Média: feudalismo e Igreja','Cruzadas e comércio medieval','Islamismo: surgimento e expansão','Povos indígenas das Américas antes de 1500','Culturas pré-colombianas: Maias, Astecas e Incas'],
-      '3': ['Renascimento: arte, ciência e humanismo','Grandes Navegações: Portugal e Espanha','Reformas religiosas: Lutero e Calvino','Contrarreforma e Inquisição','Colonização das Américas'],
-      '4': ['Escravidão nas Américas: tráfico e resistência','Revolução Científica: Galileu e Newton','Revisão do 6º ano','Avaliação diagnóstica','Preparação para o 7º ano'],
+    '6Âº Ano': {
+      '1': ['Universo: formaÃ§Ã£o e estrutura (Big Bang)','Sistema Solar: caracterÃ­sticas e movimentos','Terra: camadas, minerais e rochas','FenÃ´menos geolÃ³gicos: vulcanismo e terremotos','Atmosfera: composiÃ§Ã£o e camadas'],
+      '2': ['MatÃ©ria: propriedades e estados fÃ­sicos','SubstÃ¢ncias puras e misturas: classificaÃ§Ã£o','MÃ©todos de separaÃ§Ã£o de misturas','TransformaÃ§Ãµes fÃ­sicas e quÃ­micas','Ãgua: importÃ¢ncia, distribuiÃ§Ã£o e ciclo'],
+      '3': ['CÃ©lulas: descoberta, tipos e organelas','Seres vivos: classificaÃ§Ã£o e caracterÃ­sticas dos reinos','VÃ­rus: estrutura e doenÃ§as causadas','BactÃ©rias: estrutura, funÃ§Ãµes e importÃ¢ncia','Protistas e fungos: caracterÃ­sticas'],
+      '4': ['Ecologia: relaÃ§Ãµes ecolÃ³gicas','DesequilÃ­brios ambientais: extinÃ§Ã£o e conservaÃ§Ã£o','Sustentabilidade e desenvolvimento','RevisÃ£o do 6Âº ano e projetos','PreparaÃ§Ã£o para o 7Âº ano'],
     },
-    '7º Ano': {
-      '1': ['Absolutismo europeu: reis e poder','Mercantilismo e expansão colonial','Iluminismo: razão e liberdade','Revolução Americana: independência','Revolução Francesa: causas e desdobramentos'],
-      '2': ['Revolução Industrial: causas e consequências','Capitalismo industrial e questão social','Socialismo e marxismo: surgimento','Imperialismo europeu na África e Ásia','Colonialismo no século XIX'],
-      '3': ['Independências na América Latina','Brasil: da colônia ao Império','Abolicionismo e escravidão no século XIX','Primeira Guerra Mundial: causas e consequências','Revolução Russa de 1917'],
-      '4': ['Período entre guerras: ascensão do nazifascismo','Grande Depressão: crise econômica mundial','Brasil na Primeira República','Revisão do 7º ano','Preparação para o 8º ano'],
+    '7Âº Ano': {
+      '1': ['BotÃ¢nica: morfologia e fisiologia das plantas','ClassificaÃ§Ã£o das plantas: briÃ³fitas, pteridÃ³fitas, gimnospermas e angiospermas','ReproduÃ§Ã£o dos vegetais','FotossÃ­ntese e respiraÃ§Ã£o celular','Plantas do ParanÃ¡: biomas e espÃ©cies endÃªmicas'],
+      '2': ['Zoologia: invertebrados â porÃ­feros, cnidÃ¡rios e platelmintos','Moluscos, anelÃ­deos e artrÃ³podes','Equinodermos e outros invertebrados','Parasitoses: esquistossomose, ascaridÃ­ase e pediculose','Biodiversidade de invertebrados no ParanÃ¡'],
+      '3': ['Zoologia: vertebrados â peixes, anfÃ­bios e rÃ©pteis','Aves e mamÃ­feros: caracterÃ­sticas e adaptaÃ§Ãµes','Fauna ameaÃ§ada do ParanÃ¡','Ecossistemas aquÃ¡ticos do ParanÃ¡','ConservaÃ§Ã£o e legislaÃ§Ã£o ambiental'],
+      '4': ['RevisÃ£o: seres vivos e classificaÃ§Ã£o','Projetos de educaÃ§Ã£o ambiental','CiÃªncias e tecnologia: biotecnologia','AvaliaÃ§Ã£o diagnÃ³stica e recuperaÃ§Ã£o','PreparaÃ§Ã£o para o 8Âº ano'],
     },
-    '8º Ano': {
-      '1': ['Segunda Guerra Mundial: causas, desenvolvimento e consequências','Holocausto e crimes contra a humanidade','Formação da ONU: direitos humanos','Guerra Fria: EUA x URSS','Descolonização afro-asiática'],
-      '2': ['Brasil: Era Vargas e populismo (aprofundamento)','Democracia no Brasil: 1945-1964','Ditadura militar: causas, repressão e resistência','Transformações econômicas: milagre econômico','Redemocratização e Constituição de 1988'],
-      '3': ['Fim da Guerra Fria: queda do Muro de Berlim','Globalização: economia, cultura e política','Neoliberalismo e desigualdades sociais','Conflitos contemporâneos no mundo','Movimentos sociais globais'],
-      '4': ['Brasil contemporâneo: anos 1990 e 2000','Democratização e políticas sociais','História do Paraná no século XX','Revisão do 8º ano','Preparação para o 9º ano'],
+    '8Âº Ano': {
+      '1': ['Corpo humano: sistemas de sustentaÃ§Ã£o e movimento','Sistema digestÃ³rio: Ã³rgÃ£os, processos e doenÃ§as','Sistema respiratÃ³rio: mecanismos e doenÃ§as','Sistema cardiovascular: coraÃ§Ã£o, vasos e sangue','DoenÃ§as cardiovasculares: prevenÃ§Ã£o'],
+      '2': ['Sistema excretor: rins e funÃ§Ãµes','Sistema nervoso: central e perifÃ©rico','Sistema endÃ³crino: glÃ¢ndulas e hormÃ´nios','Imunidade: sistema imunolÃ³gico e vacinas','Drogas e saÃºde: dependÃªncia quÃ­mica'],
+      '3': ['ReproduÃ§Ã£o humana: fecundaÃ§Ã£o e desenvolvimento embrionÃ¡rio','Sexualidade e saÃºde reprodutiva','GenÃ©tica: conceitos bÃ¡sicos de Mendel','DNA, genes e hereditariedade','Biotecnologia: transgÃªnicos e clonagem'],
+      '4': ['QuÃ­mica e vida: reaÃ§Ãµes quÃ­micas no organismo','NutriÃ§Ã£o: macro e micronutrientes','EducaÃ§Ã£o alimentar: anÃ¡lise de rÃ³tulos','RevisÃ£o completa do 8Âº ano','PreparaÃ§Ã£o para o 9Âº ano'],
     },
-    '9º Ano': {
-      '1': ['Geopolítica mundial atual: polos de poder','Terrorismo e fundamentalismo religioso','Oriente Médio: conflitos e petróleo','China e Índia: ascensão econômica','África e as desigualdades globais'],
-      '2': ['Brasil no século XXI: política e economia','Movimentos sociais e democracia','Questão ambiental: desafios globais','Tecnologia e transformações sociais','Identidade cultural no mundo globalizado'],
-      '3': ['Direitos humanos: conquistas e desafios atuais','Gênero, raça e desigualdades no Brasil','Mídia, redes sociais e democracia','Paraná: desenvolvimento recente','Questões éticas contemporâneas'],
-      '4': ['Revisão geral de História do Ensino Fundamental','Pesquisa histórica: metodologia','Avaliação diagnóstica e consolidação','Preparação para o Ensino Médio','Portfólio histórico final'],
+    '9Âº Ano': {
+      '1': ['QuÃ­mica: estrutura atÃ´mica e tabela periÃ³dica','LigaÃ§Ãµes quÃ­micas: iÃ´nica, covalente e metÃ¡lica','ReaÃ§Ãµes quÃ­micas: classificaÃ§Ã£o e balanceamento','Ãcidos, bases, sais e Ã³xidos','ReaÃ§Ãµes de oxidaÃ§Ã£o-reduÃ§Ã£o'],
+      '2': ['FÃ­sica: mecÃ¢nica â movimento, velocidade e aceleraÃ§Ã£o','ForÃ§a e Leis de Newton','Energia mecÃ¢nica: cinÃ©tica e potencial','Trabalho e potÃªncia','Calor: transmissÃ£o e dilataÃ§Ã£o'],
+      '3': ['Eletricidade: cargas elÃ©tricas e campo elÃ©trico','Corrente elÃ©trica, resistÃªncia e potÃªncia','Circuitos elÃ©tricos: sÃ©rie e paralelo','Ondas: sonoras, luminosas e eletromagnÃ©ticas','Radioatividade: tipos e aplicaÃ§Ãµes'],
+      '4': ['RevisÃ£o geral de CiÃªncias do Ensino Fundamental','CiÃªncia, tecnologia e sociedade','Projetos de pesquisa cientÃ­fica','AvaliaÃ§Ã£o diagnÃ³stica e recuperaÃ§Ã£o','PreparaÃ§Ã£o para o Ensino MÃ©dio'],
+    },
+  },
+  'HistÃ³ria': {
+    '1Âº Ano': {
+      '1': ['Minha histÃ³ria: famÃ­lia, nome e data de nascimento','Linha do tempo pessoal: bebÃª, crianÃ§a, adulto','Moradia e comunidade: onde eu vivo','Rotina diÃ¡ria: manhÃ£, tarde e noite','Datas comemorativas da escola e da famÃ­lia'],
+      '2': ['A escola: histÃ³ria, funcionÃ¡rios e regras','ConvivÃªncia: respeito e cooperaÃ§Ã£o','TradiÃ§Ãµes familiares: festas e costumes','Meios de comunicaÃ§Ã£o usados pela famÃ­lia','Diferentes tipos de famÃ­lia na sociedade atual'],
+      '3': ['O bairro e a comunidade: histÃ³ria e mudanÃ§as','ProfissÃµes presentes na comunidade','PatrimÃ´nio local: lugares de memÃ³ria','Festas e cultura popular do ParanÃ¡','Povos que formaram o ParanÃ¡'],
+      '4': ['CrianÃ§as no tempo: brincadeiras do passado e do presente','HistÃ³ria dos brinquedos','RevisÃ£o do ano: linha do tempo da turma','Diversidade cultural na escola','PreparaÃ§Ã£o para o 2Âº ano'],
+    },
+    '2Âº Ano': {
+      '1': ['HistÃ³ria da famÃ­lia ao longo do tempo','Ãrvore genealÃ³gica: geraÃ§Ã£o, bisavÃ³s, avÃ³s, pais','Moradia atravÃ©s do tempo: passado e presente','Objetos de uso domÃ©stico: antes e hoje','Meios de transporte: histÃ³ria e evoluÃ§Ã£o'],
+      '2': ['HistÃ³ria da escola: fundaÃ§Ã£o e mudanÃ§as','Trabalho e profissÃµes ao longo do tempo','Tipos de trabalho: campo e cidade','Ferramentas de trabalho: antes e hoje','Direitos e deveres das crianÃ§as'],
+      '3': ['O municÃ­pio: histÃ³ria e formaÃ§Ã£o','ImigraÃ§Ã£o no ParanÃ¡: povos que vieram e seus costumes','ContribuiÃ§Ãµes culturais dos imigrantes','PatrimÃ´nio cultural e histÃ³rico do municÃ­pio','Festas tÃ­picas e tradiÃ§Ãµes paranaenses'],
+      '4': ['Cultura indÃ­gena: povos originÃ¡rios do ParanÃ¡','ContribuiÃ§Ã£o africana na formaÃ§Ã£o do Brasil e do ParanÃ¡','Diversidade Ã©tnica e cultural','RevisÃ£o do ano','PreparaÃ§Ã£o para o 3Âº ano'],
+    },
+    '3Âº Ano': {
+      '1': ['A histÃ³ria da minha famÃ­lia: documentos e fontes histÃ³ricas','Linha do tempo pessoal e da turma','Diferentes formas de registrar a histÃ³ria: foto, carta, diÃ¡rio','MemÃ³ria coletiva: o que lembramos juntos','PatrimÃ´nios histÃ³ricos locais'],
+      '2': ['A comunidade onde vivemos: histÃ³ria e transformaÃ§Ãµes','Trabalho e moradia ao longo do tempo no ParanÃ¡','TradiÃ§Ãµes culturais e festas locais','Campo e cidade: diferenÃ§as histÃ³ricas','Meios de transporte e comunicaÃ§Ã£o no passado e hoje'],
+      '3': ['O municÃ­pio: formaÃ§Ã£o histÃ³rica do ParanÃ¡','PatrimÃ´nio histÃ³rico local: monumentos e memÃ³rias','TransformaÃ§Ãµes urbanas: antes e depois','A importÃ¢ncia dos rios para o ParanÃ¡','HistÃ³ria de Curitiba e do ParanÃ¡'],
+      '4': ['Cultura indÃ­gena local: Guarani, Kaingang e Xokleng','AfrodescendÃªncia na histÃ³ria do ParanÃ¡','Festas e tradiÃ§Ãµes dos imigrantes no ParanÃ¡','RevisÃ£o do ano','PreparaÃ§Ã£o para o 4Âº ano'],
+    },
+    '4Âº Ano': {
+      '1': ['Povos indÃ­genas no Brasil: diversidade e cultura','Chegada dos europeus: Portugal e Espanha','Processo de colonizaÃ§Ã£o do Brasil','ExploraÃ§Ã£o e comÃ©rcio no perÃ­odo colonial','Economia colonial: ciclo do pau-brasil e cana-de-aÃ§Ãºcar'],
+      '2': ['EscravidÃ£o no Brasil: origens e sistema','ResistÃªncia negra e indÃ­gena: quilombos e levantes','Cultura afro-brasileira: religiÃ£o, mÃºsica e comida','Economia colonial: ciclo do ouro','Cidades coloniais: Ouro Preto e Salvador'],
+      '3': ['RevoluÃ§Ãµes e movimentos: InconfidÃªncia Mineira','IndependÃªncia do Brasil: processo e personagens','D. Pedro I e o ImpÃ©rio do Brasil','PerÃ­odo regencial: revoltas e instabilidade','ConsolidaÃ§Ã£o do ImpÃ©rio: D. Pedro II'],
+      '4': ['ProclamaÃ§Ã£o da RepÃºblica: causas e consequÃªncias','RepÃºblica Velha: oligarquias e coronelismo','Revolta da Vacina e outros movimentos','HistÃ³ria do ParanÃ¡ na Ã©poca imperial','RevisÃ£o do 4Âº ano e preparaÃ§Ã£o para o 5Âº'],
+    },
+    '5Âº Ano': {
+      '1': ['RepÃºblica Velha: polÃ­tica do cafÃ© com leite','Crise de 1929 e seus impactos no Brasil','RevoluÃ§Ã£o de 1930: GetÃºlio Vargas','Era Vargas: Estado Novo e populismo','IndustrializaÃ§Ã£o no Brasil e no ParanÃ¡'],
+      '2': ['Democracia e ditadura militar (1964-1985)','ResistÃªncia e luta pelos direitos civis','RedemocratizaÃ§Ã£o: eleiÃ§Ãµes diretas','ConstituiÃ§Ã£o de 1988: direitos e garantias','Cidadania e participaÃ§Ã£o polÃ­tica'],
+      '3': ['Brasil e o mundo atual: globalizaÃ§Ã£o','Desigualdades sociais no Brasil','Movimentos sociais e direitos humanos','Diversidade cultural e identidade nacional','ParanÃ¡ no sÃ©culo XX e XXI'],
+      '4': ['RevisÃ£o histÃ³rica do Brasil: do colonial ao contemporÃ¢neo','Marcos histÃ³ricos do ParanÃ¡','HistÃ³ria local: pesquisa e projeto','AvaliaÃ§Ã£o diagnÃ³stica e recuperaÃ§Ã£o','PreparaÃ§Ã£o para o 6Âº ano'],
+    },
+    '6Âº Ano': {
+      '1': ['PrÃ©-HistÃ³ria: evoluÃ§Ã£o humana e formaÃ§Ã£o das sociedades','MesopotÃ¢mia: primeiras civilizaÃ§Ãµes e escrita','Egito antigo: cultura, religiÃ£o e faraÃ³s','GrÃ©cia antiga: democracia e cultura','Roma antiga: repÃºblica e impÃ©rio'],
+      '2': ['Idade MÃ©dia: feudalismo e Igreja','Cruzadas e comÃ©rcio medieval','Islamismo: surgimento e expansÃ£o','Povos indÃ­genas das AmÃ©ricas antes de 1500','Culturas prÃ©-colombianas: Maias, Astecas e Incas'],
+      '3': ['Renascimento: arte, ciÃªncia e humanismo','Grandes NavegaÃ§Ãµes: Portugal e Espanha','Reformas religiosas: Lutero e Calvino','Contrarreforma e InquisiÃ§Ã£o','ColonizaÃ§Ã£o das AmÃ©ricas'],
+      '4': ['EscravidÃ£o nas AmÃ©ricas: trÃ¡fico e resistÃªncia','RevoluÃ§Ã£o CientÃ­fica: Galileu e Newton','RevisÃ£o do 6Âº ano','AvaliaÃ§Ã£o diagnÃ³stica','PreparaÃ§Ã£o para o 7Âº ano'],
+    },
+    '7Âº Ano': {
+      '1': ['Absolutismo europeu: reis e poder','Mercantilismo e expansÃ£o colonial','Iluminismo: razÃ£o e liberdade','RevoluÃ§Ã£o Americana: independÃªncia','RevoluÃ§Ã£o Francesa: causas e desdobramentos'],
+      '2': ['RevoluÃ§Ã£o Industrial: causas e consequÃªncias','Capitalismo industrial e questÃ£o social','Socialismo e marxismo: surgimento','Imperialismo europeu na Ãfrica e Ãsia','Colonialismo no sÃ©culo XIX'],
+      '3': ['IndependÃªncias na AmÃ©rica Latina','Brasil: da colÃ´nia ao ImpÃ©rio','Abolicionismo e escravidÃ£o no sÃ©culo XIX','Primeira Guerra Mundial: causas e consequÃªncias','RevoluÃ§Ã£o Russa de 1917'],
+      '4': ['PerÃ­odo entre guerras: ascensÃ£o do nazifascismo','Grande DepressÃ£o: crise econÃ´mica mundial','Brasil na Primeira RepÃºblica','RevisÃ£o do 7Âº ano','PreparaÃ§Ã£o para o 8Âº ano'],
+    },
+    '8Âº Ano': {
+      '1': ['Segunda Guerra Mundial: causas, desenvolvimento e consequÃªncias','Holocausto e crimes contra a humanidade','FormaÃ§Ã£o da ONU: direitos humanos','Guerra Fria: EUA x URSS','DescolonizaÃ§Ã£o afro-asiÃ¡tica'],
+      '2': ['Brasil: Era Vargas e populismo (aprofundamento)','Democracia no Brasil: 1945-1964','Ditadura militar: causas, repressÃ£o e resistÃªncia','TransformaÃ§Ãµes econÃ´micas: milagre econÃ´mico','RedemocratizaÃ§Ã£o e ConstituiÃ§Ã£o de 1988'],
+      '3': ['Fim da Guerra Fria: queda do Muro de Berlim','GlobalizaÃ§Ã£o: economia, cultura e polÃ­tica','Neoliberalismo e desigualdades sociais','Conflitos contemporÃ¢neos no mundo','Movimentos sociais globais'],
+      '4': ['Brasil contemporÃ¢neo: anos 1990 e 2000','DemocratizaÃ§Ã£o e polÃ­ticas sociais','HistÃ³ria do ParanÃ¡ no sÃ©culo XX','RevisÃ£o do 8Âº ano','PreparaÃ§Ã£o para o 9Âº ano'],
+    },
+    '9Âº Ano': {
+      '1': ['GeopolÃ­tica mundial atual: polos de poder','Terrorismo e fundamentalismo religioso','Oriente MÃ©dio: conflitos e petrÃ³leo','China e Ãndia: ascensÃ£o econÃ´mica','Ãfrica e as desigualdades globais'],
+      '2': ['Brasil no sÃ©culo XXI: polÃ­tica e economia','Movimentos sociais e democracia','QuestÃ£o ambiental: desafios globais','Tecnologia e transformaÃ§Ãµes sociais','Identidade cultural no mundo globalizado'],
+      '3': ['Direitos humanos: conquistas e desafios atuais','GÃªnero, raÃ§a e desigualdades no Brasil','MÃ­dia, redes sociais e democracia','ParanÃ¡: desenvolvimento recente','QuestÃµes Ã©ticas contemporÃ¢neas'],
+      '4': ['RevisÃ£o geral de HistÃ³ria do Ensino Fundamental','Pesquisa histÃ³rica: metodologia','AvaliaÃ§Ã£o diagnÃ³stica e consolidaÃ§Ã£o','PreparaÃ§Ã£o para o Ensino MÃ©dio','PortfÃ³lio histÃ³rico final'],
     },
   },
   'Geografia': {
-    '1º Ano': {
-      '1': ['O lugar onde vivo: casa, rua, bairro','Espaço natural e espaço construído','Paisagens naturais e culturais ao meu redor','Pontos de referência: onde eu me localizo','Moradia: tipos e características'],
-      '2': ['A escola: espaço e função','Bairro e comunidade: serviços e organização','Meios de transporte usados no cotidiano','Trabalho no campo e na cidade','Cuidados com o ambiente local'],
-      '3': ['Campo e cidade: diferenças e semelhanças','Meios de comunicação: rádio, TV, internet','Fontes de energia no cotidiano','Água na natureza e no nosso uso','Clima e tempo atmosférico: noções básicas'],
-      '4': ['Paisagens do Paraná: campo, cidade e floresta','Preservação do ambiente local','Rios do Paraná: importância e uso','Revisão do ano','Preparação para o 2º ano'],
+    '1Âº Ano': {
+      '1': ['O lugar onde vivo: casa, rua, bairro','EspaÃ§o natural e espaÃ§o construÃ­do','Paisagens naturais e culturais ao meu redor','Pontos de referÃªncia: onde eu me localizo','Moradia: tipos e caracterÃ­sticas'],
+      '2': ['A escola: espaÃ§o e funÃ§Ã£o','Bairro e comunidade: serviÃ§os e organizaÃ§Ã£o','Meios de transporte usados no cotidiano','Trabalho no campo e na cidade','Cuidados com o ambiente local'],
+      '3': ['Campo e cidade: diferenÃ§as e semelhanÃ§as','Meios de comunicaÃ§Ã£o: rÃ¡dio, TV, internet','Fontes de energia no cotidiano','Ãgua na natureza e no nosso uso','Clima e tempo atmosfÃ©rico: noÃ§Ãµes bÃ¡sicas'],
+      '4': ['Paisagens do ParanÃ¡: campo, cidade e floresta','PreservaÃ§Ã£o do ambiente local','Rios do ParanÃ¡: importÃ¢ncia e uso','RevisÃ£o do ano','PreparaÃ§Ã£o para o 2Âº ano'],
     },
-    '2º Ano': {
-      '1': ['Mapa: o que é e para que serve','Legendas e símbolos cartográficos','Orientação: norte, sul, leste e oeste','Rosa dos ventos: uso e função','Mapa do município: leitura básica'],
-      '2': ['Município: organização política e serviços','Trabalho no campo e extrativismo no Paraná','Agropecuária do Paraná: principais culturas','Indústria e serviços no município','Urbanização: crescimento das cidades'],
-      '3': ['Clima do Paraná: estações do ano e precipitações','Relevo do Paraná: planaltos e serras','Hidrografia do Paraná: principais rios e bacias','Biomas do Paraná: Floresta Atlântica, Cerrado e Pampa','Solo do Paraná: fertilidade e conservação'],
-      '4': ['Diversidade cultural no Paraná: povos e colonização','Imigração no Paraná: alemães, italianos, japoneses','Festas e tradições culturais paranaenses','Revisão do ano','Preparação para o 3º ano'],
+    '2Âº Ano': {
+      '1': ['Mapa: o que Ã© e para que serve','Legendas e sÃ­mbolos cartogrÃ¡ficos','OrientaÃ§Ã£o: norte, sul, leste e oeste','Rosa dos ventos: uso e funÃ§Ã£o','Mapa do municÃ­pio: leitura bÃ¡sica'],
+      '2': ['MunicÃ­pio: organizaÃ§Ã£o polÃ­tica e serviÃ§os','Trabalho no campo e extrativismo no ParanÃ¡','AgropecuÃ¡ria do ParanÃ¡: principais culturas','IndÃºstria e serviÃ§os no municÃ­pio','UrbanizaÃ§Ã£o: crescimento das cidades'],
+      '3': ['Clima do ParanÃ¡: estaÃ§Ãµes do ano e precipitaÃ§Ãµes','Relevo do ParanÃ¡: planaltos e serras','Hidrografia do ParanÃ¡: principais rios e bacias','Biomas do ParanÃ¡: Floresta AtlÃ¢ntica, Cerrado e Pampa','Solo do ParanÃ¡: fertilidade e conservaÃ§Ã£o'],
+      '4': ['Diversidade cultural no ParanÃ¡: povos e colonizaÃ§Ã£o','ImigraÃ§Ã£o no ParanÃ¡: alemÃ£es, italianos, japoneses','Festas e tradiÃ§Ãµes culturais paranaenses','RevisÃ£o do ano','PreparaÃ§Ã£o para o 3Âº ano'],
     },
-    '3º Ano': {
-      '1': ['Espaço natural e espaço construído','Paisagens naturais e culturais','O lugar onde vivemos: mapa mental','Pontos cardeais: localização e orientação','Mapa do bairro e do município'],
-      '2': ['Campo e cidade: diferenças históricas e atuais','Meios de transporte e comunicação','Fontes de energia: renováveis e não renováveis','Trabalho e produção no campo paranaense','Agropecuária e agroindústria no Paraná'],
-      '3': ['Água: importância, ciclo hidrológico e uso','Poluição da água: causas, consequências e soluções','Clima e tempo: influências na vida das pessoas','Vegetação e biomas brasileiros','Preservação ambiental: APAs e parques nacionais'],
-      '4': ['Diferentes paisagens brasileiras: Norte, Nordeste, Centro-Oeste','Paisagens do Sul e do Paraná','Diversidade cultural e regional do Brasil','Revisão do 3º ano','Preparação para o 4º ano'],
+    '3Âº Ano': {
+      '1': ['EspaÃ§o natural e espaÃ§o construÃ­do','Paisagens naturais e culturais','O lugar onde vivemos: mapa mental','Pontos cardeais: localizaÃ§Ã£o e orientaÃ§Ã£o','Mapa do bairro e do municÃ­pio'],
+      '2': ['Campo e cidade: diferenÃ§as histÃ³ricas e atuais','Meios de transporte e comunicaÃ§Ã£o','Fontes de energia: renovÃ¡veis e nÃ£o renovÃ¡veis','Trabalho e produÃ§Ã£o no campo paranaense','AgropecuÃ¡ria e agroindÃºstria no ParanÃ¡'],
+      '3': ['Ãgua: importÃ¢ncia, ciclo hidrolÃ³gico e uso','PoluiÃ§Ã£o da Ã¡gua: causas, consequÃªncias e soluÃ§Ãµes','Clima e tempo: influÃªncias na vida das pessoas','VegetaÃ§Ã£o e biomas brasileiros','PreservaÃ§Ã£o ambiental: APAs e parques nacionais'],
+      '4': ['Diferentes paisagens brasileiras: Norte, Nordeste, Centro-Oeste','Paisagens do Sul e do ParanÃ¡','Diversidade cultural e regional do Brasil','RevisÃ£o do 3Âº ano','PreparaÃ§Ã£o para o 4Âº ano'],
     },
-    '4º Ano': {
-      '1': ['Brasil: localização na América do Sul e no mundo','Regiões brasileiras: características gerais','Biomas brasileiros: Amazônia, Cerrado, Caatinga, Mata Atlântica','Relevo e hidrografia do Brasil','Principais rios do Brasil e do Paraná'],
-      '2': ['Clima no Brasil: variedades e influências','População brasileira: distribuição e diversidade','Urbanização no Brasil: campo e cidade','Migração interna no Brasil','Metrópoles brasileiras: São Paulo, Rio de Janeiro, Curitiba'],
-      '3': ['Economia brasileira: setor primário, secundário e terciário','Agricultura: modernização e agricultura familiar','Pecuária no Brasil e no Paraná','Indústria brasileira: distribuição e tipos','Serviços: comércio, turismo e tecnologia'],
-      '4': ['Problemas ambientais no Brasil: desmatamento, poluição','Sustentabilidade: desenvolvimento sustentável','Paraná: economia, população e organização','Revisão do 4º ano','Preparação para o 5º ano'],
+    '4Âº Ano': {
+      '1': ['Brasil: localizaÃ§Ã£o na AmÃ©rica do Sul e no mundo','RegiÃµes brasileiras: caracterÃ­sticas gerais','Biomas brasileiros: AmazÃ´nia, Cerrado, Caatinga, Mata AtlÃ¢ntica','Relevo e hidrografia do Brasil','Principais rios do Brasil e do ParanÃ¡'],
+      '2': ['Clima no Brasil: variedades e influÃªncias','PopulaÃ§Ã£o brasileira: distribuiÃ§Ã£o e diversidade','UrbanizaÃ§Ã£o no Brasil: campo e cidade','MigraÃ§Ã£o interna no Brasil','MetrÃ³poles brasileiras: SÃ£o Paulo, Rio de Janeiro, Curitiba'],
+      '3': ['Economia brasileira: setor primÃ¡rio, secundÃ¡rio e terciÃ¡rio','Agricultura: modernizaÃ§Ã£o e agricultura familiar','PecuÃ¡ria no Brasil e no ParanÃ¡','IndÃºstria brasileira: distribuiÃ§Ã£o e tipos','ServiÃ§os: comÃ©rcio, turismo e tecnologia'],
+      '4': ['Problemas ambientais no Brasil: desmatamento, poluiÃ§Ã£o','Sustentabilidade: desenvolvimento sustentÃ¡vel','ParanÃ¡: economia, populaÃ§Ã£o e organizaÃ§Ã£o','RevisÃ£o do 4Âº ano','PreparaÃ§Ã£o para o 5Âº ano'],
     },
-    '5º Ano': {
-      '1': ['América do Sul: localização, países e capitais','Mercosul: integração regional','Relações econômicas entre os países sul-americanos','População da América do Sul: diversidade','Relevo e hidrografia da América do Sul'],
-      '2': ['Continentes e oceanos: localização e características','Globalização: conceito e impactos','Organizações internacionais: ONU, FMI, OMC','Questão dos refugiados e migração global','Desenvolvimento humano: IDH e desigualdades'],
-      '3': ['Desenvolvimento sustentável: Agenda 2030','Mudanças climáticas: efeito estufa e aquecimento global','Biodiversidade: importância e ameaças','Geopolítica: poder e influência no mundo','Energia: fontes renováveis e não renováveis no mundo'],
-      '4': ['Brasil no contexto mundial: potências emergentes','BRICS: países em desenvolvimento','Revisão geral de Geografia dos Anos Iniciais','Projetos de pesquisa geográfica','Preparação para o 6º ano'],
+    '5Âº Ano': {
+      '1': ['AmÃ©rica do Sul: localizaÃ§Ã£o, paÃ­ses e capitais','Mercosul: integraÃ§Ã£o regional','RelaÃ§Ãµes econÃ´micas entre os paÃ­ses sul-americanos','PopulaÃ§Ã£o da AmÃ©rica do Sul: diversidade','Relevo e hidrografia da AmÃ©rica do Sul'],
+      '2': ['Continentes e oceanos: localizaÃ§Ã£o e caracterÃ­sticas','GlobalizaÃ§Ã£o: conceito e impactos','OrganizaÃ§Ãµes internacionais: ONU, FMI, OMC','QuestÃ£o dos refugiados e migraÃ§Ã£o global','Desenvolvimento humano: IDH e desigualdades'],
+      '3': ['Desenvolvimento sustentÃ¡vel: Agenda 2030','MudanÃ§as climÃ¡ticas: efeito estufa e aquecimento global','Biodiversidade: importÃ¢ncia e ameaÃ§as','GeopolÃ­tica: poder e influÃªncia no mundo','Energia: fontes renovÃ¡veis e nÃ£o renovÃ¡veis no mundo'],
+      '4': ['Brasil no contexto mundial: potÃªncias emergentes','BRICS: paÃ­ses em desenvolvimento','RevisÃ£o geral de Geografia dos Anos Iniciais','Projetos de pesquisa geogrÃ¡fica','PreparaÃ§Ã£o para o 6Âº ano'],
     },
-    '6º Ano': {
-      '1': ['Cartografia: projeções, escalas e coordenadas geográficas','Orientação: bússola, GPS e astros','Fusos horários: Brasil e mundo','Representação cartográfica: mapas temáticos','Sensoriamento remoto: satélites e imagens'],
-      '2': ['Planeta Terra: estrutura e dinâmica interna','Tectônica de placas: sismos e vulcões','Relevo: formas e agentes','Hidrografia: rios, lagos e mares do mundo','Solos: formação, tipos e uso'],
-      '3': ['Climatologia: fatores e elementos do clima','Biomas mundiais: floresta tropical, deserto, tundra','Oceanos e mares: circulação e importância','Impactos ambientais globais','Gestão ambiental e áreas protegidas'],
-      '4': ['População mundial: distribuição e diversidade','Urbanização no mundo: megacidades','Revisão do 6º ano','Avaliação diagnóstica','Preparação para o 7º ano'],
+    '6Âº Ano': {
+      '1': ['Cartografia: projeÃ§Ãµes, escalas e coordenadas geogrÃ¡ficas','OrientaÃ§Ã£o: bÃºssola, GPS e astros','Fusos horÃ¡rios: Brasil e mundo','RepresentaÃ§Ã£o cartogrÃ¡fica: mapas temÃ¡ticos','Sensoriamento remoto: satÃ©lites e imagens'],
+      '2': ['Planeta Terra: estrutura e dinÃ¢mica interna','TectÃ´nica de placas: sismos e vulcÃµes','Relevo: formas e agentes','Hidrografia: rios, lagos e mares do mundo','Solos: formaÃ§Ã£o, tipos e uso'],
+      '3': ['Climatologia: fatores e elementos do clima','Biomas mundiais: floresta tropical, deserto, tundra','Oceanos e mares: circulaÃ§Ã£o e importÃ¢ncia','Impactos ambientais globais','GestÃ£o ambiental e Ã¡reas protegidas'],
+      '4': ['PopulaÃ§Ã£o mundial: distribuiÃ§Ã£o e diversidade','UrbanizaÃ§Ã£o no mundo: megacidades','RevisÃ£o do 6Âº ano','AvaliaÃ§Ã£o diagnÃ³stica','PreparaÃ§Ã£o para o 7Âº ano'],
     },
-    '7º Ano': {
-      '1': ['África: localização, relevo, clima e população','Colonização africana e descolonização','Conflitos e desafios atuais na África','Ásia: localização, relevo e grandes países','China e Índia: crescimento e influência global'],
-      '2': ['Europa: localização, países e União Europeia','América do Norte: EUA e Canadá','América Central e Caribe: diversidade','América do Sul: aprofundamento regional','Oceania: Austrália e Pacífico'],
-      '3': ['Geopolítica: poder e conflitos mundiais','Oriente Médio: petróleo e conflitos','Globalização: comércio e fluxos internacionais','Desenvolvimento humano: IDH e desigualdades','Movimentos migratórios mundiais'],
-      '4': ['Questões ambientais globais: desmatamento, poluição','Energias renováveis e sustentabilidade','Revisão do 7º ano','Avaliação diagnóstica','Preparação para o 8º ano'],
+    '7Âº Ano': {
+      '1': ['Ãfrica: localizaÃ§Ã£o, relevo, clima e populaÃ§Ã£o','ColonizaÃ§Ã£o africana e descolonizaÃ§Ã£o','Conflitos e desafios atuais na Ãfrica','Ãsia: localizaÃ§Ã£o, relevo e grandes paÃ­ses','China e Ãndia: crescimento e influÃªncia global'],
+      '2': ['Europa: localizaÃ§Ã£o, paÃ­ses e UniÃ£o Europeia','AmÃ©rica do Norte: EUA e CanadÃ¡','AmÃ©rica Central e Caribe: diversidade','AmÃ©rica do Sul: aprofundamento regional','Oceania: AustrÃ¡lia e PacÃ­fico'],
+      '3': ['GeopolÃ­tica: poder e conflitos mundiais','Oriente MÃ©dio: petrÃ³leo e conflitos','GlobalizaÃ§Ã£o: comÃ©rcio e fluxos internacionais','Desenvolvimento humano: IDH e desigualdades','Movimentos migratÃ³rios mundiais'],
+      '4': ['QuestÃµes ambientais globais: desmatamento, poluiÃ§Ã£o','Energias renovÃ¡veis e sustentabilidade','RevisÃ£o do 7Âº ano','AvaliaÃ§Ã£o diagnÃ³stica','PreparaÃ§Ã£o para o 8Âº ano'],
     },
-    '8º Ano': {
-      '1': ['Industrialização no mundo: história e distribuição','Revolução industrial e pós-industrial','Indústria no Brasil: localização e tipos','Agricultura no mundo: tipos e técnicas','Agroindústria e agronegócio no Paraná'],
-      '2': ['Comércio mundial: exportações e importações','Blocos econômicos: UE, NAFTA, Mercosul','Redes e fluxos de informação','Tecnologia e inovação na economia global','Trabalho no mundo: formal, informal, desemprego'],
-      '3': ['Problemas socioambientais urbanos: segregação, violência','Planejamento urbano e cidades sustentáveis','Campo no século XXI: reforma agrária','Conflitos por terra no Brasil e no Paraná','Populações tradicionais: indígenas e quilombolas'],
-      '4': ['Energia no Brasil: hidrelétricas, eólica, solar','Questão ambiental no Brasil: legislação e políticas','Revisão do 8º ano','Avaliação diagnóstica','Preparação para o 9º ano'],
+    '8Âº Ano': {
+      '1': ['IndustrializaÃ§Ã£o no mundo: histÃ³ria e distribuiÃ§Ã£o','RevoluÃ§Ã£o industrial e pÃ³s-industrial','IndÃºstria no Brasil: localizaÃ§Ã£o e tipos','Agricultura no mundo: tipos e tÃ©cnicas','AgroindÃºstria e agronegÃ³cio no ParanÃ¡'],
+      '2': ['ComÃ©rcio mundial: exportaÃ§Ãµes e importaÃ§Ãµes','Blocos econÃ´micos: UE, NAFTA, Mercosul','Redes e fluxos de informaÃ§Ã£o','Tecnologia e inovaÃ§Ã£o na economia global','Trabalho no mundo: formal, informal, desemprego'],
+      '3': ['Problemas socioambientais urbanos: segregaÃ§Ã£o, violÃªncia','Planejamento urbano e cidades sustentÃ¡veis','Campo no sÃ©culo XXI: reforma agrÃ¡ria','Conflitos por terra no Brasil e no ParanÃ¡','PopulaÃ§Ãµes tradicionais: indÃ­genas e quilombolas'],
+      '4': ['Energia no Brasil: hidrelÃ©tricas, eÃ³lica, solar','QuestÃ£o ambiental no Brasil: legislaÃ§Ã£o e polÃ­ticas','RevisÃ£o do 8Âº ano','AvaliaÃ§Ã£o diagnÃ³stica','PreparaÃ§Ã£o para o 9Âº ano'],
     },
-    '9º Ano': {
-      '1': ['Geopolítica mundial: potências e blocos de poder','Conflitos internacionais: causas e consequências','Terrorismo global e segurança internacional','Globalização e soberania nacional','Organizações internacionais: papel e limitações'],
-      '2': ['Desigualdades socioeconômicas no mundo e no Brasil','População e território: dinâmicas atuais','Migração e refugiados: questão humanitária','Racismo e discriminação: dimensões geográficas','Questão indígena no Brasil e na América Latina'],
-      '3': ['Questão ambiental global: COP, Protocolo de Paris','Desenvolvimento sustentável: práticas e desafios','Cidades inteligentes: tecnologia e qualidade de vida','Agricultura familiar e soberania alimentar','Paraná: desafios e potenciais no século XXI'],
-      '4': ['Revisão geral de Geografia do Ensino Fundamental','Pesquisa geográfica: metodologia e projeto','Avaliação diagnóstica e consolidação','Preparação para o Ensino Médio','Portfólio geográfico final'],
+    '9Âº Ano': {
+      '1': ['GeopolÃ­tica mundial: potÃªncias e blocos de poder','Conflitos internacionais: causas e consequÃªncias','Terrorismo global e seguranÃ§a internacional','GlobalizaÃ§Ã£o e soberania nacional','OrganizaÃ§Ãµes internacionais: papel e limitaÃ§Ãµes'],
+      '2': ['Desigualdades socioeconÃ´micas no mundo e no Brasil','PopulaÃ§Ã£o e territÃ³rio: dinÃ¢micas atuais','MigraÃ§Ã£o e refugiados: questÃ£o humanitÃ¡ria','Racismo e discriminaÃ§Ã£o: dimensÃµes geogrÃ¡ficas','QuestÃ£o indÃ­gena no Brasil e na AmÃ©rica Latina'],
+      '3': ['QuestÃ£o ambiental global: COP, Protocolo de Paris','Desenvolvimento sustentÃ¡vel: prÃ¡ticas e desafios','Cidades inteligentes: tecnologia e qualidade de vida','Agricultura familiar e soberania alimentar','ParanÃ¡: desafios e potenciais no sÃ©culo XXI'],
+      '4': ['RevisÃ£o geral de Geografia do Ensino Fundamental','Pesquisa geogrÃ¡fica: metodologia e projeto','AvaliaÃ§Ã£o diagnÃ³stica e consolidaÃ§Ã£o','PreparaÃ§Ã£o para o Ensino MÃ©dio','PortfÃ³lio geogrÃ¡fico final'],
     },
   },
   'Arte': {
-    '1º Ano': {
-      '1': ['Artes visuais: ponto, linha e forma','Cores primárias e secundárias: mistura e criação','Produção artística com materiais do cotidiano','Apreciação de obras de arte infantis','Arte indígena: padrões e motivos do Paraná'],
-      '2': ['Música: sons e silêncio, ritmo e melodia','Exploração de instrumentos musicais simples','Expressão corporal: movimentos livres','Dança: movimentos no espaço','Gêneros musicais do Paraná: fandango e chamamé'],
-      '3': ['Teatro: jogos dramáticos e expressão facial','Fantoches e marionetes: construção e apresentação','Artes visuais: textura, volume e espaço','Escultura com materiais recicláveis','Arte popular do Paraná'],
-      '4': ['Revisão: as linguagens da arte','Projeto artístico integrado','Exposição de trabalhos da turma','Apreciação de diferentes formas de arte','Arte digital: noções básicas'],
+    '1Âº Ano': {
+      '1': ['Artes visuais: ponto, linha e forma','Cores primÃ¡rias e secundÃ¡rias: mistura e criaÃ§Ã£o','ProduÃ§Ã£o artÃ­stica com materiais do cotidiano','ApreciaÃ§Ã£o de obras de arte infantis','Arte indÃ­gena: padrÃµes e motivos do ParanÃ¡'],
+      '2': ['MÃºsica: sons e silÃªncio, ritmo e melodia','ExploraÃ§Ã£o de instrumentos musicais simples','ExpressÃ£o corporal: movimentos livres','DanÃ§a: movimentos no espaÃ§o','GÃªneros musicais do ParanÃ¡: fandango e chamamÃ©'],
+      '3': ['Teatro: jogos dramÃ¡ticos e expressÃ£o facial','Fantoches e marionetes: construÃ§Ã£o e apresentaÃ§Ã£o','Artes visuais: textura, volume e espaÃ§o','Escultura com materiais reciclÃ¡veis','Arte popular do ParanÃ¡'],
+      '4': ['RevisÃ£o: as linguagens da arte','Projeto artÃ­stico integrado','ExposiÃ§Ã£o de trabalhos da turma','ApreciaÃ§Ã£o de diferentes formas de arte','Arte digital: noÃ§Ãµes bÃ¡sicas'],
     },
-    '2º Ano': {
-      '1': ['Artes visuais: pintura, colagem e desenho','Artistas brasileiros: Tarsila do Amaral','Música: altura, duração e timbre','Construção de instrumentos com materiais recicláveis','Circo e teatro: expressão e encenação'],
-      '2': ['Dança folclórica do Paraná: quadrilha e polca','Arte africana: padrões e significados','Arte indígena brasileira: cestaria e pintura corporal','Teatro: improvisação e personagem','Artes visuais: retrato e autorretrato'],
-      '3': ['Fotografia como linguagem artística','Vídeo e cinema: noções básicas','Música eletrônica e tecnologia','Performance: arte ao vivo','Arte urbana: grafite e muralismo'],
-      '4': ['Revisão e projeto artístico integrado','Exposição e apreciação coletiva','Arte e sociedade: funções da arte','Preparação para o 3º ano','Portfólio artístico da turma'],
+    '2Âº Ano': {
+      '1': ['Artes visuais: pintura, colagem e desenho','Artistas brasileiros: Tarsila do Amaral','MÃºsica: altura, duraÃ§Ã£o e timbre','ConstruÃ§Ã£o de instrumentos com materiais reciclÃ¡veis','Circo e teatro: expressÃ£o e encenaÃ§Ã£o'],
+      '2': ['DanÃ§a folclÃ³rica do ParanÃ¡: quadrilha e polca','Arte africana: padrÃµes e significados','Arte indÃ­gena brasileira: cestaria e pintura corporal','Teatro: improvisaÃ§Ã£o e personagem','Artes visuais: retrato e autorretrato'],
+      '3': ['Fotografia como linguagem artÃ­stica','VÃ­deo e cinema: noÃ§Ãµes bÃ¡sicas','MÃºsica eletrÃ´nica e tecnologia','Performance: arte ao vivo','Arte urbana: grafite e muralismo'],
+      '4': ['RevisÃ£o e projeto artÃ­stico integrado','ExposiÃ§Ã£o e apreciaÃ§Ã£o coletiva','Arte e sociedade: funÃ§Ãµes da arte','PreparaÃ§Ã£o para o 3Âº ano','PortfÃ³lio artÃ­stico da turma'],
     },
-    '3º Ano': {
-      '1': ['História da arte: da pré-história ao Renascimento','Perspectiva e proporção no desenho','Aquarela e guache: técnicas de pintura','Escultura: modelagem em argila','Arte sacra no Brasil colonial'],
-      '2': ['Modernismo brasileiro: Semana de Arte de 1922','Artistas paranaenses: Alfredo Andersen','Música erudita e popular: diferenças','Notação musical básica: figuras de nota','Criação de melodias simples'],
-      '3': ['Dança: ritmo, espaço e expressão','Ballet, jazz e dança contemporânea','Teatro: texto dramático e improvisação','Cenário, figurino e iluminação teatral','Cinema brasileiro: história e produção'],
-      '4': ['Arte, cultura e identidade paranaense','Patrimônio artístico e cultural do Paraná','Projeto de criação artística coletiva','Exposição final','Preparação para o 4º ano'],
+    '3Âº Ano': {
+      '1': ['HistÃ³ria da arte: da prÃ©-histÃ³ria ao Renascimento','Perspectiva e proporÃ§Ã£o no desenho','Aquarela e guache: tÃ©cnicas de pintura','Escultura: modelagem em argila','Arte sacra no Brasil colonial'],
+      '2': ['Modernismo brasileiro: Semana de Arte de 1922','Artistas paranaenses: Alfredo Andersen','MÃºsica erudita e popular: diferenÃ§as','NotaÃ§Ã£o musical bÃ¡sica: figuras de nota','CriaÃ§Ã£o de melodias simples'],
+      '3': ['DanÃ§a: ritmo, espaÃ§o e expressÃ£o','Ballet, jazz e danÃ§a contemporÃ¢nea','Teatro: texto dramÃ¡tico e improvisaÃ§Ã£o','CenÃ¡rio, figurino e iluminaÃ§Ã£o teatral','Cinema brasileiro: histÃ³ria e produÃ§Ã£o'],
+      '4': ['Arte, cultura e identidade paranaense','PatrimÃ´nio artÃ­stico e cultural do ParanÃ¡','Projeto de criaÃ§Ã£o artÃ­stica coletiva','ExposiÃ§Ã£o final','PreparaÃ§Ã£o para o 4Âº ano'],
     },
-    '4º Ano': {
-      '1': ['Artes visuais: impressionismo e expressionismo','Van Gogh, Monet e Picasso: obras e contextos','Técnicas de xilogravura e serigrafia','Arte popular nordestina: cordel e literatura de cordel','Arte na publicidade: noções básicas'],
-      '2': ['Música brasileira: MPB, samba e bossa nova','Instrumentos típicos: viola, violão e percussão','Composição musical: letras e melodias','Dança brasileira: frevo, coco e jongo','Arte e tecnologia: instalações e arte digital'],
-      '3': ['Teatro: comédia e drama','Gêneros teatrais: tragédia e comédia','Improvisação teatral e jogos de papel','Criação de roteiro e apresentação','Arte e literatura: ilustração de livros'],
-      '4': ['Revisão das linguagens artísticas','Portfólio artístico digital','Arte na vida cotidiana','Avaliação de aprendizagem','Preparação para o 5º ano'],
+    '4Âº Ano': {
+      '1': ['Artes visuais: impressionismo e expressionismo','Van Gogh, Monet e Picasso: obras e contextos','TÃ©cnicas de xilogravura e serigrafia','Arte popular nordestina: cordel e literatura de cordel','Arte na publicidade: noÃ§Ãµes bÃ¡sicas'],
+      '2': ['MÃºsica brasileira: MPB, samba e bossa nova','Instrumentos tÃ­picos: viola, violÃ£o e percussÃ£o','ComposiÃ§Ã£o musical: letras e melodias','DanÃ§a brasileira: frevo, coco e jongo','Arte e tecnologia: instalaÃ§Ãµes e arte digital'],
+      '3': ['Teatro: comÃ©dia e drama','GÃªneros teatrais: tragÃ©dia e comÃ©dia','ImprovisaÃ§Ã£o teatral e jogos de papel','CriaÃ§Ã£o de roteiro e apresentaÃ§Ã£o','Arte e literatura: ilustraÃ§Ã£o de livros'],
+      '4': ['RevisÃ£o das linguagens artÃ­sticas','PortfÃ³lio artÃ­stico digital','Arte na vida cotidiana','AvaliaÃ§Ã£o de aprendizagem','PreparaÃ§Ã£o para o 5Âº ano'],
     },
-    '5º Ano': {
-      '1': ['História da arte contemporânea','Abstrato e figurativo: leitura de imagens','Pop Art e Arte Conceitual','Arte digital e mídias criativas','Fotografia: composição e enquadramento'],
-      '2': ['Música: harmonia, contraponto e arranjo','Jazz, rock e música eletrônica: história','Criação de música com tecnologia digital','Dança: gêneros contemporâneos','Performance e body art'],
-      '3': ['Teatro do oprimido: Augusto Boal','Criação teatral: texto, encenação e público','Dramaturgia: escrita de cenas','Cinema documentário: produção simples','Arte e cidadania: arte engajada'],
-      '4': ['Projeto artístico integrado e interdisciplinar','Exposição final: apresentação ao público','Reflexão crítica sobre arte','Preparação para o 6º ano','Portfólio artístico completo'],
+    '5Âº Ano': {
+      '1': ['HistÃ³ria da arte contemporÃ¢nea','Abstrato e figurativo: leitura de imagens','Pop Art e Arte Conceitual','Arte digital e mÃ­dias criativas','Fotografia: composiÃ§Ã£o e enquadramento'],
+      '2': ['MÃºsica: harmonia, contraponto e arranjo','Jazz, rock e mÃºsica eletrÃ´nica: histÃ³ria','CriaÃ§Ã£o de mÃºsica com tecnologia digital','DanÃ§a: gÃªneros contemporÃ¢neos','Performance e body art'],
+      '3': ['Teatro do oprimido: Augusto Boal','CriaÃ§Ã£o teatral: texto, encenaÃ§Ã£o e pÃºblico','Dramaturgia: escrita de cenas','Cinema documentÃ¡rio: produÃ§Ã£o simples','Arte e cidadania: arte engajada'],
+      '4': ['Projeto artÃ­stico integrado e interdisciplinar','ExposiÃ§Ã£o final: apresentaÃ§Ã£o ao pÃºblico','ReflexÃ£o crÃ­tica sobre arte','PreparaÃ§Ã£o para o 6Âº ano','PortfÃ³lio artÃ­stico completo'],
     },
-    '6º Ano': {
-      '1': ['Arte na antiguidade: Grécia e Roma','Arte medieval: iconografia e arquitetura','Renascimento: perspectiva e humanismo','Barroco e Rococó: características','Arte colonial brasileira: igrejas e azulejos'],
-      '2': ['Neoclassicismo e Romantismo na arte','Realismo e Impressionismo','Arte brasileira no século XIX','Fotografia: história e linguagem','Design: estética e função'],
-      '3': ['Vanguardas europeias: cubismo, futurismo, dadaísmo e surrealismo','Arte Moderna no Brasil: Semana de 22','Expressionismo: emoção e distorção','Arte abstrata: Kandinsky e Mondrian','Muralismo mexicano: Diego Rivera'],
-      '4': ['Arte Contemporânea: instalação, performance e videoarte','Arte digital e net art','Cultura visual e mídias sociais','Revisão do 6º ano','Preparação para o 7º ano'],
+    '6Âº Ano': {
+      '1': ['Arte na antiguidade: GrÃ©cia e Roma','Arte medieval: iconografia e arquitetura','Renascimento: perspectiva e humanismo','Barroco e RococÃ³: caracterÃ­sticas','Arte colonial brasileira: igrejas e azulejos'],
+      '2': ['Neoclassicismo e Romantismo na arte','Realismo e Impressionismo','Arte brasileira no sÃ©culo XIX','Fotografia: histÃ³ria e linguagem','Design: estÃ©tica e funÃ§Ã£o'],
+      '3': ['Vanguardas europeias: cubismo, futurismo, dadaÃ­smo e surrealismo','Arte Moderna no Brasil: Semana de 22','Expressionismo: emoÃ§Ã£o e distorÃ§Ã£o','Arte abstrata: Kandinsky e Mondrian','Muralismo mexicano: Diego Rivera'],
+      '4': ['Arte ContemporÃ¢nea: instalaÃ§Ã£o, performance e videoarte','Arte digital e net art','Cultura visual e mÃ­dias sociais','RevisÃ£o do 6Âº ano','PreparaÃ§Ã£o para o 7Âº ano'],
     },
-    '7º Ano': {
-      '1': ['Arte africana: máscaras, esculturas e tecidos','Arte pré-colombiana: Maias, Astecas e Incas','Arte asiática: China, Japão e Índia','Arte islâmica: geometria e caligrafia','Arte indígena brasileira: grafismo e rituais'],
-      '2': ['Pop Art: Andy Warhol e sociedade de consumo','Hiperrealismo e Arte Conceitual','Graffiti e Arte Urbana: política e identidade','Fotografia documental e fotojornalismo','Design gráfico: tipografia e logomarca'],
-      '3': ['Música: contraponto e polifonia','Ópera e música clássica: história','MPB: Chico Buarque, Caetano Veloso e Gilberto Gil','Hip-hop e funk: cultura e resistência','Música do Paraná: ritmos e artistas'],
-      '4': ['Dança: de gêneros populares ao contemporâneo','Teatro musical: história e características','Cinema: linguagem cinematográfica','Revisão do 7º ano','Projeto artístico colaborativo'],
+    '7Âº Ano': {
+      '1': ['Arte africana: mÃ¡scaras, esculturas e tecidos','Arte prÃ©-colombiana: Maias, Astecas e Incas','Arte asiÃ¡tica: China, JapÃ£o e Ãndia','Arte islÃ¢mica: geometria e caligrafia','Arte indÃ­gena brasileira: grafismo e rituais'],
+      '2': ['Pop Art: Andy Warhol e sociedade de consumo','Hiperrealismo e Arte Conceitual','Graffiti e Arte Urbana: polÃ­tica e identidade','Fotografia documental e fotojornalismo','Design grÃ¡fico: tipografia e logomarca'],
+      '3': ['MÃºsica: contraponto e polifonia','Ãpera e mÃºsica clÃ¡ssica: histÃ³ria','MPB: Chico Buarque, Caetano Veloso e Gilberto Gil','Hip-hop e funk: cultura e resistÃªncia','MÃºsica do ParanÃ¡: ritmos e artistas'],
+      '4': ['DanÃ§a: de gÃªneros populares ao contemporÃ¢neo','Teatro musical: histÃ³ria e caracterÃ­sticas','Cinema: linguagem cinematogrÃ¡fica','RevisÃ£o do 7Âº ano','Projeto artÃ­stico colaborativo'],
     },
-    '8º Ano': {
-      '1': ['Arte e tecnologia: arte computacional','Produção audiovisual: roteiro, filmagem e edição','Animação: stop motion e digital','Arte sonora: instalações e soundscapes','Net art e arte participativa em rede'],
-      '2': ['Artistas brasileiros contemporâneos','Arte e questões sociais: feminismo, raça e LGBTQ+','Arte de rua no Brasil: pichação e grafite','Artes visuais na publicidade e na moda','Design de produtos e sustentabilidade'],
-      '3': ['Música contemporânea: experimental e eletrônica','Produção musical digital: DAW e sampling','Composição e arranjo com tecnologia','Dança contemporânea: contact improvisation','Performance e intervenção urbana'],
-      '4': ['Teatro contemporâneo: teatro performativo','Dramaturgia contemporânea','Cinema de gênero e autoral','Revisão do 8º ano','Portfólio audiovisual final'],
+    '8Âº Ano': {
+      '1': ['Arte e tecnologia: arte computacional','ProduÃ§Ã£o audiovisual: roteiro, filmagem e ediÃ§Ã£o','AnimaÃ§Ã£o: stop motion e digital','Arte sonora: instalaÃ§Ãµes e soundscapes','Net art e arte participativa em rede'],
+      '2': ['Artistas brasileiros contemporÃ¢neos','Arte e questÃµes sociais: feminismo, raÃ§a e LGBTQ+','Arte de rua no Brasil: pichaÃ§Ã£o e grafite','Artes visuais na publicidade e na moda','Design de produtos e sustentabilidade'],
+      '3': ['MÃºsica contemporÃ¢nea: experimental e eletrÃ´nica','ProduÃ§Ã£o musical digital: DAW e sampling','ComposiÃ§Ã£o e arranjo com tecnologia','DanÃ§a contemporÃ¢nea: contact improvisation','Performance e intervenÃ§Ã£o urbana'],
+      '4': ['Teatro contemporÃ¢neo: teatro performativo','Dramaturgia contemporÃ¢nea','Cinema de gÃªnero e autoral','RevisÃ£o do 8Âº ano','PortfÃ³lio audiovisual final'],
     },
-    '9º Ano': {
-      '1': ['Arte, identidade e pertencimento','Relações de poder na arte: quem produz e quem consome','Arte e mercado: galerismo e curadoria','Crítica de arte: análise e interpretação','Arte como transformação social'],
-      '2': ['Projeto de criação artística pessoal','Pesquisa e produção: processo criativo','Exposição e apresentação do projeto','Arte e interdisciplinaridade','Profissões na área de arte e cultura'],
-      '3': ['Patrimônio cultural e preservação','Arte digital: inteligência artificial e criatividade','Diversidade cultural no mundo globalizado','Arte e sustentabilidade ambiental','Revisão crítica das linguagens artísticas'],
-      '4': ['Portfólio artístico final do Ensino Fundamental','Reflexão sobre trajetória artística','Exposição coletiva de encerramento','Avaliação diagnóstica e consolidação','Preparação para o Ensino Médio'],
+    '9Âº Ano': {
+      '1': ['Arte, identidade e pertencimento','RelaÃ§Ãµes de poder na arte: quem produz e quem consome','Arte e mercado: galerismo e curadoria','CrÃ­tica de arte: anÃ¡lise e interpretaÃ§Ã£o','Arte como transformaÃ§Ã£o social'],
+      '2': ['Projeto de criaÃ§Ã£o artÃ­stica pessoal','Pesquisa e produÃ§Ã£o: processo criativo','ExposiÃ§Ã£o e apresentaÃ§Ã£o do projeto','Arte e interdisciplinaridade','ProfissÃµes na Ã¡rea de arte e cultura'],
+      '3': ['PatrimÃ´nio cultural e preservaÃ§Ã£o','Arte digital: inteligÃªncia artificial e criatividade','Diversidade cultural no mundo globalizado','Arte e sustentabilidade ambiental','RevisÃ£o crÃ­tica das linguagens artÃ­sticas'],
+      '4': ['PortfÃ³lio artÃ­stico final do Ensino Fundamental','ReflexÃ£o sobre trajetÃ³ria artÃ­stica','ExposiÃ§Ã£o coletiva de encerramento','AvaliaÃ§Ã£o diagnÃ³stica e consolidaÃ§Ã£o','PreparaÃ§Ã£o para o Ensino MÃ©dio'],
     },
   },
-  'Educação Física': {
-    '1º Ano': {
-      '1': ['Habilidades motoras básicas: correr, saltar, arremessar','Brincadeiras e jogos populares: amarelinha, corda, elástico','Lateralidade e coordenação motora','Espaço e tempo: noções corporais','Jogos cooperativos simples'],
-      '2': ['Ginástica básica: rolamentos, cambalhotas e equilíbrio','Atividades com bolas: quicar, chutar, arremessar','Dança: movimentos livres e em grupo','Brincadeiras indígenas e africanas','Saúde e higiene pós-atividade física'],
-      '3': ['Jogos de perseguição e fuga','Brincadeiras tradicionais: pique-esconde, pegador','Atletismo básico: corrida e salto','Jogos com cordas e aros','Regras e fair play em jogos'],
-      '4': ['Revisão de habilidades motoras','Olimpíadas escolares: participação e valores','Brincadeiras ao ar livre no Paraná','Projeto de jogos criados pela turma','Preparação para o 2º ano'],
+  'EducaÃ§Ã£o FÃ­sica': {
+    '1Âº Ano': {
+      '1': ['Habilidades motoras bÃ¡sicas: correr, saltar, arremessar','Brincadeiras e jogos populares: amarelinha, corda, elÃ¡stico','Lateralidade e coordenaÃ§Ã£o motora','EspaÃ§o e tempo: noÃ§Ãµes corporais','Jogos cooperativos simples'],
+      '2': ['GinÃ¡stica bÃ¡sica: rolamentos, cambalhotas e equilÃ­brio','Atividades com bolas: quicar, chutar, arremessar','DanÃ§a: movimentos livres e em grupo','Brincadeiras indÃ­genas e africanas','SaÃºde e higiene pÃ³s-atividade fÃ­sica'],
+      '3': ['Jogos de perseguiÃ§Ã£o e fuga','Brincadeiras tradicionais: pique-esconde, pegador','Atletismo bÃ¡sico: corrida e salto','Jogos com cordas e aros','Regras e fair play em jogos'],
+      '4': ['RevisÃ£o de habilidades motoras','OlimpÃ­adas escolares: participaÃ§Ã£o e valores','Brincadeiras ao ar livre no ParanÃ¡','Projeto de jogos criados pela turma','PreparaÃ§Ã£o para o 2Âº ano'],
     },
-    '2º Ano': {
-      '1': ['Habilidades motoras: driblar, rebater e receber','Jogos pré-esportivos com bola','Brincadeiras populares do Paraná','Ginástica rítmica: fita e bola','Corridas de revezamento'],
-      '2': ['Modalidades esportivas de invasão: basquete e futsal (introdução)','Regras básicas dos esportes','Jogos de rede: badminton e tênis de mesa (básico)','Esportes paralímpicos: noções','Saúde: atividade física e qualidade de vida'],
-      '3': ['Dança folclórica: quadrilha e dança dos povos do Paraná','Expressão corporal: mímica e gesto','Lutas: princípios e valores (judô — noções)','Natação: adaptação aquática','Atividades de aventura: trilha e escalada simples'],
-      '4': ['Jogos coletivos e cooperativos','Avaliação de habilidades motoras','Projeto esportivo da escola','Revisão do ano','Preparação para o 3º ano'],
+    '2Âº Ano': {
+      '1': ['Habilidades motoras: driblar, rebater e receber','Jogos prÃ©-esportivos com bola','Brincadeiras populares do ParanÃ¡','GinÃ¡stica rÃ­tmica: fita e bola','Corridas de revezamento'],
+      '2': ['Modalidades esportivas de invasÃ£o: basquete e futsal (introduÃ§Ã£o)','Regras bÃ¡sicas dos esportes','Jogos de rede: badminton e tÃªnis de mesa (bÃ¡sico)','Esportes paralÃ­mpicos: noÃ§Ãµes','SaÃºde: atividade fÃ­sica e qualidade de vida'],
+      '3': ['DanÃ§a folclÃ³rica: quadrilha e danÃ§a dos povos do ParanÃ¡','ExpressÃ£o corporal: mÃ­mica e gesto','Lutas: princÃ­pios e valores (judÃ´ â noÃ§Ãµes)','NataÃ§Ã£o: adaptaÃ§Ã£o aquÃ¡tica','Atividades de aventura: trilha e escalada simples'],
+      '4': ['Jogos coletivos e cooperativos','AvaliaÃ§Ã£o de habilidades motoras','Projeto esportivo da escola','RevisÃ£o do ano','PreparaÃ§Ã£o para o 3Âº ano'],
     },
-    '3º Ano': {
-      '1': ['Atletismo: corridas, saltos e arremessos','Técnicas básicas de corrida','Jogos pré-atlético','Futsal: fundamentos básicos','Vôlei: toque e manchete (introdução)'],
-      '2': ['Basquete: dribble, passe e bandeja','Handebol: condução, passe e arremesso','Esportes de campo e taco: beisebol (básico)','Jogos e brincadeiras afro-brasileiras','Capoeira: movimentos e cultura'],
-      '3': ['Ginástica artística: solo e parao','Ginástica acrobática: duplas e trios','Dança de rua: break e hip-hop','Esportes radicais: skate e patins (segurança)','Jogos eletrônicos como esporte: e-sports (discussão)'],
-      '4': ['Saúde e bem-estar: hábitos saudáveis','Alimentação e atividade física','Projeto esportivo integrativo','Olimpíadas escolares paranaenses','Revisão do 3º ano'],
+    '3Âº Ano': {
+      '1': ['Atletismo: corridas, saltos e arremessos','TÃ©cnicas bÃ¡sicas de corrida','Jogos prÃ©-atlÃ©tico','Futsal: fundamentos bÃ¡sicos','VÃ´lei: toque e manchete (introduÃ§Ã£o)'],
+      '2': ['Basquete: dribble, passe e bandeja','Handebol: conduÃ§Ã£o, passe e arremesso','Esportes de campo e taco: beisebol (bÃ¡sico)','Jogos e brincadeiras afro-brasileiras','Capoeira: movimentos e cultura'],
+      '3': ['GinÃ¡stica artÃ­stica: solo e parao','GinÃ¡stica acrobÃ¡tica: duplas e trios','DanÃ§a de rua: break e hip-hop','Esportes radicais: skate e patins (seguranÃ§a)','Jogos eletrÃ´nicos como esporte: e-sports (discussÃ£o)'],
+      '4': ['SaÃºde e bem-estar: hÃ¡bitos saudÃ¡veis','AlimentaÃ§Ã£o e atividade fÃ­sica','Projeto esportivo integrativo','OlimpÃ­adas escolares paranaenses','RevisÃ£o do 3Âº ano'],
     },
-    '4º Ano': {
-      '1': ['Futsal: táticas e regras completas','Basquete: posições e táticas','Vôlei: saque, toque e manchete','Atletismo: técnicas de campo','Jogos esportivos coletivos'],
-      '2': ['Handebol: técnicas e táticas','Tênis de mesa: técnicas básicas','Badminton: serviço e rebatida','Natação: nado livre e costas','Capoeira: sequências de golpes e música'],
-      '3': ['Lutas: judô, wrestling (fundamentos)','Ginástica de condicionamento: circuitos','Dança: ritmos brasileiros (samba, axé, frevo)','Atividades de aventura na natureza','Esportes paralímpicos: atletismo e natação'],
-      '4': ['Projeto esportivo da escola','Torneios internos e fair play','Saúde: prevenção de lesões esportivas','Revisão do 4º ano','Preparação para o 5º ano'],
+    '4Âº Ano': {
+      '1': ['Futsal: tÃ¡ticas e regras completas','Basquete: posiÃ§Ãµes e tÃ¡ticas','VÃ´lei: saque, toque e manchete','Atletismo: tÃ©cnicas de campo','Jogos esportivos coletivos'],
+      '2': ['Handebol: tÃ©cnicas e tÃ¡ticas','TÃªnis de mesa: tÃ©cnicas bÃ¡sicas','Badminton: serviÃ§o e rebatida','NataÃ§Ã£o: nado livre e costas','Capoeira: sequÃªncias de golpes e mÃºsica'],
+      '3': ['Lutas: judÃ´, wrestling (fundamentos)','GinÃ¡stica de condicionamento: circuitos','DanÃ§a: ritmos brasileiros (samba, axÃ©, frevo)','Atividades de aventura na natureza','Esportes paralÃ­mpicos: atletismo e nataÃ§Ã£o'],
+      '4': ['Projeto esportivo da escola','Torneios internos e fair play','SaÃºde: prevenÃ§Ã£o de lesÃµes esportivas','RevisÃ£o do 4Âº ano','PreparaÃ§Ã£o para o 5Âº ano'],
     },
-    '5º Ano': {
-      '1': ['Futsal e futebol: técnicas e táticas avançadas','Basquete: contra-ataque e marcação','Vôlei: bloqueio e ataque','Handebol: sistemas ofensivos e defensivos','Atletismo: provas combinadas'],
-      '2': ['Esportes de raquete: tênis e squash','Esportes aquáticos: polo aquático','Dança esportiva: competições','Lutas: princípios de defesa pessoal','Esportes de neve e gelo: noções'],
-      '3': ['Corpo humano e exercício: anatomia e fisiologia básica','Treino funcional: noções','Yoga e meditação: benefícios','Consciência corporal e postura','Primeiros socorros esportivos básicos'],
-      '4': ['Projeto atlético interdisciplinar','Jogos cooperativos e inclusivos','Avaliação do desempenho motor','Revisão do Ensino Fundamental I','Preparação para o 6º ano'],
+    '5Âº Ano': {
+      '1': ['Futsal e futebol: tÃ©cnicas e tÃ¡ticas avanÃ§adas','Basquete: contra-ataque e marcaÃ§Ã£o','VÃ´lei: bloqueio e ataque','Handebol: sistemas ofensivos e defensivos','Atletismo: provas combinadas'],
+      '2': ['Esportes de raquete: tÃªnis e squash','Esportes aquÃ¡ticos: polo aquÃ¡tico','DanÃ§a esportiva: competiÃ§Ãµes','Lutas: princÃ­pios de defesa pessoal','Esportes de neve e gelo: noÃ§Ãµes'],
+      '3': ['Corpo humano e exercÃ­cio: anatomia e fisiologia bÃ¡sica','Treino funcional: noÃ§Ãµes','Yoga e meditaÃ§Ã£o: benefÃ­cios','ConsciÃªncia corporal e postura','Primeiros socorros esportivos bÃ¡sicos'],
+      '4': ['Projeto atlÃ©tico interdisciplinar','Jogos cooperativos e inclusivos','AvaliaÃ§Ã£o do desempenho motor','RevisÃ£o do Ensino Fundamental I','PreparaÃ§Ã£o para o 6Âº ano'],
     },
-    '6º Ano': {
-      '1': ['Esportes de invasão: futsal, basquete, handebol, rúgbi','Táticas coletivas: ataque e defesa','Sistema de jogo em esportes coletivos','Arbitragem: regras e sinais','Capacidades físicas: força, resistência, velocidade'],
-      '2': ['Esportes de rede/divisória: vôlei, tênis, badminton','Técnicas específicas por modalidade','Iniciação esportiva: escolha de modalidade','Esportes adaptados e para-esporte','Saúde: postura e ergonomia'],
-      '3': ['Ginástica: artística, rítmica e acrobática','Dança: gêneros e coreografias','Lutas: judô e karatê (fundamentos)','Atividades de aventura: escalada e rapel','Esportes de precisão: tiro com arco e bocha'],
-      '4': ['Saúde escolar: avaliação física','Hábitos alimentares e atividade física','Projeto esportivo: planejamento e execução','Revisão do 6º ano','Preparação para o 7º ano'],
+    '6Âº Ano': {
+      '1': ['Esportes de invasÃ£o: futsal, basquete, handebol, rÃºgbi','TÃ¡ticas coletivas: ataque e defesa','Sistema de jogo em esportes coletivos','Arbitragem: regras e sinais','Capacidades fÃ­sicas: forÃ§a, resistÃªncia, velocidade'],
+      '2': ['Esportes de rede/divisÃ³ria: vÃ´lei, tÃªnis, badminton','TÃ©cnicas especÃ­ficas por modalidade','IniciaÃ§Ã£o esportiva: escolha de modalidade','Esportes adaptados e para-esporte','SaÃºde: postura e ergonomia'],
+      '3': ['GinÃ¡stica: artÃ­stica, rÃ­tmica e acrobÃ¡tica','DanÃ§a: gÃªneros e coreografias','Lutas: judÃ´ e karatÃª (fundamentos)','Atividades de aventura: escalada e rapel','Esportes de precisÃ£o: tiro com arco e bocha'],
+      '4': ['SaÃºde escolar: avaliaÃ§Ã£o fÃ­sica','HÃ¡bitos alimentares e atividade fÃ­sica','Projeto esportivo: planejamento e execuÃ§Ã£o','RevisÃ£o do 6Âº ano','PreparaÃ§Ã£o para o 7Âº ano'],
     },
-    '7º Ano': {
-      '1': ['Técnicas avançadas nos esportes coletivos','Táticas de jogo: análise e aplicação','Regras e fair play nos esportes','Treinamento esportivo: princípios','Esportes de alto rendimento: estrutura'],
-      '2': ['Esportes de aventura e ecológicos','Escalada, rafting e mountain bike','Surfe e bodyboard','Esportes de inverno: ski e snowboard','Orientação e mapa topográfico'],
-      '3': ['Lutas brasileiras: capoeira, vale-tudo e sambo','Lutas olímpicas: judô, wrestling, boxe, taekwondo','Artes marciais orientais: karatê, kung-fu','Defesa pessoal: princípios e técnicas','Ética e filosofia das lutas'],
-      '4': ['Dança: coreografia e apresentação','Projeto de dança cultural do Paraná','Saúde e qualidade de vida: avaliação','Revisão do 7º ano','Preparação para o 8º ano'],
+    '7Âº Ano': {
+      '1': ['TÃ©cnicas avanÃ§adas nos esportes coletivos','TÃ¡ticas de jogo: anÃ¡lise e aplicaÃ§Ã£o','Regras e fair play nos esportes','Treinamento esportivo: princÃ­pios','Esportes de alto rendimento: estrutura'],
+      '2': ['Esportes de aventura e ecolÃ³gicos','Escalada, rafting e mountain bike','Surfe e bodyboard','Esportes de inverno: ski e snowboard','OrientaÃ§Ã£o e mapa topogrÃ¡fico'],
+      '3': ['Lutas brasileiras: capoeira, vale-tudo e sambo','Lutas olÃ­mpicas: judÃ´, wrestling, boxe, taekwondo','Artes marciais orientais: karatÃª, kung-fu','Defesa pessoal: princÃ­pios e tÃ©cnicas','Ãtica e filosofia das lutas'],
+      '4': ['DanÃ§a: coreografia e apresentaÃ§Ã£o','Projeto de danÃ§a cultural do ParanÃ¡','SaÃºde e qualidade de vida: avaliaÃ§Ã£o','RevisÃ£o do 7Âº ano','PreparaÃ§Ã£o para o 8Âº ano'],
     },
-    '8º Ano': {
-      '1': ['Futsal, basquete e vôlei: aprofundamento técnico-tático','Elaboração de táticas de jogo','Criação de jogos esportivos','Arbitragem: prática em jogos da escola','Competições escolares: planejamento'],
-      '2': ['Fisioterapia preventiva: alongamento e flexibilidade','Musculação: conceitos e segurança','Treinamento funcional: circuitos','Avaliação física: IMC e resistência','Doping: discussão ética e saúde'],
-      '3': ['Dança contemporânea: improvisação e performance','Street dance: grupos e batalhas','Expressão corporal: teatro físico','Coreografia: criação e ensaio','Apresentação e avaliação'],
-      '4': ['Esportes paralímpicos: aprofundamento','Esportes inclusivos na escola','Projeto esportivo interdisciplinar','Revisão do 8º ano','Preparação para o 9º ano'],
+    '8Âº Ano': {
+      '1': ['Futsal, basquete e vÃ´lei: aprofundamento tÃ©cnico-tÃ¡tico','ElaboraÃ§Ã£o de tÃ¡ticas de jogo','CriaÃ§Ã£o de jogos esportivos','Arbitragem: prÃ¡tica em jogos da escola','CompetiÃ§Ãµes escolares: planejamento'],
+      '2': ['Fisioterapia preventiva: alongamento e flexibilidade','MusculaÃ§Ã£o: conceitos e seguranÃ§a','Treinamento funcional: circuitos','AvaliaÃ§Ã£o fÃ­sica: IMC e resistÃªncia','Doping: discussÃ£o Ã©tica e saÃºde'],
+      '3': ['DanÃ§a contemporÃ¢nea: improvisaÃ§Ã£o e performance','Street dance: grupos e batalhas','ExpressÃ£o corporal: teatro fÃ­sico','Coreografia: criaÃ§Ã£o e ensaio','ApresentaÃ§Ã£o e avaliaÃ§Ã£o'],
+      '4': ['Esportes paralÃ­mpicos: aprofundamento','Esportes inclusivos na escola','Projeto esportivo interdisciplinar','RevisÃ£o do 8Âº ano','PreparaÃ§Ã£o para o 9Âº ano'],
     },
-    '9º Ano': {
-      '1': ['Análise crítica do esporte na mídia e sociedade','Esporte como profissão: mercado e carreira','Medicina esportiva: prevenção e reabilitação','Tecnologia no esporte: materiais e recursos','Grandes eventos esportivos: Olimpíadas e Copa'],
-      '2': ['Saúde mental e atividade física: estresse e bem-estar','Esportes eletrônicos: e-sports e gamificação','Bodybuilding e fitness: modas e riscos','Alimentação esportiva: noções de nutrição','Drogas e esporte: doping e efeitos colaterais'],
-      '3': ['Projeto esportivo final: da ideia à prática','Organização de evento esportivo escolar','Arbitragem e gestão esportiva','Voluntariado no esporte','Esporte e sustentabilidade ambiental'],
-      '4': ['Portfólio esportivo do Ensino Fundamental','Reflexão sobre a trajetória esportiva','Avaliação final e consolidação','Preparação para o Ensino Médio','Projetos e carreiras no esporte'],
+    '9Âº Ano': {
+      '1': ['AnÃ¡lise crÃ­tica do esporte na mÃ­dia e sociedade','Esporte como profissÃ£o: mercado e carreira','Medicina esportiva: prevenÃ§Ã£o e reabilitaÃ§Ã£o','Tecnologia no esporte: materiais e recursos','Grandes eventos esportivos: OlimpÃ­adas e Copa'],
+      '2': ['SaÃºde mental e atividade fÃ­sica: estresse e bem-estar','Esportes eletrÃ´nicos: e-sports e gamificaÃ§Ã£o','Bodybuilding e fitness: modas e riscos','AlimentaÃ§Ã£o esportiva: noÃ§Ãµes de nutriÃ§Ã£o','Drogas e esporte: doping e efeitos colaterais'],
+      '3': ['Projeto esportivo final: da ideia Ã  prÃ¡tica','OrganizaÃ§Ã£o de evento esportivo escolar','Arbitragem e gestÃ£o esportiva','Voluntariado no esporte','Esporte e sustentabilidade ambiental'],
+      '4': ['PortfÃ³lio esportivo do Ensino Fundamental','ReflexÃ£o sobre a trajetÃ³ria esportiva','AvaliaÃ§Ã£o final e consolidaÃ§Ã£o','PreparaÃ§Ã£o para o Ensino MÃ©dio','Projetos e carreiras no esporte'],
     },
   },
   'Ensino Religioso': {
-    '1º Ano': {
-      '1': ['Identidade: quem sou eu e minha história','Família: diversidade de configurações familiares','Comunidade: pertencimento e convivência','Celebrações e festas da família e comunidade','Diferentes formas de expressar gratidão e alegria'],
-      '2': ['Natureza como fonte de vida e espiritualidade','Cuidados com o ambiente e com o outro','Valores: amor, respeito e solidariedade','Orações e práticas espirituais das famílias','Diversidade de crenças na comunidade'],
-      '3': ['Sagrado na natureza: como diferentes culturas percebem','Símbolos religiosos: o que significam','Festas religiosas: Natal, Páscoa, Festa Junina','Histórias sagradas de diferentes tradições','Respeito às diferenças de crença'],
-      '4': ['Revisão: identidade, família e diversidade','Projeto de convivência e respeito','Reflexão sobre valores universais','Portfólio das aprendizagens','Preparação para o 2º ano'],
+    '1Âº Ano': {
+      '1': ['Identidade: quem sou eu e minha histÃ³ria','FamÃ­lia: diversidade de configuraÃ§Ãµes familiares','Comunidade: pertencimento e convivÃªncia','CelebraÃ§Ãµes e festas da famÃ­lia e comunidade','Diferentes formas de expressar gratidÃ£o e alegria'],
+      '2': ['Natureza como fonte de vida e espiritualidade','Cuidados com o ambiente e com o outro','Valores: amor, respeito e solidariedade','OraÃ§Ãµes e prÃ¡ticas espirituais das famÃ­lias','Diversidade de crenÃ§as na comunidade'],
+      '3': ['Sagrado na natureza: como diferentes culturas percebem','SÃ­mbolos religiosos: o que significam','Festas religiosas: Natal, PÃ¡scoa, Festa Junina','HistÃ³rias sagradas de diferentes tradiÃ§Ãµes','Respeito Ã s diferenÃ§as de crenÃ§a'],
+      '4': ['RevisÃ£o: identidade, famÃ­lia e diversidade','Projeto de convivÃªncia e respeito','ReflexÃ£o sobre valores universais','PortfÃ³lio das aprendizagens','PreparaÃ§Ã£o para o 2Âº ano'],
     },
-    '2º Ano': {
-      '1': ['Diversidade religiosa no Brasil e no Paraná','Tradições religiosas indígenas: cosmovisão e rituais','Tradições religiosas africanas: candomblé e umbanda','Catolicismo: história e práticas no Brasil','Protestantismo: história e denominações no Paraná'],
-      '2': ['Budismo e hinduísmo: princípios e práticas','Islamismo: história e preceitos básicos','Judaísmo: história, cultura e tradições','Religiões orientais no Paraná: imigração japonesa','Espiritismo: Allan Kardec e o contexto brasileiro'],
-      '3': ['Lugares sagrados: templos, igrejas, mesquitas e terreiros','Textos sagrados: Bíblia, Alcorão, Torá e outros','Ritos de passagem: nascimento, casamento e morte','Símbolos religiosos universais: cruz, lua, estrela','Peregrinações religiosas no mundo'],
-      '4': ['Diálogo inter-religioso: tolerância e respeito','Arte e religião: música, pintura e arquitetura','Ética e moral nas religiões','Revisão do 2º ano','Preparação para o 3º ano'],
+    '2Âº Ano': {
+      '1': ['Diversidade religiosa no Brasil e no ParanÃ¡','TradiÃ§Ãµes religiosas indÃ­genas: cosmovisÃ£o e rituais','TradiÃ§Ãµes religiosas africanas: candomblÃ© e umbanda','Catolicismo: histÃ³ria e prÃ¡ticas no Brasil','Protestantismo: histÃ³ria e denominaÃ§Ãµes no ParanÃ¡'],
+      '2': ['Budismo e hinduÃ­smo: princÃ­pios e prÃ¡ticas','Islamismo: histÃ³ria e preceitos bÃ¡sicos','JudaÃ­smo: histÃ³ria, cultura e tradiÃ§Ãµes','ReligiÃµes orientais no ParanÃ¡: imigraÃ§Ã£o japonesa','Espiritismo: Allan Kardec e o contexto brasileiro'],
+      '3': ['Lugares sagrados: templos, igrejas, mesquitas e terreiros','Textos sagrados: BÃ­blia, AlcorÃ£o, TorÃ¡ e outros','Ritos de passagem: nascimento, casamento e morte','SÃ­mbolos religiosos universais: cruz, lua, estrela','PeregrinaÃ§Ãµes religiosas no mundo'],
+      '4': ['DiÃ¡logo inter-religioso: tolerÃ¢ncia e respeito','Arte e religiÃ£o: mÃºsica, pintura e arquitetura','Ãtica e moral nas religiÃµes','RevisÃ£o do 2Âº ano','PreparaÃ§Ã£o para o 3Âº ano'],
     },
-    '3º Ano': {
-      '1': ['História das religiões no mundo: origem e evolução','Monoteísmo: judaísmo, cristianismo e islamismo','Politeísmo: mitologias grega, romana e nórdica','Animismo e Espiritismo','Religiosidade popular brasileira: fé e cultura'],
-      '2': ['Figuras sagradas: Jesus, Buda, Maomé, Confúcio','Profetas e mensageiros em diferentes tradições','Milagres e narrativas sagradas','Santos populares no Brasil: Padre Cícero, São Jorge','Padroeiros: Nossa Senhora Aparecida e padroeiros do Paraná'],
-      '3': ['Valores universais nas religiões: paz, amor e justiça','Orações e meditação em diferentes tradições','Música religiosa: gospel, canto gregoriano, chants','Danças sagradas: candomblé, dervixes girantes','Arte sacra: mosaicos, vitrais e esculturas'],
-      '4': ['Direitos humanos e liberdade religiosa','Discriminação religiosa: reconhecimento e prevenção','Revisão do 3º ano','Projeto de pesquisa sobre diversidade religiosa','Preparação para o 4º ano'],
+    '3Âº Ano': {
+      '1': ['HistÃ³ria das religiÃµes no mundo: origem e evoluÃ§Ã£o','MonoteÃ­smo: judaÃ­smo, cristianismo e islamismo','PoliteÃ­smo: mitologias grega, romana e nÃ³rdica','Animismo e Espiritismo','Religiosidade popular brasileira: fÃ© e cultura'],
+      '2': ['Figuras sagradas: Jesus, Buda, MaomÃ©, ConfÃºcio','Profetas e mensageiros em diferentes tradiÃ§Ãµes','Milagres e narrativas sagradas','Santos populares no Brasil: Padre CÃ­cero, SÃ£o Jorge','Padroeiros: Nossa Senhora Aparecida e padroeiros do ParanÃ¡'],
+      '3': ['Valores universais nas religiÃµes: paz, amor e justiÃ§a','OraÃ§Ãµes e meditaÃ§Ã£o em diferentes tradiÃ§Ãµes','MÃºsica religiosa: gospel, canto gregoriano, chants','DanÃ§as sagradas: candomblÃ©, dervixes girantes','Arte sacra: mosaicos, vitrais e esculturas'],
+      '4': ['Direitos humanos e liberdade religiosa','DiscriminaÃ§Ã£o religiosa: reconhecimento e prevenÃ§Ã£o','RevisÃ£o do 3Âº ano','Projeto de pesquisa sobre diversidade religiosa','PreparaÃ§Ã£o para o 4Âº ano'],
     },
-    '4º Ano': {
-      '1': ['Cosmogonias: como as religiões explicam a origem do universo','Criação do mundo no Gênesis (Bíblia)','Criação no Alcorão (Islamismo)','Mitos de criação indígenas do Paraná','Big Bang e ciência: complementaridade com a fé'],
-      '2': ['Escatologia: o que as religiões dizem sobre o fim dos tempos','Paraíso, inferno e purgatório no Catolicismo','Nirvana no Budismo','Reencarnação no Hinduísmo e Espiritismo','Dia do Juízo Final no Islamismo'],
-      '3': ['Moral e ética religiosa: o que é certo e errado','Os 10 Mandamentos e a moral judaico-cristã','Os 5 pilares do Islamismo','Os 8 caminhos do Budismo','Valores morais nas tradições indígenas'],
-      '4': ['Revisão: cosmogonias e escatologias','Diálogo entre fé e ciência','Projeto de respeito e tolerância religiosa','Avaliação do 4º ano','Preparação para o 5º ano'],
+    '4Âº Ano': {
+      '1': ['Cosmogonias: como as religiÃµes explicam a origem do universo','CriaÃ§Ã£o do mundo no GÃªnesis (BÃ­blia)','CriaÃ§Ã£o no AlcorÃ£o (Islamismo)','Mitos de criaÃ§Ã£o indÃ­genas do ParanÃ¡','Big Bang e ciÃªncia: complementaridade com a fÃ©'],
+      '2': ['Escatologia: o que as religiÃµes dizem sobre o fim dos tempos','ParaÃ­so, inferno e purgatÃ³rio no Catolicismo','Nirvana no Budismo','ReencarnaÃ§Ã£o no HinduÃ­smo e Espiritismo','Dia do JuÃ­zo Final no Islamismo'],
+      '3': ['Moral e Ã©tica religiosa: o que Ã© certo e errado','Os 10 Mandamentos e a moral judaico-cristÃ£','Os 5 pilares do Islamismo','Os 8 caminhos do Budismo','Valores morais nas tradiÃ§Ãµes indÃ­genas'],
+      '4': ['RevisÃ£o: cosmogonias e escatologias','DiÃ¡logo entre fÃ© e ciÃªncia','Projeto de respeito e tolerÃ¢ncia religiosa','AvaliaÃ§Ã£o do 4Âº ano','PreparaÃ§Ã£o para o 5Âº ano'],
     },
-    '5º Ano': {
-      '1': ['História do Cristianismo: dos primeiros cristãos ao século XXI','Reforma Protestante: Lutero e suas consequências','Catolicismo no Brasil: história e cultura','Pentecostalismo e Neopentecostalismo no Brasil','Ecumenismo: diálogos entre cristãos'],
-      '2': ['O papel das religiões na história do Brasil','Sincretismo religioso brasileiro','Fé e política: a influência religiosa na sociedade','Movimentos de direitos civis liderados por religiosos','Ativismo religioso contemporâneo'],
-      '3': ['Bioética e religião: vida, morte e natureza','Questões contemporâneas: aborto, eutanásia, genética','Sustentabilidade e ecologia espiritual','Responsabilidade social das instituições religiosas','Voluntariado e caridade nas religiões'],
-      '4': ['Portfólio de aprendizagens sobre religião e espiritualidade','Reflexão crítica e autonomia de crença','Revisão do Ensino Fundamental I em Ensino Religioso','Preparação para o 6º ano','Apresentação de pesquisa sobre tradição religiosa'],
+    '5Âº Ano': {
+      '1': ['HistÃ³ria do Cristianismo: dos primeiros cristÃ£os ao sÃ©culo XXI','Reforma Protestante: Lutero e suas consequÃªncias','Catolicismo no Brasil: histÃ³ria e cultura','Pentecostalismo e Neopentecostalismo no Brasil','Ecumenismo: diÃ¡logos entre cristÃ£os'],
+      '2': ['O papel das religiÃµes na histÃ³ria do Brasil','Sincretismo religioso brasileiro','FÃ© e polÃ­tica: a influÃªncia religiosa na sociedade','Movimentos de direitos civis liderados por religiosos','Ativismo religioso contemporÃ¢neo'],
+      '3': ['BioÃ©tica e religiÃ£o: vida, morte e natureza','QuestÃµes contemporÃ¢neas: aborto, eutanÃ¡sia, genÃ©tica','Sustentabilidade e ecologia espiritual','Responsabilidade social das instituiÃ§Ãµes religiosas','Voluntariado e caridade nas religiÃµes'],
+      '4': ['PortfÃ³lio de aprendizagens sobre religiÃ£o e espiritualidade','ReflexÃ£o crÃ­tica e autonomia de crenÃ§a','RevisÃ£o do Ensino Fundamental I em Ensino Religioso','PreparaÃ§Ã£o para o 6Âº ano','ApresentaÃ§Ã£o de pesquisa sobre tradiÃ§Ã£o religiosa'],
     },
-    '6º Ano': {
-      '1': ['Origens do universo: Big Bang, criacionismo e perspectivas','Evolução humana: Darwin e crenças religiosas','Vida após a morte em diferentes religiões','O ser humano na visão das religiões','Consciência e alma: perspectivas espirituais'],
-      '2': ['Hermenêutica: interpretação de textos sagrados','Bíblia: Antigo e Novo Testamento','Torá: os 5 livros de Moisés','Alcorão: revelação a Maomé','Vedas e Upanishads: Hinduísmo'],
-      '3': ['Ritualística comparada: batismo, bar mitzvah, circuncisão','Festas religiosas no calendário mundial','Jejum e ascese nas religiões','Peregrinações: Meca, Jerusalém, Santiago de Compostela','Arte e arquitetura religiosa no mundo'],
-      '4': ['Fundamentalismo e extremismo religioso','Secularismo e laicidade do Estado','Ensino Religioso não confessional','Revisão do 6º ano','Preparação para o 7º ano'],
+    '6Âº Ano': {
+      '1': ['Origens do universo: Big Bang, criacionismo e perspectivas','EvoluÃ§Ã£o humana: Darwin e crenÃ§as religiosas','Vida apÃ³s a morte em diferentes religiÃµes','O ser humano na visÃ£o das religiÃµes','ConsciÃªncia e alma: perspectivas espirituais'],
+      '2': ['HermenÃªutica: interpretaÃ§Ã£o de textos sagrados','BÃ­blia: Antigo e Novo Testamento','TorÃ¡: os 5 livros de MoisÃ©s','AlcorÃ£o: revelaÃ§Ã£o a MaomÃ©','Vedas e Upanishads: HinduÃ­smo'],
+      '3': ['RitualÃ­stica comparada: batismo, bar mitzvah, circuncisÃ£o','Festas religiosas no calendÃ¡rio mundial','Jejum e ascese nas religiÃµes','PeregrinaÃ§Ãµes: Meca, JerusalÃ©m, Santiago de Compostela','Arte e arquitetura religiosa no mundo'],
+      '4': ['Fundamentalismo e extremismo religioso','Secularismo e laicidade do Estado','Ensino Religioso nÃ£o confessional','RevisÃ£o do 6Âº ano','PreparaÃ§Ã£o para o 7Âº ano'],
     },
-    '7º Ano': {
-      '1': ['Filosofia e religião: racionalidade e fé','Ateísmo, agnosticismo e ceticismo','Existencialismo e questões de sentido','Ética nas religiões: semelhanças e diferenças','Fundamentalismo vs. misticismo'],
-      '2': ['Novas religiosidades: new age, wicca e neopaganismo','Espiritualidade sem religião instituída','Ecologia profunda e espiritualidade da terra','Tecnologia e espiritualidade','Meditação, mindfulness e neurociência'],
-      '3': ['Conflitos religiosos na história: Cruzadas, Inquisição','Religiões e colonialismo: imposição e resistência','Genocídio e perseguição religiosa: Holocausto','Liberdade religiosa como direito humano','Diálogo inter-religioso no século XXI'],
-      '4': ['Revisão do 7º ano','Projeto de diálogo inter-religioso','Portfólio de reflexões pessoais','Avaliação diagnóstica','Preparação para o 8º ano'],
+    '7Âº Ano': {
+      '1': ['Filosofia e religiÃ£o: racionalidade e fÃ©','AteÃ­smo, agnosticismo e ceticismo','Existencialismo e questÃµes de sentido','Ãtica nas religiÃµes: semelhanÃ§as e diferenÃ§as','Fundamentalismo vs. misticismo'],
+      '2': ['Novas religiosidades: new age, wicca e neopaganismo','Espiritualidade sem religiÃ£o instituÃ­da','Ecologia profunda e espiritualidade da terra','Tecnologia e espiritualidade','MeditaÃ§Ã£o, mindfulness e neurociÃªncia'],
+      '3': ['Conflitos religiosos na histÃ³ria: Cruzadas, InquisiÃ§Ã£o','ReligiÃµes e colonialismo: imposiÃ§Ã£o e resistÃªncia','GenocÃ­dio e perseguiÃ§Ã£o religiosa: Holocausto','Liberdade religiosa como direito humano','DiÃ¡logo inter-religioso no sÃ©culo XXI'],
+      '4': ['RevisÃ£o do 7Âº ano','Projeto de diÃ¡logo inter-religioso','PortfÃ³lio de reflexÃµes pessoais','AvaliaÃ§Ã£o diagnÃ³stica','PreparaÃ§Ã£o para o 8Âº ano'],
     },
-    '8º Ano': {
-      '1': ['Religião e poder político na história','Teocracia e laicidade: exemplos históricos','Religião e direitos humanos: aliadas ou opostas','Movimentos religiosos por justiça social','Fé e ação social: exemplos concretos'],
-      '2': ['Gênero e sexualidade nas religiões','Papel da mulher nas tradições religiosas','LGBTQ+ e religião: perspectivas diversas','Casamento e família nas religiões','Celibato, monasticismo e vida consagrada'],
-      '3': ['Morte e dying: rituais funerários comparados','Luto nas tradições religiosas','Doenças, cura e fé: aspectos espirituais da saúde','Medicina e religião: complementaridade','Experiências de quase-morte e espiritualidade'],
-      '4': ['Revisão do 8º ano','Projeto de pesquisa sobre prática religiosa local','Portfólio reflexivo','Avaliação diagnóstica','Preparação para o 9º ano'],
+    '8Âº Ano': {
+      '1': ['ReligiÃ£o e poder polÃ­tico na histÃ³ria','Teocracia e laicidade: exemplos histÃ³ricos','ReligiÃ£o e direitos humanos: aliadas ou opostas','Movimentos religiosos por justiÃ§a social','FÃ© e aÃ§Ã£o social: exemplos concretos'],
+      '2': ['GÃªnero e sexualidade nas religiÃµes','Papel da mulher nas tradiÃ§Ãµes religiosas','LGBTQ+ e religiÃ£o: perspectivas diversas','Casamento e famÃ­lia nas religiÃµes','Celibato, monasticismo e vida consagrada'],
+      '3': ['Morte e dying: rituais funerÃ¡rios comparados','Luto nas tradiÃ§Ãµes religiosas','DoenÃ§as, cura e fÃ©: aspectos espirituais da saÃºde','Medicina e religiÃ£o: complementaridade','ExperiÃªncias de quase-morte e espiritualidade'],
+      '4': ['RevisÃ£o do 8Âº ano','Projeto de pesquisa sobre prÃ¡tica religiosa local','PortfÃ³lio reflexivo','AvaliaÃ§Ã£o diagnÃ³stica','PreparaÃ§Ã£o para o 9Âº ano'],
     },
-    '9º Ano': {
-      '1': ['Pós-modernidade e espiritualidade: hibridização religiosa','Globalização das religiões: expansão e adaptação','Fundamentalismo religioso no século XXI','Terrorismo e religião: redução do discurso','Pluralismo religioso e construção da paz'],
-      '2': ['Bioética, religião e ciência: clonagem, transumanismo','Inteligência artificial e espiritualidade','Ecologia espiritual: religião e meio ambiente','Espiritualidade e saúde mental','Resiliência espiritual em tempos de crise'],
-      '3': ['Currículo de Ensino Religioso: revisão crítica','Autonomia religiosa e pensamento crítico','Construção de um projeto de vida com valores éticos','Cidadania e espiritualidade','Aprender a conviver: tolerância e paz'],
-      '4': ['Portfólio final de Ensino Religioso','Reflexão sobre trajetória espiritual pessoal','Avaliação diagnóstica e consolidação','Carta para o futuro: valores e crenças','Preparação para o Ensino Médio'],
+    '9Âº Ano': {
+      '1': ['PÃ³s-modernidade e espiritualidade: hibridizaÃ§Ã£o religiosa','GlobalizaÃ§Ã£o das religiÃµes: expansÃ£o e adaptaÃ§Ã£o','Fundamentalismo religioso no sÃ©culo XXI','Terrorismo e religiÃ£o: reduÃ§Ã£o do discurso','Pluralismo religioso e construÃ§Ã£o da paz'],
+      '2': ['BioÃ©tica, religiÃ£o e ciÃªncia: clonagem, transumanismo','InteligÃªncia artificial e espiritualidade','Ecologia espiritual: religiÃ£o e meio ambiente','Espiritualidade e saÃºde mental','ResiliÃªncia espiritual em tempos de crise'],
+      '3': ['CurrÃ­culo de Ensino Religioso: revisÃ£o crÃ­tica','Autonomia religiosa e pensamento crÃ­tico','ConstruÃ§Ã£o de um projeto de vida com valores Ã©ticos','Cidadania e espiritualidade','Aprender a conviver: tolerÃ¢ncia e paz'],
+      '4': ['PortfÃ³lio final de Ensino Religioso','ReflexÃ£o sobre trajetÃ³ria espiritual pessoal','AvaliaÃ§Ã£o diagnÃ³stica e consolidaÃ§Ã£o','Carta para o futuro: valores e crenÃ§as','PreparaÃ§Ã£o para o Ensino MÃ©dio'],
     },
   },
-  'Inglês': {
-    '1º Ano': {
+  'InglÃªs': {
+    '1Âº Ano': {
       '1': ['Alphabet in English: letters and pronunciation','Colors: red, blue, green, yellow, orange, purple','Numbers 1 to 10','Greetings: hello, hi, goodbye, good morning','Personal introduction: My name is...'],
       '2': ['Animals: cat, dog, bird, fish, rabbit','Body parts: head, arms, legs, eyes, mouth','Classroom: book, pen, pencil, desk, chair','Family members: mum, dad, brother, sister','Songs and rhymes in English'],
       '3': ['Fruits and vegetables: apple, banana, orange, carrot','Food: bread, milk, water, juice','Days of the week: Monday through Sunday','Numbers 10 to 20','Colors and objects: the blue pen, a red book'],
       '4': ['Months of the year in English','Seasons: spring, summer, autumn, winter','Weather: sunny, rainy, cloudy, windy','Professions: doctor, teacher, farmer','Year review and portfolio'],
     },
-    '2º Ano': {
+    '2Âº Ano': {
       '1': ['Review: colors, numbers and greetings','Personal pronouns: I, you, he, she, it, we, they','Verb to be: I am, you are, he is','Describing people: tall, short, fat, thin','My family in English'],
       '2': ['House vocabulary: rooms and furniture','There is / There are: structures and use','Prepositions of place: in, on, under, next to','My room: description','I like / I dont like: expressing preferences'],
       '3': ['Daily habits and routines','Action verbs: eat, drink, play, sleep, run','Frequency: always, sometimes, never','Food and meals: breakfast, lunch, dinner','Healthy food vs junk food'],
       '4': ['Wild animals: lion, elephant, tiger, giraffe','Habitats: jungle, desert, ocean, forest','Animal characteristics','Year review','Songs and rhymes review'],
     },
-    '3º Ano': {
+    '3Âº Ano': {
       '1': ['Simple present: affirmative, negative and question','Daily routine: verbs and time expressions','School subjects in English','Sports and hobbies: I play football, I like swimming','Asking and answering: Do you...? Yes/No'],
       '2': ['Describing places: school, park, hospital, supermarket','Giving directions: turn left, go straight, turn right','Extended prepositions of place','The city: city, street, building','How do I get to...?'],
       '3': ['Clothing and accessories vocabulary','Getting dressed: Im wearing a blue shirt','Shopping: How much is it?','Colors and clothes','Seasons and clothes: winter and summer clothing'],
       '4': ['Festivities in English-speaking countries: Christmas, Halloween','British and American culture: customs and traditions','Simple comparisons: bigger, smaller, faster','Year review','My English portfolio'],
     },
-    '4º Ano': {
+    '4Âº Ano': {
       '1': ['Present continuous: I am reading a book','Action verbs in present continuous','Describing actions: What are you doing?','Simple vs continuous present','Leisure activities and sports vocabulary'],
       '2': ['Simple past: regular verbs (walked, played, watched)','Main irregular verbs: went, ate, saw, had','Narrating past events: Yesterday I went to...','Temporal expressions: yesterday, last week, ago','Writing: narrating a past event'],
       '3': ['Future with going to: I am going to travel','Plans and intentions: What are you going to do?','Will for predictions: It will rain tomorrow','Weather forecast in English','Listening: dialogues about plans'],
       '4': ['Text genres: e-mail, postcard, short story','Writing: a short paragraph about myself','Reading comprehension: short texts','Year review','Preparing for 5th year English'],
     },
-    '5º Ano': {
+    '5Âº Ano': {
       '1': ['Review of grammar structures from previous years','Comparatives and superlatives: bigger, the biggest','Quantifiers: some, any, much, many','Reading techniques: skimming and scanning','Vocabulary: science and technology'],
       '2': ['Modal verbs: can, could, should, must, might','Permission and obligation','Making suggestions: Lets, Why dont we...','Conditional type 0 and 1: If it rains, I will stay home','Environmental issues vocabulary'],
       '3': ['Present perfect: I have visited London','For and since: I have lived here for 5 years','Connecting ideas: however, although, because','Writing: a short essay about the environment','Reading comprehension: longer texts'],
       '4': ['Preparation for secondary school English','Test-taking strategies in English','Listening and speaking: conversations and debates','English portfolio of the year','Plans for continuing English studies'],
     },
-    '6º Ano': {
+    '6Âº Ano': {
       '1': ['Grammar review: basic verb tenses','Articles, nouns and pronouns in context','Adjectives: order and position','Question tags: isnt it? dont you?','Reading: magazine and newspaper articles'],
       '2': ['Present perfect vs. past simple','Past tenses: irregular verbs review','Narrative writing: sequencing events','Relative clauses: who, which, that','Writing: narrative paragraph'],
       '3': ['Thematic vocabulary: food, health, technology','Listening comprehension: dialogues and interviews','Speaking: expressing opinions: I think, In my opinion','Debate in English: for and against','Pronunciation: stressed syllables and intonation'],
       '4': ['Text genres: news, review, advertisement','Analysis of advertising language','Cultural aspects of English-speaking countries','Year review','Preparing for 7th year English'],
     },
-    '7º Ano': {
+    '7Âº Ano': {
       '1': ['Reported speech: He said that...','Direct and indirect speech conversions','Passive voice: The book was written by...','Formal vs. informal English','Academic vocabulary: definitions and classifications'],
       '2': ['Conditional sentences: type 1, 2 and 3','Wishes and regrets: I wish I had...','Expressing preferences: I prefer X to Y','Vocabulary: science, environment, society','Text analysis: purpose and audience'],
       '3': ['Gerunds and infinitives: I enjoy swimming, I want to go','Phrasal verbs: give up, look for, come back','Idioms and expressions in context','Extended reading: short stories','Writing: descriptive and opinion paragraphs'],
       '4': ['Literary genres in English: poetry, short story, drama','Analyzing a poem or short story','Intercultural communication','Year review','English portfolio'],
     },
-    '8º Ano': {
+    '8Âº Ano': {
       '1': ['Advanced grammar: inversion, ellipsis, substitution','Cohesive devices: linking words and connectors','Formal writing: letters, reports, emails','Academic writing: thesis and evidence','Critical reading: identifying bias and perspective'],
       '2': ['Advanced vocabulary: Latin and Greek roots in English','Word formation: prefixes and suffixes','Collocations and fixed expressions','Negotiating and compromising in English','Presentations and public speaking in English'],
       '3': ['Media literacy in English: fake news, propaganda','Analyzing persuasive texts','Debate: structured argumentation in English','Cross-cultural communication issues','Technology and digital communication in English'],
       '4': ['Literature: extracts from classic and contemporary texts','Shakespeare: introduction','Globalization and the English language','Year review','Advanced English portfolio'],
     },
-    '9º Ano': {
+    '9Âº Ano': {
       '1': ['Advanced English for academic purposes','IELTS and TOEFL: introduction to international exams','Research skills in English: databases and citations','Advanced reading: academic texts','Writing: argumentative essay with research'],
       '2': ['English in global context: lingua franca','World Englishes: varieties and accents','Translation and interpretation skills','Advanced listening: lectures, TED talks','English for specific purposes: career vocabulary'],
       '3': ['English literature: post-colonial writing','Contemporary issues in English-speaking media','English and artificial intelligence','Autonomous language learning strategies','Self-assessment and reflection on language learning'],
@@ -638,7 +638,7 @@ interface PlanoGerado {
   pdi?: string
 }
 
-// Função para renderizar markdown simples
+// FunÃ§Ã£o para renderizar markdown simples
 function renderMD(text: string): string {
   if (!text) return '';
   return text
@@ -767,30 +767,30 @@ export default function NovoPlanejamentoPage() {
   }
 
   
-  // Gera o prompt padrão para atividade impressa
+  // Gera o prompt padrÃ£o para atividade impressa
   const gerarPromptPadrao = () => {
     const nAulas = parseInt(form.numAulas) || 1
     const totalMin = nAulas * 50
-    return `Crie uma atividade impressa completa para alunos de ${form.serie} sobre ${form.conteudo || 'o conteúdo da aula'} (${form.disciplina}).
+    return `Crie uma atividade impressa completa para alunos de ${form.serie} sobre ${form.conteudo || 'o conteÃºdo da aula'} (${form.disciplina}).
 
 ESTRUTURA DA ATIVIDADE (para ser impressa e entregue ao aluno):
-- Cabeçalho: Nome: _________ Turma: _____ Data: _____
-- Título da atividade relacionado ao conteúdo
+- CabeÃ§alho: Nome: _________ Turma: _____ Data: _____
+- TÃ­tulo da atividade relacionado ao conteÃºdo
 - Objetivos da atividade (em linguagem para o aluno)
-- Instruções claras e objetivas
-- EXATAMENTE 10 questões numeradas de 1 a 10 (5 se for Educação Infantil), variando: múltipla escolha (4 alternativas plausíveis), dissertativa, V/F com justificativa, situação-problema
-- ESPECIFICIDADE: cada questão menciona "${form.conteudo}" pelo nome — PROIBIDO enunciados genéricos
+- InstruÃ§Ãµes claras e objetivas
+- EXATAMENTE 10 questÃµes numeradas de 1 a 10 (5 se for EducaÃ§Ã£o Infantil), variando: mÃºltipla escolha (4 alternativas plausÃ­veis), dissertativa, V/F com justificativa, situaÃ§Ã£o-problema
+- ESPECIFICIDADE: cada questÃ£o menciona "${form.conteudo}" pelo nome â PROIBIDO enunciados genÃ©ricos
 - TAXONOMIA DE BLOOM: lembrar (1-2), compreender (2), aplicar (2-3), analisar (2), avaliar/criar (1-2)
-- Espaço para resposta em letra de forma: linhas para dissertativas, parênteses para objetivas
+- EspaÃ§o para resposta em letra de forma: linhas para dissertativas, parÃªnteses para objetivas
 - GABARITO COMENTADO completo com as 10 respostas ao final
-- Nível de dificuldade: ${form.nivelAtividade === 'facil' ? 'fácil' : form.nivelAtividade === 'dificil' ? 'difícil' : 'médio'}
+- NÃ­vel de dificuldade: ${form.nivelAtividade === 'facil' ? 'fÃ¡cil' : form.nivelAtividade === 'dificil' ? 'difÃ­cil' : 'mÃ©dio'}
 - Tempo total da aula: ${totalMin} minutos (${nAulas} aula${nAulas>1?'s':''} de 50 min cada)
-- Não incluir duração individual de cada questão — apenas o tempo total ao final
+- NÃ£o incluir duraÃ§Ã£o individual de cada questÃ£o â apenas o tempo total ao final
 
-REGRAS CRÍTICAS:
+REGRAS CRÃTICAS:
 - Linguagem adequada para ${form.serie}
 - Atividade alinhada com as habilidades BNCC de ${form.disciplina}
-- Contexto brasileiro: use exemplos, dados e situações do cotidiano do Brasil`
+- Contexto brasileiro: use exemplos, dados e situaÃ§Ãµes do cotidiano do Brasil`
   }
 
   // Abre modal de atividade impressa e gera prompt
@@ -805,7 +805,7 @@ REGRAS CRÍTICAS:
     setMostrarModalAtividade(true)
   }
 
-  // Lê o arquivo de modelo enviado pelo usuário
+  // LÃª o arquivo de modelo enviado pelo usuÃ¡rio
   const handleArquivoModelo = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
@@ -818,19 +818,19 @@ REGRAS CRÍTICAS:
       // Gera prompt baseado no modelo
       const nAulas = parseInt(form.numAulas) || 1
       const totalMin = nAulas * 50
-      const promptModelo = `Analise este modelo de atividade enviado pelo professor e crie uma NOVA atividade seguindo o mesmo estilo, formato e estrutura visual, mas com conteúdo sobre "${form.conteudo || 'o conteúdo da aula'}" de ${form.disciplina} para ${form.serie}.
+      const promptModelo = `Analise este modelo de atividade enviado pelo professor e crie uma NOVA atividade seguindo o mesmo estilo, formato e estrutura visual, mas com conteÃºdo sobre "${form.conteudo || 'o conteÃºdo da aula'}" de ${form.disciplina} para ${form.serie}.
 
-MODELO DE REFERÊNCIA:
+MODELO DE REFERÃNCIA:
 ---
 ${texto.substring(0, 2000)}${texto.length > 2000 ? '\n[...restante do modelo...]' : ''}
 ---
 
-INSTRUÇÕES:
-- Siga o mesmo layout e formatação do modelo acima
-- Adapte as questões para o conteúdo: ${form.conteudo}
-- Mantenha o nível ${form.nivelAtividade === 'facil' ? 'fácil' : form.nivelAtividade === 'dificil' ? 'difícil' : 'médio'}
+INSTRUÃÃES:
+- Siga o mesmo layout e formataÃ§Ã£o do modelo acima
+- Adapte as questÃµes para o conteÃºdo: ${form.conteudo}
+- Mantenha o nÃ­vel ${form.nivelAtividade === 'facil' ? 'fÃ¡cil' : form.nivelAtividade === 'dificil' ? 'difÃ­cil' : 'mÃ©dio'}
 - Tempo total da aula: ${totalMin} minutos (${nAulas} aula${nAulas>1?'s':''})
-- Não incluir duração de cada questão individualmente — apenas o tempo total ao final
+- NÃ£o incluir duraÃ§Ã£o de cada questÃ£o individualmente â apenas o tempo total ao final
 - Letra: de forma`
       setPromptAtividade(promptModelo)
     }
@@ -845,7 +845,6 @@ INSTRUÇÕES:
       const resp = await fetch('/api/gerar-atividade', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
         body: JSON.stringify({
           ...form,
           nivel: form.nivelAtividade,
@@ -876,7 +875,7 @@ INSTRUÇÕES:
       const PIX_CHAVE_DL = '42988880353'
         const PIX_NOME_DL = 'Planeprof'
           const PLANOS_DL = {
-              mensal: { label: 'Mensal', valor: 9.90, desc: 'por mês', economia: '' },
+              mensal: { label: 'Mensal', valor: 9.90, desc: 'por mÃªs', economia: '' },
                   anual: { label: 'Anual', valor: 100.00, desc: 'por ano', economia: 'Economize R$ 18,80' },
                     }
 
@@ -951,10 +950,10 @@ INSTRUÇÕES:
                                                                                                                                                                                                                                                                                                       setAbaModal('comprovante')
                                                                                                                                                                                                                                                                                                           // Realiza o download do plano em texto
                                                                                                                                                                                                                                                                                                               if (plano) {
-                                                                                                                                                                                                                                                                                                                    const conteudoPlano = `PLANEPROF — PLANO DE AULA
+                                                                                                                                                                                                                                                                                                                    const conteudoPlano = `PLANEPROF â PLANO DE AULA
                                                                                                                                                                                                                                                                                                                     =============================
-                                                                                                                                                                                                                                                                                                                    Disciplina: ${form.disciplina} | Série: ${form.serie} | Bimestre: ${form.bimestre}°
-                                                                                                                                                                                                                                                                                                                    Conteúdo: ${form.conteudo}
+                                                                                                                                                                                                                                                                                                                    Disciplina: ${form.disciplina} | SÃ©rie: ${form.serie} | Bimestre: ${form.bimestre}Â°
+                                                                                                                                                                                                                                                                                                                    ConteÃºdo: ${form.conteudo}
 
                                                                                                                                                                                                                                                                                                                     HABILIDADES BNCC:
                                                                                                                                                                                                                                                                                                                     ${plano.habilidades_bncc?.join('\n') || ''}
@@ -965,14 +964,14 @@ INSTRUÇÕES:
                                                                                                                                                                                                                                                                                                                     DESENVOLVIMENTO:
                                                                                                                                                                                                                                                                                                                     ${plano.desenvolvimento || ''}
 
-                                                                                                                                                                                                                                                                                                                    CONCLUSÃO E REFLEXÃO:
+                                                                                                                                                                                                                                                                                                                    CONCLUSÃO E REFLEXÃO:
                                                                                                                                                                                                                                                                                                                     ${plano.conclusao || ''}
 
-                                                                                                                                                                                                                                                                                                                    DINÂMICA / JOGO:
+                                                                                                                                                                                                                                                                                                                    DINÃMICA / JOGO:
                                                                                                                                                                                                                                                                                                                     ${plano.dinamica || ''}
-                                                                                                                                                                                                                                                                                                                    ${plano.pdi ? '\nPDI — PLANO DE DESENVOLVIMENTO INDIVIDUAL:\n' + plano.pdi : ''}
+                                                                                                                                                                                                                                                                                                                    ${plano.pdi ? '\nPDI â PLANO DE DESENVOLVIMENTO INDIVIDUAL:\n' + plano.pdi : ''}
                                                                                                                                                                                                                                                                                                                     =============================
-                                                                                                                                                                                                                                                                                                                    Gerado por Planeprof — planeprof.vercel.app`
+                                                                                                                                                                                                                                                                                                                    Gerado por Planeprof â planeprof.vercel.app`
                                                                                                                                                                                                                                                                                                                           const blob = new Blob([conteudoPlano], { type: 'text/plain;charset=utf-8' })
                                                                                                                                                                                                                                                                                                                                 const url = URL.createObjectURL(blob)
                                                                                                                                                                                                                                                                                                                                       const a = document.createElement('a')
@@ -1013,7 +1012,7 @@ const handleSalvar = async () => {
       <header className="bg-white shadow-sm border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Link href="/dashboard" className="text-gray-500 hover:text-gray-700">← Dashboard</Link>
+            <Link href="/dashboard" className="text-gray-500 hover:text-gray-700">â Dashboard</Link>
             <h1 className="text-xl font-bold text-blue-900">Novo Planejamento</h1>
           </div>
           {logoPreview && (
@@ -1027,13 +1026,13 @@ const handleSalvar = async () => {
         {/* Card Escola */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-gray-800">🏫 Dados da Escola</h2>
+            <h2 className="text-lg font-semibold text-gray-800">ð« Dados da Escola</h2>
             <button
               type="button"
               onClick={() => logoRef.current?.click()}
               className="flex items-center gap-2 px-4 py-2 border-2 border-dashed border-blue-300 rounded-lg text-blue-600 hover:bg-blue-50 transition text-sm font-medium"
             >
-              📷 Upload Logo da Escola
+              ð· Upload Logo da Escola
             </button>
             <input ref={logoRef} type="file" accept="image/*" onChange={handleLogo} className="hidden" />
           </div>
@@ -1050,16 +1049,16 @@ const handleSalvar = async () => {
 
         {/* Card Dados */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-          <h2 className="text-lg font-semibold mb-4 text-gray-800">📋 Dados do Planejamento</h2>
+          <h2 className="text-lg font-semibold mb-4 text-gray-800">ð Dados do Planejamento</h2>
           {error && <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4 text-sm">{error}</div>}
 
           <form onSubmit={handleGerar} className="space-y-4">
-            {/* Ícones clicáveis - linha 1: Disciplina e Série/Ano */}
+            {/* Ãcones clicÃ¡veis - linha 1: Disciplina e SÃ©rie/Ano */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
 
               {/* 1. Disciplina */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">📚 Disciplina *</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">ð Disciplina *</label>
                 <select name="disciplina" value={form.disciplina} onChange={handleChange}
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" required>
                   <option value="">Selecione...</option>
@@ -1067,9 +1066,9 @@ const handleSalvar = async () => {
                 </select>
               </div>
 
-              {/* 2. Série/Ano */}
+              {/* 2. SÃ©rie/Ano */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">🎓 Série/Ano *</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">ð SÃ©rie/Ano *</label>
                 <select name="serie" value={form.serie} onChange={handleChange}
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" required>
                   <option value="">Selecione...</option>
@@ -1079,16 +1078,16 @@ const handleSalvar = async () => {
 
               {/* 3. Bimestre */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">📅 Trimestre</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">ð Trimestre</label>
                 <select name="bimestre" value={form.bimestre} onChange={handleChange}
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
-                  {['1','2','3','4'].map(n => <option key={n} value={n}>{n}° Trimestre</option>)}
+                  {['1','2','3','4'].map(n => <option key={n} value={n}>{n}Â° Trimestre</option>)}
                 </select>
               </div>
 
-              {/* 4. Nº de Aulas */}
+              {/* 4. NÂº de Aulas */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">🕐 Nº de Aulas</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">ð NÂº de Aulas</label>
                 <select name="numAulas" value={form.numAulas} onChange={handleChange}
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
                   {[1,2,3,4,5,6].map(n => <option key={n} value={n}>{n} aula{n>1?'s':''}</option>)}
@@ -1096,26 +1095,26 @@ const handleSalvar = async () => {
               </div>
             </div>
 
-            {/* 5. Conteúdo Programático - ícone clicável */}
+            {/* 5. ConteÃºdo ProgramÃ¡tico - Ã­cone clicÃ¡vel */}
             <div>
               <button type="button"
                 onClick={() => setMostrarMenuConteudo(!mostrarMenuConteudo)}
                 className={`w-full flex items-center justify-between px-4 py-3 rounded-xl border-2 font-semibold transition text-left text-sm ${ form.conteudo ? 'border-green-500 bg-green-50 text-green-800' : 'border-gray-300 bg-white text-gray-700 hover:border-blue-400 hover:bg-blue-50'}`}>
                 <span className="flex items-center gap-2">
-                  <span className="text-lg">📖</span>
-                  <span>Conteúdo Programático *</span>
+                  <span className="text-lg">ð</span>
+                  <span>ConteÃºdo ProgramÃ¡tico *</span>
                 </span>
                 <span className="flex items-center gap-2">
-                  {form.conteudo ? <span className="text-xs text-green-600 max-w-xs truncate">{conteudosSelecionados.length > 1 ? conteudosSelecionados.length + ' conteúdos' : form.conteudo}</span> : <span className="text-xs text-gray-500">Toque para selecionar</span>}
-                  <span>{mostrarMenuConteudo ? '▲' : '▼'}</span>
+                  {form.conteudo ? <span className="text-xs text-green-600 max-w-xs truncate">{conteudosSelecionados.length > 1 ? conteudosSelecionados.length + ' conteÃºdos' : form.conteudo}</span> : <span className="text-xs text-gray-500">Toque para selecionar</span>}
+                  <span>{mostrarMenuConteudo ? 'â²' : 'â¼'}</span>
                 </span>
               </button>
               {mostrarMenuConteudo && (
                 <div className="mt-2 border border-gray-200 rounded-xl p-4 bg-white shadow-lg">
                   <p className="text-xs text-gray-500 mb-3">
                     {form.disciplina && form.serie && form.bimestre
-                      ? `Referências curriculares para ${form.disciplina} - ${form.serie} - ${form.bimestre}° Trimestre:`
-                      : 'Selecione a disciplina, série e bimestre acima para ver as referências curriculares. Ou digite manualmente:'}
+                      ? `ReferÃªncias curriculares para ${form.disciplina} - ${form.serie} - ${form.bimestre}Â° Trimestre:`
+                      : 'Selecione a disciplina, sÃ©rie e bimestre acima para ver as referÃªncias curriculares. Ou digite manualmente:'}
                   </p>
                   {form.disciplina && form.serie && form.bimestre &&
                     CONTEUDOS_PROGRAMATICOS[form.disciplina]?.[form.serie]?.[form.bimestre] ? (
@@ -1124,39 +1123,39 @@ const handleSalvar = async () => {
                         <button key={i} type="button"
                           onClick={() => { const upd = conteudosSelecionados.includes(c) ? conteudosSelecionados.filter(x => x !== c) : [...conteudosSelecionados, c]; setConteudosSelecionados(upd); setForm(prev => ({...prev, conteudo: upd.join(' | ')})); }}
                           className={`w-full text-left px-3 py-2 rounded-lg text-sm transition border ${ conteudosSelecionados.includes(c) ? 'border-blue-500 bg-blue-50 text-blue-700 font-semibold' : 'border-gray-200 hover:border-blue-300 hover:bg-blue-50 text-gray-700'}`}>
-                          <span className="flex items-center gap-2">{conteudosSelecionados.includes(c) && <span className="text-blue-600 font-bold">✔</span>}<span>{c}</span></span>
+                          <span className="flex items-center gap-2">{conteudosSelecionados.includes(c) && <span className="text-blue-600 font-bold">â</span>}<span>{c}</span></span>
                         </button>
                       ))}
                     </div>
                   ) : null}
                   <div>
-                    <div className="flex items-center justify-between mb-1"><label className="block text-xs font-medium text-gray-600">Ou escreva o conteúdo personalizado:</label>{conteudosSelecionados.length > 0 && (<button type="button" onClick={() => { setConteudosSelecionados([]); setForm(prev => ({...prev, conteudo: ''})); }} className="text-xs text-red-500 hover:text-red-700 font-medium">🗑 Limpar seleção ({conteudosSelecionados.length})</button>)}</div>
+                    <div className="flex items-center justify-between mb-1"><label className="block text-xs font-medium text-gray-600">Ou escreva o conteÃºdo personalizado:</label>{conteudosSelecionados.length > 0 && (<button type="button" onClick={() => { setConteudosSelecionados([]); setForm(prev => ({...prev, conteudo: ''})); }} className="text-xs text-red-500 hover:text-red-700 font-medium">ð Limpar seleÃ§Ã£o ({conteudosSelecionados.length})</button>)}</div>
                     <input type="text" name="conteudo" value={form.conteudo} onChange={(e) => { handleChange(e); setConteudosSelecionados([]); }}
                       className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                      placeholder="Ex: Frações - conceito e operações básicas" />
+                      placeholder="Ex: FraÃ§Ãµes - conceito e operaÃ§Ãµes bÃ¡sicas" />
                     <button type="button" onClick={() => setMostrarMenuConteudo(false)}
                       className="mt-2 w-full py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">
-                      ✓ Confirmar {conteudosSelecionados.length > 0 ? ` (${conteudosSelecionados.length})` : ""}
+                      â Confirmar {conteudosSelecionados.length > 0 ? ` (${conteudosSelecionados.length})` : ""}
                     </button>
                   </div>
                 </div>
               )}
             </div>
 
-            {/* 6. Habilidades da BNCC - ícone clicável */}
+            {/* 6. Habilidades da BNCC - Ã­cone clicÃ¡vel */}
             <div>
               <button type="button"
                 onClick={() => setMostrarMenuHabilidades(!mostrarMenuHabilidades)}
                 className={`w-full flex items-center justify-between px-4 py-3 rounded-xl border-2 font-semibold transition text-left text-sm ${ habilidadesSelecionadas.length > 0 ? 'border-blue-500 bg-blue-50 text-blue-800' : 'border-gray-300 bg-white text-gray-700 hover:border-blue-400 hover:bg-blue-50'}`}>
                 <span className="flex items-center gap-2">
-                  <span className="text-lg">🎯</span>
+                  <span className="text-lg">ð¯</span>
                   <span>Habilidades da BNCC</span>
                 </span>
                 <span className="flex items-center gap-2">
                   {habilidadesSelecionadas.length > 0
                     ? <span className="text-xs text-blue-600 max-w-xs truncate">{habilidadesSelecionadas.map(h=>h.codigo).join(', ')}</span>
                     : <span className="text-xs text-gray-500">Toque para selecionar (opcional)</span>}
-                  <span>{mostrarMenuHabilidades ? '▲' : '▼'}</span>
+                  <span>{mostrarMenuHabilidades ? 'â²' : 'â¼'}</span>
                 </span>
               </button>
               {mostrarMenuHabilidades && (
@@ -1195,18 +1194,18 @@ const handleSalvar = async () => {
                         )
                       })}
                     </div>
-                  ) : <p className="text-sm text-gray-400 mb-3">Selecione uma disciplina para ver as habilidades disponíveis.</p>}
+                  ) : <p className="text-sm text-gray-400 mb-3">Selecione uma disciplina para ver as habilidades disponÃ­veis.</p>}
                   <button type="button" onClick={() => setMostrarMenuHabilidades(false)}
                     className="w-full py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition">
-                    ✓ Confirmar ({habilidadesSelecionadas.length} selecionadas)
+                    â Confirmar ({habilidadesSelecionadas.length} selecionadas)
                   </button>
                 </div>
               )}
 
-              {/* Campo manual de código BNCC */}
+              {/* Campo manual de cÃ³digo BNCC */}
               <div className="mt-3">
                 <label className="block text-xs font-medium text-gray-600 mb-1">
-                  ✏️ Inserir código BNCC manualmente (ex: EF01MA01, EF02LP03)
+                  âï¸ Inserir cÃ³digo BNCC manualmente (ex: EF01MA01, EF02LP03)
                 </label>
                 <input
                   type="text"
@@ -1217,38 +1216,38 @@ const handleSalvar = async () => {
                 />
                 {codigoManual && (
                   <p className="text-xs text-blue-600 mt-1">
-                    {codigoManual.split(/[,\s]+/).filter((c) => c.trim()).length} código(s) BNCC manual(is) adicionado(s)
+                    {codigoManual.split(/[,\s]+/).filter((c) => c.trim()).length} cÃ³digo(s) BNCC manual(is) adicionado(s)
                   </p>
                 )}
               </div>
             </div>
 
-            {/* 7 e 8. Nº de Objetivos e Nº de Atividades Lúdicas */}
+            {/* 7 e 8. NÂº de Objetivos e NÂº de Atividades LÃºdicas */}
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">🎯 Nº de Objetivos</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">ð¯ NÂº de Objetivos</label>
                 <select name="numObjetivos" value={form.numObjetivos} onChange={handleChange}
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
                   {[1,2,3,4,5].map(n => <option key={n} value={n}>{n} objetivo{n>1?'s':''}</option>)}
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">🎮 Nº de Atividades Lúdicas</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">ð® NÂº de Atividades LÃºdicas</label>
                 <select name="numAtividades" value={form.numAtividades} onChange={handleChange}
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
-                  {[0,1,2,3,4,5].map(n => <option key={n} value={n}>{n === 0 ? 'Nenhuma' : n + ' atividade' + (n>1?'s lúdicas':' lúdica')}</option>)}
+                  {[0,1,2,3,4,5].map(n => <option key={n} value={n}>{n === 0 ? 'Nenhuma' : n + ' atividade' + (n>1?'s lÃºdicas':' lÃºdica')}</option>)}
                 </select>
               </div>
             </div>
 
-            {/* Nível de dificuldade */}
+            {/* NÃ­vel de dificuldade */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">🎯 Nível das Atividades</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">ð¯ NÃ­vel das Atividades</label>
               <div className="flex gap-3">
                 {[
-                  {val:'facil', label:'😊 Fácil', color:'green'},
-                  {val:'medio', label:'🤔 Médio', color:'yellow'},
-                  {val:'dificil', label:'🧠 Difícil', color:'red'}
+                  {val:'facil', label:'ð FÃ¡cil', color:'green'},
+                  {val:'medio', label:'ð¤ MÃ©dio', color:'yellow'},
+                  {val:'dificil', label:'ð§  DifÃ­cil', color:'red'}
                 ].map(({val, label, color}) => (
                   <button key={val} type="button"
                     onClick={() => setForm(prev => ({...prev, nivelAtividade: val}))}
@@ -1266,26 +1265,26 @@ const handleSalvar = async () => {
 
             
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">⚙️ Orientações especiais (opcional)</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">âï¸ OrientaÃ§Ãµes especiais (opcional)</label>
               <textarea name="orientacoes" value={form.orientacoes} onChange={handleChange}
                 rows={3} className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Ex: Incluir atividade prática, usar recursos visuais, jogos cooperativos..." />
+                placeholder="Ex: Incluir atividade prÃ¡tica, usar recursos visuais, jogos cooperativos..." />
             </div>
 
             <button type="submit" disabled={loading}
               className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition disabled:opacity-50 flex items-center justify-center gap-2">
-              {loading ? <><span>⚙️</span> Gerando com IA...</> : <>🤖 Gerar Plano Completo com IA</>}
+              {loading ? <><span>âï¸</span> Gerando com IA...</> : <>ð¤ Gerar Plano Completo com IA</>}
             </button>
           </form>
         </div>
 
-        {/* PDI Button - sempre visível se disciplina e série preenchidas */}
+        {/* PDI Button - sempre visÃ­vel se disciplina e sÃ©rie preenchidas */}
         {form.disciplina && form.serie && !plano && (
           <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl shadow-lg p-6 text-white">
             <div className="flex items-center justify-between flex-wrap gap-4">
               <div>
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="text-2xl">♿</span>
+                  <span className="text-2xl">â¿</span>
                   <h3 className="text-xl font-bold">PDI - Plano de Desenvolvimento Individual</h3>
                 </div>
                 <p className="text-purple-100 text-sm">Gere um plano adaptado para alunos com necessidades especiais, com recursos visuais e cronogramas ilustrados.</p>
@@ -1295,7 +1294,7 @@ const handleSalvar = async () => {
                 onClick={() => setPdiMode(!pdiMode)}
                 className="bg-white text-purple-700 px-6 py-3 rounded-xl font-bold hover:bg-purple-50 transition shadow-md flex items-center gap-2"
               >
-                {pdiMode ? '✕ Fechar PDI' : '♿ Criar PDI'}
+                {pdiMode ? 'â Fechar PDI' : 'â¿ Criar PDI'}
               </button>
             </div>
             {pdiMode && (
@@ -1312,10 +1311,10 @@ const handleSalvar = async () => {
                   value={pdiNecessidades}
                   onChange={e => setPdiNecessidades(e.target.value)}
                   rows={3}
-                  placeholder="Necessidades específicas: Ex: TEA, TDAH, baixa visão, dislexia... descreva as necessidades do aluno."
+                  placeholder="Necessidades especÃ­ficas: Ex: TEA, TDAH, baixa visÃ£o, dislexia... descreva as necessidades do aluno."
                   className="w-full border border-white/30 bg-white/20 text-white placeholder-white/60 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-white"
                 />
-                <p className="text-xs text-purple-100">💡 Primeiro gere o plano principal, depois o PDI será adaptado automaticamente.</p>
+                <p className="text-xs text-purple-100">ð¡ Primeiro gere o plano principal, depois o PDI serÃ¡ adaptado automaticamente.</p>
               </div>
             )}
           </div>
@@ -1328,22 +1327,22 @@ const handleSalvar = async () => {
               <div className="flex items-center gap-3">
                 {logoPreview && <img src={logoPreview} alt="Logo" className="h-12 w-auto object-contain bg-white rounded p-1" />}
                 <div>
-                  <h2 className="text-xl font-bold">Plano de Aula Gerado! ✅</h2>
-                  <p className="text-blue-100 text-sm">{form.disciplina} • {form.serie} • {form.bimestre}° Trimestre • {form.numAulas} aula{parseInt(form.numAulas)>1?'s':''}</p>
+                  <h2 className="text-xl font-bold">Plano de Aula Gerado! â</h2>
+                  <p className="text-blue-100 text-sm">{form.disciplina} â¢ {form.serie} â¢ {form.bimestre}Â° Trimestre â¢ {form.numAulas} aula{parseInt(form.numAulas)>1?'s':''}</p>
                 </div>
               </div>
               <span className={`px-3 py-1 rounded-full text-sm font-bold bg-white/20 text-blue-200`}>
-                🖊️ Letra de Forma
+                ðï¸ Letra de Forma
               </span>
             </div>
 
             {/* Habilidades BNCC */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
               <div className="flex items-center justify-between mb-3">
-                <h2 className="text-lg font-semibold text-blue-700">📚 Habilidades BNCC</h2>
+                <h2 className="text-lg font-semibold text-blue-700">ð Habilidades BNCC</h2>
                 <button onClick={() => handleRegerar('habilidades_bncc')} disabled={loadingSection === 'habilidades_bncc'}
                   className="flex items-center gap-1 text-xs px-3 py-1 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition border border-blue-200">
-                  {loadingSection === 'habilidades_bncc' ? '⏳...' : '🔄 Regerar'}
+                  {loadingSection === 'habilidades_bncc' ? 'â³...' : 'ð Regerar'}
                 </button>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -1356,10 +1355,10 @@ const handleSalvar = async () => {
             {/* Objetivos */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-semibold text-green-700">🎯 Objetivos da Aula</h2>
+                <h2 className="text-lg font-semibold text-green-700">ð¯ Objetivos da Aula</h2>
                 <button onClick={() => handleRegerar('objetivos')} disabled={loadingSection === 'objetivos'}
                   className="flex items-center gap-1 text-xs px-3 py-1 bg-green-50 text-green-600 rounded-lg hover:bg-green-100 transition border border-green-200">
-                  {loadingSection === 'objetivos' ? '⏳...' : '🔄 Regerar'}
+                  {loadingSection === 'objetivos' ? 'â³...' : 'ð Regerar'}
                 </button>
               </div>
               <ul className="space-y-2">
@@ -1374,15 +1373,15 @@ const handleSalvar = async () => {
             {/* Desenvolvimento */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-semibold text-purple-700">📖 Desenvolvimento da Aula</h2>
+                <h2 className="text-lg font-semibold text-purple-700">ð Desenvolvimento da Aula</h2>
                 <div className="flex gap-2">
                   <button onClick={() => handleRegerar('desenvolvimento')} disabled={loadingSection === 'desenvolvimento'}
                     className="flex items-center gap-1 text-xs px-3 py-1 bg-purple-50 text-purple-600 rounded-lg hover:bg-purple-100 transition border border-purple-200">
-                    {loadingSection === 'desenvolvimento' ? '⏳...' : '🔄 Regerar'}
+                    {loadingSection === 'desenvolvimento' ? 'â³...' : 'ð Regerar'}
                   </button>
                   <button type="button" onClick={abrirModalAtividade}
                     className="flex items-center gap-1 text-xs px-3 py-1 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition font-semibold">
-                    🖨️ Gerar Atividade Impressa
+                    ð¨ï¸ Gerar Atividade Impressa
                   </button>
                 </div>
               </div>
@@ -1390,7 +1389,7 @@ const handleSalvar = async () => {
                 <div className="text-gray-700 leading-relaxed prose-dev" style={fontStyle} dangerouslySetInnerHTML={{__html: renderMD(plano.desenvolvimento)}} />
               </div>
               <div className="mt-3 text-xs text-gray-400 flex items-center gap-1">
-                <span>⚙️</span> Para personalizar o desenvolvimento, use o campo de orientações especiais acima e regenere.
+                <span>âï¸</span> Para personalizar o desenvolvimento, use o campo de orientaÃ§Ãµes especiais acima e regenere.
               </div>
             </div>
 
@@ -1400,11 +1399,11 @@ const handleSalvar = async () => {
                 <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto mx-4 sm:mx-0">
                   <div className="bg-indigo-600 text-white p-5 rounded-t-2xl flex items-center justify-between">
                     <div>
-                      <h3 className="text-lg font-bold">🖨️ hhGerar Atividade Impressa</h3>
-                      <p className="text-indigo-200 text-sm">{form.disciplina} • {form.serie} • {form.conteudo}</p>
+                      <h3 className="text-lg font-bold">ð¨ï¸ hhGerar Atividade Impressa</h3>
+                      <p className="text-indigo-200 text-sm">{form.disciplina} â¢ {form.serie} â¢ {form.conteudo}</p>
                     </div>
                     <button type="button" onClick={() => setMostrarModalAtividade(false)}
-                      className="text-white hover:text-indigo-200 text-2xl font-bold">✕</button>
+                      className="text-white hover:text-indigo-200 text-2xl font-bold">â</button>
                   </div>
                   <div className="p-6 space-y-5">
                     {/* Modo: Prompt ou Modelo */}
@@ -1412,31 +1411,31 @@ const handleSalvar = async () => {
                       <button type="button" onClick={() => { setModoModelo(false); setPromptAtividade(gerarPromptPadrao()) }}
                         className={`flex-1 py-3 px-4 rounded-xl border-2 font-semibold text-sm transition ${
                           !modoModelo ? 'border-indigo-500 bg-indigo-50 text-indigo-700' : 'border-gray-200 text-gray-600 hover:border-gray-300'}`}>
-                        <span className="text-xl block mb-1">✏️</span>
+                        <span className="text-xl block mb-1">âï¸</span>
                         Gerar com Prompt
                         <span className="block text-xs font-normal mt-1">IA cria a atividade a partir do prompt</span>
                       </button>
                       <button type="button" onClick={() => setModoModelo(true)}
                         className={`flex-1 py-3 px-4 rounded-xl border-2 font-semibold text-sm transition ${
                           modoModelo ? 'border-indigo-500 bg-indigo-50 text-indigo-700' : 'border-gray-200 text-gray-600 hover:border-gray-300'}`}>
-                        <span className="text-xl block mb-1">📄</span>
+                        <span className="text-xl block mb-1">ð</span>
                         Usar como Modelo
-                        <span className="block text-xs font-normal mt-1">Envie um arquivo e a IA seguirá o estilo</span>
+                        <span className="block text-xs font-normal mt-1">Envie um arquivo e a IA seguirÃ¡ o estilo</span>
                       </button>
                     </div>
 
                     {/* Upload de modelo */}
                     {modoModelo && (
                       <div className="border-2 border-dashed border-indigo-300 rounded-xl p-4 bg-indigo-50">
-                        <p className="text-sm font-semibold text-indigo-700 mb-2">📁 Envie o arquivo modelo (.txt, .doc, .pdf):</p>
-                        <p className="text-xs text-indigo-600 mb-3">A IA analisará o estilo, formato e estrutura do seu modelo e criará uma nova atividade igual, mas com o conteúdo desta aula.</p>
+                        <p className="text-sm font-semibold text-indigo-700 mb-2">ð Envie o arquivo modelo (.txt, .doc, .pdf):</p>
+                        <p className="text-xs text-indigo-600 mb-3">A IA analisarÃ¡ o estilo, formato e estrutura do seu modelo e criarÃ¡ uma nova atividade igual, mas com o conteÃºdo desta aula.</p>
                         <button type="button" onClick={() => modeloRef.current?.click()}
                           className="w-full py-3 border-2 border-indigo-400 text-indigo-700 rounded-lg font-semibold hover:bg-indigo-100 transition text-sm flex items-center justify-center gap-2">
-                          📎 {arquivoModelo ? arquivoModelo.name : 'Selecionar arquivo modelo'}
+                          ð {arquivoModelo ? arquivoModelo.name : 'Selecionar arquivo modelo'}
                         </button>
                         <input ref={modeloRef} type="file" accept=".txt,.doc,.docx,.pdf" onChange={handleArquivoModelo} className="hidden" />
                         {arquivoModelo && (
-                          <p className="mt-2 text-xs text-green-600">✅ Arquivo carregado: {arquivoModelo.name} ({Math.round(arquivoModelo.size/1024)} KB)</p>
+                          <p className="mt-2 text-xs text-green-600">â Arquivo carregado: {arquivoModelo.name} ({Math.round(arquivoModelo.size/1024)} KB)</p>
                         )}
                         {conteudoModelo && (
 
@@ -1449,7 +1448,7 @@ const handleSalvar = async () => {
                         {/* URL do modelo */}
                         <div>
                           <label className="block text-xs font-medium text-indigo-700 mb-1">
-                            🔗 Cole a URL de uma atividade modelo (site, Google Docs, etc.)
+                            ð Cole a URL de uma atividade modelo (site, Google Docs, etc.)
                           </label>
                           <input
                             type="url"
@@ -1459,27 +1458,27 @@ const handleSalvar = async () => {
                             className="w-full border border-indigo-300 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white placeholder-gray-400"
                           />
                           {modeloUrl && (
-                            <p className="text-xs text-green-600 mt-1">✅ URL informada — a IA irá analisar o conteúdo e criar atividade no mesmo estilo</p>
+                            <p className="text-xs text-green-600 mt-1">â URL informada â a IA irÃ¡ analisar o conteÃºdo e criar atividade no mesmo estilo</p>
                           )}
                         </div>
                           <div className="mt-3 bg-white border border-indigo-200 rounded-lg p-3">
-                            <p className="text-xs font-semibold text-gray-600 mb-1">📝 Prévia do modelo lido:</p>
+                            <p className="text-xs font-semibold text-gray-600 mb-1">ð PrÃ©via do modelo lido:</p>
                             <p className="text-xs text-gray-500 font-mono whitespace-pre-wrap max-h-24 overflow-y-auto">{conteudoModelo.substring(0, 300)}...</p>
                           </div>
                         )}
                       </div>
                     )}
 
-                    {/* Prompt preview + edição */}
+                    {/* Prompt preview + ediÃ§Ã£o */}
                     <div>
                       <div className="flex items-center justify-between mb-2">
                         <label className="text-sm font-semibold text-gray-700">
-                          {modoModelo ? '📋 Prompt gerado a partir do modelo:' : '📋 Prompt que será enviado à IA:'}
+                          {modoModelo ? 'ð Prompt gerado a partir do modelo:' : 'ð Prompt que serÃ¡ enviado Ã  IA:'}
                         </label>
                         <button type="button" onClick={() => setEditandoPrompt(!editandoPrompt)}
                           className={`text-xs px-3 py-1 rounded-lg border font-semibold transition ${
                             editandoPrompt ? 'border-yellow-500 bg-yellow-50 text-yellow-700' : 'border-gray-300 text-gray-600 hover:bg-gray-50'}`}>
-                          {editandoPrompt ? '✓ Fechar edição' : '✏️ Editar prompt'}
+                          {editandoPrompt ? 'â Fechar ediÃ§Ã£o' : 'âï¸ Editar prompt'}
                         </button>
                       </div>
                       {editandoPrompt ? (
@@ -1494,23 +1493,23 @@ const handleSalvar = async () => {
                           <p className="text-xs text-gray-600 whitespace-pre-wrap font-mono">{promptAtividade}</p>
                         </div>
                       )}
-                      <p className="text-xs text-gray-400 mt-1">💡 Você pode editar o prompt antes de gerar para personalizar a atividade.</p>
+                      <p className="text-xs text-gray-400 mt-1">ð¡ VocÃª pode editar o prompt antes de gerar para personalizar a atividade.</p>
                     </div>
 
-                    {/* Botão Gerar */}
+                    {/* BotÃ£o Gerar */}
                     <button type="button" onClick={handleGerarAtividade} disabled={gerandoAtividade || (modoModelo && !arquivoModelo)}
                       className="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold hover:bg-indigo-700 transition disabled:opacity-50 flex items-center justify-center gap-2 text-sm">
-                      {gerandoAtividade ? <><span className="animate-spin">⚙️</span> Gerando atividade...</> : <>🖨️ Gerar Atividade Impressa</>}
+                      {gerandoAtividade ? <><span className="animate-spin">âï¸</span> Gerando atividade...</> : <>ð¨ï¸ Gerar Atividade Impressa</>}
                     </button>
                     {modoModelo && !arquivoModelo && (
-                      <p className="text-xs text-orange-600 text-center">⚠️ Envie um arquivo modelo antes de gerar</p>
+                      <p className="text-xs text-orange-600 text-center">â ï¸ Envie um arquivo modelo antes de gerar</p>
                     )}
 
                     {/* Resultado */}
                     {atividadeGerada && (
                       <div className="border-2 border-indigo-200 rounded-xl overflow-hidden">
                         <div className="bg-indigo-600 text-white px-4 py-2 flex items-center justify-between">
-                          <span className="font-semibold text-sm">📄 Atividade Gerada</span>
+                          <span className="font-semibold text-sm">ð Atividade Gerada</span>
                           <div className="flex gap-2">
                             <button type="button"
                               onClick={() => {
@@ -1523,7 +1522,7 @@ const handleSalvar = async () => {
                                 URL.revokeObjectURL(url)
                               }}
                               className="text-xs bg-white text-indigo-600 px-3 py-1 rounded-lg font-semibold hover:bg-indigo-50 transition">
-                              ⬇️ Baixar .doc
+                              â¬ï¸ Baixar .doc
                             </button>
                             <button type="button"
                               onClick={() => {
@@ -1535,7 +1534,7 @@ const handleSalvar = async () => {
                                 }
                               }}
                               className="text-xs bg-white text-indigo-600 px-3 py-1 rounded-lg font-semibold hover:bg-indigo-50 transition">
-                              🖨️ Imprimir
+                              ð¨ï¸ Imprimir
                             </button>
                           </div>
                         </div>
@@ -1549,13 +1548,13 @@ const handleSalvar = async () => {
               </div>
             )}
 
-{/* Conclusão */}
+{/* ConclusÃ£o */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-semibold text-orange-700">🏁 Conclusão e Reflexão</h2>
+                <h2 className="text-lg font-semibold text-orange-700">ð ConclusÃ£o e ReflexÃ£o</h2>
                 <button onClick={() => handleRegerar('conclusao')} disabled={loadingSection === 'conclusao'}
                   className="flex items-center gap-1 text-xs px-3 py-1 bg-orange-50 text-orange-600 rounded-lg hover:bg-orange-100 transition border border-orange-200">
-                  {loadingSection === 'conclusao' ? '⏳...' : '🔄 Regerar'}
+                  {loadingSection === 'conclusao' ? 'â³...' : 'ð Regerar'}
                 </button>
               </div>
               <div className="bg-orange-50 rounded-xl p-4">
@@ -1563,14 +1562,14 @@ const handleSalvar = async () => {
               </div>
             </div>
 
-            {/* Dinâmica / Jogo */}
+            {/* DinÃ¢mica / Jogo */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-semibold text-pink-700">🎮 Dinâmica/Jogo</h2>
+                <h2 className="text-lg font-semibold text-pink-700">ð® DinÃ¢mica/Jogo</h2>
                 {plano.dinamica && (
                   <button onClick={() => handleRegerar('dinamica')} disabled={loadingSection === 'dinamica'}
                     className="flex items-center gap-1 text-xs px-3 py-1 bg-pink-50 text-pink-600 rounded-lg hover:bg-pink-100 transition border border-pink-200">
-                    {loadingSection === 'dinamica' ? '⏳...' : '🔄 Regerar'}
+                    {loadingSection === 'dinamica' ? 'â³...' : 'ð Regerar'}
                   </button>
                 )}
               </div>
@@ -1578,9 +1577,9 @@ const handleSalvar = async () => {
                 <div className="flex flex-col items-center justify-center py-6 gap-3">
                   <button onClick={() => handleRegerar('dinamica')} disabled={loadingSection === 'dinamica'}
                     className="flex items-center gap-2 px-6 py-3 bg-pink-500 text-white rounded-xl font-semibold hover:bg-pink-600 transition disabled:opacity-50 shadow-md">
-                    {loadingSection === 'dinamica' ? <><span>⏳</span> Gerando dinâmica...</> : <><span>🎮</span> Dinâmica/Jogo: Gerar</>}
+                    {loadingSection === 'dinamica' ? <><span>â³</span> Gerando dinÃ¢mica...</> : <><span>ð®</span> DinÃ¢mica/Jogo: Gerar</>}
                   </button>
-                  <p className="text-xs text-gray-400">Clique para gerar uma dinâmica ou jogo para esta aula</p>
+                  <p className="text-xs text-gray-400">Clique para gerar uma dinÃ¢mica ou jogo para esta aula</p>
                 </div>
               ) : (
                 <>
@@ -1588,8 +1587,8 @@ const handleSalvar = async () => {
                     <p className="text-gray-700 leading-relaxed" style={fontStyle}>{plano.dinamica}</p>
                   </div>
                   <div className="mt-3 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
-                    <p className="text-xs text-yellow-700 font-medium">🎨 Prompt para gerar imagem desta dinâmica:</p>
-                    <p className="text-xs text-yellow-600 mt-1 italic">"Ilustração colorida e lúdica para crianças de {form.serie}, mostrando crianças brincando e aprendendo {form.conteudo} em sala de aula, estilo cartoon educativo brasileiro, cores vibrantes"</p>
+                    <p className="text-xs text-yellow-700 font-medium">ð¨ Prompt para gerar imagem desta dinÃ¢mica:</p>
+                    <p className="text-xs text-yellow-600 mt-1 italic">"IlustraÃ§Ã£o colorida e lÃºdica para crianÃ§as de {form.serie}, mostrando crianÃ§as brincando e aprendendo {form.conteudo} em sala de aula, estilo cartoon educativo brasileiro, cores vibrantes"</p>
                   </div>
                 </>
               )}
@@ -1599,15 +1598,15 @@ const handleSalvar = async () => {
             <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl shadow-lg p-6 text-white">
               <div className="flex items-center justify-between flex-wrap gap-4 mb-4">
                 <div className="flex items-center gap-3">
-                  <span className="text-3xl">♿</span>
+                  <span className="text-3xl">â¿</span>
                   <div>
                     <h3 className="text-xl font-bold">PDI - Plano de Desenvolvimento Individual</h3>
-                    <p className="text-purple-100 text-sm">Adaptação inclusiva para alunos com necessidades especiais</p>
+                    <p className="text-purple-100 text-sm">AdaptaÃ§Ã£o inclusiva para alunos com necessidades especiais</p>
                   </div>
                 </div>
                 <button onClick={handleGerarPDI} disabled={gerandoPdi}
                   className="bg-white text-purple-700 px-6 py-3 rounded-xl font-bold hover:bg-purple-50 transition shadow-md flex items-center gap-2">
-                  {gerandoPdi ? '⏳ Gerando PDI...' : '♿ Gerar PDI Adaptado'}
+                  {gerandoPdi ? 'â³ Gerando PDI...' : 'â¿ Gerar PDI Adaptado'}
                 </button>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
@@ -1615,28 +1614,28 @@ const handleSalvar = async () => {
                   placeholder="Nome do aluno (opcional)"
                   className="border border-white/30 bg-white/20 text-white placeholder-white/60 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-white text-sm" />
                 <input type="text" value={pdiNecessidades} onChange={e => setPdiNecessidades(e.target.value)}
-                  placeholder="Necessidades: TEA, TDAH, dislexia, baixa visão..."
+                  placeholder="Necessidades: TEA, TDAH, dislexia, baixa visÃ£o..."
                   className="border border-white/30 bg-white/20 text-white placeholder-white/60 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-white text-sm" />
               </div>
               {plano.pdi && (
                 <div className="bg-white/10 rounded-xl p-4">
-                  <p className="text-sm font-semibold mb-2">📋 PDI Gerado:</p>
+                  <p className="text-sm font-semibold mb-2">ð PDI Gerado:</p>
                   <div className="text-white/90 text-sm leading-relaxed" dangerouslySetInnerHTML={{__html: renderMD(plano.pdi)}} />
                   <button onClick={() => handleRegerar('pdi')} disabled={loadingSection === 'pdi'}
                     className="mt-3 flex items-center gap-1 text-xs px-3 py-1 bg-white/20 text-white rounded-lg hover:bg-white/30 transition">
-                    {loadingSection === 'pdi' ? '⏳...' : '🔄 Regerar PDI'}
+                    {loadingSection === 'pdi' ? 'â³...' : 'ð Regerar PDI'}
                   </button>
                 </div>
               )}
               {!plano.pdi && (
                 <div className="bg-white/10 rounded-xl p-4 text-sm text-white/80">
-                  <p className="font-medium mb-2">O PDI incluirá:</p>
+                  <p className="font-medium mb-2">O PDI incluirÃ¡:</p>
                   <ul className="space-y-1 text-xs">
-                    <li>✅ Adaptação do conteúdo "{form.conteudo}" para as necessidades específicas</li>
-                    <li>✅ Recursos visuais e cronogramas ilustrados</li>
-                    <li>✅ Estratégias de comunicação alternativa e aumentativa</li>
-                    <li>✅ Ênfase nas potencialidades individuais do aluno</li>
-                    <li>✅ Objetivos funcionais e adaptados</li>
+                    <li>â AdaptaÃ§Ã£o do conteÃºdo "{form.conteudo}" para as necessidades especÃ­ficas</li>
+                    <li>â Recursos visuais e cronogramas ilustrados</li>
+                    <li>â EstratÃ©gias de comunicaÃ§Ã£o alternativa e aumentativa</li>
+                    <li>â Ãnfase nas potencialidades individuais do aluno</li>
+                    <li>â Objetivos funcionais e adaptados</li>
                   </ul>
                 </div>
               )}
@@ -1645,11 +1644,11 @@ const handleSalvar = async () => {
             <div className="flex gap-4">
             <button onClick={handleAbrirDownload} disabled={!plano}
                             className="flex-1 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition disabled:opacity-40 flex items-center justify-center gap-2">
-                                          📥 Baixar Planejamento
+                                          ð¥ Baixar Planejamento
                                                       </button>
                                                                   <button onClick={() => { setPlano(null); setError('') }}
                 className="px-6 py-3 border-2 border-gray-300 rounded-lg font-semibold text-gray-600 hover:bg-gray-50 transition">
-                🔄 Refazer Tudo
+                ð Refazer Tudo
               </button>
             </div>
           </div>
@@ -1661,16 +1660,16 @@ const handleSalvar = async () => {
                                 <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto">
                                             {/* Header */}
                                                         <div className="flex items-center justify-between p-4 border-b">
-                                                                      <h2 className="text-lg font-bold text-gray-800">📥 Baixar Planejamento</h2>
+                                                                      <h2 className="text-lg font-bold text-gray-800">ð¥ Baixar Planejamento</h2>
                                                                                     <button onClick={() => setMostrarModalDownload(false)} className="text-gray-400 hover:text-gray-600 text-2xl leading-none">&times;</button>
                                                                                                 </div>
 
-                                                                                                            {/* Abas de navegação */}
+                                                                                                            {/* Abas de navegaÃ§Ã£o */}
                                                                                                                         <div className="flex border-b text-sm">
                                                                                                                                       {(['plano', 'cadastro', 'login', 'download'] as const).map(aba => (
                                                                                                                                                       <button key={aba} onClick={() => { setAbaModal(aba); setDownloadErro('') }}
                                                                                                                                                                         className={`flex-1 py-2 font-medium capitalize transition ${abaModal === aba ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500 hover:text-gray-700'}`}>
-                                                                                                                                                                                          {aba === 'plano' ? '💰 Planos' : aba === 'cadastro' ? '📝 Cadastro' : aba === 'login' ? '🔑 Login' : '📥 Baixar'}
+                                                                                                                                                                                          {aba === 'plano' ? 'ð° Planos' : aba === 'cadastro' ? 'ð Cadastro' : aba === 'login' ? 'ð Login' : 'ð¥ Baixar'}
                                                                                                                                                                                                           </button>
                                                                                                                                                                                                                         ))}
                                                                                                                                                                                                                                     </div>
@@ -1693,16 +1692,16 @@ const handleSalvar = async () => {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 <p className="text-2xl font-bold text-blue-600">R$ {PLANOS_DL[tipo].valor.toFixed(2).replace('.', ',')}</p>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         </div>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    {planoSelecionado === tipo && <div className="mt-1 text-xs text-blue-600">✓ Selecionado</div>}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    {planoSelecionado === tipo && <div className="mt-1 text-xs text-blue-600">â Selecionado</div>}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         </div>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           ))}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             <p className="text-xs text-gray-400 text-center">Pagamento via Pix. Cancele quando quiser.</p>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               <button onClick={() => setAbaModal('cadastro')}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      Continuar com {PLANOS_DL[planoSelecionado].label} — R$ {PLANOS_DL[planoSelecionado].valor.toFixed(2).replace('.', ',')}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      Continuar com {PLANOS_DL[planoSelecionado].label} â R$ {PLANOS_DL[planoSelecionado].valor.toFixed(2).replace('.', ',')}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         </button>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           <p className="text-center text-sm text-gray-500">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              Já tem conta? <button onClick={() => setAbaModal('login')} className="text-blue-600 font-medium hover:underline">Fazer login</button>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              JÃ¡ tem conta? <button onClick={() => setAbaModal('login')} className="text-blue-600 font-medium hover:underline">Fazer login</button>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 </p>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 </div>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               )}
@@ -1756,7 +1755,7 @@ const handleSalvar = async () => {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 {downloadLoading ? 'Cadastrando...' : 'Cadastrar e Continuar'}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   </button>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     <p className="text-center text-sm text-gray-500">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Já tem conta? <button onClick={() => { setAbaModal('login'); setDownloadErro('') }} className="text-blue-600 font-medium hover:underline">Fazer login</button>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        JÃ¡ tem conta? <button onClick={() => { setAbaModal('login'); setDownloadErro('') }} className="text-blue-600 font-medium hover:underline">Fazer login</button>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           </p>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           </div>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         )}
@@ -1783,12 +1782,12 @@ const handleSalvar = async () => {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   {downloadLoading ? 'Entrando...' : 'Entrar e Continuar'}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     </button>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       <p className="text-center text-sm text-gray-500">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          Não tem conta? <button onClick={() => { setAbaModal('cadastro'); setDownloadErro('') }} className="text-blue-600 font-medium hover:underline">Cadastrar grátis</button>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          NÃ£o tem conta? <button onClick={() => { setAbaModal('cadastro'); setDownloadErro('') }} className="text-blue-600 font-medium hover:underline">Cadastrar grÃ¡tis</button>
               {/* Aba de Download */}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         {(abaModal as string) === 'download' && (
                 <div className="space-y-4">
                   <div className="text-center">
-                    <div className="text-4xl mb-2">🎉</div>
+                    <div className="text-4xl mb-2">ð</div>
                     <p className="text-sm font-semibold text-gray-700">Login realizado com sucesso!</p>
                     <p className="text-xs text-gray-500 mt-1">Escolha o formato para baixar seu planejamento:</p>
                   </div>
@@ -1803,7 +1802,7 @@ const handleSalvar = async () => {
                         el.click()
                       }}
                       className="flex flex-col items-center justify-center gap-2 p-4 bg-red-50 border-2 border-red-200 rounded-xl hover:bg-red-100 transition group">
-                      <span className="text-3xl">📄</span>
+                      <span className="text-3xl">ð</span>
                       <span className="text-sm font-bold text-red-700">Baixar PDF</span>
                       <span className="text-xs text-red-500">Formato PDF</span>
                     </button>
@@ -1817,12 +1816,12 @@ const handleSalvar = async () => {
                         el.click()
                       }}
                       className="flex flex-col items-center justify-center gap-2 p-4 bg-blue-50 border-2 border-blue-200 rounded-xl hover:bg-blue-100 transition group">
-                      <span className="text-3xl">📝</span>
+                      <span className="text-3xl">ð</span>
                       <span className="text-sm font-bold text-blue-700">Baixar Word</span>
                       <span className="text-xs text-blue-500">Formato .docx</span>
                     </button>
                   </div>
-                  <p className="text-xs text-center text-gray-400">Você tem acesso a downloads ilimitados.</p>
+                  <p className="text-xs text-center text-gray-400">VocÃª tem acesso a downloads ilimitados.</p>
                 </div>
               )}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             </p>
@@ -1832,7 +1831,7 @@ const handleSalvar = async () => {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         {/* Aba Pix */}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       {abaModal === 'pix' && (
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       <div className="space-y-4 text-center">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <div className="text-4xl">💸</div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <div className="text-4xl">ð¸</div>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           <h3 className="font-bold text-gray-800">Pagamento via Pix</h3>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             <div className="bg-green-50 border border-green-200 rounded-xl p-4">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 <p className="text-sm font-medium text-green-800 mb-1">Plano {PLANOS_DL[planoSelecionado].label}</p>
@@ -1848,26 +1847,26 @@ const handleSalvar = async () => {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       </div>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         <div className="text-sm text-gray-600 space-y-1">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             <p>1. Abra o app do seu banco</p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <p>2. Faça o Pix para a chave acima</p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <p>2. FaÃ§a o Pix para a chave acima</p>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     <p>3. Clique em "Confirmar Pagamento" abaixo</p>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       </div>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         <button onClick={handleConfirmarPagamento}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ✅ Confirmar Pagamento e Baixar
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                â Confirmar Pagamento e Baixar
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   </button>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <p className="text-xs text-gray-400">Após confirmação, o download será iniciado automaticamente</p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <p className="text-xs text-gray-400">ApÃ³s confirmaÃ§Ã£o, o download serÃ¡ iniciado automaticamente</p>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     </div>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   )}
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 {/* Aba Comprovante */}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               {abaModal === 'comprovante' && (
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               <div className="space-y-4 text-center">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <div className="text-5xl">🎉</div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <div className="text-5xl">ð</div>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   <h3 className="font-bold text-xl text-gray-800">Download Iniciado!</h3>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     <p className="text-gray-600 text-sm">Seu planejamento foi baixado com sucesso. Obrigado por assinar o Planeprof!</p>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 text-left text-sm">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <p className="font-medium text-blue-800 mb-1">📋 Plano {PLANOS_DL[planoSelecionado].label} ativado</p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <p className="text-blue-700">Acesso por planejamentos ilimitados durante o período contratado.</p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <p className="font-medium text-blue-800 mb-1">ð Plano {PLANOS_DL[planoSelecionado].label} ativado</p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <p className="text-blue-700">Acesso por planejamentos ilimitados durante o perÃ­odo contratado.</p>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 </div>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   <button onClick={() => setMostrarModalDownload(false)}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
